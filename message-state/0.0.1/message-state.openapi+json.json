@@ -1,0 +1,58 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Message state",
+        "description": "",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://ip-dev-apim-main.azure-api.net/status"
+        }
+    ],
+    "paths": {
+        "/message/{id}": {
+            "get": {
+                "summary": "Get Message State",
+                "operationId": "get-message-state",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Message state found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "apiKeyHeader": {
+                "type": "apiKey",
+                "name": "Ocp-Apim-Subscription-Key",
+                "in": "header"
+            },
+            "apiKeyQuery": {
+                "type": "apiKey",
+                "name": "subscription-key",
+                "in": "query"
+            }
+        }
+    },
+    "security": [
+        {
+            "apiKeyHeader": []
+        },
+        {
+            "apiKeyQuery": []
+        }
+    ]
+}
