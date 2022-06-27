@@ -1,0 +1,51 @@
+openapi: '3.0.3'
+info:
+  title: Message Delivery
+  description: API to deliver messages for an integration of your company.
+  version: '1.0.0'
+servers:
+  - url: /message-delivery/1.0.0/
+paths:
+  /message:
+    post:
+      description: Creates a new message for the specified integration.
+      parameters:
+        - name: integrationId
+          in: header
+          required: true
+          description: Unique identifier of your **integration**, where the message should be delivered to.
+          schema:
+            type : string
+        - name: partnerId
+          in: header
+          required: true
+          description: Unique identifier of your Visma Verzuim **partner** scope, into which the message will be integrated.
+          schema:
+            type : string
+        - name: employerId
+          in: header
+          required: true
+          description: Unique identifier of your Visma Verzuim **employer** scope, into which the message will be integrated.
+          schema:
+            type : string
+        - name: bearer
+          in: header
+          required: true
+          description: Unique identifier of your integration, where the message should be delivered to.
+          schema:
+            type : string
+      requestBody:
+        required: true
+        content:
+          application/json: {}
+          application/xml: {}
+      responses:
+        '201':
+          description: Unique identifier of your message, can be used to trace the state.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  messageStateId:
+                    type: string
