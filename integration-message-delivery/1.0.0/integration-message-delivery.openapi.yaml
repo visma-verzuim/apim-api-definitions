@@ -4,7 +4,7 @@ info:
   description: API to deliver messages for an integration of your company.
   version: '1.0.0'
 servers:
-  - url: /message-delivery/1.0.0/
+  - url: /message-delivery
 paths:
   /message:
     post:
