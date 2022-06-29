@@ -4,11 +4,13 @@ info:
   description: API to deliver messages for an integration of your company.
   version: '1.0.1'
 servers:
-  - url: /integration/message-delivery
+  - url: /integration/message-delivery/1.0.1
 paths:
-  /message-delivery:
+  /message:
     post:
-      description: Creates a new message for the specified integration.
+      summary: Create message
+      description: Create a new message for the specified integration.
+      operationId: create-message
       parameters:
         - name: integrationId
           in: header
@@ -31,7 +33,7 @@ paths:
         - name: bearer
           in: header
           required: true
-          description: Unique identifier of your integration, where the message should be delivered to.
+          description: Authorization bearer of your Visma Verzuim integration user, which will be used to integrate the message into your instance.
           schema:
             type : string
         - name: test
@@ -47,7 +49,7 @@ paths:
           application/xml: {}
       responses:
         '201':
-          description: Unique identifier of your message, can be used to trace the state.
+          description: Unique identifier of your message. Can be used to trace the message state.
           content:
             application/json:
               schema:
