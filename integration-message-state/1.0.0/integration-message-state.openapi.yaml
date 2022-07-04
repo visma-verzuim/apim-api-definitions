@@ -6,7 +6,7 @@ info:
 servers:
   - url: /integration/message-state/1.0.0
 paths:
-  /message:
+  /message/{id}:
     get:
       summary: Retrieve message state
       description: Retrieve both the current state and historical overview for the specified message.
