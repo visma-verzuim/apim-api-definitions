@@ -1,0 +1,86 @@
+openapi: '3.0.3'
+info:
+  title: Message State
+  description: API to retrieve both current and historical overview of message states.
+  version: '1.0.0'
+servers:
+  - url: /integration/message-state/1.0.0
+paths:
+  /message:
+    get:
+      summary: Retrieve message state
+      description: Retrieve both the current state and historical overview for the specified message.
+      operationId: retrieve-message-state
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Unique identifier of your **message**, whose state should be returned.
+          schema:
+            type : string
+      responses:
+        '200':
+          description: Representation of your message, includes current state and historical overview.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '400':
+          description: The specified message identifier is invalid. Please check the identifier and try again.
+        '404':
+          description: A message with the specified identifier was not found. Please check the identifier and try again.
+        '500':
+          description: An internal error occured. Try again and if the problem persists, please contact us.
+components:
+  schemas:
+    Message:
+      type: object
+      properties:
+        integrationId:
+          type: string
+          example: "62a34422145ecb62e374e77b"
+        batchId:
+          type: string
+          example: "da56ce62-f993-11ec-927a-fa23cdbd91f1"
+        batchIndexNumber:
+          type: string
+          example: "0"
+        messageId:
+          type: string
+          example: "89179f90-2153-42b8-adf8-5b0c19d44bd5"
+        entity:
+          type: string
+          example: "employee"
+        payload:
+          type: object
+          example: {}
+        searchParameters:
+          type: object
+          example: {}
+        currentState:
+          type: object
+          $ref: '#/components/schemas/MessageState'
+        history:
+          type: array
+          items:
+            type: object
+            $ref: '#/components/schemas/MessageState'
+        created:
+          type: string
+          format: date-time
+          description: Date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6)
+          example: "2022-07-01T23:16:36.074Z"
+    MessageState:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "running"
+        description:
+          type: string
+          example: "Starting to proces message"
+        changed:
+          type: string
+          format: date-time
+          description: Date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6)
+          example: "2022-07-01T23:16:36.315Z"
