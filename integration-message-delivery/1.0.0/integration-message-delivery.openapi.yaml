@@ -8,7 +8,7 @@ servers:
 paths:
   /message:
     post:
-      summary: Create Message
+      summary: Create message
       description: Create a new message for the specified integration.
       operationId: create-message
       parameters:
@@ -49,5 +49,10 @@ paths:
               schema:
                 type: object
                 properties:
-                  messageStateId:
+                  messageId:
                     type: string
+                    example: "89179f90-2153-42b8-adf8-5b0c19d44bd5"
+        '400':
+          description: The specified request is invalid. Please check the error message and try again.
+        '500':
+          description: An internal error occured. Try again and if the problem persists, please contact us.
