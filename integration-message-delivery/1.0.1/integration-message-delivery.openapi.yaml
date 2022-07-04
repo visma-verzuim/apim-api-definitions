@@ -8,7 +8,7 @@ servers:
 paths:
   /message:
     post:
-      summary: Create message
+      summary: Create Message
       description: Create a new message for the specified integration.
       operationId: create-message
       parameters:
