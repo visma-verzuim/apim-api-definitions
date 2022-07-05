@@ -47,12 +47,16 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  messageId:
-                    type: string
-                    example: "89179f90-2153-42b8-adf8-5b0c19d44bd5"
+                $ref: '#/components/schemas/DeliveryResponse'
         '400':
           description: The specified request is invalid. Please check the error message and try again.
         '500':
           description: An internal error occured. Try again and if the problem persists, please contact us.
+components:
+  schemas:
+    DeliveryResponse:
+      type: object
+      properties:
+        messageId:
+          type: string
+          example: "89179f90-2153-42b8-adf8-5b0c19d44bd5"
