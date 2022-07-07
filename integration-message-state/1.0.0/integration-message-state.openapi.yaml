@@ -12,6 +12,18 @@ paths:
       description: Retrieve both the current state and historical overview for the specified message.
       operationId: retrieve-message-state
       parameters:
+        - name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.
+          schema:
+            type : string
+        - name: Content-Type
+          in: header
+          required: true
+          description: Indicates the original media type of the resource. Valid values are 'application/json' and 'application/xml'.
+          schema:
+            type : string
         - name: id
           in: path
           required: true
