@@ -1,7 +1,7 @@
 openapi: '3.0.3'
 info:
   title: Message State
-  description: API to retrieve both current and historical overview of message states.
+  description: API to retrieve both current and historical overview of messages that has been delivered through the message delivery API.
   version: '1.0.0'
 servers:
   - url: /integration/message-state/1.0.0
