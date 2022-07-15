@@ -1,0 +1,29 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  # This dummy job is required because the `passes-all-required-checks` job needs at least one dependent job.
+  # This job may be removed when we have at least one real check.
+  successful-dummy:
+    name: Successful dummy
+    runs-on: [self-hosted]
+    steps:
+      - name: Step which always succeeds
+        run: echo "I am a dummy step which always succeeds!"
+
+  passes-all-required-checks:
+    name: Passes all required checks
+    if: always()
+    needs:
+      - successful-dummy
+    runs-on: [self-hosted]
+    steps:
+      - name: Check whether the required jobs succeeded or failed
+        uses: re-actors/alls-green@ed97172826e514be195bf70a7858630e7a5874fc # v1.1.0
+        with:
+          jobs: ${{ toJSON(needs) }}
