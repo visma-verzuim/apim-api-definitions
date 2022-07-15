@@ -6,6 +6,20 @@ info:
 servers:
   - url: /integration/message-state/1.0.0
 paths:
+  /health:
+    get:
+      description: Retrieve current health status of this API.
+      operationId: check-api-health
+      parameters:
+        - name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.
+          schema:
+            type : string
+      responses:
+        '200':
+          description: API is available and working fine.
   /messages/{id}:
     get:
       summary: Retrieve message state
