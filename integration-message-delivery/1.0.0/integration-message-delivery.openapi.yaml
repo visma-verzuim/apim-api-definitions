@@ -6,7 +6,7 @@ info:
 servers:
   - url: /integration/message-delivery/1.0.0
 paths:
-  /message:
+  /messages:
     post:
       summary: Create message
       description: Create a new message for the specified integration.
@@ -59,14 +59,17 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeliveryResponse'
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Message'
         '400':
           description: The specified request is invalid. Please check the error message and try again.
         '500':
           description: An internal error occured. Try again and if the problem persists, please contact us.
 components:
   schemas:
-    DeliveryResponse:
+    Message:
       type: object
       properties:
         messageId:

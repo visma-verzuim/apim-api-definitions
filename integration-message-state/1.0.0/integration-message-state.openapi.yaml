@@ -6,7 +6,7 @@ info:
 servers:
   - url: /integration/message-state/1.0.0
 paths:
-  /message/{id}:
+  /messages/{id}:
     get:
       summary: Retrieve message state
       description: Retrieve both the current state and historical overview for the specified message.
@@ -30,7 +30,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Message'
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Message'
         '400':
           description: The specified message identifier is invalid. Please check the identifier and try again.
         '404':
@@ -42,6 +45,9 @@ components:
     Message:
       type: object
       properties:
+        messageId:
+          type: string
+          example: "89179f90-2153-42b8-adf8-5b0c19d44bd5"
         integrationId:
           type: string
           example: "62a34422145ecb62e374e77b"
@@ -51,9 +57,6 @@ components:
         batchIndexNumber:
           type: string
           example: "0"
-        messageId:
-          type: string
-          example: "89179f90-2153-42b8-adf8-5b0c19d44bd5"
         entity:
           type: string
           example: "employee"
