@@ -11,7 +11,7 @@ jobs:
   # This job may be removed when we have at least one real check.
   successful-dummy:
     name: Successful dummy
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     steps:
       - name: Step which always succeeds
         run: echo "I am a dummy step which always succeeds!"
@@ -21,7 +21,7 @@ jobs:
     if: always()
     needs:
       - successful-dummy
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     steps:
       - name: Check whether the required jobs succeeded or failed
         uses: re-actors/alls-green@ed97172826e514be195bf70a7858630e7a5874fc # v1.1.0
