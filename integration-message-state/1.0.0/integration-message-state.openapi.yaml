@@ -88,6 +88,9 @@ components:
         description:
           type: string
           example: "Starting to proces message"
+        additionalInformation:
+          type: object
+          example: { "key": "value", "nested": { "example": true } }
         changed:
           type: string
           format: date-time
