@@ -8,6 +8,7 @@ servers:
 paths:
   /health:
     get:
+      summary: Health
       description: Retrieve current health status of this API.
       operationId: check-api-health
       parameters:
