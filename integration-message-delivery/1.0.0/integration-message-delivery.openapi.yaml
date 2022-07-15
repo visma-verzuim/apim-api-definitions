@@ -59,16 +59,19 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    $ref: '#/components/schemas/Message'
+                $ref: '#/components/schemas/HttpCreatedResponse'
+                    
         '400':
           description: The specified request is invalid. Please check the error message and try again.
         '500':
           description: An internal error occured. Try again and if the problem persists, please contact us.
 components:
   schemas:
+    HttpCreatedResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Message'
     Message:
       type: object
       properties:

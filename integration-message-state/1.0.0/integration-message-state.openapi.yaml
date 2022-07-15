@@ -30,10 +30,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    $ref: '#/components/schemas/Message'
+                $ref: '#/components/schemas/HttpGetResponse'
         '400':
           description: The specified message identifier is invalid. Please check the identifier and try again.
         '404':
@@ -42,6 +39,11 @@ paths:
           description: An internal error occured. Try again and if the problem persists, please contact us.
 components:
   schemas:
+    HttpGetResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Message'
     Message:
       type: object
       properties:
