@@ -47,11 +47,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/HttpGetResponse'
         '400':
-          description: The specified message identifier is invalid. Please check the identifier and try again.
+          description: The specified request is invalid. Please check the returned error, verify the request and try again.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpBadRequestResponse'
         '404':
           description: A message with the specified identifier was not found. Please check the identifier and try again.
         '500':
-          description: An internal error occured. Try again and if the problem persists, please contact us.
+          description: An internal error occured. Try again and if the problem persists, please contact us. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpServerErrorResponse'
 components:
   schemas:
     HttpGetResponse:
@@ -59,6 +67,32 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/Message'
+    HttpBadRequestResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Error occurred while validating input data."
+        validation:
+            type: object
+            properties:
+              errors:
+                type: array
+                items:
+                  type: string
+                  example: "Key: 'Message.IntegrationId' Error:Field validation for 'IntegrationId' failed on the 'required' tag"
+        traceId:
+            type: string
+            example: "3456810315743914459"
+    HttpServerErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Error occurred while creating message. Please try again and if the problem persists, contact us for further assistance."
+        traceId:
+          type: string
+          example: "3456810315743914459"
     Message:
       type: object
       properties:

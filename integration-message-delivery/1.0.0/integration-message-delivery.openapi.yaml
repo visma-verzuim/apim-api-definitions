@@ -36,7 +36,7 @@ paths:
         - name: Content-Type
           in: header
           required: true
-          description: Indicates the original media type of the resource. Valid values are 'application/json' and 'application/xml'.
+          description: Indicates the original media type of the resource. Valid values are 'application/json', 'application/xml' and 'text/xml'.
           schema:
             type : string
         - name: integrationId
@@ -78,8 +78,16 @@ paths:
                     
         '400':
           description: The specified request is invalid. Please check the error message and try again.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpBadRequestResponse'
         '500':
           description: An internal error occured. Try again and if the problem persists, please contact us.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpServerErrorResponse'
 components:
   schemas:
     HttpCreatedResponse:
@@ -87,6 +95,24 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/Message'
+    HttpBadRequestResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Invalid Content-Type."
+        traceId:
+            type: string
+            example: "3456810315743914459"
+    HttpServerErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Error occurred while initializing message state. Please try again and if the problem persists, contact us for further assistance."
+        traceId:
+          type: string
+          example: "3456810315743914459"
     Message:
       type: object
       properties:
