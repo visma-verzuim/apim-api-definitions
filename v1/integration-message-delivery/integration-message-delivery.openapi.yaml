@@ -2,9 +2,9 @@ openapi: '3.0.3'
 info:
   title: Message Delivery
   description: API to deliver XML and JSON messages, which will be processed in your Visma Verzuim product by the integration you have purchased.
-  version: '1.0.0'
+  version: 'v1'
 servers:
-  - url: /integration/message-delivery/1.0.0
+  - url: /integration/message-delivery/v1
 paths:
   /health:
     get:
