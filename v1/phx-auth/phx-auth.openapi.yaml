@@ -1,0 +1,132 @@
+openapi: "3.0.3"
+info:
+  title: Auth
+  description: API to authenticate yourself to use the other APIs.
+  version: "v1"
+servers:
+  - url: /auth/v1
+paths:
+  /partner/token:
+    post:
+      summary: Create partner token
+      description: Obtain an access token using your client id and secret.
+      operationId: create-partner-token
+      tags:
+        - "Authentication"
+      parameters:
+        - name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        description: Token authentication request body.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                  example: client_credentials
+                client_id:
+                  type: integer
+                  example: 123
+                client_secret:
+                  type: string
+                  example: your_client_secret
+                scope:
+                  type: object
+                  properties:
+                    absence:
+                      type: array
+                      items:
+                        type: string
+                      example:
+                        - read
+                        - create
+                    employee:
+                      type: array
+                      items:
+                        type: string
+                      example:
+                        - read
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessToken"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthBadRequestResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Unauthorized"
+        "422":
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnprocessableEntity"
+components:
+  schemas:
+    AccessToken:
+      type: object
+      properties:
+        token_type:
+          description: Type of token
+          type: string
+          default: Bearer
+        expires_in:
+          description: Expiration time of token
+          type: integer
+          default: 10800
+        access_token:
+          description: The access token
+          type: string
+    AuthBadRequestResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          default: "invalid_client"
+        error_description:
+          type: string
+          default: "Client authentication failed"
+        message:
+          type: string
+          default: "Client authentication failed"
+    Unauthorized:
+      type: object
+      properties:
+        error:
+          type: string
+          default: "invalid_client"
+        error_description:
+          type: string
+          default: "Client authentication failed"
+        message:
+          type: string
+          default: "Client authentication failed"
+    UnprocessableEntity:
+      type: object
+      properties:
+        error:
+          type: string
+          default: "invalid_client"
+        error_description:
+          type: string
+          default: "Client authentication failed"
+        message:
+          type: string
+          default: "Client authentication failed"
