@@ -1,8 +1,8 @@
-openapi: '3.0.3'
+openapi: "3.0.3"
 info:
   title: Message State
   description: API to retrieve both current and historical overview of messages that has been delivered through the message delivery API.
-  version: 'v1'
+  version: "v1"
 servers:
   - url: /integration/message-state/v1
 paths:
@@ -17,9 +17,9 @@ paths:
           required: true
           description: Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.
           schema:
-            type : string
+            type: string
       responses:
-        '200':
+        "200":
           description: API is available and working fine.
   /messages/{id}:
     get:
@@ -32,41 +32,41 @@ paths:
           required: true
           description: Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.
           schema:
-            type : string
+            type: string
         - name: id
           in: path
           required: true
           description: Unique identifier of your **message**, whose state should be returned.
           schema:
-            type : string
+            type: string
       responses:
-        '200':
+        "200":
           description: Representation of your message, includes current state and historical overview.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HttpGetResponse'
-        '400':
+                $ref: "#/components/schemas/HttpGetResponse"
+        "400":
           description: The specified request is invalid. Please check the returned error, verify the request and try again.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HttpBadRequestResponse'
-        '404':
+                $ref: "#/components/schemas/HttpBadRequestResponse"
+        "404":
           description: A message with the specified identifier was not found. Please check the identifier and try again.
-        '500':
-          description: An internal error occured. Try again and if the problem persists, please contact us. 
+        "500":
+          description: An internal error occured. Try again and if the problem persists, please contact us.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HttpServerErrorResponse'
+                $ref: "#/components/schemas/HttpServerErrorResponse"
 components:
   schemas:
     HttpGetResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/Message'
+          $ref: "#/components/schemas/Message"
     HttpBadRequestResponse:
       type: object
       properties:
@@ -74,16 +74,16 @@ components:
           type: string
           example: "Error occurred while validating input data."
         validation:
-            type: object
-            properties:
-              errors:
-                type: array
-                items:
-                  type: string
-                  example: "Key: 'Message.IntegrationId' Error:Field validation for 'IntegrationId' failed on the 'required' tag"
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: string
+                example: "Key: 'Message.IntegrationId' Error:Field validation for 'IntegrationId' failed on the 'required' tag"
         traceId:
-            type: string
-            example: "3456810315743914459"
+          type: string
+          example: "3456810315743914459"
     HttpServerErrorResponse:
       type: object
       properties:
@@ -118,13 +118,11 @@ components:
           type: object
           example: {}
         currentState:
-          type: object
-          $ref: '#/components/schemas/MessageState'
+          $ref: "#/components/schemas/MessageState"
         history:
           type: array
           items:
-            type: object
-            $ref: '#/components/schemas/MessageState'
+            $ref: "#/components/schemas/MessageState"
         created:
           type: string
           format: date-time
