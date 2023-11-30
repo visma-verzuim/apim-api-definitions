@@ -1,8 +1,8 @@
-openapi: '3.0.3'
+openapi: "3.0.3"
 info:
   title: Message Delivery
   description: API to deliver XML and JSON messages, which will be processed in your Visma Verzuim product by the integration you have purchased.
-  version: 'v1'
+  version: "v1"
 servers:
   - url: /integration/message-delivery/v1
 paths:
@@ -17,9 +17,9 @@ paths:
           required: true
           description: Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.
           schema:
-            type : string
+            type: string
       responses:
-        '200':
+        "200":
           description: API is available and working fine.
   /messages:
     post:
@@ -32,69 +32,69 @@ paths:
           required: true
           description: Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.
           schema:
-            type : string
+            type: string
         - name: Content-Type
           in: header
           required: true
           description: Indicates the original media type of the resource. Valid values are 'application/json', 'application/xml' and 'text/xml'.
           schema:
-            type : string
+            type: string
         - name: integrationId
           in: header
           required: true
           description: Unique identifier of your **integration**, where the message should be delivered to.
           schema:
-            type : string
+            type: string
         - name: partnerId
           in: header
           required: true
           description: Unique identifier of your Visma Verzuim **partner** scope, into which the message will be integrated.
           schema:
-            type : string
+            type: string
         - name: employerId
           in: header
           required: true
           description: Unique identifier of your Visma Verzuim **employer** scope, into which the message will be integrated.
           schema:
-            type : string
+            type: string
         - name: bearer
           in: header
           required: true
           description: Authorization bearer of your Visma Verzuim integration user, which will be used to integrate the message into your Visma Verzuim product.
           schema:
-            type : string
+            type: string
       requestBody:
         required: true
         content:
           application/json: {}
           application/xml: {}
       responses:
-        '201':
+        "201":
           description: Unique identifier of your message, can be used to trace the state.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HttpCreatedResponse'
-                    
-        '400':
+                $ref: "#/components/schemas/HttpCreatedResponse"
+
+        "400":
           description: The specified request is invalid. Please check the error message and try again.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HttpBadRequestResponse'
-        '500':
+                $ref: "#/components/schemas/HttpBadRequestResponse"
+        "500":
           description: An internal error occured. Try again and if the problem persists, please contact us.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HttpServerErrorResponse'
+                $ref: "#/components/schemas/HttpServerErrorResponse"
 components:
   schemas:
     HttpCreatedResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/Message'
+          $ref: "#/components/schemas/Message"
     HttpBadRequestResponse:
       type: object
       properties:
@@ -102,8 +102,8 @@ components:
           type: string
           example: "Invalid Content-Type."
         traceId:
-            type: string
-            example: "3456810315743914459"
+          type: string
+          example: "3456810315743914459"
     HttpServerErrorResponse:
       type: object
       properties:
