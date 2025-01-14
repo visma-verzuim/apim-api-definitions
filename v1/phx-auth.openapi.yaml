@@ -5,6 +5,8 @@ info:
   version: "v1"
 servers:
   - url: /auth/v1
+tags:
+  - name: Public
 paths:
   /partner/token:
     post:
@@ -12,7 +14,7 @@ paths:
       description: Obtain an access token using your client id and secret.
       operationId: create-partner-token
       tags:
-        - "Authentication"
+        - Authentication
       parameters:
         - name: Ocp-Apim-Subscription-Key
           in: header

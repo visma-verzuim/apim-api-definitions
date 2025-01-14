@@ -5,12 +5,16 @@ info:
   version: "v1"
 servers:
   - url: /integration/message-state/v1
+tags:
+  - name: Integration
 paths:
   /health:
     get:
       summary: Health
       description: Retrieve current health status of this API.
       operationId: check-api-health
+      tags:
+        - Health
       parameters:
         - name: Ocp-Apim-Subscription-Key
           in: header
@@ -26,6 +30,8 @@ paths:
       summary: Retrieve message state
       description: Retrieve both the current state and historical overview for the specified message.
       operationId: retrieve-message-state
+      tags:
+        - Messages
       parameters:
         - name: Ocp-Apim-Subscription-Key
           in: header
