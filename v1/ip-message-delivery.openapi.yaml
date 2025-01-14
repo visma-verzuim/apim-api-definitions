@@ -5,6 +5,8 @@ info:
   version: "v1"
 servers:
   - url: /integration/message-delivery/v1
+tags:
+  - name: Integration
 paths:
   /health:
     get:
@@ -12,7 +14,7 @@ paths:
       description: Retrieve current health status of this API.
       operationId: check-api-health
       tags:
-        - "Health"
+        - Health
       parameters:
         - name: Ocp-Apim-Subscription-Key
           in: header
@@ -29,7 +31,7 @@ paths:
       description: Create a new message for the specified integration.
       operationId: create-message
       tags:
-        - "Messages"
+        - Messages
       parameters:
         - name: Ocp-Apim-Subscription-Key
           in: header
