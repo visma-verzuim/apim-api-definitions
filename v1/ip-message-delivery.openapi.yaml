@@ -5,8 +5,6 @@ info:
   version: "v1"
 servers:
   - url: /integration/message-delivery/v1
-tags:
-  - name: Integration
 paths:
   /health:
     get:

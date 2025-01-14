@@ -5,8 +5,6 @@ info:
   version: "v1"
 servers:
   - url: /v1
-tags:
-  - name: Public
 paths:
   /health/ping:
     get:
