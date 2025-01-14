@@ -10,7 +10,7 @@ tags:
 paths:
   /health/ping:
     get:
-      summary: Health
+      summary: Ping
       description: Retrieve health status via a simple ping.
       operationId: check-api-health
       tags:
