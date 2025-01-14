@@ -8,10 +8,10 @@ servers:
 tags:
   - name: Public
 paths:
-  /health:
+  /health/ping:
     get:
       summary: Health
-      description: Retrieve current health status of this API.
+      description: Retrieve health status via a simple ping.
       operationId: check-api-health
       tags:
         - Health
