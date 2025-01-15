@@ -4,9 +4,9 @@ info:
   description: Check the health of the BlueVi API.
   version: "v1"
 servers:
-  - url: /v1/health
+  - url: /v1
 paths:
-  /ping:
+  /health/ping:
     get:
       summary: Ping
       description: Retrieve health status via a simple ping.
