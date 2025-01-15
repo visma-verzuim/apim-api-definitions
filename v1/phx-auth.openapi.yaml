@@ -4,9 +4,9 @@ info:
   description: Check the health of the BlueVi API.
   version: "v1"
 servers:
-  - url: /v1
+  - url: /auth/v1
 paths:
-  /auth/partner/token:
+  /partner/token:
     post:
       summary: Create partner token
       description: Obtain an access token using your client id and secret.
