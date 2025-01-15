@@ -1,12 +1,12 @@
 openapi: "3.0.3"
 info:
   title: Health
-  description: Retrieve current health status of this API.
+  description: Check the health of the BlueVi API.
   version: "v1"
 servers:
-  - url: /v1
+  - url: /v1/health
 paths:
-  /health/ping:
+  /ping:
     get:
       summary: Ping
       description: Retrieve health status via a simple ping.

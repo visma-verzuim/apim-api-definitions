@@ -1,10 +1,10 @@
 openapi: "3.0.3"
 info:
   title: Auth
-  description: API to authenticate yourself to use the other APIs.
+  description: Check the health of the BlueVi API.
   version: "v1"
 servers:
-  - url: /auth/v1
+  - url: /v1/auth
 paths:
   /partner/token:
     post:
