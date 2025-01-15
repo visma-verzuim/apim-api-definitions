@@ -32,8 +32,8 @@ paths:
                   type: string
                   example: client_credentials
                 client_id:
-                  type: integer
-                  example: 123
+                  type: string
+                  example: 639cb341-b25c-4b72-acee-e0ac2be5c2dd
                 client_secret:
                   type: string
                   example: your_client_secret
