@@ -95,7 +95,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UnprocessableEntity"
-  /public/employee:
+  /employee:
     get:
       tags:
         - Employee
@@ -184,24 +184,24 @@ paths:
                       self:
                         type: string
                         format: uri
-                        example: "https://api.dotweb.test/public/user/roles/employer?page[number]=1&page[size]=25"
+                        example: "https://api.bluevi.com/user/roles/employer?page[number]=1&page[size]=25"
                       first:
                         type: string
                         format: uri
-                        example: "https://api.dotweb.test/public/user/roles/employer?page[size]=25"
+                        example: "https://api.bluevi.com/user/roles/employer?page[size]=25"
                       last:
                         type: string
                         format: uri
-                        example: "https://api.dotweb.test/public/user/roles/employer?page[number]=1&page[size]=25"
+                        example: "https://api.bluevi.com/user/roles/employer?page[number]=1&page[size]=25"
                       prev:
                         type: string
                         format: uri
-                        example: "https://api.dotweb.test/public/user/roles/employer?page[size]=25"
+                        example: "https://api.bluevi.com/user/roles/employer?page[size]=25"
                         nullable: true
                       next:
                         type: string
                         format: uri
-                        example: "https://api.dotweb.test/public/user/roles/employer?page[number]=2&page[size]=25"
+                        example: "https://api.bluevi.com/user/roles/employer?page[number]=2&page[size]=25"
                         nullable: true
                     type: object
                   meta:
