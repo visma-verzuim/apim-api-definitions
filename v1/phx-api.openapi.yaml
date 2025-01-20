@@ -10,7 +10,7 @@ paths:
     get:
       summary: Ping
       description: Retrieve health status via a simple ping.
-      operationId: check-api-health-ping
+      operationId: v1-health-ping-get-essential
       tags:
         - Health
       parameters:
@@ -27,7 +27,7 @@ paths:
     post:
       summary: Create partner token
       description: Obtain an access token using your client id and secret.
-      operationId: create-partner-token
+      operationId: v1-auth-partner-token-post-essential
       tags:
         - Authentication
       parameters:
@@ -100,7 +100,7 @@ paths:
       tags:
         - Employee
       summary: "Get a list of employees"
-      operationId: 7da03983f3c9f43529ef75e8bbaebc15
+      operationId: v1-employee-get-advanced
       parameters:
         - name: "filter[id]"
           in: query
