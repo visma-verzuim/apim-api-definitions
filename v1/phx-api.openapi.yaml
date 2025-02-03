@@ -1,63 +1,35 @@
-openapi: "3.0.3"
+openapi: 3.0.3
 info:
-  title: Health
-  description: Check the health of the BlueVi API.
-  version: "v1"
-servers:
-  - url: /v1
+  title: BlueVi API
+  description: The BlueVi API provides access to BlueVi directly, allowing you to interact with the data in your environment.
+  version: v1
 paths:
-  /health/ping:
-    get:
-      summary: Ping
-      description: Retrieve health status via a simple ping.
-      operationId: v1-health-ping-get-essential
-      tags:
-        - Health
-      parameters:
-        - name: Ocp-Apim-Subscription-Key
-          in: header
-          required: true
-          description: Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.
-          schema:
-            type: string
-      responses:
-        "200":
-          description: API is available and working fine.
-  /auth/partner/token:
+  /auth/token:
     post:
-      summary: Create partner token
-      description: Obtain an access token using your client id and secret.
-      operationId: v1-auth-partner-token-post-essential
       tags:
         - Authentication
-      parameters:
-        - name: Ocp-Apim-Subscription-Key
-          in: header
-          required: true
-          description: Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.
-          schema:
-            type: string
+      summary: Create access token
+      description: Obtain an access token using the client id and secret.
+      operationId: essential.auth.token.post
       requestBody:
+        description: "Token authentication request body"
         required: true
-        description: Token authentication request body.
         content:
           application/json:
             schema:
-              type: object
               properties:
                 grant_type:
                   type: string
                   example: client_credentials
                 client_id:
-                  type: integer
-                  example: 123
+                  type: string
+                  example: 639cb341-b25c-4b72-acee-e0ac2be5c2dd
                 client_secret:
                   type: string
                   example: your_client_secret
                 scope:
-                  type: object
                   properties:
-                    absence:
+                    absencecourse:
                       type: array
                       items:
                         type: string
@@ -70,98 +42,78 @@ paths:
                         type: string
                       example:
                         - read
+                  type: object
+              type: object
       responses:
-        "200":
-          description: Successful response
+        200:
+          description: The resource has been fetched and transmitted in the message body.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/AccessToken"
-        "400":
-          description: Bad Request
+        400:
+          description: The server cannot process the request due to a client error (e.g., malformed request syntax).
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/AuthBadRequestResponse"
-        "401":
-          description: Unauthorized
+        401:
+          description: Client if not authorized to access the API.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Unauthorized"
-        "422":
-          description: Unprocessable Entity
+        422:
+          description: The request was well-formed but was unable to be followed due to semantic errors.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/UnprocessableEntity"
-  /employee:
+      parameters:
+        - name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.
+          schema:
+            type: string
+  /health/ping:
     get:
       tags:
-        - Employee
-      summary: "Get a list of employees"
-      operationId: v1-employee-get-advanced
+        - Health
+      summary: Health status
+      description: Retrieve health status via a simple ping.
+      operationId: essential.health.ping.get
+      responses:
+        200:
+          description: The APIs are available to be consumed.
+        500:
+          description: The APIs are not available. Please try again later.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerErrorResponse"
       parameters:
-        - name: "filter[id]"
-          in: query
-          description: "Filter by ID to get a specific employee"
+        - name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.
           schema:
             type: string
-        - name: "filter[externalKey]"
-          in: query
-          description: "Filter by external key"
+  "/employee/{id}":
+    delete:
+      tags:
+        - Employee
+      summary: "Delete an employee"
+      description: "Deletes an employee based on the ID."
+      operationId: essential.employee.delete
+      parameters:
+        - name: id
+          in: path
+          description: "Unique identifier of the employee to delete."
+          required: true
           schema:
             type: string
-        - name: "filter[employmentId]"
-          in: query
-          description: "Filter by the ID of a specific employment"
-          schema:
-            type: string
-        - name: "filter[employeeNumber]"
-          in: query
-          description: "Filter by an employee's employee number"
-          schema:
-            type: string
-        - name: "include[person]"
-          in: query
-          description: "Include the employee's personal details in the output"
-          schema:
-            type: string
-        - name: "include[employments]"
-          in: query
-          description: "Include the employee's employments in the output"
-          schema:
-            type: string
-        - name: "include[employments.employmentContracts]"
-          in: query
-          description: "Include the employment contracts associated with the employee's employments in the output"
-          schema:
-            type: string
-        - name: "include[currentOrLastEmploymentContract.organizationalUnit.employer]"
-          in: query
-          description: "Include the employer the employee belongs to through their organizational unit in the output"
-          schema:
-            type: string
-        - name: "include[addresses]"
-          in: query
-          description: "Include the employee's addresses in the output"
-          schema:
-            type: string
-        - name: "include[employmentContract]"
-          in: query
-          description: "Include the employee's employment contract in the output"
-          schema:
-            type: string
-        - name: "include[communicationMethods]"
-          in: query
-          description: "Include the employee's communication methods in the output"
-          schema:
-            type: string
-        - name: "sort[externalKey]"
-          in: query
-          description: "Sort results by external key, use '-externalKey' to sort descending"
-          schema:
-            type: string
+            format: uuid
         - name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -170,7 +122,100 @@ paths:
             type: string
       responses:
         200:
-          description: "A list of Employees"
+          description: "Employee successfully deleted"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+        400:
+          description: "Invalid input"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestResponse"
+        500:
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerErrorResponse"
+  /employee:
+    get:
+      tags:
+        - Employee
+      summary: Get employees
+      description: Get a list of employees.
+      operationId: essential.employee.get
+      parameters:
+        - name: filter[id]
+          in: query
+          description: Filter by internal identifier.
+          schema:
+            type: string
+        - name: filter[externalKey]
+          in: query
+          description: Filter by external key.
+          schema:
+            type: string
+        - name: filter[employmentId]
+          in: query
+          description: Filter by the internal identifier of a specific employment.
+          schema:
+            type: string
+        - name: filter[employeeNumber]
+          in: query
+          description: Filter by an employee's employee number.
+          schema:
+            type: string
+        - name: include[person]
+          in: query
+          description: Include the employee's personal details in the response body.
+          schema:
+            type: string
+        - name: include[employments]
+          in: query
+          description: Include the employee's employments in the response body.
+          schema:
+            type: string
+        - name: include[employments.employmentContracts]
+          in: query
+          description: Include the employment contracts associated with the employee's employments in the response body.
+          schema:
+            type: string
+        - name: include[currentOrLastEmploymentContract.organizationalUnit.employer]
+          in: query
+          description: Include the employer, where the employee belongs to through their organizational unit, in the response body.
+          schema:
+            type: string
+        - name: include[addresses]
+          in: query
+          description: Include the employee's addresses in the response body.
+          schema:
+            type: string
+        - name: include[employmentContract]
+          in: query
+          description: Include the employee's employment contract in the response body.
+          schema:
+            type: string
+        - name: include[communicationMethods]
+          in: query
+          description: Include the employee's communication methods in the response body.
+          schema:
+            type: string
+        - name: sort[externalKey]
+          in: query
+          description: Sort results by external key, use '-externalKey' to sort descending.
+          schema:
+            type: string
+        - name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.
+          schema:
+            type: string
+      responses:
+        200:
+          description: The resource has been fetched and transmitted in the message body.
           content:
             application/json:
               schema:
@@ -184,24 +229,24 @@ paths:
                       self:
                         type: string
                         format: uri
-                        example: "https://api.bluevi.com/user/roles/employer?page[number]=1&page[size]=25"
+                        example: "https://api.bluevi.com/employee?page[number]=1&page[size]=25"
                       first:
                         type: string
                         format: uri
-                        example: "https://api.bluevi.com/user/roles/employer?page[size]=25"
+                        example: "https://api.bluevi.com/employee?page[size]=25"
                       last:
                         type: string
                         format: uri
-                        example: "https://api.bluevi.com/user/roles/employer?page[number]=1&page[size]=25"
+                        example: "https://api.bluevi.com/employee?page[number]=1&page[size]=25"
                       prev:
                         type: string
                         format: uri
-                        example: "https://api.bluevi.com/user/roles/employer?page[size]=25"
+                        example: "https://api.bluevi.com/employee?page[size]=25"
                         nullable: true
                       next:
                         type: string
                         format: uri
-                        example: "https://api.bluevi.com/user/roles/employer?page[number]=2&page[size]=25"
+                        example: "https://api.bluevi.com/employee?page[number]=2&page[size]=25"
                         nullable: true
                     type: object
                   meta:
@@ -218,56 +263,164 @@ paths:
                     type: object
                 type: object
         400:
-          description: "Bad Request"
+          description: The server cannot process the request due to a client error (e.g., malformed request syntax).
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/BadRequestResponse"
+    post:
+      tags:
+        - Employee
+      summary: Create an employee
+      description: Create an employee and its associated entities (e.g. employment, employment contract).
+      operationId: essential.employee.post
+      requestBody:
+        description: Please provide the resource data according to the schema below.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostEmployeeRequestBody"
+      responses:
+        201:
+          description: The request succeeded, and a new resource was created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmployeeResource"
+        400:
+          description: The server cannot process the request due to a client error (e.g., malformed request syntax).
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestResponse"
+        500:
+          description: The server has encountered a situation it does not know how to handle. Please try again or contact Visma Verzuim if the problem persists.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerErrorResponse"
+      parameters:
+        - name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.
+          schema:
+            type: string
+    patch:
+      tags:
+        - Employee
+      summary: Update an employee
+      description: Update an employee and its associated entities (e.g. employment, employment contract).
+      operationId: essential.employee.patch
+      requestBody:
+        description: Please provide the resource data according to the schema below.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchEmployeeRequestBody"
+      responses:
+        200:
+          description: The resource has been fetched and transmitted in the message body.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmployeeResource"
+        400:
+          description: The server cannot process the request due to a client error (e.g., malformed request syntax).
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestResponse"
+        500:
+          description: The server has encountered a situation it does not know how to handle. Please try again or contact Visma Verzuim if the problem persists.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerErrorResponse"
+      parameters:
+        - name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.
+          schema:
+            type: string
 components:
   schemas:
     AccessToken:
-      type: object
       properties:
         token_type:
-          description: Type of token
+          description: Type of access token.
           type: string
           default: Bearer
         expires_in:
-          description: Expiration time of token
+          description: Expiration time of the access token.
           type: integer
           default: 10800
         access_token:
-          description: The access token
+          description: The access token itself.
           type: string
+      type: object
     AuthBadRequestResponse:
-      type: object
       properties:
         error:
           type: string
-          default: "invalid_client"
+          example: invalid_client
         error_description:
           type: string
-          default: "Client authentication failed"
+          example: Client authentication failed
         message:
           type: string
-          default: "Client authentication failed"
+          example: Client authentication failed
+      type: object
     Unauthorized:
-      type: object
       properties:
         error:
           type: string
-          default: "invalid_client"
+          example: invalid_client
         error_description:
           type: string
-          default: "Client authentication failed"
+          example: Client authentication failed
+        hint:
+          type: string
+          example: Check the `absencecourse-readx` scope
         message:
           type: string
-          default: "Client authentication failed"
+          example: Client authentication failed
+      type: object
+    UnprocessableEntity:
+      properties:
+        error:
+          type: string
+          example: invalid_client
+        error_description:
+          type: string
+          example: Client authentication failed
+        message:
+          type: string
+          example: Client authentication failed
+      type: object
+    SuccessResponse:
+      properties:
+        message:
+          type: string
+          example: success
+        timestamp:
+          type: integer
+          example: 1697101490
+        status:
+          type: integer
+          example: 200
+        traceId:
+          type: string
+          example: sample-uuid-string
+      type: object
     BadRequestResponse:
       properties:
         message:
           type: string
-          example: "Request validation failed"
+          example: Request validation failed
         timestamp:
           type: integer
           example: 1697101490
@@ -281,69 +434,88 @@ components:
               example: REQ_00001
             message:
               type: string
-              example: "Validation failed"
+              example: Validation failed
             detail:
               type: array
               items:
                 type: string
               example:
-                - "The request could not be validated"
-                - "Description of the first validation error"
-                - "Description of the second validation error"
+                - The request could not be validated
+                - Description of the first validation error
+                - Description of the second validation error
           type: object
         traceId:
           type: string
           example: sample-uuid-string
       type: object
-    UnprocessableEntity:
-      type: object
+    ServerErrorResponse:
       properties:
-        error:
-          type: string
-          default: "invalid_client"
-        error_description:
-          type: string
-          default: "Client authentication failed"
         message:
           type: string
-          default: "Client authentication failed"
+          example: An error occurred
+        timestamp:
+          type: integer
+          example: 1697101490
+        status:
+          type: integer
+          example: 500
+        errors:
+          properties:
+            code:
+              type: string
+              example: REQ_00001
+            message:
+              type: string
+              example: An error occurred
+            detail:
+              type: array
+              items:
+                type: string
+              example:
+                - A server error occurred
+                - Something bad happened that we did not expect
+          type: object
+        traceId:
+          type: string
+          example: sample-uuid-string
+      type: object
     EmployeeResource:
       properties:
         id:
-          description: "ID of the employee"
+          description: Unique identifier of the employee.
           type: string
           format: uuid
         externalKey:
-          description: "External key associated with the employee"
+          description: External key associated with the employee.
           type: string
           nullable: true
         socialSecurityNumber:
-          description: "The SSN(BSN) of the employee."
+          description: The SSN (BSN) of the employee.
           type: string
           pattern: '^\d{9}$'
           nullable: true
         noRisk:
-          description: "No risk indication for the Employee."
+          description: No risk indication for the employee.
           type: boolean
         sfb:
-          description: "Structural Functional Disability (SFB) status of the Employee."
+          description: Structural Functional Disability (SFB) status of the Employee.
           type: boolean
         absenceFrequency:
-          description: "The number of absences for the employee over the past 12 months. Updated nightly."
+          description: The number of absences for the employee over the past 12 months. Updated nightly.
           type: integer
         person:
           oneOf:
             - $ref: "#/components/schemas/EmployerPersonResource"
           nullable: true
-          description: "The personal details associated with the employee, available if the relation is included in the query"
+          description: The personal details associated with the employee, available if the relation is included in the query.
         addresses:
-          description: "The addresses associated with the employee, available if the relation is included in the query"
+          description: The addresses associated with the employee, available if the relation is included in the query.
           type: array
           items:
             $ref: "#/components/schemas/EmployerPersonAddressResource"
           nullable: true
         communicationMethods:
-          description: "The communication methods associated with the employee, available if the relation is included in the query"
+          description: The communication methods associated with the employee, available if the relation is included in the query.
           type: array
           items:
             $ref: "#/components/schemas/EmployerPersonCommunicationsResource"
@@ -352,13 +524,13 @@ components:
           oneOf:
             - $ref: "#/components/schemas/EmploymentContractResource"
           nullable: true
-          description: "The current or last employment contract associated with the employee, available if the relation is included in the query"
+          description: The current or last employment contract associated with the employee, available if the relation is included in the query.
         dateCreated:
-          description: "The date and time the employee was created in YYYY-MM-DD HH:MM:SS format"
+          description: The date and time the employee was created in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
         dateUpdated:
-          description: "The date and time the absence course was last updated in YYYY-MM-DD HH:MM:SS format"
+          description: The date and time the absence course was updated in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
         dossiers:
@@ -366,7 +538,7 @@ components:
           items:
             $ref: "#/components/schemas/Dossier"
         employments:
-          description: "The employments associated with the employee, available if the relation is included in the query"
+          description: The employments associated with the employee, available if the relation is included in the query.
           type: array
           items:
             $ref: "#/components/schemas/Employment"
@@ -374,32 +546,32 @@ components:
     EmployerPersonResource:
       properties:
         id:
-          description: "ID of the employer person"
+          description: Uniqud identifier of the employer person.
           type: string
           format: uuid
         externalKey:
-          description: "The external key associated with the employer person"
+          description: The external key associated with the employer person.
           type: string
           nullable: true
         migrationKey:
-          description: "The migration key associated with the employer person"
+          description: The migration key associated with the employer person.
           type: string
         initials:
-          description: "The initials of the employer person"
+          description: The initials of the employer person.
           type: string
         firstName:
-          description: "The first name associated with the employer person"
+          description: The first name associated with the employer person.
           type: string
           nullable: true
         lastName:
-          description: "The last name associated with the employer person"
+          description: The last name associated with the employer person.
           type: string
         lastNamePartner:
-          description: "The surname of the partner associated with the employer person"
+          description: The last name of the partner associated with the employer person.
           type: string
           nullable: true
         namePreference:
-          description: "The naming preference associated with the employer person"
+          description: The naming preference associated with the employer person.
           type: string
           enum:
             - own
@@ -407,200 +579,196 @@ components:
             - own-partner
             - partner-own
         prefix:
-          description: "The prefix associated with the employer person"
+          description: The prefix associated with the employer person.
           type: string
           nullable: true
         prefixPartner:
-          description: "The prefix of the name of the partner associated with the employer person"
+          description: The prefix of the name of the partner associated with the employer person.
           type: string
           nullable: true
         placeOfBirth:
-          description: "The city of birth associated with the employer person"
+          description: The city of birth associated with the employer person.
           type: string
           nullable: true
         gender:
-          description: "The gender associated with the employer person."
+          description: The gender associated with the employer person.
           type: string
           enum:
-            - M
-            - F
-            - X
+            - m
+            - f
+            - x
         dateOfBirth:
-          description: "The date of birth associated with the employer person."
+          description: The date of birth associated with the employer person.
           type: string
           format: date
         dateOfDeath:
-          description: "The date of death associated with the employer person."
+          description: The date of death associated with the employer person.
           type: string
           format: date
           nullable: true
         maritalStatus:
-          description: "The marital status associated with the employer person"
+          description: The marital status associated with the employer person.
           type: string
           enum:
-            - SINGLE
-            - MARRIED
-            - PARTNERSHIP
-            - WIDOWED
-            - WIDOWED_AFTER_MARRIAGE
-            - WIDOWED_AFTER_PARTNERSHIP
-            - DIVORCED
-            - DIVORCED_AFTER_MARRIAGE
-            - DIVORCED_AFTER_PARTNERSHIP
-            - UNKNOWN
+            - single
+            - married
+            - partnership
+            - widowed
+            - widowed-after-marriage
+            - widowed-after-partnership
+            - divorced
+            - divorced-after-marriage
+            - divorced-after-partnership
+            - unknown
         salutation:
-          description: "The salutation associated with the employer person"
+          description: The salutation associated with the employer person.
           type: string
           enum:
             - full
             - short
         dateCreated:
-          description: "The date and time the employer person was created in YYYY-MM-DD HH:MM:SS format"
+          description: The date and time the employer person was created in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
         dateUpdated:
-          description: "The date and time the employer person was last updated in YYYY-MM-DD HH:MM:SS format"
+          description: The date and time the employer person was updated in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
       type: object
     EmployerPersonAddressResource:
       properties:
         id:
-          description: "ID of the employer person address"
+          description: Unique identifier of the employer person address.
           type: string
           format: uuid
         externalKey:
-          description: "The external key associated with the employer person address"
+          description: The external key associated with the employer person address.
           type: string
-        migration_key:
-          description: "The migration key associated with the employer person address"
+        migrationKey:
+          description: The migration key associated with the employer person address.
           type: string
         personId:
-          description: "The person ID associated with the employer person address"
+          description: The person identifier associated with the employer person address.
           type: string
           format: uuid
         street:
-          description: "The street of the address associated with the employer person address."
+          description: The street of the address associated with the employer person address.
           type: string
         number:
-          description: "The number of the address associated with the employer person address."
+          description: The number of the address associated with the employer person address.
           type: string
         postalCode:
-          description: "The postal code of the address associated with the employer person address."
+          description: The postal code of the address associated with the employer person address.
           type: string
         city:
-          description: "The city of the address associated with the employer person address."
+          description: The city of the address associated with the employer person address.
           type: string
         primary:
-          description: "Indication if the address is flagged as primary or not."
-          type: string
-          enum:
-            - "0"
-            - "1"
+          description: Indication if the address is flagged as primary or not.
+          type: boolean
         dateCreated:
-          description: "The date and time the employer person address was created in YYYY-MM-DD HH:MM:SS format"
+          description: The date and time the employer person address was created in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
         dateUpdated:
-          description: "The date and time the employer person address was last updated in YYYY-MM-DD HH:MM:SS format"
+          description: The date and time the employer person address was updated in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
       type: object
     EmployerPersonCommunicationsResource:
       properties:
         uuid:
-          description: "UUID of the current communication method"
+          description: The UUID of the current communication method.
           type: string
         externalKey:
-          description: "The external key associated with the current communication method"
+          description: The external key associated with the current communication method.
           type: string
         migrationKey:
-          description: "The migration key associated with the current communication method"
+          description: The migration key associated with the current communication method.
           type: string
         value:
-          description: "The value associated with the current communication method"
+          description: The value associated with the current communication method.
           type: string
         primary:
-          description: "Indication if the communication method is flagged as primary or not."
+          description: Indication if the communication method is flagged as primary or not.
           type: boolean
         type:
-          description: "The type of communication"
+          description: The type of communication.
           type: string
           enum:
             - email
             - phone
             - mobile
         purpose:
-          description: "The purpose of the communication"
+          description: The purpose of the communication.
           type: string
           enum:
             - personal
             - business
         dateCreated:
-          description: "The date and time the employer person communication was created in YYYY-MM-DD HH:MM:SS format"
+          description: The date and time the employer person communication was created in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
         dateUpdated:
-          description: "The date and time the employer person communication was last updated in YYYY-MM-DD HH:MM:SS format"
+          description: The date and time the employer person communication was updated in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
       type: object
     EmploymentContractResource:
       properties:
         id:
-          description: "UUID of the employment contract"
+          description: UUID of the employment contract.
           type: string
           format: uuid
           example: b4b1ae1a-8683-4f6b-a3f6-3fff05c90d50
         externalKey:
-          description: "The external key associated with the employment contract"
+          description: The external key associated with the employment contract.
           type: string
           example: External@Key
           nullable: true
         migrationKey:
-          description: "The migration key associated with the employment contract"
+          description: The migration key associated with the employment contract.
           type: string
           example: Migration@Key
           nullable: true
         dateStart:
-          description: "The start date associated with the employment contract."
+          description: The start date associated with the employment contract in YYYY-MM-DD format.
           type: string
           format: date
         dateEnd:
-          description: "The end date associated with the employment contract."
+          description: The end date associated with the employment contract in YYYY-MM-DD format.
           type: string
           format: date
-          example: "2000-01-01"
           nullable: true
         jobTitle:
-          description: "The job title (position) associated with the employment contract"
+          description: The job title (position) associated with the employment contract.
           type: string
-          example: "Chief Executive Officer"
+          example: Chief Executive Officer
           nullable: true
         employmentType:
           $ref: "#/components/schemas/EmploymentType"
         normHoursPerWeek:
-          description: "Standard hours per week associated with the employment contract."
+          description: Standard hours per week associated with the employment contract.
           type: number
           format: float
           nullable: true
         hoursPerWeek:
-          description: "Hours per week associated with the employment contract."
+          description: Hours per week associated with the employment contract.
           type: number
           format: float
           nullable: true
         functionYears:
-          description: "Function Years information"
+          description: Function years associated with the employment contract.
           type: integer
           nullable: true
         paymentPeriod:
-          description: "The choice of interval during which the employment contract payment is given out"
+          description: The choice of interval during which the employment contract payment is given out.
           type: string
           enum:
             - hour
             - day
             - week
-            - four_weeks
+            - four-weeks
             - month
             - year
           example: month
@@ -608,62 +776,62 @@ components:
         organizationalUnit:
           $ref: "#/components/schemas/OrganizationalUnit"
         univeralSalary:
-          description: "The universal(uniform) salary associated with the employment contract."
+          description: The universal(uniform) salary associated with the employment contract.
           type: number
           format: float
-          example: "99899.34"
+          example: 99899.34
           nullable: true
         dateCreated:
-          description: "The date and time the employment contract was created in YYYY-MM-DD HH:MM:SS format"
+          description: The date and time the employment contract was created in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
         dateUpdated:
-          description: "The date and time the employment contract was last updated in YYYY-MM-DD HH:MM:SS format"
+          description: The date and time the employment contract was updated in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
       type: object
     EmploymentType:
       properties:
         id:
-          description: "ID of the employment type"
+          description: Unique identifier of the employment type.
           type: string
           format: uuid
         externalKey:
-          description: "The external key of the employment type"
+          description: The external key of the employment type.
           type: string
         migrationKey:
-          description: "The migration key of the employment type"
+          description: The migration key of the employment type.
           type: string
         name:
-          description: "The name of the employment type"
+          description: The name of the employment type.
           type: string
         code:
-          description: "The code of the employment type"
+          description: The code of the employment type.
           type: string
         indefiniteContract:
-          description: "Whether the employment type is for a contract of indefinite duration ('onbepaalde tijd')"
+          description: Whether the employment type is for a contract of indefinite duration.
           type: boolean
         education:
-          description: "Whether the employment type is for education (internship)"
+          description: Whether the employment type is for education (internship).
           type: boolean
       type: object
     OrganizationalUnit:
       properties:
         id:
-          description: "ID of the organizational unit"
+          description: Unique identifier of the organizational unit.
           type: string
           format: uuid
         externalKey:
-          description: "External key of the organizational unit"
+          description: External key of the organizational unit.
           type: string
         migrationKey:
-          description: "Migration key of the organizational unit"
+          description: Migration key of the organizational unit.
           type: string
         name:
-          description: "Name of the organizational unit"
+          description: Name of the organizational unit.
           type: string
         code:
-          description: "Code of the organizational unit"
+          description: Code of the organizational unit.
           type: string
         employer:
           $ref: "#/components/schemas/Employer"
@@ -674,58 +842,58 @@ components:
         company:
           $ref: "#/components/schemas/OrganizationalUnitCompany"
         dateStart:
-          description: "Start date of the organizational unit in ISO8601 format"
+          description: Start date of the organizational unit in YYYY-MM-DD format.
           type: string
           format: date
         dateEnd:
-          description: "End date of the organizational unit in ISO8601 format"
+          description: End date of the organizational unit in YYYY-MM-DD format.
           type: string
           format: date
         dateCreated:
-          description: "The datetime of when the organizational unit was created"
+          description: The date and time of when the organizational unit was created in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
         dateUpdated:
-          description: "The datetime of when the organizational unit was updated"
+          description: The date and time of when the organizational unit was updated in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
       type: object
     Employer:
       properties:
         id:
-          description: "ID of the employer"
+          description: Unique identifier of the employer.
           type: string
           format: uuid
         externalKey:
-          description: "The external key associated with the employer"
+          description: The external key associated with the employer.
           type: string
         migrationKey:
-          description: "The migration key associated with the employer"
+          description: The migration key associated with the employer.
           type: string
         name:
-          description: "The name of the employer"
+          description: The name of the employer.
           type: string
         relationNumber:
-          description: "The relation number of the employer"
+          description: The relation number of the employer.
           type: string
         policyNumber:
-          description: "The policy number of the employer"
+          description: The policy number of the employer.
           type: string
         communications:
           type: array
           items:
             $ref: "#/components/schemas/EmployerCommunication"
         allowCommunications:
-          description: "Determines whether DWC can send communications (email, etc.) to employees of the employer"
+          description: Determines whether the application can send communications (email, etc.) to employees of the employer.
           type: boolean
         arboCanView:
-          description: "The arbo can view of the employer"
+          description: The arbo can view of the employer.
           type: boolean
         arboCanEdit:
-          description: "The arbo can edit of the employer"
+          description: The arbo can edit of the employer.
           type: boolean
         absencePregnancyRegistrationByInterface:
-          description: "The absence pregnancy registration by interface of the employer"
+          description: The absence pregnancy registration by interface of the employer.
           type: boolean
         insurancePolicies:
           type: array
@@ -756,128 +924,127 @@ components:
           items:
             $ref: "#/components/schemas/OwnRiskContract"
         dateCreated:
-          description: "The date the employer was created"
+          description: The date and time the employer was created in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
         dateUpdated:
-          description: "The date the employer was updated"
+          description: The date and time the employer was updated in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
         remark:
-          description: "The remark of the employer"
+          description: The remark of the employer.
           type: string
         organizationalUnitsCount:
-          description: "The number of organizational units associated with the employer"
+          description: The number of organizational units associated with the employer.
           type: integer
       type: object
     EmployerCommunication:
       properties:
         externalKey:
-          description: "The external key associated with the employer communication"
+          description: The external key associated with the employer communication.
           type: string
         migrationKey:
-          description: "The migration key associated with the employer communication"
+          description: The migration key associated with the employer communication.
           type: string
         employerId:
-          description: "The employer ID associated with the employer communication"
+          description: The employer identifier associated with the employer communication.
           type: string
           format: uuid
         type:
-          description: "The type of the employer communication, e.g. 'email' or 'phone', etc."
+          description: The type of the employer communication, e.g. 'email' or 'phone', etc.
           type: string
         value:
-          description: "The value of the communication method (e.g. email address, phone number)"
+          description: The value of the communication method (e.g. email address, phone number).
           type: string
         isPrimary:
-          description: "Whether this is the primary means of communication for this type"
+          description: Whether this is the primary means of communication for this type.
           type: boolean
         dateCreated:
-          description: "The date the employer communication was created"
+          description: The date and time the employer communication was created in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
         dateUpdated:
-          description: "The date the employer communication was updated"
+          description: The date and time the employer communication was updated in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
       type: object
     InsurancePolicy:
       properties:
         id:
-          description: "ID of the insurance policy"
+          description: Unique identifier of the insurance policy.
           type: string
           format: uuid
         externalKey:
-          description: "External key associated with the insurance policy"
+          description: External key associated with the insurance policy.
           type: string
         migrationKey:
-          description: "Migration key associated with the insurance policy"
+          description: Migration key associated with the insurance policy
           type: string
         policyNumber:
-          description: "The policy number of the insurance policy"
+          description: The policy number of the insurance policy.
           type: string
         dateStart:
-          description: "The start date in YYYY-MM-DD format"
+          description: The start date of the insurance policy in YYYY-MM-DD format.
           type: string
           format: date
         dateEnd:
-          description: "The end date in YYYY-MM-DD format"
+          description: The end date of the insurance policy in YYYY-MM-DD format.
           type: string
           format: date
         dateCreated:
-          description: "The date the insurance policy was created"
+          description: The date and time the insurance policy was created in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
         dateUpdated:
-          description: "The date the insurance policy was updated"
+          description: The date and time the insurance policy was updated in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
       type: object
     EmployerDivision:
-      title: "Employer Division"
       properties:
         id:
-          description: "Unique identifier for the Employer Division"
+          description: Unique identifier for the employer division.
           type: string
           format: uuid
         externalKey:
-          description: "External key of the Employer Division"
+          description: External key of the employer division.
           type: string
         migrationKey:
-          description: "Migration key of the Employer Division"
+          description: Migration key of the employer division.
           type: string
         parentId:
-          description: "ID of the parent division, if any"
+          description: Unique identifier of the parent division, if any.
           type: string
           format: uuid
         name:
-          description: "Name of the Employer Division"
+          description: Name of the employer division.
           type: string
         color:
-          description: "Color associated with the Employer Division"
+          description: Color associated with the employer division.
           type: string
         dateCreated:
-          description: "Creation date of the Employer Division"
+          description: The date and time the employer division was created in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
         dateUpdated:
-          description: "Last update date of the Employer Division"
+          description: The date and time the employer division was updated in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
       type: object
     CompanyDoctor:
       properties:
         id:
-          description: "The ID of the company doctor."
+          description: Unique identifier of the company doctor.
           type: string
           format: uuid
         externalKey:
-          description: "The external key associated with the company doctor."
+          description: The external key associated with the company doctor.
           type: string
         migrationKey:
-          description: "The migration key associated with the company doctor."
+          description: The migration key associated with the company doctor.
           type: string
         username:
-          description: "The username of the company doctor. This is available if the user relation is loaded."
+          description: The username of the company doctor. This is available if the user relation is loaded.
           type: string
         person:
           $ref: "#/components/schemas/MasterPerson"
@@ -885,39 +1052,39 @@ components:
     MasterPerson:
       properties:
         id:
-          description: "ID of the master person"
+          description: Unique identifier of the master person.
           type: string
           format: uuid
         name:
-          description: "Name of the master person"
+          description: Name of the master person.
           type: string
         surname:
-          description: "Surname of the master person"
+          description: Surname of the master person.
           type: string
         initials:
-          description: "Initials of the master person"
+          description: Initials of the master person.
           type: string
         nickname:
-          description: "Nickname of the master person"
+          description: Nickname of the master person.
           type: string
         primaryEmail:
-          description: "Primary Email of the master person"
+          description: Primary email address of the master person.
           type: string
       type: object
     DossierOfficer:
       properties:
         id:
-          description: "The ID of the Dossier officer."
+          description: Unique identifier of the dossier officer.
           type: string
           format: uuid
         externalKey:
-          description: "The external key associated with the dossier officer."
+          description: The external key associated with the dossier officer.
           type: string
         migrationKey:
-          description: "The migration key associated with the dossier officer."
+          description: The migration key associated with the dossier officer.
           type: string
         username:
-          description: "The username of the dossier officer. This is available if the user relation is loaded."
+          description: The username of the dossier officer. This is available if the user relation is loaded.
           type: string
         person:
           $ref: "#/components/schemas/MasterPerson"
@@ -925,186 +1092,186 @@ components:
     ArboService:
       properties:
         id:
-          description: "ID of the arbo service"
+          description: Unique identifier of the arbo service.
           type: string
           format: uuid
         externalKey:
-          description: "The external key associated with the arbo service"
+          description: The external key associated with the arbo service.
           type: string
         migrationKey:
-          description: "The migration key associated with the arbo service"
+          description: The migration key associated with the arbo service.
           type: string
         name:
-          description: "The name of the arbo service"
+          description: The name of the arbo service.
           type: string
         dateCreated:
-          description: "The date the arbo service was created"
+          description: The date and time the arbo service was created in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
         dateUpdated:
-          description: "The date the arbo service was updated"
+          description: The date and time the arbo service was updated in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
       type: object
     Contract:
       properties:
         id:
-          description: "ID of the contract"
+          description: Unique identifier of the contract.
           type: string
           format: uuid
         externalKey:
-          description: "External key associated with the contract"
+          description: External key associated with the contract.
           type: string
         migrationKey:
-          description: "Migration key associated with the contract"
+          description: Migration key associated with the contract.
           type: string
         type:
           $ref: "#/components/schemas/ContractType"
         service:
           $ref: "#/components/schemas/ServiceType"
         accountnumber:
-          description: "Account number associated with the contract"
+          description: Account number associated with the contract.
           type: string
         active:
-          description: "Whether the contract is active"
+          description: Indicates whether the contract is active.
           type: boolean
         dateStart:
-          description: "The start date in YYYY-MM-DD format"
+          description: The start date of the contract in YYYY-MM-DD format.
           type: string
           format: date
         dateEnd:
-          description: "The end date in YYYY-MM-DD format"
+          description: The end date of the contract in YYYY-MM-DD format.
           type: string
           format: date
         dateCreated:
-          description: "The date the contract was created"
+          description: The date and time the contract was created in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
         dateUpdated:
-          description: "The date the contract was updated"
+          description: The date and time the contract was updated in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
       type: object
     ContractType:
       properties:
         id:
-          description: "ID of the contract type"
+          description: Unique identifier of the contract type.
           type: string
           format: uuid
         externalKey:
-          description: "External key associated with the contract type"
+          description: External key associated with the contract type.
           type: string
         migrationKey:
-          description: "Migration key associated with the contract type"
+          description: Migration key associated with the contract type.
           type: string
         name:
-          description: "The name of the contract type"
+          description: The name of the contract type.
           type: string
         code:
-          description: "The code of the contract type"
+          description: The code of the contract type.
           type: string
         description:
-          description: "The description of the contract type"
+          description: The description of the contract type.
           type: string
         subscriptionFee:
-          description: "The subscription fee of the contract type"
+          description: The subscription fee of the contract type.
           type: string
         type:
-          description: "The type of the contract type"
+          description: The type of the contract type.
           type: string
         billingType:
-          description: "The billing type of the contract type"
+          description: The billing type of the contract type.
           type: string
         dateStart:
-          description: "The start date in YYYY-MM-DD format"
+          description: The start date of the contract type in YYYY-MM-DD format.
           type: string
           format: date
         dateEnd:
-          description: "The end date in YYYY-MM-DD format"
+          description: The end date of the contract type in YYYY-MM-DD format.
           type: string
           format: date
         dateCreated:
-          description: "The date the contract type was created"
+          description: The date and time the contract type was created in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
         dateUpdated:
-          description: "The date the contract type was updated"
+          description: The date and time the contract type was updated in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
       type: object
     ServiceType:
       properties:
         id:
-          description: "ID of the service type"
+          description: Unique identifier of the service type.
           type: string
           format: uuid
         name:
-          description: "The name of the service type"
+          description: The name of the service type.
           type: string
         active:
-          description: "Whether the service type is active"
+          description: Indicates whether the service type is active.
           type: boolean
         dateCreated:
-          description: "The date the service type was created"
+          description: The date and time the service type was created in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
         dateUpdated:
-          description: "The date the service type was updated"
+          description: The date and time the service type was updated in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
       type: object
     EmployerAddress:
       properties:
         uuid:
-          description: "UUID of the employer  address"
+          description: UUID of the employer address.
           type: string
           format: uuid
         externalKey:
-          description: "The external key associated with the employer  address"
+          description: The external key associated with the employer address.
           type: string
-        migration_key:
-          description: "The migration key associated with the employer  address"
+        migrationKey:
+          description: The migration key associated with the employer address.
           type: string
         country:
-          description: "The country of the employer address"
+          description: The country of the employer address.
           type: string
         street:
-          description: "The street of the employer address"
+          description: The street of the employer address.
           type: string
         number:
-          description: "The number of the employer address"
+          description: The number of the employer address.
           type: string
         postalCode:
-          description: "The postal code of the employer address"
+          description: The postal code of the employer address.
           type: string
         city:
-          description: "The city of the employer address"
+          description: The city of the employer address.
           type: string
         dateCreated:
-          description: "The date the employer address was created"
+          description: The date and time the employer address was created in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
         dateUpdated:
-          description: "The date the employer address was updated"
+          description: The date and time the employer address was updated in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
       type: object
     ContactPerson:
       properties:
         id:
-          description: "ID of the contact person"
+          description: Unique identifier of the contact person.
           type: string
           format: uuid
         externalKey:
-          description: "External key associated with the contact person"
+          description: External key associated with the contact person.
           type: string
         migrationKey:
-          description: "Migration key associated with the contact person"
+          description: Migration key associated with the contact person.
           type: string
         user:
           $ref: "#/components/schemas/User"
         team:
-          description: "The team the contact person is associated with"
+          description: The team the contact person is associated with.
           type: object
         employee:
           $ref: "#/components/schemas/EmployeeResource"
@@ -1115,7 +1282,7 @@ components:
         employer:
           $ref: "#/components/schemas/Employer"
         type:
-          description: "The type of the contact person"
+          description: The type of the contact person.
           type: string
           enum:
             - general
@@ -1123,13 +1290,13 @@ components:
             - team-contact-person
             - preferred-professional
         isAuthorized:
-          description: "Whether the contact person is authorized"
+          description: Indicates whether the contact person is authorized.
           type: boolean
         isUwvContactPerson:
-          description: "Whether the contact person is a UWV contact person"
+          description: Indicates wether the contact person is a UWV contact person.
           type: boolean
         fullSalutation:
-          description: "The fullSalutation of the contact person. Combination of short/full and gender"
+          description: The full salutation of the contact person. Combination of short/full and gender.
           type: string
           enum:
             - mr
@@ -1138,32 +1305,32 @@ components:
             - miss
             - unknown
         dateCreated:
-          description: "The date the contact person was created"
+          description: The date and time the contact person was created in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
         dateUpdated:
-          description: "The date the contact person was updated"
+          description: The date and time the contact person was updated in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
       type: object
     User:
       properties:
         id:
-          description: "ID of the user"
+          description: Unique identifier of the user.
           type: string
           format: uuid
         username:
-          description: "Username of the user"
+          description: Username of the user.
           type: string
         user_type_id:
-          description: "User type id of the user"
+          description: User type id of the user.
           type: integer
         arboRole:
           $ref: "#/components/schemas/ArboRole"
         teamRole:
           type: object
         teams:
-          description: "The teams the user is associated with"
+          description: The teams the user is associated with.
           type: array
           items:
             type: object
@@ -1172,102 +1339,102 @@ components:
         masterPerson:
           $ref: "#/components/schemas/MasterPerson"
         dossiersCount:
-          description: "Number of dossiers associated with the user"
+          description: Number of dossiers associated with the user.
           type: integer
         tasksCount:
-          description: "Number of tasks associated with the user"
+          description: Number of tasks associated with the user.
           type: integer
       type: object
     ArboRole:
       properties:
         id:
-          description: "Unique identifier for the arbo role"
+          description: Unique identifier for the arbo role.
           type: string
           format: uuid
         name:
-          description: "The name of the arbo role"
+          description: The name of the arbo role.
           type: string
           example: Administrator
         externalKey:
-          description: "The external key of the arbo role"
+          description: The external key of the arbo role.
           type: string
         migrationKey:
-          description: "The migration key of the arbo role"
+          description: The migration key of the arbo role.
           type: string
         active:
-          description: "The active status of the arbo role"
+          description: The active status of the arbo role.
           type: boolean
       type: object
     OwnRiskContract:
       properties:
         id:
-          description: "ID of the own risk contract"
+          description: Unique identifier of the own risk contract.
           type: string
           format: uuid
         type:
-          description: "The type of the own risk contract"
+          description: The type of the own risk contract.
           type: string
         dateCreated:
-          description: "The date the own risk contract was created"
+          description: The date and time the own risk contract was created in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
         dateUpdated:
-          description: "The date the own risk contract was updated"
+          description: The date and time the own risk contract was updated in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
       type: object
     OrganizationalUnitType:
       properties:
         id:
-          description: "ID of the Organizational Unit Type"
+          description: Unique identifier of the organizational unit type.
           type: string
           format: uuid
         externalKey:
-          description: "External key of the Organizational Unit Type"
+          description: External key of the organizational unit type.
           type: string
         employer:
           $ref: "#/components/schemas/Employer"
         name:
-          description: "Name of the Organizational Unit Type"
+          description: Name of the organizational unit type.
           type: string
         color:
-          description: "Color associated with the Organizational Unit Type"
+          description: Color associated with the organizational unit type.
           type: string
         legalEntity:
-          description: "Indicates if it is a legal entity"
+          description: Indicates if the organizational unit type is a legal entity.
           type: boolean
         active:
-          description: "Indicates if the Organizational Unit Type is active"
+          description: Indicates if organizational unit type is active.
           type: boolean
         dateCreated:
-          description: "Creation date of the Organizational Unit Type"
+          description: The date and time the organizational unit type was created in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
         dateUpdated:
-          description: "Last update date of the Organizational Unit Type"
+          description: The date and time the organizational unit type was updated in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
       type: object
     OrganizationalUnitCompany:
       properties:
         legalName:
-          description: "Legal name of the company, equivalent to the official name of the organizational unit"
+          description: Legal name of the company, equivalent to the official name of the organizational unit.
           type: string
         legalForm:
-          description: "Legal form of the company, represented as a lowercase string"
+          description: Legal form of the company, represented as a lowercase string.
           type: string
         relationNumber:
-          description: "Relation number of the company"
+          description: Relation number of the company.
           type: string
         normHours:
-          description: "Norm hours per week of the company"
+          description: Norm hours per week of the company.
           type: number
           example: 40
         kvkNumber:
-          description: "KVK number of the company"
+          description: KVK number of the company.
           type: string
         vatNumber:
-          description: "VAT number of the company"
+          description: VAT number of the company.
           type: string
         uwv:
           $ref: "#/components/schemas/OrganizationalUnitCompanyUwv"
@@ -1279,38 +1446,38 @@ components:
     OrganizationalUnitCompanyUwv:
       properties:
         registrationNumber:
-          description: "UWV identification number ('aansluitnummer') of the company"
+          description: UWV identification number of the company.
           type: string
         riskCode:
-          description: "UWV risk code of the company"
+          description: UWV risk code of the company.
           type: integer
         sectorId:
-          description: "UWV sector ID of the company"
+          description: UWV sector ID of the company.
           type: integer
         payrollTaxIdentificationNumber:
-          description: "Payroll tax identification number ('loonheffingsnummer') of the company"
+          description: Payroll tax identification number of the company.
           type: string
       type: object
     Dossier:
       properties:
         id:
-          description: "The ID of the Dossier."
+          description: Unique identifier of the dossier.
           type: string
           format: uuid
         type:
-          description: "The type of the Dossier."
+          description: The type of the dossier.
           type: string
         externalKey:
-          description: "The external key associated with the Dossier."
+          description: The external key associated with the dossier.
           type: string
         dateStart:
-          description: "The start date in ISO8601 format."
+          description: The start date of the dossier in YYYY-MM-DD format.
           type: string
         dateEnd:
-          description: "The end date in ISO8601 format."
+          description: The end date of the dossier in YYYY-MM-DD format.
           type: string
         protocol:
-          description: "The current protocol of the Dossier."
+          description: The current protocol of the dossier.
           type: string
           enum:
             - wvp
@@ -1351,13 +1518,13 @@ components:
             - bedrijfsdossier
             - betaald-ouderschapsverlof
         dossierStatus:
-          description: "The current status of the Dossier."
+          description: The current status of the dossier.
           type: string
           enum:
             - open
             - completed
         safetyNet:
-          description: "The accident type of the Dossier."
+          description: The safety net type associated with the dossier.
           type: string
           enum:
             - disposal
@@ -1368,32 +1535,65 @@ components:
             - sick-due-to-organ-donation
             - unknown
         accidentType:
-          description: "The accident type of the Dossier."
+          description: The accident type associated with the dossier.
           type: string
+          enum:
+            - private
+            - private-with-liable
+            - work-related-accident
+            - work-related-accident-with-liable
         nursingAddress:
-          type: object
+          $ref: "#/components/schemas/DossierAddress"
         dateCreated:
-          description: "Date the note type was created"
+          description: The date and time the dossier was created in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
         dateUpdated:
-          description: "Date the note type was last updated"
+          description: The date and time the dossier was updated in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
+      type: object
+    DossierAddress:
+      properties:
+        id:
+          description: Unique identifier of the dossier address.
+          type: string
+          format: uuid
+        street:
+          description: The street part of the dossier address.
+          type: string
+          example: Dorpstraat
+        number:
+          description: The house number (plus optional extension) part of the dossier address.
+          type: string
+          example: 123A
+        city:
+          description: The city the dossier address is in.
+          type: string
+          example: Het Dorp
+        postalCode:
+          description: The postal code of the dossier address.
+          type: string
+          example: 1234AB
+        country:
+          description: The country code of the dossier address.
+          type: string
+          format: ISO3166-alpha2
+          example: NL
       type: object
     Employment:
       properties:
         uuid:
-          description: "UUID of the employment"
+          description: UUID of the employment.
           type: string
         externalKey:
-          description: "The external key associated with the employment"
+          description: The external key associated with the employment.
           type: string
         migrationKey:
-          description: "The migration key associated with the employment"
+          description: The migration key associated with the employment.
           type: string
         employmentNumber:
-          description: "The the total sum of employments of the employee"
+          description: The total sum of employments of the employee.
           type: string
         employee:
           $ref: "#/components/schemas/EmployeeResource"
@@ -1402,47 +1602,47 @@ components:
           items:
             $ref: "#/components/schemas/EmploymentContractResource"
         primary:
-          description: "Indication if the employment is flagged as primary or not."
+          description: Indication if the employment is flagged as primary or not.
           type: boolean
         dateSeniority:
-          description: "The seniority date of the employee associated with this employment in YYYY-MM-DD HH:MM:SS format."
+          description: The seniority date of the employee associated with this employment in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date
         employeeNumber:
-          description: "The employee number of the employee associated with this employment"
+          description: The employee number of the employee associated with this employment.
           type: string
           nullable: true
         supervisorType:
-          description: "The type of supervisor associated with this employment"
+          description: The type of supervisor associated with this employment.
           type: string
         internalSupervisorId:
-          description: "The ID of the internal supervisor associated with this employment"
+          description: Unique identifier of the internal supervisor associated with this employment.
           type: string
           format: uuid
           nullable: true
         externalSupervisorId:
-          description: "The ID of the external supervisor associated with this employment"
+          description: Unique identifier of the external supervisor associated with this employment.
           type: string
           format: uuid
           nullable: true
         dateStartChainProvision:
-          description: "The date of the start of the chain provision in YYYY-MM-DD format"
+          description: The date of the start of the chain provision in YYYY-MM-DD format.
           type: string
           format: date
           nullable: true
         uwvRiskCode:
-          description: "The UWV risk code of the Employee associated with this employment."
+          description: The UWV risk code of the employee associated with this employment.
           type: string
           nullable: true
         waitingPeriod:
-          description: "The waiting period (related to UWV) of the Employee associated with this employment."
+          description: The waiting period (related to UWV) of the employee associated with this employment.
           type: integer
         dateCreated:
-          description: "The date and time the employment was created in YYYY-MM-DD HH:MM:SS format"
+          description: The date and time the employment was created in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
         dateUpdated:
-          description: "The date and time the employment was last updated in YYYY-MM-DD HH:MM:SS format"
+          description: The date and time the employment was updated in YYYY-MM-DD HH:MM:SS format.
           type: string
           format: date-time
       type: object
@@ -1462,30 +1662,32 @@ components:
         - employment.dateStart
       properties:
         externalKey:
-          description: "The external key of the employee"
+          description: The external key of the employee.
           type: string
         person:
           properties:
             initials:
-              description: "The Initials of the Employee"
+              description: The initials of the employee.
               type: string
             firstName:
-              description: "The first name of the Employee"
+              description: The first name of the employee.
               type: string
             prefix:
-              description: "The prefix of the name of the Employee"
+              description: The prefix of the employee's last name.
               type: string
+              example: van der
             lastName:
-              description: "The last name of the Employee"
+              description: The last name of the employee.
               type: string
             prefixPartner:
-              description: "The prefix of the name of the partner of the Employee"
+              description: The prefix of the name of the partner of the employee.
               type: string
+              example: van der
             lastnamePartner:
-              description: "The surname of the partner of the Employee"
+              description: The last name of the partner of the employee.
               type: string
             namePreference:
-              description: "The name preference for the Employee."
+              description: The name preference for the employee.
               type: string
               default: own
               enum:
@@ -1494,148 +1696,150 @@ components:
                 - own-partner
                 - partner-own
             salutation:
-              description: "The title of the Employee (Mr,Mrs or Mister,Missus)."
+              description: The title of the employee.
               type: string
               enum:
                 - full
                 - short
             gender:
-              description: "The gender of the Employee."
+              description: The gender of the employee.
               type: string
               enum:
                 - m
                 - f
                 - x
             dateOfBirth:
-              description: "The date of birth of the Employee."
+              description: The date of birth of the employee.
               type: string
               format: date
             dateOfDeath:
-              description: "The date of death of the Employee."
+              description: The date of death of the employee.
               type: string
               format: date
             nationality:
-              description: "The nationality of the Employee in ISO 3166-1 alpha-2 format (2 letters)."
+              description: The nationality of the employee in ISO 3166-1 alpha-2 format (2 letters).
               type: string
+              example: NL
             placeOfBirth:
-              description: "The city of birth of the Employee"
+              description: The city of birth of the employee.
               type: string
             maritalStatus:
-              description: "The marital status of the Employee"
+              description: The marital status of the employee.
               type: string
               enum:
                 - single
                 - married
                 - partnership
                 - widowed
-                - widowed_after_marriage
-                - widowed_after_partnership
+                - widowed-after-marriage
+                - widowed-after-partnership
                 - divorced
-                - divorced_after_marriage
-                - divorced_after_partnership
+                - divorced-after-marriage
+                - divorced-after-partnership
                 - unkown
             noRisk:
-              description: "No risk indication for the Employee."
+              description: No risk indication for the employee.
               type: boolean
             sfb:
-              description: "Structural Functional Disability (SFB) status of the Employee."
+              description: Structural Functional Disability (SFB) status of the employee.
               type: boolean
             socialSecurityNumber:
-              description: "The SSN(BSN) of the employee."
+              description: The SSN(BSN) of the employee.
               type: string
               pattern: '^\d{9}$'
           type: object
         address:
           properties:
             street:
-              description: "The street of the primary address of the Employee."
+              description: The street of the primary address of the employee.
               type: string
             number:
-              description: "The number of the primary address of the Employee."
+              description: The number of the primary address of the employee.
               type: string
             postalCode:
-              description: "The postal code of the primary address of the Employee."
+              description: The postal code of the primary address of the employee.
               type: string
             city:
-              description: "The city of the primary address of the Employee ."
+              description: The city of the primary address of the employee.
               type: string
             country:
-              description: "The country of the Employee in ISO 3166-1 alpha-2 format (2 letters)."
+              description: The country of the employee in ISO 3166-1 alpha-2 format (2 letters).
               type: string
+              example: NL
           type: object
         communicationMethods:
           properties:
             privateEmail:
-              description: "The private email of the Employee"
+              description: The private email address of the employee.
               type: string
               format: email
             privatePhone:
-              description: "The private phone of the Employee"
+              description: The private phone of the employee.
               type: string
             privateMobile:
-              description: "The private mobile phone of the Employee"
+              description: The private mobile phone of the employee.
               type: string
             businessEmail:
-              description: "The business email of the Employee"
+              description: The business email of the employee.
               type: string
               format: email
             businessPhone:
-              description: "The business phone of the Employee"
+              description: The business phone of the employee.
               type: string
             businessMobile:
-              description: "The business mobile phone of the Employee"
+              description: The business mobile phone of the employee.
               type: string
           type: object
         employment:
           properties:
             organizationalUnitId:
-              description: "The ID of the Organisational Unit the Employee belongs to. Mutually exclusive with organizationalUnitKey"
+              description: Unique identifier of the organisational unit the employee belongs to. Mutually exclusive with organizationalUnitKey.
               type: string
               format: uuid
             organizationalUnitKey:
-              description: "The external key of the Organisational Unit the Employee belongs to. Mutually exclusive with organizationalUnitId"
+              description: The external key of the organisational unit the employee belongs to. Mutually exclusive with organizationalUnitId.
               type: string
             externalKey:
-              description: "The external key assigned to the employment generated for the Employee"
+              description: The external key assigned to the employment generated for the employee.
               type: string
             employeeNumber:
-              description: "The employee number of the Employee"
+              description: The employee number of the employee.
               type: string
               nullable: true
             externalSupervisorId:
-              description: "The id of the external supervisor of the Employee"
+              description: Unique identifier of the external supervisor of the employee.
               type: string
               format: uuid
               nullable: true
             internalSupervisorId:
-              description: "The id of the internal supervisor of the Employee (should be another employee.id)"
+              description: Unique identifier of the internal supervisor of the employee (should be another employee.id).
               type: string
               format: uuid
               nullable: true
             employmentTypeId:
-              description: "The id of the employment type of the Employee. Mutually exclusive with employmentTypeCode"
+              description: Unique identifier of the employment type of the employee. Mutually exclusive with employmentTypeCode.
               type: string
               format: uuid
             employmentTypeCode:
-              description: "The code of the employment type of the Employee. Mutually exclusive with employmentTypeId"
+              description: The code of the employment type of the employee. Mutually exclusive with employmentTypeId.
               type: string
             jobTitle:
-              description: "The job title (position) of the Employee"
+              description: The job title (position) of the employee.
               type: string
             dateStart:
-              description: "The start date of the first Employment Contract of the Employee."
+              description: The start date of the first employment contract of the employee in YYYY-MM-DD format.
               type: string
               format: date
             dateEnd:
-              description: "The end date of the first Employment Contract of the Employee."
+              description: The end date of the first employment contract of the employee in YYYY-MM-DD format.
               type: string
               format: date
             dateSeniority:
-              description: "The seniority date of the Employee."
+              description: The seniority date of the employee in YYYY-MM-DD format.
               type: string
               format: date
             employmentEndReason:
-              description: "The reason for the end of employment of the Employee"
+              description: The reason for the end of employment of the employee.
               type: string
               enum:
                 - end-employment
@@ -1653,23 +1857,23 @@ components:
                 - immediate-dismissal
                 - mutual-termination-of-employment
             normHoursPerWeek:
-              description: "Standard hours per week the Employee works."
+              description: Standard hours per week the employee works.
               type: number
               format: float
               nullable: true
             hoursPerWeek:
-              description: "Hours per week the Employee works."
+              description: Hours per week the employee works.
               type: number
               format: float
               nullable: true
             paymentPeriod:
-              description: "The payment period of the Employee."
+              description: The payment period of the employee.
               type: string
               enum:
                 - hour
                 - day
                 - week
-                - four_weeks
+                - four-weeks
                 - month
                 - year
               nullable: true
@@ -1677,19 +1881,19 @@ components:
         uwv:
           properties:
             registrationNumber:
-              description: "The UWV registration number of the Employee"
+              description: The UWV registration number of the employee.
               type: string
             sectorId:
-              description: "The UWV sector of the Employee"
+              description: The UWV sector of the employee.
               type: integer
             riskCode:
-              description: "The UWV risk code of the Employee"
+              description: The UWV risk code of the employee.
               type: string
             waitingPeriod:
-              description: "The waiting period (related to UWV) of the Employee"
+              description: The waiting period (related to UWV) of the employee.
               type: integer
             payrollDiscountIndication:
-              description: "Indication for payroll discount (related to UWV) for the Employee."
+              description: Indication for payroll discount (related to UWV) for the employee.
               type: boolean
           type: object
       type: object
@@ -1698,34 +1902,34 @@ components:
         - employeeId
       properties:
         employeeId:
-          description: "The uuid of the existing employee"
+          description: Unique identifier of the existing employee.
           type: string
           format: uuid
         externalKey:
-          description: "The external key of the employee"
+          description: The external key of the employee.
           type: string
         person:
           properties:
             initials:
-              description: "The Initials of the Employee"
+              description: The Initials of the employee.
               type: string
             firstName:
-              description: "The first name of the Employee"
+              description: The first name of the employee.
               type: string
             prefix:
-              description: "The prefix of the name of the Employee"
+              description: The prefix of the name of the employee.
               type: string
             lastName:
-              description: "The last name of the Employee"
+              description: The last name of the employee.
               type: string
             prefixPartner:
-              description: "The prefix of the name of the partner of the Employee"
+              description: The prefix of the name of the partner of the employee.
               type: string
             lastnamePartner:
-              description: "The surname of the partner of the Employee"
+              description: The last name of the partner of the employee.
               type: string
             namePreference:
-              description: "The name preference for the Employee."
+              description: The name preference for the employee.
               type: string
               default: own
               enum:
@@ -1734,96 +1938,96 @@ components:
                 - own-partner
                 - partner-own
             salutation:
-              description: "The title of the Employee (Mr,Mrs or Mister,Missus)."
+              description: The title of the employee.
               type: string
               enum:
                 - full
                 - short
             gender:
-              description: "The gender of the Employee."
+              description: The gender of the employee.
               type: string
               enum:
                 - m
                 - f
                 - x
             dateOfBirth:
-              description: "The date of birth of the Employee."
+              description: The date of birth of the employee.
               type: string
               format: date
             dateOfDeath:
-              description: "The date of death of the Employee."
+              description: The date of death of the employee.
               type: string
               format: date
             nationality:
-              description: "The nationality of the Employee in ISO 3166-1 alpha-2 format (2 letters)."
+              description: The nationality of the employee in ISO 3166-1 alpha-2 format (2 letters).
               type: string
             placeOfBirth:
-              description: "The city of birth of the Employee"
+              description: The city of birth of the employee.
               type: string
             maritalStatus:
-              description: "The marital status of the Employee"
+              description: The marital status of the employee.
               type: string
               enum:
                 - single
                 - married
                 - partnership
                 - widowed
-                - widowed_after_marriage
-                - widowed_after_partnership
+                - widowed-after-marriage
+                - widowed-after-partnership
                 - divorced
-                - divorced_after_marriage
-                - divorced_after_partnership
+                - divorced-after-marriage
+                - divorced-after-partnership
                 - unknown
             noRisk:
-              description: "No risk indication for the Employee."
+              description: No risk indication for the employee.
               type: boolean
             sfb:
-              description: "Structural Functional Disability (SFB) for the Employee."
+              description: Structural Functional Disability (SFB) for the employee.
               type: boolean
             socialSecurityNumber:
-              description: "The SSN(BSN) of the employee."
+              description: The social security number (BSN) of the employee.
               type: string
               pattern: '^\d{9}$'
           type: object
         address:
           properties:
             street:
-              description: "The street of the primary address of the Employee."
+              description: The street of the primary address of the employee.
               type: string
             number:
-              description: "The number of the primary address of the Employee."
+              description: The number of the primary address of the employee.
               type: string
             postalCode:
-              description: "The postal code of the primary address of the Employee."
+              description: The postal code of the primary address of the employee.
               type: string
             city:
-              description: "The city of the primary address of the Employee ."
+              description: The city of the primary address of the employee.
               type: string
             country:
-              description: "The country of the Employee in ISO 3166-1 alpha-2 format (2 letters)."
+              description: The country of the Employee in ISO 3166-1 alpha-2 format (2 letters).
               type: string
           type: object
         communicationMethods:
           properties:
             privateEmail:
-              description: "The private email of the Employee"
+              description: The private email of the employee.
               type: string
               format: email
             privatePhone:
-              description: "The private phone of the Employee"
+              description: The private phone of the employee.
               type: string
             privateMobile:
-              description: "The private mobile phone of the Employee"
+              description: The private mobile phone of the employee.
               type: string
             businessEmail:
-              description: "The business email of the Employee"
+              description: The business email of the employee.
               type: string
               format: email
             businessPhone:
-              description: "The business phone of the Employee"
+              description: The business phone of the employee.
               type: string
             businessMobile:
-              description: "The business mobile phone of the Employee"
+              description: The business mobile phone of the employee.
               type: string
           type: object
       type: object
