@@ -5,4 +5,4 @@ updates:
     schedule:
       interval: "monthly"
     reviewers:
-      - "visma-verzuim/ip-infra-dependency-updaters"
+      - "visma-verzuim/corp-infra-dependency-updaters"
