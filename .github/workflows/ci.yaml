@@ -23,7 +23,7 @@ jobs:
       - successful-dummy
     runs-on: ubuntu-latest
     steps:
-      - name: Check whether the required jobs succeeded or failed
-        uses: re-actors/alls-green@ed97172826e514be195bf70a7858630e7a5874fc # v1.1.0
+      - name: Check whether the needed jobs succeeded or failed
+        uses: visma-verzuim/github-actions/require-jobs-to-succeed@v1
         with:
           jobs: ${{ toJSON(needs) }}
