@@ -24,6 +24,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check whether the required jobs succeeded or failed
-        uses: re-actors/alls-green@ed97172826e514be195bf70a7858630e7a5874fc # v1.1.0
+        uses: re-actors/alls-green@223e4bb7a751b91f43eda76992bcfbf23b8b0302 # v1.1.0
         with:
           jobs: ${{ toJSON(needs) }}
