@@ -1,6 +1,8 @@
 openapi: 3.0.3
 info:
-  title: 'Public API Documentation'
+  title: BlueVi API
+  description: The BlueVi API provides access to BlueVi directly, allowing you to interact with the data in your environment.
+
   version: v1
 paths:
   /absence-reason:
