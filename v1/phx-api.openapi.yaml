@@ -8,7 +8,7 @@ paths:
       tags:
         - 'Absence Reasons'
       summary: 'Get a list of absence reasons'
-      operationId: essential.get.absence-reason
+      operationId: absencereason-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -76,40 +76,14 @@ paths:
       tags:
         - Authentication
       summary: '(DEPRECATED) Obtain an access token token using the client id and secret'
-      operationId: essential.post.auth.partner.token
+      operationId: auth-partner-token-post-v1-essential
       requestBody:
         description: 'Token authentication request body'
         required: true
         content:
           application/json:
             schema:
-              properties:
-                grant_type:
-                  type: string
-                  example: client_credentials
-                client_id:
-                  type: string
-                  example: 639cb341-b25c-4b72-acee-e0ac2be5c2dd
-                client_secret:
-                  type: string
-                  example: your_client_secret
-                scope:
-                  properties:
-                    absence:
-                      type: array
-                      items:
-                        type: string
-                      example:
-                        - read
-                        - create
-                    employee:
-                      type: array
-                      items:
-                        type: string
-                      example:
-                        - read
-                  type: object
-              type: object
+              $ref: '#/components/schemas/PostAuthTokenRequestBody'
       responses:
         200:
           description: 'Successful response'
@@ -149,44 +123,14 @@ paths:
       tags:
         - Authentication
       summary: 'Obtain an access token token using the client id and secret.'
-      operationId: essential.post.auth.token
+      operationId: auth-token-post-v1-essential
       requestBody:
         description: 'Token authentication request body'
         required: true
         content:
           application/json:
             schema:
-              properties:
-                grant_type:
-                  description: "The type of the grant being used. In this case, 'client_credentials' is used for machine-to-machine authentication."
-                  type: string
-                  example: client_credentials
-                client_id:
-                  description: 'The unique identifier for the client application requesting access to the resource. It is provided during the client registration process.'
-                  type: string
-                  example: 639cb341-b25c-4b72-acee-e0ac2be5c2dd
-                client_secret:
-                  description: 'A confidential key associated with the client application. This is used to authenticate the client and ensure the security of the OAuth2 flow.'
-                  type: string
-                  example: your_client_secret
-                scope:
-                  description: 'Specify the scope for the session.'
-                  properties:
-                    absencecourse:
-                      type: array
-                      items:
-                        type: string
-                      example:
-                        - read
-                        - create
-                    employee:
-                      type: array
-                      items:
-                        type: string
-                      example:
-                        - read
-                  type: object
-              type: object
+              $ref: '#/components/schemas/PostAuthTokenRequestBody'
       responses:
         200:
           description: 'Successful response'
@@ -226,7 +170,7 @@ paths:
         - Health
       summary: 'Health check'
       description: 'This endpoint checks if the API is online and operational, confirming that it is running smoothly and able to respond to requests.'
-      operationId: essential.get.health.ping
+      operationId: health-ping-get-v1-essential
       responses:
         200:
           description: 'The health check was successful and the API is functioning properly.'
@@ -236,20 +180,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerErrorResponse'
-      parameters:
-        -
-          name: Ocp-Apim-Subscription-Key
-          in: header
-          required: true
-          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
-          schema:
-            type: string
   /arbo-role:
     get:
       tags:
         - 'User Roles'
       summary: 'Get a list of arbo roles that can be assigned to users'
-      operationId: advanced.get.arbo-role
+      operationId: arborole-get-v1-advanced
       parameters:
         -
           name: 'filter[id]'
@@ -304,7 +240,7 @@ paths:
       tags:
         - 'Company Doctors'
       summary: 'Get a list of company doctors'
-      operationId: essential.get.company-doctor
+      operationId: companydoctor-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -357,7 +293,7 @@ paths:
         - ContactPerson
       summary: 'Update an existing contact person'
       description: 'Update an existing contact person'
-      operationId: advanced.patch.contact-person.type
+      operationId: contactperson-type-patch-v1-advanced
       parameters:
         -
           name: type
@@ -365,10 +301,7 @@ paths:
           description: 'Type of contact person (employer or organizational-unit)'
           required: true
           schema:
-            type: string
-            enum:
-              - employer
-              - organizational-unit
+            $ref: '#/components/schemas/PatchContactPersonTypeEnumOptions'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -408,7 +341,7 @@ paths:
         - ContactPerson
       summary: 'Update an existing contact person'
       description: 'Update an existing contact person by their unique identifier'
-      operationId: advanced.patch.contact-person.type.id
+      operationId: contactperson-type-id-patch-v1-advanced
       parameters:
         -
           name: type
@@ -416,10 +349,7 @@ paths:
           description: 'Type of contact person (employer or organizational-unit)'
           required: true
           schema:
-            type: string
-            enum:
-              - employer
-              - organizational-unit
+            $ref: '#/components/schemas/PostContactPersonTypeEnumOptions'
         -
           name: uuid
           in: path
@@ -467,7 +397,7 @@ paths:
         - ContactPerson
       summary: 'Create a new contact person'
       description: 'Creates a new contact person for either an employer or organizational unit. This endpoint handles the creation process and associates the contact person with the specified entity.'
-      operationId: essential.post.contact-person
+      operationId: contactperson-post-v1-essential
       parameters:
         -
           name: type
@@ -515,7 +445,7 @@ paths:
         - EmployerContracts
       summary: 'Delete an employer contract'
       description: 'Deletes an employer contract based on the ID.'
-      operationId: essential.delete.employer-contract.id
+      operationId: employercontract-id-delete-v1-essential
       parameters:
         -
           name: id
@@ -556,7 +486,7 @@ paths:
       tags:
         - EmployerContracts
       summary: 'Get a list of contract types that can be applied to employer contracts'
-      operationId: essential.get.contract-type
+      operationId: contracttype-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -627,7 +557,7 @@ paths:
       tags:
         - EmployerContracts
       summary: 'Get a list of employer contracts'
-      operationId: essential.get.employer-contract
+      operationId: employercontract-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -673,7 +603,7 @@ paths:
           description: 'Filter Employer Contracts by start date (Employer Contracts that start on or before this date)'
           schema:
             type: string
-            format: date-time
+            format: date-time-offset
           example: '2024-01-01T12:34:56+01:00'
         -
           name: 'filter[dateUpdatedFrom]'
@@ -760,7 +690,7 @@ paths:
       tags:
         - EmployerContracts
       summary: 'Create an employer contract'
-      operationId: essential.post.employer-contract
+      operationId: employercontract-post-v1-essential
       requestBody:
         description: 'Employer Contract data'
         required: true
@@ -804,7 +734,7 @@ paths:
         - EmployerContracts
       summary: 'Update an existing employer contract'
       description: 'Update an Employer Contract by applying changes to an existing contract.'
-      operationId: essential.patch.employer-contract
+      operationId: employercontract-patch-v1-essential
       requestBody:
         description: 'Employer Contract data to update'
         required: true
@@ -848,7 +778,7 @@ paths:
       tags:
         - EmployerContracts
       summary: 'Get a list of modules that can be applied to employer contracts (uses the employercontracts scope)'
-      operationId: essential.get.contract.modules
+      operationId: contract-modules-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -906,7 +836,7 @@ paths:
       tags:
         - EmployerContracts
       summary: 'Get a list of partnerships that can be applied to employer contracts'
-      operationId: essential.get.contract.partnership
+      operationId: contract-partnership-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -977,7 +907,7 @@ paths:
       tags:
         - EmployerContracts
       summary: 'Get a list of service types that can be applied to employer contracts'
-      operationId: essential.get.contract.service-type
+      operationId: contract-servicetype-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -1024,7 +954,7 @@ paths:
         - AbsenceCourse
       summary: 'Delete an absence course'
       description: 'Deletes an absence course based on the unique identifier. This operation also updates the status of a dossier.'
-      operationId: essential.delete.absence-course
+      operationId: absencecourse-delete-v1-essential
       parameters:
         -
           name: id
@@ -1066,7 +996,7 @@ paths:
       tags:
         - AbsenceCourse
       summary: 'Get a list of absence courses'
-      operationId: essential.get.absence-course
+      operationId: absencecourse-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -1224,7 +1154,7 @@ paths:
         - AbsenceCourse
       summary: 'Create an absence course'
       description: 'An AbsenceCourse is an event in an absence dossier, such as an employee being reported sick or recovering partially or fully. This endpoint either starts a new dossier or adds the absence to an existing one based on composite absence rules.'
-      operationId: essential.post.absence-course
+      operationId: absencecourse-post-v1-essential
       requestBody:
         description: 'Absence course data'
         required: true
@@ -1264,7 +1194,7 @@ paths:
         - AbsenceCourse
       summary: 'Update an existing absence course'
       description: 'Update an AbsenceCourse by applying changes to an existing course.'
-      operationId: essential.patch.absence-course
+      operationId: absencecourse-patch-v1-essential
       requestBody:
         description: 'Absence course data to update'
         required: true
@@ -1305,7 +1235,7 @@ paths:
         - Dossier
       summary: 'Delete a dossier'
       description: 'Deletes a dossier based on the ID.'
-      operationId: essential.delete.dossier
+      operationId: dossier-delete-v1-essential
       parameters:
         -
           name: id
@@ -1346,7 +1276,7 @@ paths:
       tags:
         - DossierContent
       summary: 'Get a list of document types that can be applied to dossier content'
-      operationId: essential.get.dossier.document-types
+      operationId: dossiercontent-documenttypes-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -1457,7 +1387,7 @@ paths:
       tags:
         - DossierContent
       summary: 'Get a list of note types that can be applied to dossier content'
-      operationId: essential.get.dossier.note-types
+      operationId: dossiercontent-notetypes-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -1547,7 +1477,7 @@ paths:
       tags:
         - DossierContent
       summary: 'Get a list of upload types that can be applied to dossier content'
-      operationId: essential.get.dossier.upload-types
+      operationId: dossiercontent-uploadtypes-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -1645,7 +1575,7 @@ paths:
         - DossierContent
       summary: 'Delete a document'
       description: 'Deletes a document based on the ID.'
-      operationId: essential.delete.dossier.content.document
+      operationId: dossiercontent-document-delete-v1-essential
       parameters:
         -
           name: id
@@ -1686,7 +1616,7 @@ paths:
       tags:
         - DossierContent
       summary: 'Get a list of documents that can be applied to dossier content'
-      operationId: essential.get.dossier.content.documents
+      operationId: dossiercontent-documents-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -1746,7 +1676,7 @@ paths:
           required: false
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateUpdatedUntil]'
           in: query
@@ -1754,7 +1684,7 @@ paths:
           required: false
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -1787,7 +1717,7 @@ paths:
         - DossierContent
       summary: 'Update an existing document'
       description: 'Update an existing document belonging to a dossier'
-      operationId: essential.patch.dossier.content.document.id
+      operationId: dossiercontent-document-id-patch-v1-essential
       parameters:
         -
           name: uuid
@@ -1836,7 +1766,7 @@ paths:
         - DossierContent
       summary: 'Create a new document'
       description: 'Create a new document for a dossier'
-      operationId: essential.post.dossier.content.document
+      operationId: dossiercontent-document-post-v1-essential
       requestBody:
         description: 'The document data'
         required: true
@@ -1876,7 +1806,7 @@ paths:
         - DossierContent
       summary: 'Update an existing document'
       description: 'Update an existing document belonging to a dossier'
-      operationId: essential.patch.dossier.content.document
+      operationId: dossiercontent-document-patch-v1-essential
       requestBody:
         description: 'The document data'
         required: true
@@ -1916,7 +1846,7 @@ paths:
       tags:
         - 'Dossier External Resource'
       summary: 'Delete a dossier external resource'
-      operationId: essential.delete.dossier.external-resource.id
+      operationId: dossier-externalresource-id-delete-v1-essential
       parameters:
         -
           name: id
@@ -1957,7 +1887,7 @@ paths:
         - 'Dossier External Resource'
       summary: 'Update an external resource with ID'
       description: 'Update an external resource associated with a dossier using its unique identifier'
-      operationId: essential.patch.dossier.external-resource.id
+      operationId: dossier-externalresource-id-patch-v1-essential
       parameters:
         -
           name: id
@@ -2004,7 +1934,7 @@ paths:
       tags:
         - 'Dossier External Resource'
       summary: 'Get a list of external resources'
-      operationId: essential.get.dossier.external-resource
+      operationId: dossier-externalresource-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -2063,7 +1993,7 @@ paths:
         - 'Dossier External Resource'
       summary: 'Create an external resource'
       description: 'Create an external resource associated with a dossier'
-      operationId: essential.post.dossier.external-resource
+      operationId: dossier-externalresource-post-v1-essential
       requestBody:
         description: 'Dossier external resource data for creating a new dossier external resource'
         required: true
@@ -2103,7 +2033,7 @@ paths:
         - 'Dossier External Resource'
       summary: 'Update an external resource'
       description: "Update an external resource associated with a dossier by providing either its 'id' or 'key' through the request body"
-      operationId: essential.patch.dossier.external-resource
+      operationId: dossier-externalresource-patch-v1-essential
       requestBody:
         description: 'Dossier external resource data for updating a dossier external resource'
         required: true
@@ -2144,7 +2074,7 @@ paths:
         - 'Dossier External Resource'
       summary: 'Create an external resource'
       description: 'Create an external resource associated with a dossier'
-      operationId: essential.post.dossier.id.external-resource
+      operationId: dossier-id-externalresource-post-v1-essential
       parameters:
         -
           name: dossierId
@@ -2192,7 +2122,7 @@ paths:
         - DossierContent
       summary: 'Delete a note'
       description: 'Deletes a note based on the unique identifier.'
-      operationId: essential.delete.dossier.note.id
+      operationId: dossiercontent-note-id-delete-v1-essential
       parameters:
         -
           name: id
@@ -2233,7 +2163,7 @@ paths:
       tags:
         - DossierContent
       summary: 'Get a list of notes that can be applied to dossier content'
-      operationId: essential.get.dossier.content.notes
+      operationId: dossiercontent-notes-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -2300,7 +2230,7 @@ paths:
           required: false
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateUpdatedUntil]'
           in: query
@@ -2308,7 +2238,7 @@ paths:
           required: false
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -2341,7 +2271,7 @@ paths:
         - DossierContent
       summary: 'Update an existing note'
       description: 'Update an existing belonging to a dossier'
-      operationId: essential.patch.dossier.content.note.id
+      operationId: dossiercontent-note-id-patch-v1-essential
       parameters:
         -
           name: uuid
@@ -2390,7 +2320,7 @@ paths:
         - DossierContent
       summary: 'Create a new note'
       description: 'Create a new note for a dossier'
-      operationId: essential.post.dossier.content.note
+      operationId: dossiercontent-note-post-v1-essential
       requestBody:
         description: 'The note data'
         required: true
@@ -2430,7 +2360,7 @@ paths:
         - DossierContent
       summary: 'Update an existing note'
       description: 'Update an existing note belonging to a dossier'
-      operationId: essential.patch.dossier.content.note
+      operationId: dossiercontent-note-patch-v1-essential
       requestBody:
         description: 'The note data'
         required: true
@@ -2471,7 +2401,7 @@ paths:
         - DossierContent
       summary: 'Delete a dossier upload'
       description: 'Deletes a dossier upload based on the ID.'
-      operationId: essential.delete.dossier.upload.id
+      operationId: dossiercontent-upload-id-delete-v1-essential
       parameters:
         -
           name: id
@@ -2512,7 +2442,7 @@ paths:
       tags:
         - DossierContent
       summary: 'Get a list of dossier uploads'
-      operationId: essential.get.dossier.content.upload
+      operationId: dossiercontent-upload-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -2557,7 +2487,7 @@ paths:
           required: false
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateUpdatedUntil]'
           in: query
@@ -2565,7 +2495,7 @@ paths:
           required: false
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -2597,7 +2527,7 @@ paths:
         - DossierContent
       summary: 'Create a new upload'
       description: 'Create a new upload for a dossier'
-      operationId: essential.post.dossier.content.upload
+      operationId: dossiercontent-upload-post-v1-essential
       requestBody:
         description: 'The upload data'
         required: true
@@ -2637,7 +2567,7 @@ paths:
         - DossierContent
       summary: 'Update an existing upload'
       description: 'Update an existing upload belonging to a dossier'
-      operationId: essential.patch.dossier.content.upload
+      operationId: dossiercontent-upload-patch-v1-essential
       requestBody:
         description: 'The upload data'
         required: true
@@ -2678,7 +2608,7 @@ paths:
         - DossierContent
       summary: 'Update an existing upload'
       description: 'Update an existing upload belonging to a dossier'
-      operationId: essential.patch.dossier.content.upload.id
+      operationId: dossiercontent-upload-id-patch-v1-essential
       parameters:
         -
           name: uuid
@@ -2726,7 +2656,7 @@ paths:
       tags:
         - 'Dossier Task'
       summary: 'Get a list of dossier tasks'
-      operationId: advanced.get.dossier.task
+      operationId: dossier-task-get-v1-advanced
       parameters:
         -
           name: 'filter[id]'
@@ -2778,28 +2708,28 @@ paths:
           description: 'Filter by tasks, completed since this date-time'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateCompletedUntil]'
           in: query
           description: 'Filter by tasks, completed until this date-time'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateUpdatedFrom]'
           in: query
           description: 'Filter by tasks, updated since this date-time'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateUpdatedUntil]'
           in: query
           description: 'Filter by tasks, updated until this date-time'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[active]'
           in: query
@@ -2852,7 +2782,7 @@ paths:
       tags:
         - 'Dossier Task'
       summary: 'Create a new dossier task'
-      operationId: advanced.post.dossier.task
+      operationId: dossier-task-post-v1-advanced
       requestBody:
         description: 'Dossier Task data'
         required: true
@@ -2892,7 +2822,7 @@ paths:
         - 'Dossier Task'
       summary: 'Update a dossier task using request body ID'
       description: 'Update a dossier task by specifying its ID in the request payload.'
-      operationId: advanced.patch.dossier.task
+      operationId: dossier-task-patch-v1-advanced
       requestBody:
         description: 'Data payload for updating the dossier task.'
         required: true
@@ -2933,7 +2863,7 @@ paths:
         - 'Dossier Task'
       summary: 'Update a specific dossier task by ID in the url'
       description: 'Perform an update on a specified dossier task using its unique ID.'
-      operationId: essential.patch.dossier.task.id
+      operationId: dossier-task-id-patch-v1-essential
       parameters:
         -
           name: id
@@ -2982,7 +2912,7 @@ paths:
       tags:
         - Dossier
       summary: 'Get a list of birth leave dossiers'
-      operationId: advanced.get.dossier.birth-leave
+      operationId: dossier-birthleave-get-v1-advanced
       parameters:
         -
           name: 'filter[id]'
@@ -3022,7 +2952,7 @@ paths:
           description: 'Filter by the updated since date'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateStart]'
           in: query
@@ -3043,7 +2973,7 @@ paths:
           description: 'Filter up to (and including) the update date'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: sort
           in: query
@@ -3091,7 +3021,7 @@ paths:
         - Dossier
       summary: 'Create a birth leave dossier'
       description: 'This endpoint is used to create a new birth leave dossier.'
-      operationId: advanced.post.dossier.birth-leave
+      operationId: dossier-birthleave-post-v1-advanced
       requestBody:
         description: 'Dossier data'
         required: true
@@ -3100,7 +3030,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostBirthLeaveRequestBody'
       responses:
-        200:
+        201:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -3131,7 +3061,7 @@ paths:
         - Dossier
       summary: 'Update a Birth Leave dossier'
       description: 'This endpoint is used to update a Birth Leave dossier.'
-      operationId: advanced.patch.dossier.birth-leave
+      operationId: dossier-birthleave-patch-v1-advanced
       requestBody:
         description: 'Dossier data'
         required: true
@@ -3172,7 +3102,7 @@ paths:
         - Dossier
       summary: 'Get a list of dossiers'
       description: 'Lists all dossiers that match the parameters specified on the request.'
-      operationId: essential.get.dossier
+      operationId: dossier-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -3219,7 +3149,7 @@ paths:
           description: 'Filter by the updated-since date'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateStart]'
           in: query
@@ -3240,7 +3170,7 @@ paths:
           description: 'Filter up to (and including) the update date'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: sort
           in: query
@@ -3288,7 +3218,7 @@ paths:
       tags:
         - Dossier
       summary: 'Get a list of preventive dossiers'
-      operationId: essential.get.dossier.preventive
+      operationId: dossier-preventive-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -3391,7 +3321,7 @@ paths:
         - Dossier
       summary: 'Create a preventive dossier'
       description: 'This endpoint is used to create a new preventive dossier.'
-      operationId: essential.post.dossier.preventive
+      operationId: dossier-preventive-post-v1-essential
       requestBody:
         description: 'Dossier data'
         required: true
@@ -3431,7 +3361,7 @@ paths:
         - Dossier
       summary: 'Update a preventive dossier'
       description: 'This endpoint is used to update a preventive dossier.'
-      operationId: essential.patch.dossier.preventive
+      operationId: dossier-preventive-patch-v1-essential
       requestBody:
         description: 'Dossier data'
         required: true
@@ -3471,7 +3401,7 @@ paths:
       tags:
         - Dossier
       summary: 'Get a list of Medical Preventive dossiers'
-      operationId: ultimate.get.dossier.medical-preventive
+      operationId: dossier-medicalpreventive-get-v1-ultimate
       parameters:
         -
           name: 'filter[id]'
@@ -3574,7 +3504,7 @@ paths:
         - Dossier
       summary: 'Create a medical preventive dossier'
       description: 'This endpoint is used to create a new medical preventive dossier.'
-      operationId: ultimate.post.dossier.medical-preventive
+      operationId: dossier-medicalpreventive-post-v1-ultimate
       requestBody:
         description: 'Dossier data'
         required: true
@@ -3614,7 +3544,7 @@ paths:
         - Dossier
       summary: 'Update a medical preventive dossier'
       description: 'This endpoint is used to update a medical preventive dossier.'
-      operationId: ultimate.patch.dossier.medical-preventive
+      operationId: dossier-medicalpreventive-patch-v1-ultimate
       requestBody:
         description: 'Dossier data'
         required: true
@@ -3654,7 +3584,7 @@ paths:
       tags:
         - Dossier
       summary: 'Get a list of Illness dossiers'
-      operationId: essential.get.dossier.illness
+      operationId: dossier-illness-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -3757,7 +3687,7 @@ paths:
         - Dossier
       summary: 'Update a illness dossier'
       description: 'This endpoint is used to update a new illness dossier.'
-      operationId: essential.patch.dossier.illness
+      operationId: dossier-illness-patch-v1-essential
       requestBody:
         description: 'Dossier data'
         required: true
@@ -3767,11 +3697,11 @@ paths:
               $ref: '#/components/schemas/PatchIllnessRequestBody'
       responses:
         200:
-          description: 'Dossier successfully created'
+          description: 'Dossier successfully updated'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dossier'
+                $ref: '#/components/schemas/IllnessDossier'
         400:
           description: 'Invalid input'
           content:
@@ -3797,7 +3727,7 @@ paths:
       tags:
         - DossierContent
       summary: 'Get a list of dossier sections that can be applied to dossier contents'
-      operationId: essential.get.dossier.section
+      operationId: dossier-section-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -3873,7 +3803,7 @@ paths:
       tags:
         - Dossier
       summary: 'Get a list of paid parental leave dossiers'
-      operationId: advanced.get.dossier.paid-parental-leave
+      operationId: dossier-paidparentalleave-get-v1-advanced
       parameters:
         -
           name: 'filter[id]'
@@ -3914,7 +3844,7 @@ paths:
           description: 'Filter by the dossier updated since this date. Format YYYY-MM-DD'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateStart]'
           in: query
@@ -3935,7 +3865,7 @@ paths:
           description: 'Filter by dossier updated up to (and including) the update date'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: sort
           in: query
@@ -3983,7 +3913,7 @@ paths:
         - Dossier
       summary: 'Create a paid parental leave dossier'
       description: 'This endpoint is used to create a new paid parental leave dossier.'
-      operationId: advanced.post.dossier.paid-parental-leave
+      operationId: dossier-paidparentalleave-post-v1-advanced
       requestBody:
         description: 'Dossier data'
         required: true
@@ -4023,7 +3953,7 @@ paths:
         - Dossier
       summary: 'Update a Paid Parental Leave dossier'
       description: 'This endpoint is used to update a Paid Parental Leave dossier.'
-      operationId: advanced.patch.dossier.paid-parental-leave
+      operationId: dossier-paidparentalleave-patch-v1-advanced
       requestBody:
         description: 'Dossier data'
         required: true
@@ -4063,7 +3993,7 @@ paths:
       tags:
         - Dossier
       summary: 'Get a list of pregnancy dossiers'
-      operationId: essential.get.dossier.pregnancy
+      operationId: dossier-pregnancy-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -4104,7 +4034,7 @@ paths:
           description: 'Filter by the updated-since date'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateStart]'
           in: query
@@ -4125,7 +4055,7 @@ paths:
           description: 'Filter up to (and including) the update date'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: sort
           in: query
@@ -4173,7 +4103,7 @@ paths:
         - Dossier
       summary: 'Create a pregnancy dossier'
       description: 'This endpoint is used to create a new pregnancy dossier.'
-      operationId: essential.post.dossier.pregnancy
+      operationId: dossier-pregnancy-post-v1-essential
       requestBody:
         description: 'Dossier data'
         required: true
@@ -4214,7 +4144,7 @@ paths:
         - 'Return to work advice'
       summary: 'Get the return to work advice base on the dossier'
       description: 'Returns the return to work advice based on the dossier ID.'
-      operationId: ultimate.get.dossier.id.return-to-work-advice
+      operationId: dossier-id-returntoworkadvice-get-v1-ultimate
       parameters:
         -
           name: id
@@ -4255,7 +4185,7 @@ paths:
       tags:
         - Dossier
       summary: 'Get a list of Spoor-2 dossiers'
-      operationId: ultimate.get.dossier.spoor2
+      operationId: dossier-spoor2-get-v1-ultimate
       parameters:
         -
           name: 'filter[id]'
@@ -4361,7 +4291,7 @@ paths:
         - Dossier
       summary: 'Create a spoor 2 dossier'
       description: 'This endpoint is used to create a new spoor 2 dossier.'
-      operationId: ultimate.post.dossier.spoor2
+      operationId: dossier-spoor2-post-v1-ultimate
       requestBody:
         description: 'Dossier data'
         required: true
@@ -4401,7 +4331,7 @@ paths:
         - Dossier
       summary: 'Update a spoor 2 dossier'
       description: 'This endpoint is used to update a new spoor 2 dossier.'
-      operationId: ultimate.patch.dossier.spoor2
+      operationId: dossier-spoor2-patch-v1-ultimate
       requestBody:
         description: 'Dossier data'
         required: true
@@ -4441,7 +4371,7 @@ paths:
       tags:
         - Dossier
       summary: 'Get a list of ZW ERD dossiers'
-      operationId: ultimate.get.dossier.zwerd
+      operationId: dossier-zwerd-get-v1-ultimate
       parameters:
         -
           name: 'filter[id]'
@@ -4482,7 +4412,7 @@ paths:
           description: 'Filter by the updated-since date'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateStart]'
           in: query
@@ -4503,7 +4433,7 @@ paths:
           description: 'Filter up to (and including) the update date'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: sort
           in: query
@@ -4541,7 +4471,7 @@ paths:
         - Dossier
       summary: 'Create a ZW ERD dossier'
       description: 'This endpoint is used to create a new ZW ERD dossier.'
-      operationId: ultimate.post.dossier.zwerd
+      operationId: dossier-zwerd-post-v1-ultimate
       requestBody:
         description: 'Dossier data'
         required: true
@@ -4581,7 +4511,7 @@ paths:
         - Dossier
       summary: 'Update a ZW ERD dossier'
       description: 'This endpoint is used to update a ZW ERD dossier.'
-      operationId: ultimate.patch.dossier.zwerd
+      operationId: dossier-zwerd-patch-v1-ultimate
       requestBody:
         description: 'Dossier data'
         required: true
@@ -4621,7 +4551,7 @@ paths:
       tags:
         - Dossier
       summary: 'Get a list of Illness and ZW ERD dossiers'
-      operationId: essential.get.dossier.illness-and-zwerd
+      operationId: dossier-illnessandzwerd-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -4728,7 +4658,7 @@ paths:
         - Dossier
       summary: 'Create a wga dossier'
       description: 'This endpoint is used to create a new wga dossier.'
-      operationId: ultimate.post.dossier.wga
+      operationId: dossier-wga-post-v1-ultimate
       requestBody:
         description: 'Dossier data'
         required: true
@@ -4768,7 +4698,7 @@ paths:
         - Dossier
       summary: 'Create a wga dossier'
       description: 'This endpoint is used to update a wga dossier.'
-      operationId: ultimate.patch.dossier.wga
+      operationId: dossier-wga-patch-v1-ultimate
       requestBody:
         description: 'Dossier data'
         required: true
@@ -4809,7 +4739,7 @@ paths:
         - Dossier
       summary: 'Create a company social worker dossier'
       description: 'This endpoint is used to create a new company social worker dossier.'
-      operationId: ultimate.post.dossier.company-social-worker
+      operationId: dossier-companysocialworker-post-v1-ultimate
       requestBody:
         description: 'Dossier data'
         required: true
@@ -4823,7 +4753,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicApiPostResponse'
+                $ref: '#/components/schemas/PostBasicDossierResponseBody'
         400:
           description: 'Bad Request'
           content:
@@ -4850,7 +4780,7 @@ paths:
         - Dossier
       summary: 'Create an ergonomics dossier'
       description: 'This endpoint is used to create a new ergonomics dossier.'
-      operationId: ultimate.post.dossier.ergonomics
+      operationId: dossier-ergonomics-post-v1-ultimate
       requestBody:
         description: 'Dossier data'
         required: true
@@ -4864,7 +4794,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicApiPostResponse'
+                $ref: '#/components/schemas/PostBasicDossierResponseBody'
         400:
           description: 'Bad Request'
           content:
@@ -4891,7 +4821,7 @@ paths:
         - Dossier
       summary: 'Create a confidential counselor dossier'
       description: 'This endpoint is used to create a new confidential counselor dossier.'
-      operationId: ultimate.post.dossier.confidential-counselor
+      operationId: dossier-confidentialcounselor-post-v1-ultimate
       requestBody:
         description: 'Dossier data'
         required: true
@@ -4905,7 +4835,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicApiPostResponse'
+                $ref: '#/components/schemas/PostBasicDossierResponseBody'
         400:
           description: 'Bad Request'
           content:
@@ -4932,7 +4862,7 @@ paths:
         - Dossier
       summary: 'Create a second line care dossier'
       description: 'This endpoint is used to create a new second line care dossier.'
-      operationId: ultimate.post.dossier.second-line-care
+      operationId: dossier-secondlinecare-post-v1-ultimate
       requestBody:
         description: 'Dossier data'
         required: true
@@ -4946,7 +4876,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicApiPostResponse'
+                $ref: '#/components/schemas/PostBasicDossierResponseBody'
         400:
           description: 'Bad Request'
           content:
@@ -4973,7 +4903,7 @@ paths:
         - Dossier
       summary: 'Create a physiotherapy dossier'
       description: 'This endpoint is used to create a new physiotherapy dossier.'
-      operationId: ultimate.post.dossier.physiotherapy
+      operationId: dossier-physiotherapy-post-v1-ultimate
       requestBody:
         description: 'Dossier data'
         required: true
@@ -4987,7 +4917,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicApiPostResponse'
+                $ref: '#/components/schemas/PostBasicDossierResponseBody'
         400:
           description: 'Bad Request'
           content:
@@ -5014,7 +4944,7 @@ paths:
         - Dossier
       summary: 'Create a psychologist dossier'
       description: 'This endpoint is used to create a new psychologist dossier.'
-      operationId: ultimate.post.dossier.psychologist
+      operationId: dossier-psychologist-post-v1-ultimate
       requestBody:
         description: 'Dossier data'
         required: true
@@ -5022,6 +4952,47 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/PostBasicDossierRequestBody'
+      responses:
+        201:
+          description: 'Dossier successfully created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostBasicDossierResponseBody'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+  /dossier/company-dossier:
+    post:
+      tags:
+        - Dossier
+      summary: 'Create a company dossier'
+      description: 'This endpoint is used to create a new company dossier.'
+      operationId: dossier-companydossier-post-v1-ultimate
+      requestBody:
+        description: 'Dossier data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostCompanyDossierRequestBody'
       responses:
         201:
           description: 'Dossier successfully created'
@@ -5054,7 +5025,7 @@ paths:
       tags:
         - 'Dossier Officers'
       summary: 'Get a list of Dossier Officers (dossierverantwoordelijken)'
-      operationId: essential.get.dossier-officer
+      operationId: dossierofficer-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -5103,7 +5074,7 @@ paths:
         - Employee
       summary: 'Delete an employee'
       description: 'Deletes an employee based on the unique identifier.'
-      operationId: essential.delete.employee
+      operationId: employee-delete-v1-essential
       parameters:
         -
           name: id
@@ -5145,7 +5116,7 @@ paths:
       tags:
         - Employee
       summary: 'Get a list of employees'
-      operationId: essential.get.employee
+      operationId: employee-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -5173,6 +5144,22 @@ paths:
           description: "Filter by an employee's employee number"
           schema:
             type: string
+        -
+          name: 'filter[dateUpdatedFrom]'
+          in: query
+          description: 'Filter by date of last update being after or the same day as the one given'
+          schema:
+            type: string
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2000-01-01 12:34:56'
+        -
+          name: 'filter[dateUpdatedUntil]'
+          in: query
+          description: 'Filter by date of last update being before or on the same day as the one given'
+          schema:
+            type: string
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2030-01-01 12:34:56'
         -
           name: include
           in: query
@@ -5214,7 +5201,7 @@ paths:
         - Employee
       summary: 'Create an employee'
       description: 'This endpoint creates an Employee and its associated entities (Employment, Employment Contract, Primary Address, Person Information, Person Communications).'
-      operationId: essential.post.employee
+      operationId: employee-post-v1-essential
       requestBody:
         description: 'Employee data'
         required: true
@@ -5254,7 +5241,7 @@ paths:
         - Employee
       summary: 'Update an employee'
       description: 'This endpoint updates an existing Employee and their associated entities (Primary Address, Person Information, Person Communications).'
-      operationId: essential.patch.employee
+      operationId: employee-patch-v1-essential
       requestBody:
         description: 'Employee data'
         required: true
@@ -5295,7 +5282,7 @@ paths:
         - Employer
       summary: 'Delete an employer'
       description: 'Deletes an employer based on the ID. This operation also removes any users, contracts, roles, authorizations and organizational unit types linked to the employer.'
-      operationId: essential.delete.employer.id
+      operationId: employer-id-delete-v1-essential
       parameters:
         -
           name: id
@@ -5336,7 +5323,7 @@ paths:
       tags:
         - Employer
       summary: 'Update an employer while referencing the employer by its id'
-      operationId: essential.patch.employer.id
+      operationId: employer-id-patch-v1-essential
       parameters:
         -
           name: id
@@ -5384,7 +5371,7 @@ paths:
       tags:
         - Employer
       summary: "Get a list of arbo services (in application known as 'arbodiensten')"
-      operationId: essential.get.employer.arbo-service
+      operationId: employer-arboservice-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -5434,7 +5421,7 @@ paths:
       tags:
         - Employer
       summary: 'Get a list of employers'
-      operationId: essential.get.employer
+      operationId: employer-get-v1-essential
       parameters:
         -
           name: 'filter[search]'
@@ -5519,7 +5506,7 @@ paths:
       tags:
         - Employer
       summary: 'Create an employer'
-      operationId: essential.post.employer
+      operationId: employer-post-v1-essential
       requestBody:
         description: 'Employer data'
         required: true
@@ -5558,7 +5545,7 @@ paths:
       tags:
         - Employer
       summary: 'Update an employer'
-      operationId: essential.patch.employer
+      operationId: employer-patch-v1-essential
       requestBody:
         description: 'Employer data'
         required: true
@@ -5598,7 +5585,7 @@ paths:
       tags:
         - 'Employer Divisions'
       summary: 'Get a list of employer divisions (werkgever indeling)'
-      operationId: essential.get.employer-division
+      operationId: employerdivision-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -5663,7 +5650,7 @@ paths:
       tags:
         - 'User Roles'
       summary: 'Get a list of employer roles that can be assigned to users'
-      operationId: essential.get.employer-role
+      operationId: employerrole-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -5740,7 +5727,7 @@ paths:
         - Employments
       summary: 'Delete an employment contract'
       description: 'Deletes an employment contract based on the ID.'
-      operationId: essential.delete.employment.contract.id
+      operationId: employment-contract-id-delete-v1-essential
       parameters:
         -
           name: id
@@ -5782,7 +5769,7 @@ paths:
         - Employments
       summary: 'Delete an employment and all employment-contracts that belong to it'
       description: 'Deletes an employment based on the ID.'
-      operationId: advanced.delete.employment.id
+      operationId: employment-id-delete-v1-advanced
       parameters:
         -
           name: id
@@ -5823,7 +5810,7 @@ paths:
       tags:
         - Employments
       summary: 'Get a list of employment contracts'
-      operationId: advanced.get.employment.contract
+      operationId: employment-contract-get-v1-advanced
       parameters:
         -
           name: 'filter[id]'
@@ -5870,42 +5857,42 @@ paths:
           description: 'Filter by date of latest update being after or the same day as the one given'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateUpdatedUntil]'
           in: query
           description: 'Filter by date of latest update being before or on the same day as the one given'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateStartFrom]'
           in: query
           description: 'Filter by start date being after or the same day as the one given'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateStartUntil]'
           in: query
           description: 'Filter by start date being before or on the same day as the one given'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateEndFrom]'
           in: query
           description: 'Filter by end date being after or the same day as the one given'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateEndUntil]'
           in: query
           description: 'Filter by end date being before or on the same day as the one given'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: include
           in: query
@@ -5953,7 +5940,7 @@ paths:
         - Employments
       summary: 'Create a new employment contract'
       description: 'Create a new employment contract'
-      operationId: advanced.post.employment.contract
+      operationId: employment-contract-post-v1-advanced
       requestBody:
         description: 'Employment Contract data'
         required: true
@@ -5993,7 +5980,7 @@ paths:
         - Employments
       summary: 'Update an existing employment contract'
       description: 'Update an existing employment contract'
-      operationId: advanced.patch.employment.contract
+      operationId: employment-contract-patch-v1-advanced
       requestBody:
         description: 'Employment Contract data'
         required: true
@@ -6033,7 +6020,7 @@ paths:
       tags:
         - Employments
       summary: 'Get a list of employments'
-      operationId: advanced.get.employment
+      operationId: employment-get-v1-advanced
       parameters:
         -
           name: 'filter[id]'
@@ -6181,7 +6168,7 @@ paths:
         - Employments
       summary: 'Create a new employment'
       description: 'Create a new employment'
-      operationId: advanced.post.employment
+      operationId: employment-post-v1-advanced
       requestBody:
         description: 'Employment data'
         required: true
@@ -6221,7 +6208,7 @@ paths:
         - Employments
       summary: 'Update an existing employment'
       description: 'Update an existing employment'
-      operationId: advanced.patch.employment
+      operationId: employment-patch-v1-advanced
       requestBody:
         description: 'Employment data'
         required: true
@@ -6261,7 +6248,7 @@ paths:
       tags:
         - Employments
       summary: 'Get a list of employment types'
-      operationId: advanced.get.employment.employment-type
+      operationId: employment-employmenttype-get-v1-advanced
       parameters:
         -
           name: 'filter[id]'
@@ -6314,7 +6301,7 @@ paths:
         - Employments
       summary: 'Update an existing employment'
       description: 'Update an existing employment'
-      operationId: advanced.patch.employment.id
+      operationId: employment-id-patch-v1-advanced
       parameters:
         -
           name: uuid
@@ -6362,7 +6349,7 @@ paths:
       tags:
         - 'External Supervisor'
       summary: 'Get a list of external supervisors'
-      operationId: essential.get.external-supervisor
+      operationId: externalsupervisor-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -6438,7 +6425,7 @@ paths:
       tags:
         - Operation
       summary: 'Get a list of operations'
-      operationId: essential.get.operation
+      operationId: operation-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -6484,7 +6471,7 @@ paths:
       tags:
         - 'Billable Operation'
       summary: 'Get a list of billable operations'
-      operationId: ultimate.get.billable-operation
+      operationId: billableoperation-get-v1-ultimate
       parameters:
         -
           name: 'filter[id]'
@@ -6609,7 +6596,7 @@ paths:
         - 'Organizational Units'
       summary: 'Delete an organizational unit'
       description: 'Deletes an organizational unit based on the ID. This operation also removes any employees linked to the organizational unit, along with their associated employment contracts.'
-      operationId: essential.delete.organizational-unit.id
+      operationId: organizationalunit-id-delete-v1-essential
       parameters:
         -
           name: id
@@ -6650,7 +6637,7 @@ paths:
         - 'Organizational Units'
       summary: 'Update an existing organizational unit'
       description: "Updates an existing organizational unit. Allows for 'id' to be in the path or in the request body."
-      operationId: essential.patch.organizational-unit.id
+      operationId: organizationalunit-id-patch-v1-essential
       parameters:
         -
           name: id
@@ -6668,6 +6655,7 @@ paths:
           schema:
             type: string
       requestBody:
+        description: 'Data to be updated for the organizational unit'
         required: true
         content:
           application/json:
@@ -6697,7 +6685,7 @@ paths:
       tags:
         - 'Organizational Units'
       summary: 'Get a list of organizational units'
-      operationId: essential.get.organizational-unit
+      operationId: organizationalunit-get-v1-essential
       parameters:
         -
           name: 'filter[id]'
@@ -6749,6 +6737,22 @@ paths:
           schema:
             type: string
             format: uuid
+        -
+          name: 'filter[dateUpdatedFrom]'
+          in: query
+          description: 'Filter by date of last update being after or the same day as the one given'
+          schema:
+            type: string
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2000-01-01 12:34:56'
+        -
+          name: 'filter[dateUpdatedUntil]'
+          in: query
+          description: 'Filter by date of last update being before or on the same day as the one given'
+          schema:
+            type: string
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2030-01-01 12:34:56'
         -
           name: sort
           in: query
@@ -6807,7 +6811,7 @@ paths:
         - 'Organizational Units'
       summary: 'Create a new organizational unit'
       description: 'Create a new organizational unit'
-      operationId: essential.post.organizational-unit
+      operationId: organizationalunit-post-v1-essential
       requestBody:
         description: "Organizational Unit data - please be aware: 'company.normHours' is required when 'company' is present"
         required: true
@@ -6847,7 +6851,7 @@ paths:
       tags:
         - 'Organizational Units'
       summary: 'Get a list of organizational unit types'
-      operationId: essential.get.organizational-unit.organizational-unit-type
+      operationId: organizationalunit-organizationalunittype-get-v1-essential
       parameters:
         -
           name: 'filter[employerId]'
@@ -6897,7 +6901,7 @@ paths:
       tags:
         - Task
       summary: 'Get a list of tasks'
-      operationId: advanced.get.task
+      operationId: task-get-v1-advanced
       parameters:
         -
           name: 'filter[id]'
@@ -6948,28 +6952,28 @@ paths:
           description: 'Filter by date updated from'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateUpdatedUntil]'
           in: query
           description: 'Filter by date updated until'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateCreatedFrom]'
           in: query
           description: 'Filter by date created from'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateCreatedUntil]'
           in: query
           description: 'Filter by date created until'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: sort
           in: query
@@ -7008,7 +7012,7 @@ paths:
         - User
       summary: '(DEPRECATED) Create/Update Users event Endpoint'
       description: 'Event endpoint to create/update users'
-      operationId: advanced.event.user
+      operationId: user-event-v1-advanced
       requestBody:
         description: 'Pass parameters used for creating/updating a user'
         required: true
@@ -7190,20 +7194,12 @@ paths:
                     example: 'Valid role missing'
                 type: object
       deprecated: true
-      parameters:
-        -
-          name: Ocp-Apim-Subscription-Key
-          in: header
-          required: true
-          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
-          schema:
-            type: string
   /user/employer:
     get:
       tags:
         - User
       summary: 'Get a list of employer users'
-      operationId: advanced.get.user.employer
+      operationId: user-employer-get-v1-advanced
       parameters:
         -
           name: 'filter[id]'
@@ -7238,28 +7234,28 @@ paths:
           description: 'Filter by users updated since this date'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateUpdatedUntil]'
           in: query
           description: 'Filter up to (and including) the update date'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateCreatedFrom]'
           in: query
           description: 'Filter by the creation date'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateCreatedUntil]'
           in: query
           description: 'Filter up to (and including) the creation date'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[isActive]'
           in: query
@@ -7327,7 +7323,7 @@ paths:
         - User
       summary: 'Create employer user'
       description: 'Post endpoint to create employer users'
-      operationId: advanced.post.user.employer
+      operationId: user-employer-post-v1-advanced
       requestBody:
         description: 'User data'
         required: true
@@ -7367,7 +7363,7 @@ paths:
       tags:
         - User
       summary: 'Get a list of internal users'
-      operationId: advanced.get.user.internal
+      operationId: user-internal-get-v1-advanced
       parameters:
         -
           name: 'filter[id]'
@@ -7402,28 +7398,28 @@ paths:
           description: 'Filter by the update date'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateUpdatedUntil]'
           in: query
           description: 'Filter up to (and including) the update date'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateCreatedFrom]'
           in: query
           description: 'Filter by the creation date'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateCreatedUntil]'
           in: query
           description: 'Filter up to (and including) the create date'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[isActive]'
           in: query
@@ -7491,7 +7487,7 @@ paths:
         - User
       summary: 'Create internal user'
       description: 'Post endpoint to create internal users'
-      operationId: advanced.post.user.internal
+      operationId: user-internal-post-v1-advanced
       requestBody:
         description: 'User data'
         required: true
@@ -7531,7 +7527,7 @@ paths:
       tags:
         - User
       summary: 'Get a list of external users'
-      operationId: advanced.get.user.external
+      operationId: user-external-get-v1-advanced
       parameters:
         -
           name: 'filter[id]'
@@ -7566,28 +7562,28 @@ paths:
           description: 'Filter by the update date'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateUpdatedUntil]'
           in: query
           description: 'Filter up to (and including) the update date'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateCreatedFrom]'
           in: query
           description: 'Filter by the creation date'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[dateCreatedUntil]'
           in: query
           description: 'Filter up to (and including) the create date'
           schema:
             type: string
-            format: date-time
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
           name: 'filter[isActive]'
           in: query
@@ -7655,7 +7651,7 @@ paths:
         - User
       summary: 'Create external user'
       description: 'Post endpoint to create external users'
-      operationId: advanced.post.user.external
+      operationId: user-external-post-v1-advanced
       requestBody:
         description: 'User data'
         required: true
@@ -7696,7 +7692,7 @@ paths:
         - User
       summary: 'Create Users patch Endpoint'
       description: 'Patch endpoint to create users'
-      operationId: advanced.patch.user
+      operationId: user-patch-v1-advanced
       requestBody:
         description: 'User data'
         required: true
@@ -7737,7 +7733,7 @@ paths:
         - User
       summary: 'Post User Authorizations Endpoint'
       description: 'Post user authorizations'
-      operationId: advanced.post.user.authorizations
+      operationId: user-authorizations-post-v1-advanced
       requestBody:
         description: 'User data with authorizations'
         required: true
@@ -7837,6 +7833,41 @@ components:
           minLength: 0
           example: false
       type: object
+    PostAuthTokenRequestBodyScopeExample:
+      description: 'This is an example of how to request scopes for the bearer token'
+      properties:
+        absencecourse:
+          type: array
+          items:
+            type: string
+          example:
+            - read
+            - create
+        employee:
+          type: array
+          items:
+            type: string
+          example:
+            - read
+      type: object
+    PostAuthTokenRequestBody:
+      required:
+        - grant_type
+        - client_id
+        - client_secret
+      properties:
+        grant_type:
+          type: string
+          example: client_credentials
+        client_id:
+          type: string
+          example: 639cb341-b25c-4b72-acee-e0ac2be5c2dd
+        client_secret:
+          type: string
+          example: your_client_secret
+        scope:
+          $ref: '#/components/schemas/PostAuthTokenRequestBodyScopeExample'
+      type: object
     AccessToken:
       properties:
         token_type:
@@ -7890,6 +7921,27 @@ components:
           type: string
           example: 'Client authentication failed'
       type: object
+    PublicApiError:
+      description: 'Error response object'
+      required:
+        - code
+        - message
+        - detail
+      properties:
+        code:
+          type: string
+          example: REQ_00001
+        message:
+          type: string
+          example: 'Request validation failed'
+        detail:
+          type: array
+          items:
+            type: string
+          example:
+            - 'Description of the first validation error'
+            - 'Description of the second validation error'
+      type: object
     BadRequestResponse:
       properties:
         message:
@@ -7902,22 +7954,7 @@ components:
           type: integer
           example: 400
         errors:
-          properties:
-            code:
-              type: string
-              example: REQ_00001
-            message:
-              type: string
-              example: 'Validation failed'
-            detail:
-              type: array
-              items:
-                type: string
-              example:
-                - 'The request could not be validated'
-                - 'Description of the first validation error'
-                - 'Description of the second validation error'
-          type: object
+          $ref: '#/components/schemas/PublicApiError'
         traceId:
           type: string
           example: sample-uuid-string
@@ -7934,21 +7971,7 @@ components:
           type: integer
           example: 500
         errors:
-          properties:
-            code:
-              type: string
-              example: REQ_00001
-            message:
-              type: string
-              example: 'Server error'
-            detail:
-              type: array
-              items:
-                type: string
-              example:
-                - 'A server error occurred'
-                - 'Something bad happened that we did not expect'
-          type: object
+          $ref: '#/components/schemas/PublicApiError'
         traceId:
           type: string
           example: sample-uuid-string
@@ -8015,11 +8038,33 @@ components:
           items:
             type: string
         data:
-          type: object
+          $ref: '#/components/schemas/PublicApiResponseBodyDataExample'
         traceId:
           type: string
           format: uuid
           example: b7810b40-bd6a-4bea-a92c-5543e5b288b9
+      type: object
+    PublicApiResponseBodyDataExample:
+      description: 'The data object of the response which contains the created resource'
+      properties:
+        id:
+          description: 'The unique identifier of the created resource'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+          example: 550e8400-e29b-41d4-a716-446655440000
+        externalKey:
+          description: "An identifier provided by an external system that uniquely identifies the resource in that system. This key serves as an alternative to the 'id' field for referencing the entity."
+          type: string
+          maxLength: 191
+          minLength: 0
+          example: external-key-123
+          nullable: true
+        name:
+          description: 'The name of the created resource'
+          type: string
+          example: 'Sample Resource'
       type: object
     PublicApiPostResponse:
       required:
@@ -8039,7 +8084,7 @@ components:
           items:
             type: string
         data:
-          type: object
+          $ref: '#/components/schemas/PublicApiResponseBodyDataExample'
         traceId:
           type: string
           format: uuid
@@ -8224,6 +8269,11 @@ components:
             data:
               $ref: '#/components/schemas/ContactPerson'
           type: object
+    PatchContactPersonTypeEnumOptions:
+      type: string
+      enum:
+        - employer
+        - organizational-unit
     PatchContactPersonRequestBody:
       properties:
         id:
@@ -9023,11 +9073,11 @@ components:
         dateCreated:
           description: 'The date the contract was created'
           type: string
-          format: date-time
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         dateUpdated:
           description: 'The date the contract was updated'
           type: string
-          format: date-time
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
       type: object
     Module:
       properties:
@@ -10698,6 +10748,15 @@ components:
           type: string
           format: date
       type: object
+    PostBasicDossierResponseBody:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponse'
+        -
+          properties:
+            data:
+              $ref: '#/components/schemas/DossierWithoutRelations'
+          type: object
     PostBasicDossierRequestBody:
       required:
         - dateStart
@@ -10814,6 +10873,23 @@ components:
           maximum: 9
           minimum: 1
           example: 8
+      type: object
+    PostCompanyDossierRequestBody:
+      required:
+        - organinzationalUnitId
+        - dateStart
+      properties:
+        externalKey:
+          description: "An identifier provided by an external system that uniquely specifies the dossier. This key serves as an alternative to the 'id' field for referencing the dossier."
+          type: string
+        dateStart:
+          description: 'The date the dossier started'
+          type: string
+          format: date
+        organinzationalUnitId:
+          description: "The id of the organizational unit, required if 'employmentKey' is omitted"
+          type: string
+          format: uuid
       type: object
     PostMedicalPreventiveDossierRequestBody:
       required:
@@ -11011,7 +11087,7 @@ components:
           type: string
           format: date
         requestedLeavePeriod:
-          description: 'The requested leave period'
+          description: "The requested leave period in weeks, this will calculate and fill the 'expectedDurationDays' property."
           type: integer
           format: int32
       type: object
@@ -11840,11 +11916,11 @@ components:
         dateCreated:
           description: 'The date the dossier external resource was created'
           type: string
-          format: date-time
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         dateUpdated:
           description: 'The date the dossier external resource was updated'
           type: string
-          format: date-time
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
       type: object
     DossierTypeEnumOptions:
       type: string
@@ -11981,6 +12057,11 @@ components:
           $ref: '#/components/schemas/SafetyNetEnumOptions'
         accidentType:
           $ref: '#/components/schemas/AccidentTypeEnumOptions'
+        expectedDurationDays:
+          description: 'The expected duration of the dossier in days. This field indicates the expected length of time the dossier is expected to remain open or active. Applies to illness and pregnancy dossiers.'
+          type: integer
+          example: 28
+          nullable: true
         dateCreated:
           description: 'The date and time indicating when the dossier was initially created in the system. (Format YYYY-MM-DD HH:MM:SS)'
           type: string
@@ -12654,6 +12735,24 @@ components:
         communicationMethods:
           $ref: '#/components/schemas/EmployeeRequestBodyCommunicationMethods'
       type: object
+    PostEmployeeRequestBodyUWV:
+      properties:
+        registrationNumber:
+          description: 'The UWV registration number of the employee'
+          type: string
+        sectorId:
+          description: 'The UWV sector of the employee'
+          type: integer
+        riskCode:
+          description: 'The UWV risk code of the employee'
+          type: string
+        waitingPeriod:
+          description: 'The waiting period (related to UWV) of the employee'
+          type: integer
+        payrollDiscountIndication:
+          description: 'Indication for payroll discount (related to UWV) for the Employee.'
+          type: boolean
+      type: object
     PostEmployeeRequestBodyEmployment:
       properties:
         organizationalUnitId:
@@ -12789,23 +12888,7 @@ components:
         employment:
           $ref: '#/components/schemas/PostEmployeeRequestBodyEmployment'
         uwv:
-          properties:
-            registrationNumber:
-              description: 'The UWV registration number of the employee'
-              type: string
-            sectorId:
-              description: 'The UWV sector of the employee'
-              type: integer
-            riskCode:
-              description: 'The UWV risk code of the employee'
-              type: string
-            waitingPeriod:
-              description: 'The waiting period (related to UWV) of the employee'
-              type: integer
-            payrollDiscountIndication:
-              description: 'Indication for payroll discount (related to UWV) for the Employee.'
-              type: boolean
-          type: object
+          $ref: '#/components/schemas/PostEmployeeRequestBodyUWV'
       type: object
     Employee:
       type: object
@@ -14626,6 +14709,8 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/EmploymentContractResource'
+            employmentEndReason:
+              $ref: '#/components/schemas/EmploymentEndReasonEnumOptions'
             internalSupervisorId:
               description: 'The unique identifier of the internal supervisor associated with this employment'
               type: string
@@ -16413,13 +16498,6 @@ components:
           example: 15
         arboRole:
           $ref: '#/components/schemas/ArboRole'
-        teamRole:
-          type: object
-        teams:
-          description: 'The teams the user is associated with'
-          type: array
-          items:
-            type: object
         person:
           $ref: '#/components/schemas/MasterPerson'
         masterPerson:
