@@ -587,7 +587,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerErrorResponse'
-  '/contact-persons/{type}/{uuid}':
+  '/contact-person/{type}/{uuid}':
     patch:
       tags:
         - ContactPerson
@@ -1592,7 +1592,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerErrorResponse'
-  /configuration/dossier/note-types:
+  /configuration/dossier/note-type:
     get:
       tags:
         - DossierContent
@@ -8489,6 +8489,101 @@ paths:
           description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
           schema:
             type: string
+  '/linked-user/{id}':
+    delete:
+      tags:
+        - User
+      summary: 'Delete a linked user'
+      description: 'Deletes an linked user based on the ID.'
+      operationId: user-linkeduser-delete-v1-ultimate
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Unique identifier of the linked user to delete.'
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: d77b71b2-b046-4aba-afa2-a785a92393d3
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Linked user successfully deleted'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+  '/user/{id}/linked-user/{linkedUserId}':
+    delete:
+      tags:
+        - User
+      summary: 'Delete linked user'
+      description: 'Deletes link between two users based on user ids'
+      operationId: user-linkeduserfromuser-delete-v1-ultimate
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Unique identifier of user'
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: d77b71b2-b046-4aba-afa2-a785a92393d3
+        -
+          name: linkedUserId
+          in: path
+          description: 'Unique identifier of user that the other user is linked to.'
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: d77b71b2-b046-4aba-afa2-a785a92393d3
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Linked users successfully deleted for this user'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
   /linked-user:
     get:
       tags:
