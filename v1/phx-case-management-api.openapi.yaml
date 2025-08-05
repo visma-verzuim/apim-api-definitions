@@ -1,6 +1,7 @@
 openapi: 3.0.0
 info:
-  title: 'Public API Documentation'
+  title: 'BlueVi Case Management API'
+  description: 'Communicate with BlueVi directly over 100+ API endpoints.'
   version: v1
 paths:
   /absence-reason:
@@ -67,6 +68,101 @@ paths:
                 $ref: '#/components/schemas/BadRequestResponse'
         500:
           description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+  /appointment:
+    get:
+      tags:
+        - Appointments
+      summary: 'Get a list of appointments'
+      operationId: appointment-get-v1-ultimate
+      parameters:
+        -
+          name: 'filter[title]'
+          in: query
+          description: 'Filter by the appointment title. Matches partial strings, case-insensitive.'
+          schema:
+            type: string
+        -
+          name: 'filter[dateStartFrom]'
+          in: query
+          description: 'Filter by the earliest start date you want to see appointments for. Format: YYYY-MM-DD'
+          schema:
+            type: string
+            format: date
+          example: '2025-01-01'
+        -
+          name: 'filter[dateStartUntil]'
+          in: query
+          description: 'Filter by the last start date you want to see appointments for. Format: YYYY-MM-DD'
+          schema:
+            type: string
+            format: date
+          example: '2025-01-31'
+        -
+          name: 'filter[userId]'
+          in: query
+          description: 'Filter by the unique identifier of the user. Must be a valid UUID.'
+          schema:
+            type: string
+            format: uuid
+          example: 8366316b-1304-482e-bf53-0067174d477a
+        -
+          name: 'filter[status]'
+          in: query
+          description: 'Filter by the status of the appointment.'
+          schema:
+            $ref: '#/components/schemas/AppointmentStatusEnumOptions'
+        -
+          name: 'filter[employerId]'
+          in: query
+          description: 'Show only appointments for the specified employer. Must be a valid UUID.'
+          schema:
+            type: string
+            format: uuid
+          example: 8366316b-1304-482e-bf53-0067174d477a
+        -
+          name: 'filter[employeeId]'
+          in: query
+          description: 'Show only appointments for the specified employee. Must be a valid UUID.'
+          schema:
+            type: string
+            format: uuid
+          example: 8366316b-1304-482e-bf53-0067174d477a
+        -
+          name: include
+          in: query
+          description: 'Include the related resources - use comma separated values to include multiple resources'
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/GetAppointmentIncludeOptions'
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'A list of appointments'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAppointmentResponse'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Internal Server Error'
           content:
             application/json:
               schema:
@@ -287,7 +383,163 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerErrorResponse'
-  '/contact-persons/{type}':
+  /contact-person:
+    get:
+      tags:
+        - ContactPerson
+      summary: 'Get contact persons'
+      description: 'Returns a list of contact persons based on the provided query parameters.'
+      operationId: contactperson-get-v1-essential
+      parameters:
+        -
+          name: 'filter[id]'
+          in: query
+          description: 'Filter by unique identifier to get a specific contact person.'
+          schema:
+            type: string
+            format: uuid
+        -
+          name: 'filter[externalKey]'
+          in: query
+          description: 'Filter by external key to get a specific contact person.'
+          schema:
+            type: string
+        -
+          name: 'filter[employerId]'
+          in: query
+          description: 'Filter by employer ID to get contact persons associated with a specific employer.'
+          schema:
+            type: string
+            format: uuid
+        -
+          name: 'filter[organizationalUnitId]'
+          in: query
+          description: 'Filter by organizational unit ID to get contact persons associated with a specific organizational unit.'
+          schema:
+            type: string
+            format: uuid
+        -
+          name: 'filter[employerKey]'
+          in: query
+          description: 'Filter by employer key to get contact persons associated with a specific employer.'
+          schema:
+            type: string
+        -
+          name: 'filter[organizationalUnitKey]'
+          in: query
+          description: 'Filter by organizational unit key to get contact persons associated with a specific organizational unit.'
+          schema:
+            type: string
+        -
+          name: 'filter[type]'
+          in: query
+          description: 'Filter by contact person type. The type that the contact person is associated with.'
+          schema:
+            $ref: '#/components/schemas/ContactPersonTypeEnumOptions'
+        -
+          name: 'filter[dateUpdatedFrom]'
+          in: query
+          description: 'Filter by date updated from'
+          schema:
+            type: string
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+        -
+          name: 'filter[dateUpdatedUntil]'
+          in: query
+          description: 'Filter up to (and including) the update date'
+          schema:
+            type: string
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+        -
+          name: sort
+          in: query
+          description: "Sort results by specific column, Use '-' as prefix to sort descending."
+          schema:
+            $ref: '#/components/schemas/GetContactPersonSortOptions'
+        -
+          name: include
+          in: query
+          description: 'Include related resources in the response. Use comma to separate multiple values.'
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/GetContactPersonIncludeOptions'
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'A list of contact persons matching the query parameters.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetContactPersonResponse'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+  '/contact-person/{type}':
+    post:
+      tags:
+        - ContactPerson
+      summary: 'Create a new contact person'
+      description: 'Creates a new contact person for either an employer or organizational unit. This endpoint handles the creation process and associates the contact person with the specified entity.'
+      operationId: contactperson-post-v1-essential
+      parameters:
+        -
+          name: type
+          in: path
+          description: 'Type of contact person (employer or organizational-unit)'
+          required: true
+          schema:
+            $ref: '#/components/schemas/PostContactPersonTypeEnumOptions'
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+      requestBody:
+        description: 'Contact person data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostContactPersonRequestBody'
+      responses:
+        201:
+          description: 'Contact person successfully created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactPerson'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
     patch:
       tags:
         - ContactPerson
@@ -391,54 +643,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerErrorResponse'
-  '/contact-person/{type}':
-    post:
-      tags:
-        - ContactPerson
-      summary: 'Create a new contact person'
-      description: 'Creates a new contact person for either an employer or organizational unit. This endpoint handles the creation process and associates the contact person with the specified entity.'
-      operationId: contactperson-post-v1-essential
-      parameters:
-        -
-          name: type
-          in: path
-          description: 'Type of contact person (employer or organizational-unit)'
-          required: true
-          schema:
-            $ref: '#/components/schemas/PostContactPersonTypeEnumOptions'
-        -
-          name: Ocp-Apim-Subscription-Key
-          in: header
-          required: true
-          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
-          schema:
-            type: string
-      requestBody:
-        description: 'Contact person data'
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PostContactPersonRequestBody'
-      responses:
-        201:
-          description: 'Contact person successfully created'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ContactPerson'
-        400:
-          description: 'Bad Request'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadRequestResponse'
-        500:
-          description: 'Server error'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerErrorResponse'
   '/employer-contract/{id}':
     delete:
       tags:
@@ -520,6 +724,12 @@ paths:
           description: 'Filter by the type of the contract type'
           schema:
             $ref: '#/components/schemas/ContractTypeTypeEnumOptions'
+        -
+          name: 'filter[code]'
+          in: query
+          description: "Filter by the 'code' of the contract type"
+          schema:
+            type: string
         -
           name: sort
           in: query
@@ -1271,7 +1481,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerErrorResponse'
-  /configuration/dossier/document-types:
+  /configuration/dossier/document-type:
     get:
       tags:
         - DossierContent
@@ -1472,7 +1682,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerErrorResponse'
-  /configuration/dossier/upload-types:
+  /configuration/dossier/upload-type:
     get:
       tags:
         - DossierContent
@@ -1611,7 +1821,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerErrorResponse'
-  /dossier/content/documents:
+  /dossier/content/document:
     get:
       tags:
         - DossierContent
@@ -1686,6 +1896,16 @@ paths:
             type: string
             pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
+          name: include
+          in: query
+          description: 'Include the related resources - use comma separated values to include multiple resources'
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/GetDossierContentDocumentIncludeOptions'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -1711,56 +1931,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerErrorResponse'
-  '/dossier/content/document/{uuid}':
-    patch:
-      tags:
-        - DossierContent
-      summary: 'Update an existing document'
-      description: 'Update an existing document belonging to a dossier'
-      operationId: dossiercontent-document-id-patch-v1-essential
-      parameters:
-        -
-          name: uuid
-          in: path
-          description: 'The uuid of the document'
-          required: true
-          schema:
-            type: string
-            format: uuid
-        -
-          name: Ocp-Apim-Subscription-Key
-          in: header
-          required: true
-          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
-          schema:
-            type: string
-      requestBody:
-        description: 'The document data'
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchDossierDocumentRequestBody'
-      responses:
-        200:
-          description: 'The document was successfully updated'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DossierDocumentResource'
-        400:
-          description: 'Bad Request'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadRequestResponse'
-        500:
-          description: 'Server error'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerErrorResponse'
-  /dossier/content/document:
     post:
       tags:
         - DossierContent
@@ -1841,6 +2011,55 @@ paths:
           description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
           schema:
             type: string
+  '/dossier/content/document/{uuid}':
+    patch:
+      tags:
+        - DossierContent
+      summary: 'Update an existing document'
+      description: 'Update an existing document belonging to a dossier'
+      operationId: dossiercontent-document-id-patch-v1-essential
+      parameters:
+        -
+          name: uuid
+          in: path
+          description: 'The uuid of the document'
+          required: true
+          schema:
+            type: string
+            format: uuid
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+      requestBody:
+        description: 'The document data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchDossierDocumentRequestBody'
+      responses:
+        200:
+          description: 'The document was successfully updated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DossierDocumentResource'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
   '/dossier/external-resource/{id}':
     delete:
       tags:
@@ -2158,7 +2377,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerErrorResponse'
-  /dossier/content/notes:
+  /dossier/content/note:
     get:
       tags:
         - DossierContent
@@ -2240,6 +2459,16 @@ paths:
             type: string
             pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
+          name: include
+          in: query
+          description: 'Include the related resources - use comma separated values to include multiple resources'
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/GetDossierContentNoteIncludeOptions'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -2265,56 +2494,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerErrorResponse'
-  '/dossier/content/note/{uuid}':
-    patch:
-      tags:
-        - DossierContent
-      summary: 'Update an existing note'
-      description: 'Update an existing belonging to a dossier'
-      operationId: dossiercontent-note-id-patch-v1-essential
-      parameters:
-        -
-          name: uuid
-          in: path
-          description: 'The uuid of the note'
-          required: true
-          schema:
-            type: string
-            format: uuid
-        -
-          name: Ocp-Apim-Subscription-Key
-          in: header
-          required: true
-          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
-          schema:
-            type: string
-      requestBody:
-        description: 'The note data'
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchDossierNoteRequestBody'
-      responses:
-        200:
-          description: 'The note was successfully updated'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DossierNoteResource'
-        400:
-          description: 'Bad Request'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadRequestResponse'
-        500:
-          description: 'Server error'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerErrorResponse'
-  /dossier/content/note:
     post:
       tags:
         - DossierContent
@@ -2395,6 +2574,55 @@ paths:
           description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
           schema:
             type: string
+  '/dossier/content/note/{uuid}':
+    patch:
+      tags:
+        - DossierContent
+      summary: 'Update an existing note'
+      description: 'Update an existing belonging to a dossier'
+      operationId: dossiercontent-note-id-patch-v1-essential
+      parameters:
+        -
+          name: uuid
+          in: path
+          description: 'The uuid of the note'
+          required: true
+          schema:
+            type: string
+            format: uuid
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+      requestBody:
+        description: 'The note data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchDossierNoteRequestBody'
+      responses:
+        200:
+          description: 'The note was successfully updated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DossierNoteResource'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
   '/dossier/content/upload/{id}':
     delete:
       tags:
@@ -2496,6 +2724,16 @@ paths:
           schema:
             type: string
             pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+        -
+          name: include
+          in: query
+          description: 'Include the related resources - use comma separated values to include multiple resources'
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/GetDossierContentUploadIncludeOptions'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -2736,6 +2974,19 @@ paths:
           description: 'Filter by active status'
           schema:
             type: boolean
+        -
+          name: 'filter[dossierId]'
+          in: query
+          description: 'Filter by the unique identifier of the Dossier'
+          schema:
+            type: string
+            format: uuid
+        -
+          name: 'filter[dossierExternalKey]'
+          in: query
+          description: 'Filter by Dossier externalKey'
+          schema:
+            type: string
         -
           name: sort
           in: query
@@ -4138,6 +4389,46 @@ paths:
           description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
           schema:
             type: string
+    patch:
+      tags:
+        - Dossier
+      summary: 'Update a pregnancy dossier'
+      description: 'This endpoint is used to update a Pregnancy dossier.'
+      operationId: dossier-pregnancy-patch-v1-essential
+      requestBody:
+        description: 'Dossier data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchPregnancyDossierRequestBody'
+      responses:
+        200:
+          description: 'Dossier successfully updated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dossier'
+        400:
+          description: 'Invalid input'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
   '/dossier/{id}/return-to-work-advice':
     get:
       tags:
@@ -4652,6 +4943,573 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerErrorResponse'
+    patch:
+      tags:
+        - Dossier
+      summary: 'Update a illness and Zwerd dossier'
+      description: 'This endpoint is used to update a Illness and Zwerd dossier.'
+      operationId: dossier-illnessandzwerd-patch-v1-essential
+      requestBody:
+        description: 'Dossier data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchIllnessZwerdDossierRequestBody'
+      responses:
+        200:
+          description: 'Dossier successfully updated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dossier'
+        400:
+          description: 'Invalid input'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+  /dossier/company-social-worker:
+    post:
+      tags:
+        - Dossier
+      summary: 'Create a company social worker dossier'
+      description: 'This endpoint is used to create a new company social worker dossier.'
+      operationId: dossier-companysocialworker-post-v1-ultimate
+      requestBody:
+        description: 'Dossier data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostBasicDossierRequestBody'
+      responses:
+        201:
+          description: 'Dossier successfully created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostBasicDossierResponseBody'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+    patch:
+      tags:
+        - Dossier
+      summary: 'Patch company social worker dossier'
+      description: 'This endpoint is used to update a company social worker dossier.'
+      operationId: dossier-companysocialworker-patch-v1-ultimate
+      requestBody:
+        description: 'Dossier data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchBasicRequestBody'
+      responses:
+        200:
+          description: 'Dossier successfully updated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiPatchResponse'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+  /dossier/ergonomics:
+    post:
+      tags:
+        - Dossier
+      summary: 'Create an ergonomics dossier'
+      description: 'This endpoint is used to create a new ergonomics dossier.'
+      operationId: dossier-ergonomics-post-v1-ultimate
+      requestBody:
+        description: 'Dossier data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostBasicDossierRequestBody'
+      responses:
+        201:
+          description: 'Dossier successfully created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostBasicDossierResponseBody'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+    patch:
+      tags:
+        - Dossier
+      summary: 'Patch an ergonomics dossier'
+      description: 'This endpoint is used to update an ergonomics dossier.'
+      operationId: dossier-ergonomics-patch-v1-ultimate
+      requestBody:
+        description: 'Dossier data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchBasicRequestBody'
+      responses:
+        200:
+          description: 'Dossier successfully updated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiPatchResponse'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+  /dossier/confidential-counselor:
+    post:
+      tags:
+        - Dossier
+      summary: 'Create a confidential counselor dossier'
+      description: 'This endpoint is used to create a new confidential counselor dossier.'
+      operationId: dossier-confidentialcounselor-post-v1-ultimate
+      requestBody:
+        description: 'Dossier data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostBasicDossierRequestBody'
+      responses:
+        201:
+          description: 'Dossier successfully created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostBasicDossierResponseBody'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+    patch:
+      tags:
+        - Dossier
+      summary: 'Patch a confidential counselor dossier'
+      description: 'This endpoint is used to update a confidential counselor dossier.'
+      operationId: dossier-confidentialcounselor-patch-v1-ultimate
+      requestBody:
+        description: 'Dossier data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchBasicRequestBody'
+      responses:
+        200:
+          description: 'Dossier successfully updated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiPatchResponse'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+  /dossier/second-line-care:
+    post:
+      tags:
+        - Dossier
+      summary: 'Create a second line care dossier'
+      description: 'This endpoint is used to create a new second line care dossier.'
+      operationId: dossier-secondlinecare-post-v1-ultimate
+      requestBody:
+        description: 'Dossier data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostBasicDossierRequestBody'
+      responses:
+        201:
+          description: 'Dossier successfully created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostBasicDossierResponseBody'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+    patch:
+      tags:
+        - Dossier
+      summary: 'Patch second-line-care dossier'
+      description: 'This endpoint is used to update a second-line-care dossier.'
+      operationId: dossier-secondlinecare-patch-v1-ultimate
+      requestBody:
+        description: 'Dossier data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchBasicRequestBody'
+      responses:
+        200:
+          description: 'Dossier successfully updated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiPatchResponse'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+  /dossier/physyiotherapy:
+    patch:
+      tags:
+        - Dossier
+      summary: 'Patch physyiotherapy dossier'
+      description: 'This endpoint is used to update a physyiotherapy dossier.'
+      operationId: dossier-physyiotherapy-patch-v1-ultimate
+      requestBody:
+        description: 'Dossier data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchBasicRequestBody'
+      responses:
+        200:
+          description: 'Dossier successfully updated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiPatchResponse'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+  /dossier/psychologist:
+    post:
+      tags:
+        - Dossier
+      summary: 'Create a psychologist dossier'
+      description: 'This endpoint is used to create a new psychologist dossier.'
+      operationId: dossier-psychologist-post-v1-ultimate
+      requestBody:
+        description: 'Dossier data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostBasicDossierRequestBody'
+      responses:
+        201:
+          description: 'Dossier successfully created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostBasicDossierResponseBody'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+    patch:
+      tags:
+        - Dossier
+      summary: 'Patch psychologist dossier'
+      description: 'This endpoint is used to update a psychologist dossier.'
+      operationId: dossier-psychologist-patch-v1-ultimate
+      requestBody:
+        description: 'Dossier data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchBasicRequestBody'
+      responses:
+        200:
+          description: 'Dossier successfully updated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiPatchResponse'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+  /dossier/occupational-expert:
+    post:
+      tags:
+        - Dossier
+      summary: 'Create a occupational expert dossier'
+      description: 'This endpoint is used to create a new occupational expert dossier.'
+      operationId: dossier-occupationalexpert-post-v1-ultimate
+      requestBody:
+        description: 'Dossier data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostBasicDossierRequestBody'
+      responses:
+        201:
+          description: 'Dossier successfully created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostBasicDossierResponseBody'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+    patch:
+      tags:
+        - Dossier
+      summary: 'Patch occupational expert dossier'
+      description: 'This endpoint is used to update a occupational expert dossier.'
+      operationId: dossier-occupationalexpert-patch-v1-ultimate
+      requestBody:
+        description: 'Dossier data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchBasicRequestBody'
+      responses:
+        200:
+          description: 'Dossier successfully updated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiPatchResponse'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
   /dossier/wga:
     post:
       tags:
@@ -4733,170 +5591,6 @@ paths:
           description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
           schema:
             type: string
-  /dossier/company-social-worker:
-    post:
-      tags:
-        - Dossier
-      summary: 'Create a company social worker dossier'
-      description: 'This endpoint is used to create a new company social worker dossier.'
-      operationId: dossier-companysocialworker-post-v1-ultimate
-      requestBody:
-        description: 'Dossier data'
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PostBasicDossierRequestBody'
-      responses:
-        201:
-          description: 'Dossier successfully created'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PostBasicDossierResponseBody'
-        400:
-          description: 'Bad Request'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadRequestResponse'
-        500:
-          description: 'Server error'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerErrorResponse'
-      parameters:
-        -
-          name: Ocp-Apim-Subscription-Key
-          in: header
-          required: true
-          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
-          schema:
-            type: string
-  /dossier/ergonomics:
-    post:
-      tags:
-        - Dossier
-      summary: 'Create an ergonomics dossier'
-      description: 'This endpoint is used to create a new ergonomics dossier.'
-      operationId: dossier-ergonomics-post-v1-ultimate
-      requestBody:
-        description: 'Dossier data'
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PostBasicDossierRequestBody'
-      responses:
-        201:
-          description: 'Dossier successfully created'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PostBasicDossierResponseBody'
-        400:
-          description: 'Bad Request'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadRequestResponse'
-        500:
-          description: 'Server error'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerErrorResponse'
-      parameters:
-        -
-          name: Ocp-Apim-Subscription-Key
-          in: header
-          required: true
-          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
-          schema:
-            type: string
-  /dossier/confidential-counselor:
-    post:
-      tags:
-        - Dossier
-      summary: 'Create a confidential counselor dossier'
-      description: 'This endpoint is used to create a new confidential counselor dossier.'
-      operationId: dossier-confidentialcounselor-post-v1-ultimate
-      requestBody:
-        description: 'Dossier data'
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PostBasicDossierRequestBody'
-      responses:
-        201:
-          description: 'Dossier successfully created'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PostBasicDossierResponseBody'
-        400:
-          description: 'Bad Request'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadRequestResponse'
-        500:
-          description: 'Server error'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerErrorResponse'
-      parameters:
-        -
-          name: Ocp-Apim-Subscription-Key
-          in: header
-          required: true
-          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
-          schema:
-            type: string
-  /dossier/second-line-care:
-    post:
-      tags:
-        - Dossier
-      summary: 'Create a second line care dossier'
-      description: 'This endpoint is used to create a new second line care dossier.'
-      operationId: dossier-secondlinecare-post-v1-ultimate
-      requestBody:
-        description: 'Dossier data'
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PostBasicDossierRequestBody'
-      responses:
-        201:
-          description: 'Dossier successfully created'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PostBasicDossierResponseBody'
-        400:
-          description: 'Bad Request'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadRequestResponse'
-        500:
-          description: 'Server error'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerErrorResponse'
-      parameters:
-        -
-          name: Ocp-Apim-Subscription-Key
-          in: header
-          required: true
-          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
-          schema:
-            type: string
   /dossier/physiotherapy:
     post:
       tags:
@@ -4904,47 +5598,6 @@ paths:
       summary: 'Create a physiotherapy dossier'
       description: 'This endpoint is used to create a new physiotherapy dossier.'
       operationId: dossier-physiotherapy-post-v1-ultimate
-      requestBody:
-        description: 'Dossier data'
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PostBasicDossierRequestBody'
-      responses:
-        201:
-          description: 'Dossier successfully created'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PostBasicDossierResponseBody'
-        400:
-          description: 'Bad Request'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadRequestResponse'
-        500:
-          description: 'Server error'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerErrorResponse'
-      parameters:
-        -
-          name: Ocp-Apim-Subscription-Key
-          in: header
-          required: true
-          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
-          schema:
-            type: string
-  /dossier/psychologist:
-    post:
-      tags:
-        - Dossier
-      summary: 'Create a psychologist dossier'
-      description: 'This endpoint is used to create a new psychologist dossier.'
-      operationId: dossier-psychologist-post-v1-ultimate
       requestBody:
         description: 'Dossier data'
         required: true
@@ -5852,6 +6505,19 @@ paths:
           schema:
             type: string
         -
+          name: 'filter[employerId]'
+          in: query
+          description: 'Filter by the unique identifier of an employer'
+          schema:
+            type: string
+            format: uuid
+        -
+          name: 'filter[employerKey]'
+          in: query
+          description: 'Filter by the external key of an employer'
+          schema:
+            type: string
+        -
           name: 'filter[dateUpdatedFrom]'
           in: query
           description: 'Filter by date of latest update being after or the same day as the one given'
@@ -6060,6 +6726,19 @@ paths:
             type: string
             format: uuid
           example: 9c77ba70-fc65-4715-9158-17d65f55c373
+        -
+          name: 'filter[employerId]'
+          in: query
+          description: 'Filter by the unique identifier of the employer associated with the current or last employment contract'
+          schema:
+            type: string
+            format: uuid
+        -
+          name: 'filter[employerKey]'
+          in: query
+          description: 'Filter by the external key of the employer associated with the current or last employment contract'
+          schema:
+            type: string
         -
           name: 'filter[employmentEndReason]'
           in: query
@@ -7006,6 +7685,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerErrorResponse'
+  '/user/{id}':
+    delete:
+      tags:
+        - User
+      summary: 'Delete a user and all associated entities, including linked users, dossier officers, and company doctors'
+      description: 'Deletes a user based on the UUID.'
+      operationId: user-id-delete-v1-advanced
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Unique identifier of the user to delete.'
+          required: true
+          schema:
+            type: string
+            format: uuid
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'User successfully deleted'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
   /user/event:
     post:
       tags:
@@ -7768,6 +8489,181 @@ paths:
           description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
           schema:
             type: string
+  /linked-user:
+    get:
+      tags:
+        - User
+      summary: 'Get a list of LinkedUser records which represent links between users'
+      operationId: user-linkeduser-get-v1-ultimate
+      parameters:
+        -
+          name: 'filter[id]'
+          in: query
+          description: 'Filter by the unique identifier of the linked user record'
+          schema:
+            type: string
+            format: uuid
+          example: e8f92546-5970-43ae-9f44-2fd4687bfd6b
+        -
+          name: 'filter[externalKey]'
+          in: query
+          description: 'Filter by the external key of the linked user record'
+          schema:
+            type: string
+          example: company-name-linked-1234-5678
+        -
+          name: 'filter[isApproved]'
+          in: query
+          description: "Filter by 'approved' status of the linked user)"
+          schema:
+            type: boolean
+          example: true
+        -
+          name: 'filter[fromUserId]'
+          in: query
+          description: "Filter by a user's unique identifier of the 'from' user in the linked user record"
+          schema:
+            type: string
+            format: uuid
+          example: e8f92546-5970-43ae-9f44-2fd4687bfd6b
+        -
+          name: 'filter[toUserId]'
+          in: query
+          description: "Filter by a user's unique identifier of the 'from' user in the linked user record"
+          schema:
+            type: string
+            format: uuid
+          example: e8f92546-5970-43ae-9f44-2fd4687bfd6b
+        -
+          name: 'filter[fromOrToUserId]'
+          in: query
+          description: "Filter by a user's unique identifier in either the 'from' or the 'to' user in the linked user record"
+          schema:
+            type: string
+            format: uuid
+          example: e8f92546-5970-43ae-9f44-2fd4687bfd6b
+        -
+          name: 'filter[dateUpdatedFrom]'
+          in: query
+          description: "Filter by the date when the linked user record was last updated, from (and including) this date/time. Defaults to 'start of day' if only a date is specified."
+          schema:
+            type: string
+            pattern: '^(\d{4}-\d{2}-\d{2}( \d{2}:\d{2}:\d{2})?)$'
+          example: '2023-10-01 12:34:56'
+        -
+          name: 'filter[dateUpdatedUntil]'
+          in: query
+          description: "Filter by the date when the linked user record was last updated, to (and including) this date/time. Defaults to 'end of day' if only a date is specified."
+          schema:
+            type: string
+            pattern: '^(\d{4}-\d{2}-\d{2}( \d{2}:\d{2}:\d{2})?)$'
+          example: '2023-10-01'
+        -
+          name: 'filter[dateCreatedFrom]'
+          in: query
+          description: "Filter by the date when the linked user record was created, from (and including) this date/time. Defaults to 'start of day' if only a date is specified."
+          schema:
+            type: string
+            pattern: '^(\d{4}-\d{2}-\d{2}( \d{2}:\d{2}:\d{2})?)$'
+          example: '2023-10-01 12:34:56'
+        -
+          name: 'filter[dateCreatedUntil]'
+          in: query
+          description: "Filter by the date when the linked user record was created, to (and including) this date/time. Defaults to 'end of day' if only a date is specified."
+          schema:
+            type: string
+            pattern: '^(\d{4}-\d{2}-\d{2}( \d{2}:\d{2}:\d{2})?)$'
+          example: '2023-10-01'
+        -
+          name: 'filter[environmentName]'
+          in: query
+          description: "Filter by (part of) the environmentName of the linked user record, performs a case-insensitive 'like' match"
+          schema:
+            type: string
+            pattern: '^(\d{4}-\d{2}-\d{2}( \d{2}:\d{2}:\d{2})?)$'
+          example: '2023-10-01'
+        -
+          name: sort
+          in: query
+          description: "Sorts results ascending by the given option, options prefixed with '-' sort descending"
+          schema:
+            $ref: '#/components/schemas/GetLinkedUserSortOptions'
+        -
+          name: include
+          in: query
+          description: 'Include related resources - use comma separated values to include multiple resources'
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/GetLinkedUserIncludeOptions'
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'A list of LinkedUser records that match the given filters'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLinkedUserResponse'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+    post:
+      tags:
+        - User
+      summary: 'Create a linked user'
+      description: 'With this endpoint two users can be linked'
+      operationId: user-linkeduser-post-v1-ultimate
+      requestBody:
+        description: 'Linked user data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostLinkedUserRequestBody'
+      responses:
+        201:
+          description: 'Linked user successfully created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostLinkedUserResponseBody'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        500:
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
 components:
   schemas:
     GetAbsenceReasonResponse:
@@ -7833,6 +8729,259 @@ components:
           minLength: 0
           example: false
       type: object
+    AppointmentStatusEnumOptions:
+      description: 'The status of the appointment'
+      type: string
+      enum:
+        - cancelled
+        - completed
+        - reserved
+        - final
+        - noShow
+        - noAvailability
+    GetAppointmentResponse:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Appointment'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+        meta:
+          $ref: '#/components/schemas/PaginationMetaInformation'
+      type: object
+    GetAppointmentIncludeOptions:
+      type: string
+      enum:
+        - employer
+        - user
+        - location
+        - employee
+        - operation
+        - methodOfConsult
+    Appointment:
+      properties:
+        id:
+          description: 'The unique identifier of the appointment'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+        title:
+          description: 'The title of the appointment'
+          type: string
+          maxLength: 191
+          minLength: 0
+          nullable: true
+        status:
+          $ref: '#/components/schemas/AppointmentStatusEnumOptions'
+        description:
+          description: 'The description of the appointment'
+          type: string
+          nullable: true
+        methodOfConsult:
+          $ref: '#/components/schemas/MethodOfConsultEnumOptions'
+        url:
+          description: "The url of the appointment in case of an 'online' appointment"
+          type: string
+          maxLength: 191
+          minLength: 0
+          nullable: true
+        phoneNumber:
+          description: "The phone number to call in case of a 'phone' appointment"
+          type: string
+          maxLength: 32
+          minLength: 0
+          nullable: true
+        operation:
+          oneOf:
+            -
+              $ref: '#/components/schemas/Operation'
+          nullable: true
+          description: 'The operation related to the appointment, available if the relation is included in the query'
+        location:
+          oneOf:
+            -
+              $ref: '#/components/schemas/AppointmentLocation'
+          nullable: true
+          description: 'The location related to the appointment, available if the relation is included in the query'
+        employee:
+          oneOf:
+            -
+              $ref: '#/components/schemas/Employee'
+          nullable: true
+          description: 'The employee the appointment is for, available if the relation is included in the query'
+        user:
+          oneOf:
+            -
+              $ref: '#/components/schemas/User'
+          nullable: true
+          description: 'The user the appointment belongs to, available if the relation is included in the query'
+        employer:
+          oneOf:
+            -
+              $ref: '#/components/schemas/Employer'
+          nullable: true
+          description: 'The employer related to the appointment, available if the relation is included in the query'
+        dateStart:
+          description: 'The start date and time of the appointment in YYYY-MM-DD HH:MM:SS format'
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+        dateEnd:
+          description: 'The end date and time of the appointment in YYYY-MM-DD HH:MM:SS format'
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+        dateCreated:
+          description: 'The date and time the employee was created in YYYY-MM-DD HH:MM:SS format'
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+        dateUpdated:
+          description: 'The date and time the absence course was last updated in YYYY-MM-DD HH:MM:SS format'
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+      type: object
+    AppointmentEmployee:
+      properties:
+        id:
+          description: 'The unique identifier of the employee'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+          example: 123e4567-e89b-12d3-a456-426614174000
+        externalKey:
+          description: "An identifier provided by an external system that uniquely specifies the employee. This key serves as an alternative to the 'id' field for referencing the employee."
+          type: string
+          maxLength: 191
+          minLength: 0
+          example: ext-key-987654321
+          nullable: true
+        person:
+          oneOf:
+            -
+              $ref: '#/components/schemas/EmployerPersonResource'
+          nullable: true
+          description: 'The personal details associated with the employee, available if the relation is included in the query'
+        dateCreated:
+          description: 'The date and time the employee was created in our system. Format YYYY-MM-DD HH:MM:SS'
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2020-01-23 01:23:45'
+        dateUpdated:
+          description: 'The date and time the absence course was last updated in our system. Format YYYY-MM-DD HH:MM:SS'
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2020-01-23 12:34:56'
+      type: object
+    AppointmentLocation:
+      properties:
+        id:
+          description: 'The unique identifier of the appointment location'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+        name:
+          description: 'The name of the appointment location'
+          type: string
+          maxLength: 191
+          minLength: 1
+          example: Hoofdlocatie
+        postalCode:
+          description: 'The postal code of the appointment location'
+          type: string
+          minLength: 6
+          example: 7556BN
+        city:
+          description: 'The city of the appointment location'
+          type: string
+          maxLength: 191
+          minLength: 1
+          example: Hengelo
+        street:
+          description: 'The street of the appointment location'
+          type: string
+          maxLength: 191
+          minLength: 1
+          example: Demmersweg
+        houseNumber:
+          description: 'The house number of the appointment location'
+          type: integer
+          example: 46
+        houseNumberAddition:
+          description: 'The house number addition of the appointment location'
+          type: string
+          maxLength: 16
+          minLength: 0
+          example: A
+      type: object
+    AppointmentSchedule:
+      properties:
+        id:
+          description: 'The id of the schedule'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+        name:
+          description: 'The name of the schedule'
+          type: string
+          maxLength: 191
+          minLength: 0
+          nullable: true
+        isWorking:
+          description: 'Whether the schedule is working or not'
+          type: boolean
+        isRoomExclusivelyReserved:
+          description: 'Whether the room is exclusively reserved for the schedule or not'
+          type: boolean
+        timeConstrainedEntityId:
+          description: 'The id of the time constrained entity of the schedule'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+          nullable: true
+        schedulableEntity:
+          description: 'Whether the schedule is a schedulable entity or not'
+          type: string
+          nullable: true
+      type: object
+    AppointmentUserResource:
+      properties:
+        id:
+          description: 'The unique identifier of the user'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+        externalKey:
+          description: "An identifier provided by an external system that uniquely specifies the user. This key serves as an alternative to the 'id' field for referencing the user."
+          type: string
+          maxLength: 191
+          minLength: 0
+          nullable: true
+        username:
+          description: 'Username of the user'
+          type: string
+          maxLength: 191
+          minLength: 1
+        type:
+          $ref: '#/components/schemas/UserTypeEnumOptions'
+        person:
+          $ref: '#/components/schemas/MasterPerson'
+        isActive:
+          description: 'Indicates if the user is active'
+          type: boolean
+      type: object
+    MethodOfConsultEnumOptions:
+      description: 'The method of consultation for the appointment'
+      type: string
+      enum:
+        - online
+        - phone
+        - location
+        - unknown
     PostAuthTokenRequestBodyScopeExample:
       description: 'This is an example of how to request scopes for the bearer token'
       properties:
@@ -8260,6 +9409,33 @@ components:
         person:
           $ref: '#/components/schemas/MasterPerson'
       type: object
+    GetContactPersonResponse:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactPerson'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+        meta:
+          $ref: '#/components/schemas/PaginationMetaInformation'
+      type: object
+    GetContactPersonSortOptions:
+      type: string
+      enum:
+        - externalKey
+        - '-externalKey'
+        - type
+        - '-type'
+        - dateCreated
+        - '-dateCreated'
+        - dateUpdated
+        - '-dateUpdated'
+    GetContactPersonIncludeOptions:
+      type: string
+      enum:
+        - employer
+        - organizationalUnit
     PatchContactPersonResponse:
       allOf:
         -
@@ -8484,6 +9660,13 @@ components:
       enum:
         - general
         - uwv
+        - team-contact-person
+        - preferred-professional
+        - internal-confidential-counselor
+        - prevention-officer
+        - chairman-of-the-works-council
+        - manager
+        - hr-manager
     ContactPerson:
       properties:
         id:
@@ -8605,7 +9788,7 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/Contract'
+            $ref: '#/components/schemas/EmployerContract'
         links:
           $ref: '#/components/schemas/PaginationLinks'
         meta:
@@ -8617,6 +9800,8 @@ components:
         - contractType
         - serviceType
         - employer
+        - organizationalUnit
+        - partnership
     GetContractModulesResponse:
       properties:
         data:
@@ -8685,6 +9870,7 @@ components:
           description: 'The unique identifier of the organizational unit'
           type: string
           format: uuid
+          nullable: true
         contractTypeId:
           description: 'The unique identifier of the contract type'
           type: string
@@ -8761,6 +9947,10 @@ components:
           type: string
           format: uuid
           example: bc1a50da-1093-4809-8efc-e3553b2f49b0
+        organizationalUnitId:
+          description: 'Optional: the unique identifier of the organizational unit the employer contract is associated with.'
+          type: string
+          format: uuid
         dateStart:
           description: 'The start-date of the employer contract in format YYYY-MM-DD'
           type: string
@@ -9054,7 +10244,7 @@ components:
         serviceType:
           $ref: '#/components/schemas/ServiceType'
         employer:
-          $ref: '#/components/schemas/Employer'
+          $ref: '#/components/schemas/EmployerWithoutRelations'
         partnership:
           $ref: '#/components/schemas/Partnership'
         organizationalUnit:
@@ -9423,6 +10613,12 @@ components:
         meta:
           $ref: '#/components/schemas/PaginationMetaInformation'
       type: object
+    GetDossierContentDocumentIncludeOptions:
+      type: string
+      enum:
+        - dossier
+        - documentType
+        - dossierSection
     GetDossierContentDocumentResponse:
       properties:
         data:
@@ -9663,6 +10859,12 @@ components:
           minLength: 36
           example: 90dd731a-5e65-43f9-82df-bba234855918
       type: object
+    GetDossierContentNoteIncludeOptions:
+      type: string
+      enum:
+        - dossier
+        - noteType
+        - dossierSection
     GetDossierContentNoteResponse:
       properties:
         data:
@@ -9824,6 +11026,12 @@ components:
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
           example: '2021-12-31 23:59:59'
       type: object
+    GetDossierContentUploadIncludeOptions:
+      type: string
+      enum:
+        - dossier
+        - uploadType
+        - dossierSection
     GetDossierContentUploadResponse:
       properties:
         data:
@@ -10220,6 +11428,51 @@ components:
         data:
           $ref: '#/components/schemas/ReturnToWorkAdvice'
       type: object
+    PatchBasicRequestBody:
+      properties:
+        id:
+          description: 'The id for the dossier'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+        externalKey:
+          description: "An identifier provided by an external system that uniquely specifies the dossier. This key serves as an alternative to the 'id' field for referencing the dossier."
+          type: string
+          maxLength: 191
+          minLength: 1
+          example: EXT-DOS-458
+        dateStart:
+          description: 'The date the dossier started in format YYYY-MM-DD'
+          type: string
+          format: date
+          example: '2020-01-23'
+        dateReported:
+          description: 'Date the dossier was reported in format YYYY-MM-DD'
+          type: string
+          format: date
+          example: '2020-01-23'
+        dateCompleted:
+          description: 'The date the dossier completed in format YYYY-MM-DD, this property is prohibited unless dossierStatus is set to completed'
+          type: string
+          format: date
+          example: '2020-01-23'
+        dossierStatus:
+          $ref: '#/components/schemas/DossierStatusEnumOptions'
+        employmentId:
+          description: 'The unique identifier of the employment. Only one employment identifier is allowed.'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+          example: e3eab6bd-4adc-4d9b-9620-2b0c49ecb7d3
+        employmentKey:
+          description: 'The external key of the employment. Only one employment identifier is allowed.'
+          type: string
+          maxLength: 191
+          minLength: 1
+          example: EXT-Key-4385
+      type: object
     DossierClosureReasonEnumOptions:
       type: string
       enum:
@@ -10394,6 +11647,74 @@ components:
           type: string
           format: date
       type: object
+    PatchIllnessZwerdDossierRequestBody:
+      properties:
+        id:
+          description: 'The unique identifier of the dossier to be updated'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+        externalKey:
+          description: "An identifier provided by an external system that uniquely specifies the dossier. This key serves as an alternative to the 'id' field for referencing the dossier."
+          type: string
+          maxLength: 191
+          minLength: 0
+          example: ext-dos-1234
+          nullable: true
+        zwerdDecline:
+          description: 'Indicates if the ZWERD request is declined'
+          type: boolean
+        zwerdRequestStatus:
+          description: 'The status of the ZWERD request'
+          type: string
+          maxLength: 191
+          minLength: 0
+          nullable: true
+        highestDayPayment:
+          description: 'The highest daily payment amount'
+          type: number
+          example: 45
+          nullable: true
+        HighestBrutoDayPayment:
+          description: 'The highest bruto daily payment amount'
+          type: number
+          example: 35
+          nullable: true
+        dateZwerdRequestStart:
+          description: 'Start date of the ZWERD request'
+          type: string
+          format: date
+          nullable: true
+        dateZwerdRequestEnd:
+          description: 'End date of the ZWERD request (must be after zwerdRequestStart)'
+          type: string
+          format: date
+          nullable: true
+        datePaymentPeriodZwerdStart:
+          description: 'Start date of the ZWERD payment period'
+          type: string
+          format: date
+          nullable: true
+        datePaymentPeriodZwerdEnd:
+          description: 'End date of the ZWERD payment period (must be after paymentPeriodZwerdStart)'
+          type: string
+          format: date
+          nullable: true
+        dateDepositPeriodStart:
+          description: 'Start date of the deposit period'
+          type: string
+          format: date
+          nullable: true
+        dateDepositPeriodEnd:
+          description: 'End date of the deposit period (must be after depositPeriodStart)'
+          type: string
+          format: date
+          nullable: true
+        afterRegistrationZwerd:
+          description: 'Indicates if this is after ZWERD registration'
+          type: boolean
+      type: object
     PatchMedicalPreventiveDossierRequestBody:
       properties:
         id:
@@ -10503,6 +11824,58 @@ components:
           type: integer
         dateAdmission:
           description: 'The date of admission in format YYYY-MM-DD'
+          type: string
+          format: date
+      type: object
+    RequestedLeavePeriodEnumOptions:
+      description: "The requested leave period in weeks, this will calculate and fill the 'expectedDurationDays' property."
+      type: integer
+      enum:
+        - 4
+        - 5
+        - 6
+        - 8
+        - 9
+        - 10
+    PatchPregnancyDossierRequestBody:
+      properties:
+        dateOfBirthExpected:
+          description: 'The expected birthdate of the child'
+          type: string
+          format: date
+        dateOfActualBirth:
+          description: 'The actual birthdate of the child'
+          type: string
+          format: date
+        dateActualLeave:
+          description: 'The actual start date of the requested leave'
+          type: string
+          format: date
+        dateExpectedLeave:
+          description: 'The expected start date of the requested leave'
+          type: string
+          format: date
+        dateFirstWorkingDay:
+          description: 'The first working day after the leave period'
+          type: string
+          format: date
+        dateActualFirstWorkingDay:
+          description: 'The actual first working day after the leave period'
+          type: string
+          format: date
+        expectsMultiples:
+          description: 'Indicates if the pregnancy is expected to be multiple births'
+          type: boolean
+        hospitalizationChild:
+          description: 'Indicates if the child was hospitalized'
+          type: boolean
+        flexibleLeave:
+          description: 'Flag to indicate if the leave is flexible'
+          type: boolean
+        requestedLeavePeriod:
+          $ref: '#/components/schemas/RequestedLeavePeriodEnumOptions'
+        dateStartActual:
+          description: 'The actual start date of the requested leave'
           type: string
           format: date
       type: object
@@ -10770,6 +12143,11 @@ components:
           example: EXT-DOS-458
         dateStart:
           description: 'The date the dossier started in format YYYY-MM-DD'
+          type: string
+          format: date
+          example: '2020-01-23'
+        dateReported:
+          description: "Date the dossier was reported in format YYYY-MM-DD, if omitted defaults to 'now'"
           type: string
           format: date
           example: '2020-01-23'
@@ -11087,9 +12465,7 @@ components:
           type: string
           format: date
         requestedLeavePeriod:
-          description: "The requested leave period in weeks, this will calculate and fill the 'expectedDurationDays' property."
-          type: integer
-          format: int32
+          $ref: '#/components/schemas/RequestedLeavePeriodEnumOptions'
       type: object
     PostPreventiveDossierRequestBody:
       required:
@@ -12039,6 +13415,11 @@ components:
           minLength: 0
           example: External-Dossier-Key
           nullable: true
+        dateReported:
+          description: 'Date the dossier was reported, formatted in ISO8601 (YYYY-MM-DD).'
+          type: string
+          format: date
+          example: '2020-01-23'
         dateStart:
           description: 'The effective start date of the Dossier, formatted in ISO8601 (YYYY-MM-DD).'
           type: string
@@ -12532,6 +13913,8 @@ components:
       enum:
         - externalKey
         - '-externalKey'
+        - dateUpdated
+        - '-dateUpdated'
     GetEmployeeIncludeOptions:
       type: string
       enum:
@@ -12539,7 +13922,7 @@ components:
         - employments
         - employments.employmentContracts
         - currentOrLastEmploymentContract.organizationalUnit.employer
-        - addresses
+        - addresses.country
         - employmentContract
         - communicationMethods
     EmployeeRequestBodyPerson:
@@ -12713,16 +14096,20 @@ components:
           nullable: true
       type: object
     PatchEmployeeRequestBody:
-      required:
-        - employeeId
       properties:
-        employeeId:
-          description: 'The unique identifier of the employee to update'
+        id:
+          description: "The unique identifier of the employee to update. Required unless 'key' is provided, mutually exclusive with 'key'."
           type: string
           format: uuid
           example: f9e8d7c6-1234-5678-9012-abcdef987654
+        key:
+          description: "Identifier in an external system that uniquely specifies the employee to be updated. Required unless 'id' is provided. This key serves as an alternative to the 'id' field for referencing the employee; only one of 'id' or 'key' is allowed in a request to identify the employee."
+          type: string
+          maxLength: 191
+          minLength: 0
+          example: 1234@external-key|test
         externalKey:
-          description: "An identifier provided by an external system that uniquely specifies the employee. This key serves as an alternative to the 'id' field for referencing the employee."
+          description: 'This is used to set a new external key for the employee, this is the identfier in an external system.'
           type: string
           maxLength: 191
           minLength: 0
@@ -13034,6 +14421,7 @@ components:
         - ownRiskContracts.type
         - communications
         - contactPersons.details
+        - incomeInsuranceProvider
     PatchEmployerRequestBody:
       description: 'You should only send the fields that need to be updated; any omitted fields will remain unchanged.'
       properties:
@@ -13115,12 +14503,22 @@ components:
           description: "The unique identifier of the arboservice, obtainable by the list of arboservice. (field in application 'arbodienst')"
           type: string
           format: uuid
+          maxLength: 36
+          minLength: 36
           example: f814d306-ee4e-4d18-9a54-6c00d881e469
           nullable: true
         visitAddress:
           $ref: '#/components/schemas/Address'
         postalAddress:
           $ref: '#/components/schemas/Address'
+        incomeInsuranceProviderId:
+          description: 'The unique identifier of the income insurance provider'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+          example: c9ef0d79-7c66-406d-ae4a-a66515992ef7
+          nullable: true
       type: object
     EmployerRequestBodyContract:
       required:
@@ -13260,15 +14658,26 @@ components:
           example: 8d113cc8-2bd5-4a75-8ebd-ec71acdff9c2
           nullable: true
         arboServiceId:
-          description: 'The unique identifier of the arboservice (arbodienst)'
-          type: integer
-          example: 1
+          description: "The unique identifier of the arboservice, obtainable by the list of arboservices. (field in application 'arbodienst')"
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+          example: f814d306-ee4e-4d18-9a54-6c00d881e469
+          nullable: true
         visitAddress:
           $ref: '#/components/schemas/Address'
         postalAddress:
           $ref: '#/components/schemas/Address'
         contract:
           $ref: '#/components/schemas/EmployerRequestBodyContract'
+        incomeInsuranceProviderId:
+          description: 'The unique identifier of the income insurance provider'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+          example: c9ef0d79-7c66-406d-ae4a-a66515992ef7
       type: object
     Address:
       description: Address
@@ -13580,6 +14989,8 @@ components:
           description: 'The number of organizational units associated with the employer'
           type: integer
           example: 12
+        incomeInsuranceProvider:
+          $ref: '#/components/schemas/IncomeInsuranceProvider'
       type: object
     EmployerWithoutRelations:
       properties:
@@ -13657,6 +15068,46 @@ components:
           minLength: 0
           example: 'Internal remark with regards to this employer'
           nullable: true
+      type: object
+    IncomeInsuranceProvider:
+      properties:
+        id:
+          description: 'The unique identifier of the income insurance provider'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+          example: 5e517511-5e36-4a1f-9405-c5a58dfdce74
+        externalKey:
+          description: "An identifier provided by an external system that uniquely specifies the income insurance provider. This key serves as an alternative to the 'id' field for referencing the income insurance provider."
+          type: string
+          maxLength: 191
+          minLength: 0
+          example: income-insurance-provider-1234
+          nullable: true
+        migrationKey:
+          description: 'The internal migration key associated with the income insurance provider.'
+          type: string
+          maxLength: 191
+          minLength: 0
+          example: database_234@84739
+          nullable: true
+        name:
+          description: 'The name of the income insurance provider'
+          type: string
+          maxLength: 191
+          minLength: 1
+          example: 'Income Insurerer Example Entity'
+        dateCreated:
+          description: 'The date and time that the arbo service was created in our system. Format YYYY-MM-DD HH:MM:SS'
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2020-02-20 12:34:56'
+        dateUpdated:
+          description: 'The date and time that the arbo service was last updated in our system. Format YYYY-MM-DD HH:MM:SS'
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2020-02-20 12:34:56'
       type: object
     GetEmployerDivisionResponse:
       properties:
@@ -13763,8 +15214,15 @@ components:
           minLength: 0
           example: Demmersweg
           nullable: true
+        country:
+          description: 'The ISO 2 code of the country of the address associated with the employer person address.'
+          type: string
+          maxLength: 2
+          minLength: 2
+          example: NL
+          nullable: true
         number:
-          description: 'The number of the address associated with the employer person address. including the suffix.'
+          description: "The number of the address associated with the employer person address. including the suffix. Only available if the 'country' relation is included in the query."
           type: string
           maxLength: 191
           minLength: 0
@@ -14070,9 +15528,9 @@ components:
     GetEmploymentContractResourceIncludeOptions:
       type: string
       enum:
-        - organizationalUnit
+        - organizationalUnit.employer
         - employmentType
-        - employment
+        - employment.employee.person
     GetEmploymentResponse:
       properties:
         data:
@@ -14095,7 +15553,7 @@ components:
       type: string
       enum:
         - employmentEndReason
-        - employee
+        - employee.person
         - supervisor
         - externalSupervisor
         - currentOrLastEmploymentContract
@@ -14745,9 +16203,10 @@ components:
           type: object
     EmploymentWithoutRelations:
       properties:
-        uuid:
+        id:
           description: 'The unique identifier of the employment'
           type: string
+          format: uuid
           maxLength: 36
           minLength: 36
           example: 123e4567-e89b-12d3-a456-426614174000
@@ -14766,11 +16225,9 @@ components:
           example: Migration-Key-456
           nullable: true
         employmentNumber:
-          description: 'The total number of employments for the employee'
-          type: string
-          maxLength: 191
-          minLength: 0
-          example: '3'
+          description: 'The number of the employment for this employee, f.e. if there is already an employment then the next employment will get employmentNumber 2, etc.'
+          type: integer
+          example: 3
           nullable: true
         primary:
           description: 'Indication if the employment is flagged as primary or not.'
@@ -15155,8 +16612,9 @@ components:
       type: string
       enum:
         - dossierTask
+        - employment.employee
         - dossier
-        - dossier.employment
+        - dossier.employment.employee
         - dossier.employment.employmentContracts
         - dossier.employment.employmentContracts.organizationalUnit
         - dossier.employment.employmentContracts.organizationalUnit.employer
@@ -16442,6 +17900,123 @@ components:
         authorization:
           $ref: '#/components/schemas/UserAuthorization'
       type: object
+    GetLinkedUserResponse:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/LinkedUser'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+        meta:
+          $ref: '#/components/schemas/PaginationMetaInformation'
+      type: object
+    GetLinkedUserSortOptions:
+      type: string
+      enum:
+        - externalKey
+        - '-externalKey'
+        - dateUpdated
+        - '-dateUpdated'
+        - dateCreated
+        - '-dateCreated'
+    GetLinkedUserIncludeOptions:
+      type: string
+      enum:
+        - fromUser
+        - toUser
+    PostLinkedUserResponseBody:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponse'
+        -
+          properties:
+            data:
+              $ref: '#/components/schemas/LinkedUser'
+          type: object
+    PostLinkedUserRequestBody:
+      required:
+        - fromId
+        - toId
+        - environmentDescription
+      properties:
+        externalKey:
+          description: 'An identifier provided by an external system that uniquely specifies the linked user.'
+          type: string
+          maxLength: 191
+          minLength: 1
+          example: EXT-DOS-458
+        environmentDescription:
+          description: 'Describes the environment where the users is going to log into'
+          type: string
+          maxLength: 191
+          minLength: 1
+          example: 'Test environment 1'
+        fromId:
+          description: 'Id of main user where to link users to'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+          example: e3eab6bd-4adc-4d9b-9620-2b0c49ecb7d3
+        toId:
+          description: 'Id of linked user'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+          example: e3eab6bd-4adc-4d9b-9620-2b0c49ecb7d3
+      type: object
+    LinkedUser:
+      description: 'Represents a link between two users in the system.'
+      properties:
+        id:
+          description: 'The unique identifier of the linked user record.'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+          example: 40b03a3c-e304-4b8f-b4ae-562b315e36f2
+        externalKey:
+          description: "An identifier provided by an external system that uniquely specifies the link between the users. This key serves as an alternative to the 'id' field for referencing the user link."
+          type: string
+          maxLength: 191
+          minLength: 0
+          example: link-from-1234-to-5678
+          nullable: true
+        fromUser:
+          oneOf:
+            -
+              $ref: '#/components/schemas/User'
+          nullable: true
+          description: "The 'main' user that the 'toUser' is linked to. Nullable in situations where the user does not exist or is not loaded."
+        toUser:
+          oneOf:
+            -
+              $ref: '#/components/schemas/User'
+          nullable: true
+          description: "The 'secondary' user that is linked to the 'fromUser'. Nullable in situations where the user does not exist or is not loaded."
+        environmentName:
+          description: 'An identifying string meant to be help the user identify the link'
+          type: string
+          maxLength: 191
+          minLength: 1
+          example: 'Jansen BV (Case Manager)'
+        approved:
+          description: 'Indicates whether the link between the users has been approved and is therefore active.'
+          type: boolean
+          example: true
+        dateCreated:
+          description: 'The date and time when the link was created.'
+          type: string
+          pattern: '^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})$'
+          example: '2023-10-01 12:34:56'
+        dateUpdated:
+          description: 'The date and time when the link was last updated.'
+          type: string
+          pattern: '^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})$'
+          example: '2023-10-01 12:34:56'
+      type: object
     ArboAuthorizationLevelEnumOptions:
       type: string
       enum:
@@ -16611,6 +18186,9 @@ tags:
   -
     name: 'Absence Reasons'
     description: 'Absence Reasons'
+  -
+    name: Appointments
+    description: Appointments
   -
     name: Authentication
     description: Authentication
