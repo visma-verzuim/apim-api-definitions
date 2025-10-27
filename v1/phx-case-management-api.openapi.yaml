@@ -15772,6 +15772,18 @@ components:
         meta:
           $ref: '#/components/schemas/PaginationMetaInformation'
       type: object
+    BillableAvailabilityMutationResource:
+      description: 'A mutation record of a billable availability'
+      type: object
+      allOf:
+        -
+          $ref: '#/components/schemas/BillableAvailabilityResource'
+    ParentBillableAvailabilityResource:
+      description: 'The parent billable availability record'
+      type: object
+      allOf:
+        -
+          $ref: '#/components/schemas/BillableAvailabilityResource'
     BillableAvailabilityResource:
       properties:
         id:
@@ -15861,12 +15873,12 @@ components:
         organizationalUnit:
           $ref: '#/components/schemas/OrganizationalUnit'
         parentAvailability:
-          $ref: '#/components/schemas/BillableAvailabilityResource'
+          $ref: '#/components/schemas/ParentBillableAvailabilityResource'
         mutations:
           description: 'The mutations of this availability record'
           type: array
           items:
-            $ref: '#/components/schemas/BillableAvailabilityResource'
+            $ref: '#/components/schemas/BillableAvailabilityMutationResource'
       type: object
     MethodOfConsultEnumOptions:
       description: 'The method of consultation for the appointment'
