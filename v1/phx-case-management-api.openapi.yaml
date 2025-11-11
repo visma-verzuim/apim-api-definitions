@@ -117,10 +117,150 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+  /appointment:
+    get:
+      tags:
+        - Appointments
+      summary: 'Get a list of appointments'
+      description: 'Retrieve a list of appointments with optional filtering and inclusion of related resources.'
+      operationId: appointment-get-v1-ultimate
+      parameters:
+        -
+          name: 'filter[title]'
+          in: query
+          description: 'Filter by the appointment title. Matches partial strings, case-insensitive.'
+          schema:
+            type: string
+        -
+          name: 'filter[dateStartFrom]'
+          in: query
+          description: 'Filter by the earliest start date you want to see appointments for. Format: YYYY-MM-DD'
+          schema:
+            type: string
+            format: date
+          example: '2025-01-01'
+        -
+          name: 'filter[dateStartUntil]'
+          in: query
+          description: 'Filter by the last start date you want to see appointments for. Format: YYYY-MM-DD'
+          schema:
+            type: string
+            format: date
+          example: '2025-01-31'
+        -
+          name: 'filter[userId]'
+          in: query
+          description: 'Filter by the unique identifier of the user. Must be a valid UUID.'
+          schema:
+            type: string
+            format: uuid
+          example: 8366316b-1304-482e-bf53-0067174d477a
+        -
+          name: 'filter[status]'
+          in: query
+          description: 'Filter by the status of the appointment.'
+          schema:
+            $ref: '#/components/schemas/AppointmentStatusEnumOptions'
+        -
+          name: 'filter[employerId]'
+          in: query
+          description: 'Show only appointments for the specified employer. Must be a valid UUID.'
+          schema:
+            type: string
+            format: uuid
+          example: 8366316b-1304-482e-bf53-0067174d477a
+        -
+          name: 'filter[employeeId]'
+          in: query
+          description: 'Show only appointments for the specified employee. Must be a valid UUID.'
+          schema:
+            type: string
+            format: uuid
+          example: 8366316b-1304-482e-bf53-0067174d477a
+        -
+          name: include
+          in: query
+          description: 'Include the related resources - use comma separated values to include multiple resources'
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/GetAppointmentIncludeOptions'
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'A list of appointments'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAppointmentResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        500:
+          description: 'Internal Server Error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
   /agenda/billable/availabilities:
     get:
       tags:
-        - Agenda
         - BillableAvailability
       summary: 'Get a list of billable availabilities'
       operationId: agenda-billable-availabilities-get-v1-ultimate
@@ -137,25 +277,29 @@ paths:
           in: query
           description: 'Filter by the user ID'
           schema:
-            type: integer
+            type: string
+            format: uuid
         -
           name: 'filter[employerId]'
           in: query
           description: 'Filter by the employer ID'
           schema:
-            type: integer
+            type: string
+            format: uuid
         -
           name: 'filter[organizationalUnitId]'
           in: query
           description: 'Filter by the organizational unit ID'
           schema:
-            type: integer
+            type: string
+            format: uuid
         -
           name: 'filter[scheduleUuid]'
           in: query
           description: 'Filter by the schedule UUID'
           schema:
             type: string
+            format: uuid
         -
           name: 'filter[billingCode]'
           in: query
@@ -278,146 +422,6 @@ paths:
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
         500:
           description: 'Server Error'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerErrorResponse'
-          headers:
-            Deprecated:
-              description: 'This endpoint has been deprecated at the given timestamp.'
-              required: false
-              schema:
-                type: string
-                example: '@1758557834'
-                pattern: '^\@[0-9]{10}$'
-            Sunset:
-              description: 'This endpoint will be removed at the given date/time.'
-              required: false
-              schema:
-                type: string
-                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
-                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-  /appointment:
-    get:
-      tags:
-        - Appointments
-      summary: 'Get a list of appointments'
-      operationId: appointment-get-v1-ultimate
-      parameters:
-        -
-          name: 'filter[title]'
-          in: query
-          description: 'Filter by the appointment title. Matches partial strings, case-insensitive.'
-          schema:
-            type: string
-        -
-          name: 'filter[dateStartFrom]'
-          in: query
-          description: 'Filter by the earliest start date you want to see appointments for. Format: YYYY-MM-DD'
-          schema:
-            type: string
-            format: date
-          example: '2025-01-01'
-        -
-          name: 'filter[dateStartUntil]'
-          in: query
-          description: 'Filter by the last start date you want to see appointments for. Format: YYYY-MM-DD'
-          schema:
-            type: string
-            format: date
-          example: '2025-01-31'
-        -
-          name: 'filter[userId]'
-          in: query
-          description: 'Filter by the unique identifier of the user. Must be a valid UUID.'
-          schema:
-            type: string
-            format: uuid
-          example: 8366316b-1304-482e-bf53-0067174d477a
-        -
-          name: 'filter[status]'
-          in: query
-          description: 'Filter by the status of the appointment.'
-          schema:
-            $ref: '#/components/schemas/AppointmentStatusEnumOptions'
-        -
-          name: 'filter[employerId]'
-          in: query
-          description: 'Show only appointments for the specified employer. Must be a valid UUID.'
-          schema:
-            type: string
-            format: uuid
-          example: 8366316b-1304-482e-bf53-0067174d477a
-        -
-          name: 'filter[employeeId]'
-          in: query
-          description: 'Show only appointments for the specified employee. Must be a valid UUID.'
-          schema:
-            type: string
-            format: uuid
-          example: 8366316b-1304-482e-bf53-0067174d477a
-        -
-          name: include
-          in: query
-          description: 'Include the related resources - use comma separated values to include multiple resources'
-          style: form
-          explode: false
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/GetAppointmentIncludeOptions'
-        -
-          name: Ocp-Apim-Subscription-Key
-          in: header
-          required: true
-          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
-          schema:
-            type: string
-      responses:
-        200:
-          description: 'A list of appointments'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetAppointmentResponse'
-          headers:
-            Deprecated:
-              description: 'This endpoint has been deprecated at the given timestamp.'
-              required: false
-              schema:
-                type: string
-                example: '@1758557834'
-                pattern: '^\@[0-9]{10}$'
-            Sunset:
-              description: 'This endpoint will be removed at the given date/time.'
-              required: false
-              schema:
-                type: string
-                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
-                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        400:
-          description: 'Bad Request'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadRequestResponse'
-          headers:
-            Deprecated:
-              description: 'This endpoint has been deprecated at the given timestamp.'
-              required: false
-              schema:
-                type: string
-                example: '@1758557834'
-                pattern: '^\@[0-9]{10}$'
-            Sunset:
-              description: 'This endpoint will be removed at the given date/time.'
-              required: false
-              schema:
-                type: string
-                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
-                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        500:
-          description: 'Internal Server Error'
           content:
             application/json:
               schema:
@@ -15477,6 +15481,27 @@ components:
           minLength: 0
           example: false
       type: object
+    GetAppointmentResponse:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Appointment'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+        meta:
+          $ref: '#/components/schemas/PaginationMetaInformation'
+      type: object
+    GetAppointmentIncludeOptions:
+      type: string
+      enum:
+        - employer
+        - user
+        - location
+        - employee
+        - operation
+        - methodOfConsult
+        - billing
     GetBillableAvailabilitiesResponse:
       properties:
         data:
@@ -15506,42 +15531,12 @@ components:
     GetBillableAvailabilitiesIncludeOptions:
       type: string
       enum:
-        - user
-        - createdBy
+        - user.person
+        - createdBy.person
         - parentAvailability
-        - mutations
+        - mutations.createdBy.person
         - employer
         - organizationalUnit
-    AppointmentStatusEnumOptions:
-      description: 'The status of the appointment'
-      type: string
-      enum:
-        - cancelled
-        - completed
-        - reserved
-        - final
-        - noShow
-        - noAvailability
-    GetAppointmentResponse:
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Appointment'
-        links:
-          $ref: '#/components/schemas/PaginationLinks'
-        meta:
-          $ref: '#/components/schemas/PaginationMetaInformation'
-      type: object
-    GetAppointmentIncludeOptions:
-      type: string
-      enum:
-        - employer
-        - user
-        - location
-        - employee
-        - operation
-        - methodOfConsult
     Appointment:
       properties:
         id:
@@ -15567,7 +15562,7 @@ components:
             -
               $ref: '#/components/schemas/MethodOfConsultEnumOptions'
           nullable: true
-          description: 'The method of consultation of the appointment'
+          description: 'The method of consultation of the appointment, available if the relation is included in the query'
         url:
           description: "The url of the appointment in case of an 'online' appointment"
           type: string
@@ -15595,21 +15590,39 @@ components:
         employee:
           oneOf:
             -
-              $ref: '#/components/schemas/Employee'
+              $ref: '#/components/schemas/EmployeeWithoutRelations'
           nullable: true
           description: 'The employee the appointment is for, available if the relation is included in the query'
         user:
           oneOf:
             -
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/AppointmentUserResource'
           nullable: true
           description: 'The user the appointment belongs to, available if the relation is included in the query'
         employer:
           oneOf:
             -
-              $ref: '#/components/schemas/Employer'
+              $ref: '#/components/schemas/EmployerWithoutRelations'
           nullable: true
           description: 'The employer related to the appointment, available if the relation is included in the query'
+        organizationalUnit:
+          oneOf:
+            -
+              $ref: '#/components/schemas/OrganizationalUnitWithoutRelations'
+          nullable: true
+          description: "The organizational unit the employee belonged to at the time of the appointment, available if the 'employee' relation is included in the query"
+        schedule:
+          oneOf:
+            -
+              $ref: '#/components/schemas/AppointmentSchedule'
+          nullable: true
+          description: 'The schedule details of the appointment, available if the relation is included in the query'
+        billing:
+          oneOf:
+            -
+              $ref: '#/components/schemas/AppointmentBilling'
+          nullable: true
+          description: 'The billing details of the appointment, available if the relation is included in the query'
         dateStart:
           description: 'The start date and time of the appointment in YYYY-MM-DD HH:MM:SS format'
           type: string
@@ -15626,6 +15639,49 @@ components:
           description: 'The date and time the absence course was last updated in YYYY-MM-DD HH:MM:SS format'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+      type: object
+    AppointmentBillingAppointment:
+      properties:
+        isBillable:
+          description: 'Whether the appointment is billable. An appointment is billable when at least one of its operations is billable.'
+          type: boolean
+        billableOperations:
+          description: 'The billable operations associated with the appointment'
+          type: array
+          items:
+            $ref: '#/components/schemas/Operation'
+        durationMinutes:
+          description: 'The duration of the appointment in minutes'
+          type: integer
+      type: object
+    AppointmentBilling:
+      properties:
+        appointment:
+          $ref: '#/components/schemas/AppointmentBillingAppointment'
+        schedule:
+          $ref: '#/components/schemas/AppointmentBillingSchedule'
+      type: object
+    AppointmentBillingSchedule:
+      properties:
+        isBillable:
+          description: 'Indicates whether the schedule in which the appointment was performed is billable'
+          type: boolean
+        billingCode:
+          description: 'The billing operation code from the schedule, this value is set by the user when configuring the schedule'
+          type: string
+          nullable: true
+        employer:
+          oneOf:
+            -
+              $ref: '#/components/schemas/EmployerWithoutRelations'
+          nullable: true
+          description: 'The employer associated with the schedule'
+        organizationalUnit:
+          oneOf:
+            -
+              $ref: '#/components/schemas/OrganizationalUnitWithoutRelations'
+          nullable: true
+          description: 'The organizational unit associated with the schedule. Only (optionally) present for billable schedules.'
       type: object
     AppointmentEmployee:
       properties:
@@ -15719,6 +15775,9 @@ components:
         isWorking:
           description: 'Whether the schedule is working or not'
           type: boolean
+        isBillable:
+          description: 'Whether the schedule is billable or not'
+          type: boolean
         isRoomExclusivelyReserved:
           description: 'Whether the room is exclusively reserved for the schedule or not'
           type: boolean
@@ -15732,6 +15791,12 @@ components:
         schedulableEntity:
           description: 'Whether the schedule is a schedulable entity or not'
           type: string
+          nullable: true
+        billingCode:
+          description: 'The billing code of the schedule'
+          type: string
+          maxLength: 191
+          minLength: 0
           nullable: true
       type: object
     AppointmentUserResource:
@@ -15761,17 +15826,6 @@ components:
           description: 'Indicates if the user is active'
           type: boolean
       type: object
-    BillableAvailabilityCollection:
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/BillableAvailabilityResource'
-        links:
-          $ref: '#/components/schemas/PaginationLinks'
-        meta:
-          $ref: '#/components/schemas/PaginationMetaInformation'
-      type: object
     BillableAvailabilityMutationResource:
       description: 'A mutation record of a billable availability'
       type: object
@@ -15790,6 +15844,7 @@ components:
           description: 'The unique identifier of the billable availability'
           type: string
           format: uuid
+          example: 40b03a3c-e304-4b8f-b4ae-562b315e36f2
         date:
           description: 'The date of the availability'
           type: string
@@ -15810,22 +15865,30 @@ components:
           type: integer
         userId:
           description: 'The ID of the user this availability belongs to'
-          type: integer
+          type: string
+          format: uuid
+          example: 40b03a3c-e304-4b8f-b4ae-562b315e36f2
         employerId:
           description: 'The ID of the employer'
-          type: integer
+          type: string
+          format: uuid
+          example: 40b03a3c-e304-4b8f-b4ae-562b315e36f2
         employerName:
           description: 'The name of the employer'
           type: string
         organizationalUnitId:
           description: 'The ID of the organizational unit'
-          type: integer
+          type: string
+          format: uuid
+          example: 40b03a3c-e304-4b8f-b4ae-562b315e36f2
         organizationalUnitName:
           description: 'The name of the organizational unit'
           type: string
         scheduleUuid:
           description: 'The UUID of the schedule'
           type: string
+          format: uuid
+          example: 40b03a3c-e304-4b8f-b4ae-562b315e36f2
         scheduleName:
           description: 'The name of the schedule'
           type: string
@@ -15834,7 +15897,9 @@ components:
           type: string
         parentAvailabilityId:
           description: 'The ID of the parent availability if this is a mutation'
-          type: integer
+          type: string
+          format: uuid
+          example: 40b03a3c-e304-4b8f-b4ae-562b315e36f2
           nullable: true
         isRootRecord:
           description: 'Whether this is a root record (not a mutation)'
@@ -15845,11 +15910,8 @@ components:
         originalDurationMinutes:
           description: 'The original duration in minutes between start and end time'
           type: integer
-        totalMinutesDelta:
-          description: 'The total minutes delta including all mutations'
-          type: integer
-        finalEffectiveMinutes:
-          description: 'The final effective minutes considering original duration and all mutations'
+        billableDurationMinutes:
+          description: "Requires the 'mutations' include. The total minutes to be billed. The sum of the original duration +/- all mutations"
           type: integer
         createdBy:
           description: 'The ID of the user who created this record'
@@ -15880,6 +15942,31 @@ components:
           items:
             $ref: '#/components/schemas/BillableAvailabilityMutationResource'
       type: object
+    AppointmentCancellationReasonEnumOptions:
+      description: 'The reason for the cancellation of the appointment'
+      type: string
+      enum:
+        - timely-cancellation-by-employee
+        - late-cancellation-by-employee
+        - timely-cancellation-by-employer
+        - late-cancellation-by-employer
+        - employee-passed-away
+        - employee-recovered
+        - timely-cancellation-by-service-provider
+        - late-cancellation-by-service-provider
+        - auto-cancelled
+        - invalid-value
+    AppointmentStatusEnumOptions:
+      description: 'The reason for the cancellation of the appointment'
+      type: string
+      enum:
+        - completed
+        - reserved
+        - final
+        - no-show
+        - cancelled
+        - no-availability
+        - invalid-value
     MethodOfConsultEnumOptions:
       description: 'The method of consultation for the appointment'
       type: string
@@ -23567,6 +23654,7 @@ components:
         - dossier.employment.employmentContracts
         - dossier.employment.employmentContracts.organizationalUnit
         - dossier.employment.employmentContracts.organizationalUnit.employer
+        - executedBy.person
     BillableOperationWithoutRelations:
       properties:
         id:
@@ -23632,6 +23720,8 @@ components:
               $ref: '#/components/schemas/Operation'
             employer:
               $ref: '#/components/schemas/EmployerWithoutRelations'
+            executedBy:
+              $ref: '#/components/schemas/AppointmentUserResource'
             organizationalUnit:
               $ref: '#/components/schemas/OrganizationalUnit'
             dossier:
@@ -23862,6 +23952,14 @@ components:
           type: string
         company:
           $ref: '#/components/schemas/PostOrganizationalUnitRequestBodyCompanyData'
+        dateStart:
+          description: "Start date, defaults to today's date if not provided"
+          type: string
+          format: date
+        dateEnd:
+          description: 'End date'
+          type: string
+          format: date
       type: object
     PostOrganizationalUnitRequestBodyCompanyData:
       properties:
@@ -23903,14 +24001,6 @@ components:
           $ref: '#/components/schemas/OrganizationalUnitAddress'
         communications:
           $ref: '#/components/schemas/OrganizationalUnitCommunication'
-        dateStart:
-          description: 'Start date, defaults to '
-          type: string
-          format: date
-        dateEnd:
-          description: 'End date'
-          type: string
-          format: date
       type: object
     LegalFormEnumOptions:
       type: string
@@ -25208,14 +25298,11 @@ tags:
     name: 'Absence Reasons'
     description: 'Absence Reasons'
   -
-    name: Agenda
-    description: Agenda
+    name: Appointments
+    description: Appointments
   -
     name: BillableAvailability
     description: BillableAvailability
-  -
-    name: Appointments
-    description: Appointments
   -
     name: Authentication
     description: Authentication
