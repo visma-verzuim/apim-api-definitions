@@ -47,6 +47,10 @@ paths:
           schema:
             $ref: '#/components/schemas/GetAbsenceReasonSortOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -187,6 +191,10 @@ paths:
             type: array
             items:
               $ref: '#/components/schemas/GetAppointmentIncludeOptions'
+        -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -370,6 +378,10 @@ paths:
             type: array
             items:
               $ref: '#/components/schemas/GetBillableAvailabilitiesIncludeOptions'
+        -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -700,6 +712,10 @@ paths:
           schema:
             type: boolean
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -796,6 +812,10 @@ paths:
           description: 'Filter by the username of the company doctor'
           schema:
             type: string
+        -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -951,6 +971,10 @@ paths:
             items:
               $ref: '#/components/schemas/GetContactPersonIncludeOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -1056,7 +1080,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContactPerson'
+                $ref: '#/components/schemas/PostContactPersonResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -1446,6 +1470,10 @@ paths:
           schema:
             $ref: '#/components/schemas/GetContractTypeSortOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -1625,6 +1653,10 @@ paths:
             items:
               $ref: '#/components/schemas/GetEmployerContractIncludeOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -1709,15 +1741,11 @@ paths:
               $ref: '#/components/schemas/PostEmployerContractRequestBody'
       responses:
         201:
-          description: 'Employer successfully created'
+          description: 'Employer Contract successfully created'
           content:
             application/json:
               schema:
-                oneOf:
-                  -
-                    $ref: '#/components/schemas/EmployerContract'
-                  -
-                    $ref: '#/components/schemas/EmployerServiceContract'
+                $ref: '#/components/schemas/PostEmployerContractResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -1802,11 +1830,7 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                  -
-                    $ref: '#/components/schemas/EmployerContract'
-                  -
-                    $ref: '#/components/schemas/EmployerServiceContract'
+                $ref: '#/components/schemas/PatchEmployerContractResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -1904,6 +1928,10 @@ paths:
           description: 'Filter by module description'
           schema:
             type: string
+        -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -2021,6 +2049,10 @@ paths:
           schema:
             $ref: '#/components/schemas/GetPartnershipSortOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -2111,6 +2143,10 @@ paths:
           description: 'Filter service-types with the active status'
           schema:
             type: boolean
+        -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -2403,6 +2439,10 @@ paths:
             items:
               $ref: '#/components/schemas/GetAbsenceCourseIncludeOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -2492,7 +2532,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AbsenceCourse'
+                $ref: '#/components/schemas/PostAbsenceCourseResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -2577,7 +2617,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AbsenceCourse'
+                $ref: '#/components/schemas/PatchAbsenceCourseResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -2816,6 +2856,10 @@ paths:
           schema:
             type: boolean
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -2950,6 +2994,10 @@ paths:
           required: false
           schema:
             type: boolean
+        -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -3092,6 +3140,10 @@ paths:
           required: false
           schema:
             type: boolean
+        -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -3335,6 +3387,10 @@ paths:
             items:
               $ref: '#/components/schemas/GetDossierContentDocumentIncludeOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -3424,7 +3480,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DossierDocumentResource'
+                $ref: '#/components/schemas/PostDossierDocumentResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -3509,7 +3565,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DossierDocumentResource'
+                $ref: '#/components/schemas/PatchDossierDocumentResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -3611,7 +3667,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DossierDocumentResource'
+                $ref: '#/components/schemas/PatchDossierDocumentResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -3758,17 +3814,18 @@ paths:
     patch:
       tags:
         - 'Dossier External Resource'
-      summary: 'Update an external resource with ID'
-      description: 'Update an external resource associated with a dossier using its unique identifier'
+      summary: 'Update an external resource'
+      description: 'Update an external resource for a dossier'
       operationId: dossier-externalresource-id-patch-v1-essential
       parameters:
         -
           name: id
           in: path
-          description: 'Unique identifier of the external resource'
+          description: 'The unique identifier of the external resource to update.'
           required: true
           schema:
             type: string
+            format: uuid
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -3785,11 +3842,11 @@ paths:
               $ref: '#/components/schemas/PatchDossierExternalResourceRequestBody'
       responses:
         200:
-          description: 'Dossier external resource updated'
+          description: 'Dossier external resource created'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DossierExternalResourceResource'
+                $ref: '#/components/schemas/PatchDossierExternalResourceResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -3881,6 +3938,10 @@ paths:
           schema:
             $ref: '#/components/schemas/GetDossierExternalResourceSortOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -3970,7 +4031,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DossierExternalResourceResource'
+                $ref: '#/components/schemas/PostDossierExternalResourceResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -4040,7 +4101,7 @@ paths:
       tags:
         - 'Dossier External Resource'
       summary: 'Update an external resource'
-      description: "Update an external resource associated with a dossier by providing either its 'id' or 'key' through the request body"
+      description: 'Update an external resource for a dossier'
       operationId: dossier-externalresource-patch-v1-essential
       requestBody:
         description: 'Dossier external resource data for updating a dossier external resource'
@@ -4051,11 +4112,11 @@ paths:
               $ref: '#/components/schemas/PatchDossierExternalResourceRequestBody'
       responses:
         200:
-          description: 'Dossier external resource updated'
+          description: 'Dossier external resource created'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DossierExternalResourceResource'
+                $ref: '#/components/schemas/PatchDossierExternalResourceResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -4156,7 +4217,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DossierExternalResourceResource'
+                $ref: '#/components/schemas/PostDossierExternalResourceResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -4393,6 +4454,10 @@ paths:
             items:
               $ref: '#/components/schemas/GetDossierContentNoteIncludeOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -4482,7 +4547,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DossierNoteResource'
+                $ref: '#/components/schemas/PostDossierNoteResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -4567,7 +4632,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DossierNoteResource'
+                $ref: '#/components/schemas/PatchDossierNoteResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -4669,7 +4734,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DossierNoteResource'
+                $ref: '#/components/schemas/PatchDossierNoteResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -4884,6 +4949,10 @@ paths:
             items:
               $ref: '#/components/schemas/GetDossierContentUploadIncludeOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -4973,7 +5042,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DossierUploadResource'
+                $ref: '#/components/schemas/PostDossierUploadResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -5058,7 +5127,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DossierUploadResource'
+                $ref: '#/components/schemas/PatchDossierUploadResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -5160,7 +5229,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DossierUploadResource'
+                $ref: '#/components/schemas/PatchDossierUploadResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -5333,6 +5402,10 @@ paths:
             items:
               $ref: '#/components/schemas/GetDossierTaskIncludeOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -5421,7 +5494,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DossierTask'
+                $ref: '#/components/schemas/PostDossierTaskResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -5506,7 +5579,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DossierTask'
+                $ref: '#/components/schemas/PatchDossierTaskResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -5572,7 +5645,7 @@ paths:
           description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
           schema:
             type: string
-  '/dossier/task/{id}':
+  '/dossier/task/{uuid}':
     patch:
       tags:
         - 'Dossier Task'
@@ -5609,7 +5682,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DossierTask'
+                $ref: '#/components/schemas/PatchDossierTaskResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -5751,6 +5824,10 @@ paths:
             items:
               $ref: '#/components/schemas/GetDossierIncludeOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -5840,7 +5917,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dossier'
+                $ref: '#/components/schemas/PostBirthLeaveDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -5925,7 +6002,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dossier'
+                $ref: '#/components/schemas/PatchBirthLeaveDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -6082,6 +6159,10 @@ paths:
             type: array
             items:
               $ref: '#/components/schemas/GetDossierIncludeOptions'
+        -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -6320,7 +6401,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dossier'
+                $ref: '#/components/schemas/PostPreventiveDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -6405,7 +6486,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dossier'
+                $ref: '#/components/schemas/PatchPreventiveDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -6638,7 +6719,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dossier'
+                $ref: '#/components/schemas/PostMedicalPreventiveDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -6723,7 +6804,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dossier'
+                $ref: '#/components/schemas/PatchMedicalPreventiveDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -6839,6 +6920,10 @@ paths:
           description: 'Filter by the type of dossier linked to the dossier section.'
           schema:
             $ref: '#/components/schemas/DossierTypeEnumOptions'
+        -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -7052,6 +7137,10 @@ paths:
             items:
               $ref: '#/components/schemas/GetIllnessDossierIncludeOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -7141,7 +7230,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/IllnessDossier'
+                $ref: '#/components/schemas/PatchIllnessDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -7381,7 +7470,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dossier'
+                $ref: '#/components/schemas/PatchIllnessZwerdDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -7539,6 +7628,10 @@ paths:
             items:
               $ref: '#/components/schemas/GetMedicalDossierIncludeOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -7694,6 +7787,10 @@ paths:
             items:
               $ref: '#/components/schemas/GetDossierIncludeOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -7783,7 +7880,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dossier'
+                $ref: '#/components/schemas/PostPaidParentalLeaveDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -7868,7 +7965,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dossier'
+                $ref: '#/components/schemas/PatchPaidParentalLeaveDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -8019,6 +8116,10 @@ paths:
             items:
               $ref: '#/components/schemas/GetDossierIncludeOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -8108,7 +8209,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dossier'
+                $ref: '#/components/schemas/PostPregnancyDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -8193,7 +8294,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dossier'
+                $ref: '#/components/schemas/PatchPregnancyDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -8427,6 +8528,10 @@ paths:
             items:
               $ref: '#/components/schemas/GetDossierIncludeOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -8516,7 +8621,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dossier'
+                $ref: '#/components/schemas/PostSpoor2DossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -8601,7 +8706,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dossier'
+                $ref: '#/components/schemas/PatchSpoor2DossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -8752,6 +8857,10 @@ paths:
             items:
               $ref: '#/components/schemas/GetDossierIncludeOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -8841,7 +8950,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dossier'
+                $ref: '#/components/schemas/PostZwerdDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -8926,7 +9035,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dossier'
+                $ref: '#/components/schemas/PatchZwerdDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -9097,7 +9206,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicApiPatchResponse'
+                $ref: '#/components/schemas/PatchBasicDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -9268,7 +9377,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicApiPatchResponse'
+                $ref: '#/components/schemas/PatchBasicDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -9439,7 +9548,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicApiPatchResponse'
+                $ref: '#/components/schemas/PatchBasicDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -9610,7 +9719,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicApiPatchResponse'
+                $ref: '#/components/schemas/PatchBasicDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -9696,7 +9805,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicApiPatchResponse'
+                $ref: '#/components/schemas/PatchBasicDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -9867,7 +9976,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicApiPatchResponse'
+                $ref: '#/components/schemas/PatchBasicDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -10038,7 +10147,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicApiPatchResponse'
+                $ref: '#/components/schemas/PatchBasicDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -10124,7 +10233,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dossier'
+                $ref: '#/components/schemas/PostWGADossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -10209,7 +10318,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dossier'
+                $ref: '#/components/schemas/PatchWGADossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -10381,7 +10490,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicApiPostResponse'
+                $ref: '#/components/schemas/PostCompanyDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -10475,6 +10584,10 @@ paths:
           required: false
           schema:
             type: string
+        -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -10679,6 +10792,10 @@ paths:
           schema:
             $ref: '#/components/schemas/GetEmployeeSortOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -10743,11 +10860,11 @@ paths:
               $ref: '#/components/schemas/PostEmployeeRequestBody'
       responses:
         201:
-          description: 'Absence course successfully created'
+          description: 'Employee successfully created'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Employee'
+                $ref: '#/components/schemas/PostEmployeeResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -10828,11 +10945,11 @@ paths:
               $ref: '#/components/schemas/PatchEmployeeRequestBody'
       responses:
         200:
-          description: 'Absence course successfully created'
+          description: 'Employee successfully updated'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Employee'
+                $ref: '#/components/schemas/PatchEmployeeResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -11020,7 +11137,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Employer'
+                $ref: '#/components/schemas/PatchEmployerResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -11102,6 +11219,10 @@ paths:
           schema:
             type: string
           example: arbo-123
+        -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -11234,6 +11355,10 @@ paths:
           schema:
             $ref: '#/components/schemas/GetEmployerSortOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -11322,7 +11447,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Employer'
+                $ref: '#/components/schemas/PostEmployerResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -11406,7 +11531,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Employer'
+                $ref: '#/components/schemas/PatchEmployerResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -11506,11 +11631,31 @@ paths:
           schema:
             type: string
         -
+          name: 'filter[parentsOnly]'
+          in: query
+          description: 'Only see top-level divisions. Combine with `include=children` to get a tree structure of all top-level divisions and their children.'
+          schema:
+            type: boolean
+        -
           name: sort
           in: query
           description: 'Sort by a specific field (externalKey)'
           schema:
             $ref: '#/components/schemas/GetEmployerDivisionSortOptions'
+        -
+          name: include
+          in: query
+          description: 'Include the related resources - use comma separated values to include multiple resources'
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/GetEmployerDivisionIncludeOptions'
+        -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -11632,6 +11777,10 @@ paths:
             type: array
             items:
               $ref: '#/components/schemas/GetEmployerRoleIncludeOptions'
+        -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -11995,6 +12144,10 @@ paths:
           schema:
             $ref: '#/components/schemas/GetEmploymentContractResourceSortOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -12072,7 +12225,7 @@ paths:
       description: 'Create a new employment contract'
       operationId: employment-contract-post-v1-advanced
       requestBody:
-        description: 'Employment Contract data'
+        description: 'Employment contract data'
         required: true
         content:
           application/json:
@@ -12084,7 +12237,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EmploymentContractResource'
+                $ref: '#/components/schemas/PostEmploymentContractResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -12169,7 +12322,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EmploymentContractResource'
+                $ref: '#/components/schemas/PatchEmploymentContractResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -12371,6 +12524,10 @@ paths:
             $ref: '#/components/schemas/GetEmploymentSortOptions'
           example: '-dateUpdated'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -12460,7 +12617,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Employment'
+                $ref: '#/components/schemas/PostEmploymentResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -12545,7 +12702,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Employment'
+                $ref: '#/components/schemas/PatchEmploymentResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -12644,6 +12801,10 @@ paths:
           schema:
             type: boolean
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -12729,7 +12890,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Employment'
+                $ref: '#/components/schemas/PatchEmploymentResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -12838,6 +12999,10 @@ paths:
             items:
               $ref: '#/components/schemas/GetExternalSupervisorIncludeOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -12935,11 +13100,55 @@ paths:
           schema:
             type: boolean
         -
+          name: 'filter[billable]'
+          in: query
+          description: 'Filter operations that are marked as billable'
+          schema:
+            type: boolean
+        -
           name: 'filter[isAnonymous]'
           in: query
           description: 'Filter operations that are marked as being confidential/anonymous'
           schema:
             type: boolean
+        -
+          name: 'filter[dateUpdatedFrom]'
+          in: query
+          description: 'Filter operations that were updated from a specific date/time (inclusive)'
+          schema:
+            type: string
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+        -
+          name: 'filter[dateUpdatedUntil]'
+          in: query
+          description: 'Filter operations that were updated up to a specific date/time (inclusive)'
+          schema:
+            type: string
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+        -
+          name: 'filter[dateCreatedFrom]'
+          in: query
+          description: 'Filter operations that were created from a specific date/time (inclusive)'
+          schema:
+            type: string
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+        -
+          name: 'filter[dateCreatedUntil]'
+          in: query
+          description: 'Filter operations that were created up to a specific date/time (inclusive)'
+          schema:
+            type: string
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+        -
+          name: sort
+          in: query
+          description: 'Sort by certain pre-defined fields'
+          schema:
+            $ref: '#/components/schemas/GetOperationSortOptions'
+        -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -13109,6 +13318,10 @@ paths:
             type: array
             items:
               $ref: '#/components/schemas/GetBillableOperationIncludeOptions'
+        -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -13302,7 +13515,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganizationalUnit'
+                $ref: '#/components/schemas/PatchOrganizationalUnitResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -13461,6 +13674,10 @@ paths:
             items:
               $ref: '#/components/schemas/GetOrganizationalUnitIncludeOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -13550,7 +13767,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganizationalUnit'
+                $ref: '#/components/schemas/PostOrganizationalUnitResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -13640,6 +13857,10 @@ paths:
             type: array
             items:
               $ref: '#/components/schemas/GetOrganizationalUnitTypeIncludeOptions'
+        -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -13805,6 +14026,10 @@ paths:
             type: array
             items:
               $ref: '#/components/schemas/GetTaskIncludeOptions'
+        -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -14257,6 +14482,10 @@ paths:
             items:
               $ref: '#/components/schemas/GetUserIncludeOptions'
         -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
+        -
           name: Ocp-Apim-Subscription-Key
           in: header
           required: true
@@ -14346,7 +14575,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/PostUserResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -14600,7 +14829,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/PostUserResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -14854,7 +15083,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/PostUserResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -14940,7 +15169,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/PatchUserResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -15026,7 +15255,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/PostEmployeeUserResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -15112,7 +15341,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/PostUserAuthorizationsResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -15462,6 +15691,10 @@ paths:
           description: "Sorts results ascending by the given option, options prefixed with '-' sort descending"
           schema:
             $ref: '#/components/schemas/GetLinkedUserSortOptions'
+        -
+          $ref: '#/components/parameters/PageNumber'
+        -
+          $ref: '#/components/parameters/PageSize'
         -
           name: Ocp-Apim-Subscription-Key
           in: header
@@ -16374,11 +16607,10 @@ components:
           type: integer
           example: 5
       type: object
-    PublicApiPatchResponse:
+    PublicApiPatchResponseEnvelope:
       required:
         - message
         - status
-        - data
         - traceId
       properties:
         message:
@@ -16388,16 +16620,27 @@ components:
           type: integer
           example: 200
         errors:
+          description: 'List of errors. Empty on success.'
           type: array
           items:
             type: string
-        data:
-          $ref: '#/components/schemas/PublicApiResponseBodyDataExample'
+          example: {  }
         traceId:
           type: string
           format: uuid
           example: b7810b40-bd6a-4bea-a92c-5543e5b288b9
       type: object
+    PublicApiPatchResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/PublicApiResponseBodyDataExample'
+          type: object
     PublicApiResponseBodyDataExample:
       description: 'The data object of the response which contains the created resource'
       properties:
@@ -16420,11 +16663,10 @@ components:
           type: string
           example: 'Sample Resource'
       type: object
-    PublicApiPostResponse:
+    PublicApiPostResponseEnvelope:
       required:
         - message
         - status
-        - data
         - traceId
       properties:
         message:
@@ -16434,16 +16676,27 @@ components:
           type: integer
           example: 201
         errors:
+          description: 'List of errors. Empty on success.'
           type: array
           items:
             type: string
-        data:
-          $ref: '#/components/schemas/PublicApiResponseBodyDataExample'
+          example: {  }
         traceId:
           type: string
           format: uuid
           example: b7810b40-bd6a-4bea-a92c-5543e5b288b9
       type: object
+    PublicApiPostResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/PublicApiResponseBodyDataExample'
+          type: object
     GetPregnancyDossierResponse:
       properties:
         data:
@@ -16666,8 +16919,10 @@ components:
     PatchContactPersonResponse:
       allOf:
         -
-          $ref: '#/components/schemas/PublicApiPatchResponse'
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
         -
+          required:
+            - data
           properties:
             data:
               $ref: '#/components/schemas/ContactPerson'
@@ -16778,8 +17033,10 @@ components:
     PostContactPersonResponse:
       allOf:
         -
-          $ref: '#/components/schemas/PublicApiPostResponse'
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
         -
+          required:
+            - data
           properties:
             data:
               $ref: '#/components/schemas/ContactPerson'
@@ -17156,6 +17413,21 @@ components:
           example: true
           nullable: true
       type: object
+    PatchEmployerContractResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              oneOf:
+                -
+                  $ref: '#/components/schemas/EmployerContract'
+                -
+                  $ref: '#/components/schemas/EmployerServiceContract'
+          type: object
     PostEmployerContractRequestBody:
       description: 'Employer Contract data'
       required:
@@ -17252,6 +17524,17 @@ components:
           example: 80
           nullable: true
       type: object
+    PostEmployerContractResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/EmployerContract'
+          type: object
     Contract:
       properties:
         id:
@@ -17300,6 +17583,7 @@ components:
           type: string
           format: date
           example: '2025-12-31'
+          nullable: true
         dateCreated:
           description: 'The date and time that the contract was created in our system. Format YYYY-MM-DD HH:MM:SS'
           type: string
@@ -17382,10 +17666,11 @@ components:
           format: date
           example: '2000-01-01'
         dateEnd:
-          description: 'The end date of this contract in YYYY-MM-DD format'
+          description: 'The end date of this contracttype in YYYY-MM-DD format'
           type: string
           format: date
           example: '2025-12-31'
+          nullable: true
         dateCreated:
           description: 'The date and type that the contract type was created in our system. Format YYYY-MM-DD HH:MM:SS'
           type: string
@@ -17760,11 +18045,20 @@ components:
           description: "Reason for recovery, only allowed with 'recoveryPercentage' equal to 100"
           example: recovered
       type: object
+    PatchAbsenceCourseResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/AbsenceCourse'
+          type: object
     PostAbsenceCourseRequestBody:
       required:
         - dateStart
-        - employmentId
-        - employmentKey
         - recoveryPercentage
       properties:
         newDossier:
@@ -17797,14 +18091,14 @@ components:
           minLength: 0
           example: sick
         employmentId:
-          description: "The unique identifier for the employment the absence is related to, exclusive with 'employmentKey'"
+          description: "The unique identifier for the employment the absence is related to, exclusive with 'employmentKey', required if 'employmentKey' is not provided"
           type: string
           format: uuid
           maxLength: 36
           minLength: 36
           example: 22ac850c-144e-4fda-8ccb-2e098116012d
         employmentKey:
-          description: "The external key of the employment the absence is related to, exclusive with 'employmentId'"
+          description: "The external key of the employment the absence is related to, exclusive with 'employmentId', required if 'employmentId' is not provided"
           type: string
           maxLength: 191
           minLength: 0
@@ -17854,6 +18148,17 @@ components:
           minimum: 0
           example: 25
       type: object
+    PostAbsenceCourseResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/AbsenceCourse'
+          type: object
     GetDossierDocumentTypeResponse:
       properties:
         data:
@@ -17970,6 +18275,17 @@ components:
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
           example: '2021-12-31 23:59:59'
       type: object
+    PatchDossierDocumentResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/DossierDocumentResource'
+          type: object
     PostDossierDocumentRequestBody:
       required:
         - dossierId
@@ -18033,6 +18349,17 @@ components:
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
           example: '2021-12-31 23:59:59'
       type: object
+    PostDossierDocumentResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/DossierDocumentResource'
+          type: object
     GetDossierExternalResourceResourceResponse:
       properties:
         data:
@@ -18093,6 +18420,17 @@ components:
           example: fa-cloud
           nullable: true
       type: object
+    PatchDossierExternalResourceResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/DossierExternalResourceResource'
+          type: object
     PostDossierExternalResourceRequestBody:
       properties:
         priority:
@@ -18133,6 +18471,17 @@ components:
           minLength: 36
           example: 90dd731a-5e65-43f9-82df-bba234855918
       type: object
+    PostDossierExternalResourceResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/DossierExternalResourceResource'
+          type: object
     GetDossierContentNoteIncludeOptions:
       type: string
       enum:
@@ -18224,6 +18573,17 @@ components:
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
           example: '2021-12-31 23:59:59'
       type: object
+    PatchDossierNoteResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/DossierNoteResource'
+          type: object
     PostDossierNoteRequestBody:
       required:
         - dossierId
@@ -18300,6 +18660,17 @@ components:
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
           example: '2021-12-31 23:59:59'
       type: object
+    PostDossierNoteResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/DossierNoteResource'
+          type: object
     GetDossierContentUploadIncludeOptions:
       type: string
       enum:
@@ -18376,6 +18747,17 @@ components:
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
           example: '2021-12-31 23:59:59'
       type: object
+    PatchDossierUploadResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/DossierUploadResource'
+          type: object
     PostDossierUploadRequestBody:
       required:
         - dossierId
@@ -18441,6 +18823,17 @@ components:
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
           example: '2021-12-31 23:59:59'
       type: object
+    PostDossierUploadResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/DossierUploadResource'
+          type: object
     GetDossierTaskResponse:
       properties:
         data:
@@ -18565,14 +18958,26 @@ components:
           example: '2024-11-16 17:00:00'
           nullable: true
       type: object
+    PatchDossierTaskResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/DossierTask'
+          type: object
     PostDossierTaskRequestBody:
       description: 'Dossier Task data'
       required:
         - dossierId
         - taskId
-        - taskStatusId
+        - taskStatus
         - title
         - isPostponed
+        - dateStart
       properties:
         externalKey:
           description: "An identifier provided by an external system that uniquely specifies the dossier-task. This key serves as an alternative to the 'id' field for referencing the dossier-task."
@@ -18645,6 +19050,17 @@ components:
           example: 123e4567-e89b-12d3-a456-426614174000
           nullable: true
       type: object
+    PostDossierTaskResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/DossierTask'
+          type: object
     GetDossierSortOptions:
       type: string
       enum:
@@ -18738,6 +19154,17 @@ components:
           minLength: 1
           example: EXT-Key-4385
       type: object
+    PatchBasicDossierResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/DossierWithoutRelations'
+          type: object
     DossierClosureReasonEnumOptions:
       type: string
       enum:
@@ -18834,6 +19261,17 @@ components:
           minimum: 1
           example: 8
       type: object
+    PatchBirthLeaveDossierResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Dossier'
+          type: object
     PatchIllnessRequestBody:
       required:
         - id
@@ -18908,6 +19346,17 @@ components:
           description: 'Indicates if the plan of approach has been made'
           type: boolean
       type: object
+    PatchIllnessDossierResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/IllnessDossier'
+          type: object
     PatchIllnessZwerdDossierRequestBody:
       properties:
         id:
@@ -18988,6 +19437,17 @@ components:
           description: 'Indicates if the plan of approach has been made'
           type: boolean
       type: object
+    PatchIllnessZwerdDossierResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Dossier'
+          type: object
     PatchMedicalPreventiveDossierRequestBody:
       properties:
         id:
@@ -19015,6 +19475,17 @@ components:
           format: date
           example: '2020-01-23'
       type: object
+    PatchMedicalPreventiveDossierResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Dossier'
+          type: object
     PatchPaidParentalLeaveDossierRequestBody:
       required:
         - id
@@ -19090,6 +19561,17 @@ components:
           type: string
           format: date
       type: object
+    PatchPaidParentalLeaveDossierResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Dossier'
+          type: object
     RequestedLeavePeriodEnumOptions:
       description: "The requested leave period in weeks, this will calculate and fill the 'expectedDurationDays' property."
       type: integer
@@ -19154,6 +19636,17 @@ components:
           type: string
           format: date
       type: object
+    PatchPregnancyDossierResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Dossier'
+          type: object
     PatchPreventiveDossierRequestBody:
       properties:
         id:
@@ -19190,6 +19683,17 @@ components:
           format: date
           example: '2020-01-23'
       type: object
+    PatchPreventiveDossierResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Dossier'
+          type: object
     PatchSpoor2RequestBody:
       required:
         - id
@@ -19279,6 +19783,17 @@ components:
         traject:
           $ref: '#/components/schemas/Spoor2TrajectEnumOptions'
       type: object
+    PatchSpoor2DossierResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Dossier'
+          type: object
     PatchWGADossierRequestBody:
       properties:
         id:
@@ -19333,6 +19848,17 @@ components:
           type: string
           format: date
       type: object
+    PatchWGADossierResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Dossier'
+          type: object
     PatchZwerdDossierRequestBody:
       properties:
         id:
@@ -19374,11 +19900,24 @@ components:
           type: string
           format: date
       type: object
+    PatchZwerdDossierResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Dossier'
+          type: object
     PostBasicDossierResponseBody:
       allOf:
         -
-          $ref: '#/components/schemas/PublicApiPostResponse'
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
         -
+          required:
+            - data
           properties:
             data:
               $ref: '#/components/schemas/DossierWithoutRelations'
@@ -19505,6 +20044,17 @@ components:
           minimum: 1
           example: 8
       type: object
+    PostBirthLeaveDossierResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Dossier'
+          type: object
     PostCompanyDossierRequestBody:
       required:
         - organinzationalUnitId
@@ -19522,6 +20072,17 @@ components:
           type: string
           format: uuid
       type: object
+    PostCompanyDossierResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Dossier'
+          type: object
     PostMedicalPreventiveDossierRequestBody:
       required:
         - dateStart
@@ -19550,6 +20111,17 @@ components:
           type: string
           example: EXT-DVB-3215
       type: object
+    PostMedicalPreventiveDossierResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Dossier'
+          type: object
     PostPaidParentalLeaveRequestBody:
       required:
         - dateOfBirth
@@ -19656,6 +20228,17 @@ components:
           type: integer
           example: 1
       type: object
+    PostPaidParentalLeaveDossierResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Dossier'
+          type: object
     PostPregnancyDossierRequestBody:
       required:
         - dateStart
@@ -19720,6 +20303,17 @@ components:
         requestedLeavePeriod:
           $ref: '#/components/schemas/RequestedLeavePeriodEnumOptions'
       type: object
+    PostPregnancyDossierResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Dossier'
+          type: object
     PostPreventiveDossierRequestBody:
       required:
         - dateStart
@@ -19759,6 +20353,17 @@ components:
           type: string
           format: date
       type: object
+    PostPreventiveDossierResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Dossier'
+          type: object
     PostSpoor2RequestBody:
       required:
         - dateStart
@@ -19850,6 +20455,17 @@ components:
         traject:
           $ref: '#/components/schemas/Spoor2TrajectEnumOptions'
       type: object
+    PostSpoor2DossierResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Dossier'
+          type: object
     PostWGADossierRequestBody:
       required:
         - dateStart
@@ -19875,31 +20491,20 @@ components:
           description: "The key of the employment, required if 'employmentId' is omitted"
           type: string
         dossierNumber:
-          description: 'The dossier number, defaults to 0'
+          description: 'The dossier number of the dossier'
           type: string
-        dossierOfficerId:
-          description: "The id of the dossier officer, required if 'dossierOfficerKey' is omitted"
-          type: string
-          format: uuid
-        dossierOfficerKey:
-          description: "The key of the dossier officer, required if 'dossierOfficerId' is omitted"
-          type: string
-        safetyNet:
-          $ref: '#/components/schemas/SafetyNetEnumOptions'
-        dossierClosureReason:
-          $ref: '#/components/schemas/DossierClosureReasonEnumOptions'
-        contractId:
-          description: 'The id of the contract'
-          type: string
-          format: uuid
-        expectedDurationDays:
-          description: 'The expected duration of the absence in days'
-          type: integer
-        dateCompleted:
-          description: 'The date the dossier was completed'
-          type: string
-          format: date
       type: object
+    PostWGADossierResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Dossier'
+          type: object
     PostZwerdDossierRequestBody:
       required:
         - dateStart
@@ -19947,6 +20552,17 @@ components:
           type: string
           format: date
       type: object
+    PostZwerdDossierResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Dossier'
+          type: object
     RecoveryReasonEnumOptions:
       type: string
       enum:
@@ -20031,6 +20647,7 @@ components:
           type: string
           format: date
           example: '2025-02-12'
+          nullable: true
         recoveryPercentage:
           description: 'Percentage of recovery'
           type: number
@@ -20155,6 +20772,10 @@ components:
         cvoDiagnosis:
           $ref: '#/components/schemas/CvoDiagnosis'
         cvoIsChronic:
+          type: boolean
+          example: true
+        main:
+          description: 'Flag to indicate if the diagnosis is the main diagnosis'
           type: boolean
           example: true
         secondCvoDiagnosis:
@@ -20705,6 +21326,8 @@ components:
               $ref: '#/components/schemas/EmploymentWithoutRelations'
             nursingAddress:
               $ref: '#/components/schemas/DossierAddress'
+            organizationalUnit:
+              $ref: '#/components/schemas/OrganizationalUnitWithPossibleRelationToEmployer'
           type: object
     DossierWithPossibleRelationToEmployee:
       type: object
@@ -20749,6 +21372,7 @@ components:
           type: string
           format: date
           example: '2024-12-31'
+          nullable: true
         protocol:
           $ref: '#/components/schemas/ProtocolEnumOptions'
         dossierStatus:
@@ -21507,6 +22131,17 @@ components:
         communicationMethods:
           $ref: '#/components/schemas/EmployeeRequestBodyCommunicationMethods'
       type: object
+    PatchEmployeeResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Employee'
+          type: object
     PostEmployeeRequestBodyUWV:
       properties:
         registrationNumber:
@@ -21603,6 +22238,7 @@ components:
           type: string
           format: date
           example: '2025-12-31'
+          nullable: true
         dateSeniority:
           description: 'The seniority (AOW) date of the employee. Format YYYY-MM-DD'
           type: string
@@ -21662,6 +22298,17 @@ components:
         uwv:
           $ref: '#/components/schemas/PostEmployeeRequestBodyUWV'
       type: object
+    PostEmployeeResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Employee'
+          type: object
     Employee:
       type: object
       allOf:
@@ -21905,6 +22552,17 @@ components:
           example: c9ef0d79-7c66-406d-ae4a-a66515992ef7
           nullable: true
       type: object
+    PatchEmployerResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Employer'
+          type: object
     EmployerRequestBodyContract:
       required:
         - contractTypeId
@@ -22101,6 +22759,17 @@ components:
           type: string
           example: Hengelo
       type: object
+    PostEmployerResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Employer'
+          type: object
     ArboService:
       properties:
         id:
@@ -22510,6 +23179,63 @@ components:
       enum:
         - externalKey
         - '-externalKey'
+    GetEmployerDivisionIncludeOptions:
+      type: string
+      enum:
+        - parent
+        - children
+    EmployerDivisionChild:
+      title: 'Employer Division Child'
+      description: 'A child employer division in a recursive tree structure.'
+      properties:
+        id:
+          description: 'The unique identifier for the Employer Division'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+          example: 472d87df-796d-4910-8796-ee49eddac03f
+        externalKey:
+          description: 'An identifier provided by an external system that uniquely specifies the employer division.'
+          type: string
+          maxLength: 191
+          minLength: 0
+          example: external-identifier-243934
+          nullable: true
+        migrationKey:
+          description: 'An internal key used in migration to identify Employer Division in other instances'
+          type: string
+          maxLength: 191
+          minLength: 0
+          example: staging_db-21334432
+          nullable: true
+        children:
+          description: 'The child Employer Divisions of this division'
+          type: array
+          items:
+            $ref: '#/components/schemas/EmployerDivisionChild'
+        name:
+          description: 'Name of the Employer Division'
+          type: string
+          maxLength: 191
+          minLength: 1
+          example: 'Segment A employers'
+        color:
+          description: 'Color-code associated with the Employer Division. Format #RRGGBB'
+          type: string
+          pattern: '#([A-F0-9]{6})'
+          example: '#FF0000'
+        dateCreated:
+          description: 'The creation date of the Employer Division in our system.'
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2020-01-23 12:34:56'
+        dateUpdated:
+          description: 'Last update date of the Employer Division in our system.'
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2020-01-23 12:34:56'
+      type: object
     EmployerDivision:
       title: 'Employer Division'
       properties:
@@ -22534,11 +23260,23 @@ components:
           minLength: 0
           example: staging_db-21334432
           nullable: true
+        parent:
+          oneOf:
+            -
+              $ref: '#/components/schemas/EmployerDivision'
+          nullable: true
+          description: 'The parent Employer Division of this division, if any'
         parentId:
           description: 'The unique identifier for the parent employer division'
           type: string
           format: uuid
           example: 1c6a86c9-f1de-47e2-9fd5-e7d8a28eff2e
+          nullable: true
+        children:
+          description: 'The child Employer Divisions of this division. Null if the relation is not loaded.'
+          type: array
+          items:
+            $ref: '#/components/schemas/EmployerDivisionChild'
           nullable: true
         name:
           description: 'Name of the Employer Division'
@@ -23057,6 +23795,17 @@ components:
           example: CCC123
           nullable: true
       type: object
+    PatchEmploymentContractResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/EmploymentContractResource'
+          type: object
     PatchEmploymentRequestBody:
       properties:
         id:
@@ -23126,6 +23875,17 @@ components:
           example: testEmployeeNumber
           nullable: true
       type: object
+    PatchEmploymentResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Employment'
+          type: object
     PostEmploymentContractRequestBody:
       required:
         - paymentPeriod
@@ -23222,6 +23982,17 @@ components:
           example: CCC123
           nullable: true
       type: object
+    PostEmploymentContractResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/EmploymentContractResource'
+          type: object
     PostEmploymentRequestBody:
       properties:
         employeeId:
@@ -23341,6 +24112,17 @@ components:
         paymentPeriod:
           $ref: '#/components/schemas/PaymentPeriodEnumOptions'
       type: object
+    PostEmploymentResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Employment'
+          type: object
     PaymentPeriodEnumOptions:
       type: string
       enum:
@@ -23619,10 +24401,11 @@ components:
           type: boolean
           example: true
         dateSeniority:
-          description: 'The seniority (aow) date of the employee associated with this employment. Format YYYY-MM-DD HH:MM:SS.'
+          description: 'The seniority (aow) date of the employee associated with this employment.'
           type: string
-          format: date
+          pattern: '^\d{4}-\d{2}-\d{2}$'
           example: '2060-05-30'
+          nullable: true
         employeeNumber:
           description: 'The employee number of the employee associated with this employment'
           type: string
@@ -23633,7 +24416,7 @@ components:
         dateStartChainProvision:
           description: 'The date of the start of the chain provision in YYYY-MM-DD format'
           type: string
-          format: date
+          pattern: '^\d{4}-\d{2}-\d{2}$'
           example: '2020-01-23'
           nullable: true
         uwvRiskCode:
@@ -23829,6 +24612,7 @@ components:
           type: string
           format: date
           example: '2025-12-31'
+          nullable: true
         dateCreated:
           description: 'The date and time that the insurance policy was created in our system'
           type: string
@@ -23881,6 +24665,15 @@ components:
         gender:
           $ref: '#/components/schemas/GenderEnumOptions'
       type: object
+    GetOperationSortOptions:
+      type: string
+      enum:
+        - shortCode
+        - dateCreated
+        - dateUpdated
+        - '-shortCode'
+        - '-dateCreated'
+        - '-dateUpdated'
     GetOperationResponse:
       properties:
         data:
@@ -23962,6 +24755,9 @@ components:
           type: boolean
         shouldBeBilled:
           description: 'Indicates whether the operation should be billed.'
+          type: boolean
+        isForAppointment:
+          description: 'Indicates whether the operation is specifically for appointments.'
           type: boolean
         dateCreated:
           description: 'The date and time when the operation was created in the system.'
@@ -24259,6 +25055,17 @@ components:
         uwv:
           $ref: '#/components/schemas/OrganizationalUnitCompanyUwv'
       type: object
+    PatchOrganizationalUnitResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/OrganizationalUnit'
+          type: object
     PostOrganizationalUnitRequestBody:
       required:
         - name
@@ -24312,6 +25119,7 @@ components:
           description: 'End date'
           type: string
           format: date
+          nullable: true
       type: object
     PostOrganizationalUnitRequestBodyCompanyData:
       properties:
@@ -24354,6 +25162,17 @@ components:
         communications:
           $ref: '#/components/schemas/OrganizationalUnitCommunication'
       type: object
+    PostOrganizationalUnitResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/OrganizationalUnit'
+          type: object
     LegalFormEnumOptions:
       type: string
       enum:
@@ -24607,6 +25426,7 @@ components:
           type: string
           format: date
           example: '2030-01-23'
+          nullable: true
         dateCreated:
           description: 'The datetime of when the organizational unit was created in our system'
           type: string
@@ -24664,6 +25484,7 @@ components:
           type: string
           format: date
           example: '2030-01-23'
+          nullable: true
         dateCreated:
           description: 'The datetime of when the organizational unit was created in our system'
           type: string
@@ -25089,6 +25910,12 @@ components:
           maxLength: 36
           minLength: 36
           example: 1404eaf8-419a-4e00-ada1-2e5dc044ae80
+        key:
+          description: "An identifier provided by an external system that uniquely specifies the user to be updated. This key serves as an alternative to the 'id' field for referencing the user; only one of 'id' or 'key' is needed and allowed in a request."
+          type: string
+          maxLength: 191
+          minLength: 1
+          example: 1234@external-key|test
         externalkey:
           description: 'The key known in an external system associated with the user'
           type: string
@@ -25156,6 +25983,17 @@ components:
         person:
           $ref: '#/components/schemas/UserPerson'
       type: object
+    PatchUserResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/User'
+          type: object
     PostEmployeeUserRequestBody:
       properties:
         externalkey:
@@ -25204,6 +26042,17 @@ components:
           type: boolean
           example: true
       type: object
+    PostEmployeeUserResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/User'
+          type: object
     PostUserRequestBody:
       properties:
         externalkey:
@@ -25272,6 +26121,17 @@ components:
         person:
           $ref: '#/components/schemas/UserPerson'
       type: object
+    PostUserResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/User'
+          type: object
     UserAuthorizationLevelEnumOptions:
       type: string
       enum:
@@ -25365,6 +26225,17 @@ components:
         authorization:
           $ref: '#/components/schemas/UserAuthorization'
       type: object
+    PostUserAuthorizationsResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/User'
+          type: object
     GetLinkedUserResponse:
       properties:
         data:
@@ -25388,8 +26259,10 @@ components:
     PostLinkedUserResponseBody:
       allOf:
         -
-          $ref: '#/components/schemas/PublicApiPostResponse'
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
         -
+          required:
+            - data
           properties:
             data:
               $ref: '#/components/schemas/LinkedUser'
@@ -25645,6 +26518,24 @@ components:
               -
                 $ref: '#/components/schemas/EmployerAuthorizationResource'
       type: object
+  parameters:
+    PageNumber:
+      name: 'page[number]'
+      in: query
+      description: 'The specific page number to retrieve for paginated results.'
+      required: false
+      schema:
+        type: integer
+        default: 1
+    PageSize:
+      name: 'page[size]'
+      in: query
+      description: 'The number of items per page.'
+      required: false
+      schema:
+        type: integer
+        default: 25
+        maximum: 1000
 tags:
   -
     name: 'Absence Reasons'
