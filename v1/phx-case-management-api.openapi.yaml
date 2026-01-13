@@ -16624,7 +16624,6 @@ components:
           type: array
           items:
             type: string
-          example: {  }
         traceId:
           type: string
           format: uuid
@@ -16680,7 +16679,6 @@ components:
           type: array
           items:
             type: string
-          example: {  }
         traceId:
           type: string
           format: uuid
