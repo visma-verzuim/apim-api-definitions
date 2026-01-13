@@ -5649,12 +5649,12 @@ paths:
     patch:
       tags:
         - 'Dossier Task'
-      summary: 'Update a specific dossier task by ID in the url'
+      summary: 'Update a specific dossier task by UUID in the url'
       description: 'Perform an update on a specified dossier task using its unique ID.'
-      operationId: dossier-task-id-patch-v1-essential
+      operationId: dossier-task-uuid-patch-v1-essential
       parameters:
         -
-          name: id
+          name: uuid
           in: path
           description: 'The unique identifier of the dossier task.'
           required: true
