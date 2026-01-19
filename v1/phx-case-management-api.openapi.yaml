@@ -1588,7 +1588,7 @@ paths:
           schema:
             type: string
             format: date-time-offset
-          example: '2024-01-01 12:34:56'
+          example: '2024-01-01T12:34:56+01:00'
         -
           name: 'filter[dateStartUntil]'
           in: query
@@ -1596,7 +1596,7 @@ paths:
           schema:
             type: string
             format: date-time-offset
-          example: '2024-01-01 12:34:56'
+          example: '2024-01-01T12:34:56+01:00'
         -
           name: 'filter[dateUpdatedFrom]'
           in: query
@@ -1604,7 +1604,7 @@ paths:
           schema:
             type: string
             format: date-time-offset
-          example: '2024-01-01 12:34:56'
+          example: '2024-01-01T12:34:56+01:00'
         -
           name: 'filter[dateUpdatedUntil]'
           in: query
@@ -1612,7 +1612,7 @@ paths:
           schema:
             type: string
             format: date-time-offset
-          example: '2024-01-01 12:34:56'
+          example: '2024-01-01T12:34:56+01:00'
         -
           name: 'filter[dateEndFrom]'
           in: query
@@ -1627,7 +1627,7 @@ paths:
           schema:
             type: string
             format: date-time-offset
-          example: '2024-01-01 12:34:56'
+          example: '2024-01-01T12:34:56+01:00'
         -
           name: 'filter[dateEndUntil]'
           in: query
@@ -1635,7 +1635,7 @@ paths:
           schema:
             type: string
             format: date-time-offset
-          example: '2024-01-01 12:34:56'
+          example: '2024-01-01T12:34:56+01:00'
         -
           name: 'filter[status]'
           in: query
@@ -2385,7 +2385,7 @@ paths:
           schema:
             type: string
             format: date-time-offset
-          example: '2024-01-01 12:34:56'
+          example: '2024-01-01T12:34:56+01:00'
         -
           name: 'filter[dateStartUntil]'
           in: query
@@ -2393,7 +2393,7 @@ paths:
           schema:
             type: string
             format: date-time-offset
-          example: '2024-01-01 12:34:56'
+          example: '2024-01-01T12:34:56+01:00'
         -
           name: 'filter[dateEndFrom]'
           in: query
@@ -2401,7 +2401,7 @@ paths:
           schema:
             type: string
             format: date-time-offset
-          example: '2024-01-01 12:34:56'
+          example: '2024-01-01T12:34:56+01:00'
         -
           name: 'filter[dateEndUntil]'
           in: query
@@ -2409,7 +2409,7 @@ paths:
           schema:
             type: string
             format: date-time-offset
-          example: '2024-01-01 12:34:56'
+          example: '2024-01-01T12:34:56+01:00'
         -
           name: 'filter[dateUpdatedFrom]'
           in: query
@@ -2417,7 +2417,7 @@ paths:
           schema:
             type: string
             format: date-time-offset
-          example: '2024-01-01 12:34:56'
+          example: '2024-01-01T12:34:56+01:00'
         -
           name: 'filter[dateUpdatedUntil]'
           in: query
@@ -2425,7 +2425,7 @@ paths:
           schema:
             type: string
             format: date-time-offset
-          example: '2024-01-01 12:34:56'
+          example: '2024-01-01T12:34:56+01:00'
         -
           name: sort
           in: query
@@ -16648,6 +16648,7 @@ components:
           type: array
           items:
             type: string
+          example: []
         traceId:
           type: string
           format: uuid
@@ -16703,6 +16704,7 @@ components:
           type: array
           items:
             type: string
+          example: []
         traceId:
           type: string
           format: uuid
