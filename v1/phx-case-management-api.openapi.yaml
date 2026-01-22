@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: 'BlueVi Case Management API'
-  description: 'Communicate with BlueVi directly over 100+ API endpoints.'
+  description: 'Communicate with BlueVi Case Management directly over 100+ API endpoints.'
   version: v1
 paths:
   /absence-reason:
@@ -14264,7 +14264,7 @@ paths:
                   example: internal
                 roleId:
                   type: integer
-                  example: 1122334455667788
+                  example: 123
                 username:
                   type: string
                   example: dotweb-user
@@ -16120,18 +16120,22 @@ components:
           description: 'The start date and time of the appointment in YYYY-MM-DD HH:MM:SS format'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
         dateEnd:
           description: 'The end date and time of the appointment in YYYY-MM-DD HH:MM:SS format'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
         dateCreated:
           description: 'The date and time the employee was created in YYYY-MM-DD HH:MM:SS format'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
         dateUpdated:
           description: 'The date and time the absence course was last updated in YYYY-MM-DD HH:MM:SS format'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
       type: object
     AppointmentBillingAppointment:
       properties:
@@ -17393,8 +17397,6 @@ components:
       type: object
     PatchEmployerContractRequestBody:
       description: 'You only have to submit the mutuable fields'
-      required:
-        - 'employerContractId,employerContractExternalKey'
       properties:
         employerContractId:
           description: 'The unique identifier of the employer contract (required if employerContractExternalKey is not provided)'
@@ -17449,6 +17451,10 @@ components:
           nullable: true
         contractStatus:
           $ref: '#/components/schemas/EmployerContractStatusEnumOptions'
+        useNegativeRegistration:
+          description: 'Negative Registration flag'
+          type: boolean
+          example: true
         contractNumber:
           description: 'The administrative contract number of the employer contract'
           type: string
@@ -17540,6 +17546,7 @@ components:
           description: 'Optional: the unique identifier of the organizational unit the employer contract is associated with.'
           type: string
           format: uuid
+          example: dc1a50da-1093-4809-8efc-e3553b2f49b0
         dateStart:
           description: 'The start-date of the employer contract in format YYYY-MM-DD'
           type: string
@@ -17568,6 +17575,10 @@ components:
           type: boolean
           example: true
           nullable: true
+        useNegativeRegistration:
+          description: 'Negative Registration flag'
+          type: boolean
+          example: true
         contractNumber:
           description: 'The administrative contractnumber associated to this employer-contract'
           type: string
@@ -17636,6 +17647,10 @@ components:
           nullable: true
         active:
           description: 'Indication if the contract is active'
+          type: boolean
+          example: true
+        useNegativeRegistration:
+          description: 'Negative registration flag'
           type: boolean
           example: true
         dateStart:
@@ -17820,6 +17835,10 @@ components:
           format: float
           example: 80
           nullable: true
+        useNegativeRegistration:
+          description: 'Negative registration flag'
+          type: boolean
+          example: true
         dateStart:
           description: 'The start date of the employer-contract in YYYY-MM-DD format'
           type: string
@@ -17885,6 +17904,10 @@ components:
           description: "Indicates whether tasks and dossiers from this employer remain visible in the case management portal's open tasks and dossier lists after the contract has ended (Uitloop dossier option)"
           type: boolean
           example: true
+        useNegativeRegistration:
+          description: 'Negative Registration flag'
+          type: boolean
+          example: true
         dateStart:
           description: 'The start date in YYYY-MM-DD format'
           type: string
@@ -17898,10 +17921,12 @@ components:
           description: 'The date the contract was created'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
         dateUpdated:
           description: 'The date the contract was updated'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
       type: object
     Module:
       properties:
@@ -17909,6 +17934,7 @@ components:
           description: 'ID of the module'
           type: string
           format: uuid
+          example: f8c2d4e6-1a3b-5c7d-9e0f-2a4b6c8d0e1f
         name:
           description: 'The name of the module'
           type: string
@@ -17925,10 +17951,12 @@ components:
           description: 'The date the module was created'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
         dateUpdated:
           description: 'The date the module was updated'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
       type: object
     OwnRiskContract:
       properties:
@@ -17984,10 +18012,12 @@ components:
           description: 'The date and time the partnership was created in our system. Format YYYY-MM-DD HH:MM:SS'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
         dateUpdated:
           description: 'The date and time the partnership was last updated in our system. Format YYYY-MM-DD HH:MM:SS'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
       type: object
     ServiceType:
       properties:
@@ -18467,6 +18497,7 @@ components:
           type: string
           maxLength: 191
           minLength: 1
+          example: external-resource-key
         externalKey:
           description: "An identifier provided by an external system that uniquely specifies the external resource. This key serves as an alternative to the 'id' field for referencing the external resource."
           type: string
@@ -19185,6 +19216,7 @@ components:
           format: uuid
           maxLength: 36
           minLength: 36
+          example: 3f8a90e8-ab71-4ef4-bcdf-a1ef5b71ab62
         externalKey:
           description: "An identifier provided by an external system that uniquely specifies the dossier. This key serves as an alternative to the 'id' field for referencing the dossier."
           type: string
@@ -19290,6 +19322,7 @@ components:
           type: string
           maxLength: 191
           minLength: 0
+          example: '0'
           nullable: true
         dossierOfficerId:
           description: "The id of the dossier officer, required if 'dossierOfficerKey' is omitted"
@@ -19313,6 +19346,7 @@ components:
           description: 'The unique identifier of the contract'
           type: string
           format: uuid
+          example: 88a500c7-5095-44b8-a58f-4af561ba1d72
         expectedDurationDays:
           description: 'The expected duration of the dossier in days'
           type: integer
@@ -19391,6 +19425,7 @@ components:
           type: string
           maxLength: 191
           minLength: 0
+          example: '0'
           nullable: true
         dossierOfficerId:
           description: "The unique identifier of the dossier officer, required if 'dossierOfficerKey' is omitted"
@@ -19589,6 +19624,7 @@ components:
           type: string
           maxLength: 191
           minLength: 0
+          example: external-key-123
           nullable: true
         migrationKeyId:
           $ref: '#/components/schemas/PatchRequestPropertyMigrationKeyId'
@@ -19616,6 +19652,7 @@ components:
           type: string
           maxLength: 191
           minLength: 0
+          example: '0'
           nullable: true
         dossierOfficerId:
           description: "The unique identifier of the dossier officer, required if 'dossierOfficerKey' is omitted"
@@ -19624,6 +19661,7 @@ components:
         dossierOfficerKey:
           description: "The key of the dossier officer, required if 'dossierOfficerId' is omitted"
           type: string
+          example: officer-key-789
         safetyNet:
           $ref: '#/components/schemas/SafetyNetEnumOptions'
         dossierClosureReason:
@@ -19762,6 +19800,7 @@ components:
           type: string
           maxLength: 191
           minLength: 0
+          example: external-key-123
           nullable: true
         dateReported:
           description: 'The date the dossier was reported in format YYYY-MM-DD'
@@ -19836,7 +19875,7 @@ components:
           type: string
           maxLength: 191
           minLength: 0
-          example: dosnr-2345
+          example: '0'
           nullable: true
         dossierOfficerId:
           description: "The unique identifier of the dossier officer, required if 'dossierOfficerKey' is omitted"
@@ -19900,6 +19939,7 @@ components:
           description: 'The id for the dossier'
           type: string
           format: uuid
+          example: 3f8a90e8-ab71-4ef4-bcdf-a1ef5b71ab62
         key:
           description: "An identifier provided by an external system that uniquely specifies the dossier to be updated. The key of the dossier, this is an alternative to the 'id' field for referencing the dossier"
           type: string
@@ -19929,10 +19969,15 @@ components:
         dossierNumber:
           description: 'The dossier number, defaults to 0'
           type: string
+          maxLength: 191
+          minLength: 0
+          example: '0'
+          nullable: true
         dossierOfficerId:
           description: "The id of the dossier officer, required if 'dossierOfficerKey' is omitted"
           type: string
           format: uuid
+          example: 65eb91e5-4e61-4144-91ea-f60af3a08a78
         dossierOfficerKey:
           description: "The key of the dossier officer, required if 'dossierOfficerId' is omitted"
           type: string
@@ -19944,6 +19989,7 @@ components:
           description: 'The id of the contract'
           type: string
           format: uuid
+          example: 88a500c7-5095-44b8-a58f-4af561ba1d72
         expectedDurationDays:
           description: 'The expected duration of the absence in days'
           type: integer
@@ -20086,6 +20132,7 @@ components:
           type: string
           maxLength: 191
           minLength: 0
+          example: external-key-123
           nullable: true
         migrationKey:
           $ref: '#/components/schemas/PostRequestPropertyMigrationKey'
@@ -20112,11 +20159,16 @@ components:
           type: string
           maxLength: 191
           minLength: 0
+          example: employment-key-456
         protocol:
           $ref: '#/components/schemas/ProtocolEnumOptions'
         dossierNumber:
           description: 'The dossier number, defaults to 0'
           type: string
+          maxLength: 191
+          minLength: 0
+          example: '0'
+          nullable: true
         dossierOfficerId:
           description: "The unqiue identifier of the dossier officer, required if 'dossierOfficerKey' is omitted"
           type: string
@@ -20124,6 +20176,7 @@ components:
         dossierOfficerKey:
           description: "The key of the dossier officer, required if 'dossierOfficerId' is omitted"
           type: string
+          example: officer-key-789
         safetyNet:
           $ref: '#/components/schemas/SafetyNetEnumOptions'
         dossierClosureReason:
@@ -20288,12 +20341,13 @@ components:
           type: string
           maxLength: 191
           minLength: 0
-          example: '123'
+          example: '0'
           nullable: true
         dossierOfficerId:
           description: "The unique identifier of the dossier officer, required if 'dossierOfficerKey' is omitted"
           type: string
           format: uuid
+          example: 65eb91e5-4e61-4144-91ea-f60af3a08a78
         dossierOfficerKey:
           description: "The external key of the dossier officer, required if 'dossierOfficerId' is omitted"
           type: string
@@ -20532,7 +20586,7 @@ components:
           type: string
           maxLength: 191
           minLength: 0
-          example: dos-123
+          example: '0'
           nullable: true
         dossierOfficerId:
           description: "The unique identifier of the dossier officer, required if 'dossierOfficerKey' is omitted"
@@ -20619,6 +20673,10 @@ components:
         dossierNumber:
           description: 'The dossier number of the dossier'
           type: string
+          maxLength: 191
+          minLength: 0
+          example: '0'
+          nullable: true
       type: object
     PostWGADossierResponse:
       allOf:
@@ -21010,17 +21068,20 @@ components:
           type: string
           maxLength: 191
           minLength: 0
+          example: external-key-123
           nullable: true
         title:
           description: 'The title of the Dossier Document.'
           type: string
           maxLength: 191
           minLength: 1
+          example: 'Example Document Title'
         content:
           description: 'The content of the Dossier Document.'
           type: string
           maxLength: 67108863
           minLength: 1
+          example: 'This is the document content example.'
         isConcept:
           description: 'Whether the Dossier Document is a concept.'
           type: boolean
@@ -21034,10 +21095,12 @@ components:
           description: 'The date and time the Dossier Document was created.'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
         dateUpdated:
           description: 'The date and time the Dossier Document was last updated.'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
         dossier:
           oneOf:
             -
@@ -21070,22 +21133,26 @@ components:
           type: string
           maxLength: 191
           minLength: 0
+          example: external-key-123
           nullable: true
         migrationKey:
           description: 'The internal migration key associated with the document type'
           type: string
           maxLength: 191
           minLength: 0
+          example: migration-key-456
         name:
           description: 'Name of the document type'
           type: string
           maxLength: 191
           minLength: 1
+          example: 'Example Document Type'
         code:
           description: 'Code of the document type'
           type: string
           maxLength: 191
           minLength: 0
+          example: DOC_TYPE_CODE
           nullable: true
         communicateWithEmployee:
           description: 'Indication if the documents needs to be shared with the employee'
@@ -21118,10 +21185,12 @@ components:
           description: 'Date and time the document type was created in our system'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
         dateUpdated:
           description: 'Date the document type was last updated in our system'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
       type: object
     DossierNoteResource:
       properties:
@@ -21136,17 +21205,20 @@ components:
           type: string
           maxLength: 191
           minLength: 0
+          example: external-key-123
           nullable: true
         title:
           description: 'The title of the Dossier Note.'
           type: string
           maxLength: 191
           minLength: 1
+          example: 'Example Note Title'
         content:
           description: 'The content of the Dossier Note.'
           type: string
           maxLength: 67108863
           minLength: 1
+          example: 'This is the note content example.'
         forBothParties:
           description: 'Whether the Dossier Note is for both parties.'
           type: boolean
@@ -21160,10 +21232,12 @@ components:
           description: 'The date and time the Dossier Note was created in our system.'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
         dateUpdated:
           description: 'The date and time the Dossier Note was updated in our system.'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
         dossier:
           oneOf:
             -
@@ -21196,22 +21270,26 @@ components:
           type: string
           maxLength: 191
           minLength: 0
+          example: external-key-123
           nullable: true
         migrationKey:
           description: 'The internal migration key associated with the note type'
           type: string
           maxLength: 191
           minLength: 0
+          example: migration-key-456
         name:
           description: 'Name of the note type'
           type: string
           maxLength: 191
           minLength: 1
+          example: 'Example Note Type'
         code:
           description: 'Code of the note type'
           type: string
           maxLength: 191
           minLength: 0
+          example: NOTE_TYPE_CODE
           nullable: true
         isMedical:
           description: 'Indicates if the note type is available in medical'
@@ -21229,10 +21307,12 @@ components:
           description: 'Date and time the note type was created in our system'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
         dateUpdated:
           description: 'Date and time the note type was last updated in our system'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
       type: object
     DossierUploadResource:
       properties:
@@ -21247,17 +21327,20 @@ components:
           type: string
           maxLength: 191
           minLength: 0
+          example: external-key-123
           nullable: true
         title:
           description: 'The title of the Dossier Upload.'
           type: string
           maxLength: 191
           minLength: 1
+          example: 'Example Upload Title'
         note:
           description: 'An optional note or comment attached to the upload, offering additional context or details regarding the file'
           type: string
           maxLength: 65535
           minLength: 0
+          example: 'Additional notes about this upload'
           nullable: true
         forBothParties:
           description: 'Whether the Dossier Upload is for both parties.'
@@ -21269,10 +21352,12 @@ components:
           description: 'The date and time the Dossier Upload was created in our system.'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
         dateUpdated:
           description: 'The date and time the Dossier Upload was last updated in our system.'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
         dossier:
           oneOf:
             -
@@ -21347,10 +21432,12 @@ components:
           description: 'Date the upload type was created in our system'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
         dateUpdated:
           description: 'Date the upload type was last updated in our system'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
       type: object
     DossierExternalResourceResource:
       properties:
@@ -21383,10 +21470,12 @@ components:
           description: 'The date the dossier external resource was created'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
         dateUpdated:
           description: 'The date the dossier external resource was updated'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
       type: object
     DossierTypeEnumOptions:
       type: string
@@ -21502,17 +21591,17 @@ components:
         dateReported:
           description: 'Date the dossier was reported, formatted in ISO8601 (YYYY-MM-DD).'
           type: string
-          format: date
+          pattern: '^\d{4}-\d{2}-\d{2}$'
           example: '2020-01-23'
         dateStart:
           description: 'The effective start date of the Dossier, formatted in ISO8601 (YYYY-MM-DD).'
           type: string
-          format: date
+          pattern: '^\d{4}-\d{2}-\d{2}$'
           example: '2024-01-01'
         dateEnd:
           description: 'The completion or closure date of the Dossier, formatted in ISO8601 (YYYY-MM-DD).'
           type: string
-          format: date
+          pattern: '^\d{4}-\d{2}-\d{2}$'
           example: '2024-12-31'
           nullable: true
         protocol:
@@ -21541,9 +21630,11 @@ components:
         pa:
           description: 'Indicates if the problem analysis has been made'
           type: boolean
+          example: true
         pva:
           description: 'Indicates if the plan of approach has been made'
           type: boolean
+          example: false
       type: object
     DossierSection:
       properties:
@@ -21584,7 +21675,8 @@ components:
         color:
           description: 'Color of the dossier section.'
           type: string
-          pattern: '^#[A-F0-9]{6}$'
+          pattern: '^#[a-fA-F0-9]{6}$'
+          example: '#FF0000'
         canContainNotes:
           description: 'Whether the dossier section can contain notes'
           type: boolean
@@ -21663,21 +21755,25 @@ components:
           description: 'The date when the task is scheduled to be completed.'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2}$'
+          example: '2026-01-20'
           nullable: true
         dateCompleted:
           description: 'The date and time when the task is marked as completed'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
           nullable: true
         dateCreated:
           description: 'The date and time of the creation of the dossier-task'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
           nullable: true
         dateUpdated:
           description: 'The date and time of the last-update of the dossier-task'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
           nullable: true
       type: object
     DossierTask:
@@ -21998,11 +22094,13 @@ components:
           description: 'The date and time when the ZWERD record was created'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
           nullable: true
         dateUpdated:
           description: 'The date and time when the ZWERD record was last updated'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
       type: object
     GetDossierOfficerResponse:
       properties:
@@ -22374,18 +22472,18 @@ components:
         dateStart:
           description: 'The start date of the first Employment Contract of the employee. Format YYYY-MM-DD'
           type: string
-          format: date
+          pattern: '^\d{4}-\d{2}-\d{2}$'
           example: '2020-01-23'
         dateEnd:
           description: 'The end date of the first Employment Contract of the employee. Format YYYY-MM-DD'
           type: string
-          format: date
+          pattern: '^\d{4}-\d{2}-\d{2}$'
           example: '2025-12-31'
           nullable: true
         dateSeniority:
           description: 'The seniority (AOW) date of the employee. Format YYYY-MM-DD'
           type: string
-          format: date
+          pattern: '^\d{4}-\d{2}-\d{2}$'
           example: '2060-05-15'
         employmentEndReason:
           $ref: '#/components/schemas/EmploymentEndReasonEnumOptions'
@@ -22962,7 +23060,7 @@ components:
       type: object
     EmployerAddress:
       properties:
-        uuid:
+        id:
           description: 'The unique identifier of the employer address'
           type: string
           format: uuid
@@ -23537,7 +23635,7 @@ components:
         - business
     EmployerPersonCommunicationsResource:
       properties:
-        uuid:
+        id:
           description: 'The unique identifier of the communication method'
           type: string
           maxLength: 36
@@ -24319,12 +24417,12 @@ components:
         dateStart:
           description: 'The start date associated with the employment contract. (Format YYYY-MM-DD)'
           type: string
-          format: date
+          pattern: '^\d{4}-\d{2}-\d{2}$'
           example: '1990-01-01'
         dateEnd:
           description: 'The end date associated with the employment contract. (Format YYYY-MM-DD)'
           type: string
-          format: date
+          pattern: '^\d{4}-\d{2}-\d{2}$'
           example: '2000-01-01'
           nullable: true
         jobTitle:
@@ -24362,7 +24460,7 @@ components:
           example: month
         organizationalUnit:
           $ref: '#/components/schemas/OrganizationalUnit'
-        univeralSalary:
+        universalSalary:
           description: 'The universal(uniform) salary associated with the employment contract.'
           type: number
           format: double
@@ -24406,11 +24504,13 @@ components:
           description: 'The start date associated with the employment contract. (Format YYYY-MM-DD)'
           type: string
           format: date
+          pattern: '^\d{4}-\d{2}-\d{2}$'
           example: '1990-01-01'
         dateEnd:
           description: 'The end date associated with the employment contract. (Format YYYY-MM-DD)'
           type: string
           format: date
+          pattern: '^\d{4}-\d{2}-\d{2}$'
           example: '2000-01-01'
           nullable: true
         jobTitle:
@@ -24446,7 +24546,7 @@ components:
           example: month
         organizationalUnit:
           $ref: '#/components/schemas/OrganizationalUnitWithPossibleRelationToEmployer'
-        univeralSalary:
+        universalSalary:
           description: 'The universal(uniform) salary associated with the employment contract.'
           type: number
           format: double
@@ -25124,6 +25224,7 @@ components:
           description: "The unique identifier of the parent organizational unit, mutually exclusive with 'parentOrganizationalUnitKey', nullable"
           type: string
           format: uuid
+          example: 40b03a3c-e304-4b8f-b4ae-562b315e36f2
           nullable: true
         parentOrganizationalUnitKey:
           description: "The key of the parent organizational unit, mutually exclusive with 'parentOrganizationalUnitId'"
@@ -25388,7 +25489,7 @@ components:
       type: object
     OrganizationalUnitAddress:
       properties:
-        uuid:
+        id:
           description: 'The unique identifier of the OrganizationalUnit address'
           type: string
           format: uuid
@@ -25471,7 +25572,7 @@ components:
           minLength: 0
           example: other-db-ref-904358
           nullable: true
-        OrganizationalUnitId:
+        organizationalUnitId:
           description: 'The OrganizationalUnit ID associated with the OrganizationalUnit communication'
           type: string
           format: uuid
@@ -25986,14 +26087,17 @@ components:
           description: 'The date and time that the task was deleted.'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
         dateCreated:
           description: 'The date and time that the task was created.'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
         dateUpdated:
           description: 'The date and time that the task was last updated.'
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-20 12:34:56'
       type: object
     GetUserResponse:
       properties:
@@ -26377,6 +26481,7 @@ components:
           description: 'The unique identifier of the user where the authorization is set for'
           type: string
           format: uuid
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
         externalkey:
           description: 'The key of an external system, associated with the user where the authorization is set for'
           type: string
@@ -26559,7 +26664,7 @@ components:
           maxLength: 191
           minLength: 1
           example: user123
-        user_type_id:
+        userTypeId:
           description: 'User type id of the user. Obtainable by the list of usertype'
           type: integer
           example: 15
@@ -26611,6 +26716,7 @@ components:
           description: 'The unique identifier of the user'
           type: string
           format: uuid
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
         externalKey:
           description: "An identifier provided by an external system that uniquely specifies the user. This key serves as an alternative to the 'id' field for referencing the user."
           type: string
