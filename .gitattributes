@@ -1,0 +1,2 @@
+# Normalize line endings to LF for PHX Case Management API
+v1/phx-case-management-api.openapi.yaml text eol=lf
