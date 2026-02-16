@@ -58,7 +58,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of absence reasons that match the given filters'
           content:
             application/json:
@@ -79,7 +79,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -100,7 +100,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -209,7 +209,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of appointments'
           content:
             application/json:
@@ -230,7 +230,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -251,7 +251,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Internal Server Error'
           content:
             application/json:
@@ -396,7 +396,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of billable availabilities'
           content:
             application/json:
@@ -417,7 +417,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -438,7 +438,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server Error'
           content:
             application/json:
@@ -473,7 +473,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostAuthTokenRequestBody'
       responses:
-        '200':
+        200:
           description: 'Successful response'
           content:
             application/json:
@@ -494,7 +494,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -515,7 +515,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '401':
+        401:
           description: Unauthorized
           content:
             application/json:
@@ -536,7 +536,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '422':
+        422:
           description: 'Unprocessable Entity'
           content:
             application/json:
@@ -580,7 +580,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostAuthTokenRequestBody'
       responses:
-        '200':
+        200:
           description: 'Successful response'
           content:
             application/json:
@@ -601,7 +601,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -622,7 +622,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '401':
+        401:
           description: Unauthorized
           content:
             application/json:
@@ -643,7 +643,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '422':
+        422:
           description: 'Unprocessable Entity'
           content:
             application/json:
@@ -680,9 +680,9 @@ paths:
       description: 'This endpoint checks if the API is online and operational, confirming that it is running smoothly and able to respond to requests.'
       operationId: health-ping-get-v1-essential
       responses:
-        '200':
+        200:
           description: 'The health check was successful and the API is functioning properly.'
-        '500':
+        500:
           description: 'An internal server error occurred. This indicates that there was an issue processing the health check.'
           content:
             application/json:
@@ -729,7 +729,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of available arbo roles'
           content:
             application/json:
@@ -750,7 +750,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -771,7 +771,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -830,7 +830,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of company doctors'
           content:
             application/json:
@@ -851,7 +851,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -872,7 +872,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -988,7 +988,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of contact persons matching the query parameters.'
           content:
             application/json:
@@ -1009,7 +1009,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -1030,7 +1030,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -1081,7 +1081,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostContactPersonRequestBody'
       responses:
-        '201':
+        201:
           description: 'Contact person successfully created'
           content:
             application/json:
@@ -1102,7 +1102,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -1123,7 +1123,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -1173,7 +1173,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchContactPersonRequestBody'
       responses:
-        '200':
+        200:
           description: Success
           content:
             application/json:
@@ -1194,7 +1194,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -1215,7 +1215,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -1274,7 +1274,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchContactPersonRequestBody'
       responses:
-        '200':
+        200:
           description: 'Successful request'
           content:
             application/json:
@@ -1295,7 +1295,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -1316,7 +1316,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -1361,7 +1361,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'Employer contract successfully deleted'
           content:
             application/json:
@@ -1382,7 +1382,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -1403,7 +1403,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -1487,7 +1487,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of contract types'
           content:
             application/json:
@@ -1508,7 +1508,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -1529,7 +1529,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -1670,7 +1670,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of employer contracts'
           content:
             application/json:
@@ -1691,7 +1691,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -1712,7 +1712,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -1746,7 +1746,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostEmployerContractRequestBody'
       responses:
-        '201':
+        201:
           description: 'Employer Contract successfully created'
           content:
             application/json:
@@ -1767,7 +1767,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -1788,7 +1788,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -1831,7 +1831,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchEmployerContractRequestBody'
       responses:
-        '200':
+        200:
           description: 'Employer successfully updated'
           content:
             application/json:
@@ -1852,7 +1852,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -1873,7 +1873,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -1946,7 +1946,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of modules that can be applied to employer contracts'
           content:
             application/json:
@@ -1967,7 +1967,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -1988,7 +1988,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -2066,7 +2066,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of partnerships'
           content:
             application/json:
@@ -2087,7 +2087,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -2108,7 +2108,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -2161,7 +2161,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of service types'
           content:
             application/json:
@@ -2182,7 +2182,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -2203,7 +2203,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -2249,7 +2249,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'Absence course successfully deleted'
           content:
             application/json:
@@ -2270,7 +2270,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -2291,7 +2291,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -2460,7 +2460,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of AbsenceCourses'
           content:
             application/json:
@@ -2481,7 +2481,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad request'
           content:
             application/json:
@@ -2502,7 +2502,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -2537,7 +2537,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostAbsenceCourseRequestBody'
       responses:
-        '201':
+        201:
           description: 'Absence course successfully created'
           content:
             application/json:
@@ -2558,7 +2558,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -2579,7 +2579,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -2622,7 +2622,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchAbsenceCourseRequestBody'
       responses:
-        '200':
+        200:
           description: 'Absence course successfully updated'
           content:
             application/json:
@@ -2643,7 +2643,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -2664,7 +2664,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -2717,7 +2717,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'Dossier successfully deleted'
           content:
             application/json:
@@ -2738,7 +2738,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -2759,7 +2759,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -2794,7 +2794,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostDiagnosisRequestBody'
       responses:
-        '201':
+        201:
           description: 'Diagnosis successfully created'
           content:
             application/json:
@@ -2815,7 +2815,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -2836,7 +2836,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -2962,7 +2962,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of document types'
           content:
             application/json:
@@ -2983,7 +2983,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -3004,7 +3004,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -3101,7 +3101,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of note types'
           content:
             application/json:
@@ -3122,7 +3122,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -3143,7 +3143,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -3247,7 +3247,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of upload types'
           content:
             application/json:
@@ -3268,7 +3268,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -3289,7 +3289,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -3334,7 +3334,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'Document successfully deleted'
           content:
             application/json:
@@ -3355,7 +3355,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -3376,7 +3376,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -3497,7 +3497,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of documents'
           content:
             application/json:
@@ -3518,7 +3518,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -3539,7 +3539,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -3574,7 +3574,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostDossierDocumentRequestBody'
       responses:
-        '201':
+        201:
           description: 'The document was successfully created'
           content:
             application/json:
@@ -3595,7 +3595,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -3616,7 +3616,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -3659,7 +3659,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchDossierDocumentRequestBody'
       responses:
-        '200':
+        200:
           description: 'The document was successfully updated'
           content:
             application/json:
@@ -3680,7 +3680,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -3701,7 +3701,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -3761,7 +3761,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchDossierDocumentRequestBody'
       responses:
-        '200':
+        200:
           description: 'The document was successfully updated'
           content:
             application/json:
@@ -3782,7 +3782,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -3803,7 +3803,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -3847,7 +3847,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'Dossier external resource successfully deleted'
           content:
             application/json:
@@ -3868,7 +3868,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -3889,7 +3889,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -3940,7 +3940,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchDossierExternalResourceRequestBody'
       responses:
-        '200':
+        200:
           description: 'Dossier external resource created'
           content:
             application/json:
@@ -3961,7 +3961,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -3982,7 +3982,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server Error'
           content:
             application/json:
@@ -4048,7 +4048,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A List of Dossier external resources that match the given filters'
           content:
             application/json:
@@ -4069,7 +4069,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -4090,7 +4090,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server Error'
           content:
             application/json:
@@ -4125,7 +4125,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostDossierExternalResourceRequestBody'
       responses:
-        '201':
+        201:
           description: 'Dossier external resource created'
           content:
             application/json:
@@ -4146,7 +4146,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -4167,7 +4167,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server Error'
           content:
             application/json:
@@ -4210,7 +4210,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchDossierExternalResourceRequestBody'
       responses:
-        '200':
+        200:
           description: 'Dossier external resource created'
           content:
             application/json:
@@ -4231,7 +4231,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -4252,7 +4252,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server Error'
           content:
             application/json:
@@ -4311,7 +4311,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostDossierExternalResourceRequestBody'
       responses:
-        '201':
+        201:
           description: 'Dossier external resource created'
           content:
             application/json:
@@ -4332,7 +4332,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -4353,7 +4353,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server Error'
           content:
             application/json:
@@ -4398,7 +4398,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'Note successfully deleted'
           content:
             application/json:
@@ -4419,7 +4419,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -4440,7 +4440,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -4568,7 +4568,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of notes'
           content:
             application/json:
@@ -4589,7 +4589,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -4610,7 +4610,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server Error'
           content:
             application/json:
@@ -4645,7 +4645,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostDossierNoteRequestBody'
       responses:
-        '201':
+        201:
           description: 'The note was successfully created'
           content:
             application/json:
@@ -4666,7 +4666,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -4687,7 +4687,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -4730,7 +4730,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchDossierNoteRequestBody'
       responses:
-        '200':
+        200:
           description: 'The note was successfully updated'
           content:
             application/json:
@@ -4751,7 +4751,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -4772,7 +4772,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -4832,7 +4832,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchDossierNoteRequestBody'
       responses:
-        '200':
+        200:
           description: 'The note was successfully updated'
           content:
             application/json:
@@ -4853,7 +4853,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -4874,7 +4874,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -4919,7 +4919,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'Dossier upload successfully deleted'
           content:
             application/json:
@@ -4940,7 +4940,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -4961,7 +4961,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -5067,7 +5067,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of uploads'
           content:
             application/json:
@@ -5088,7 +5088,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -5109,7 +5109,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server Error'
           content:
             application/json:
@@ -5144,7 +5144,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostDossierUploadRequestBody'
       responses:
-        '201':
+        201:
           description: 'The upload was successfully created'
           content:
             application/json:
@@ -5165,7 +5165,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -5186,7 +5186,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -5229,7 +5229,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchDossierUploadRequestBody'
       responses:
-        '200':
+        200:
           description: 'The upload was successfully updated'
           content:
             application/json:
@@ -5250,7 +5250,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -5271,7 +5271,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -5331,7 +5331,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchDossierUploadRequestBody'
       responses:
-        '200':
+        200:
           description: 'The upload was successfully updated'
           content:
             application/json:
@@ -5352,7 +5352,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -5373,7 +5373,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -5520,7 +5520,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of dossier tasks'
           content:
             application/json:
@@ -5541,7 +5541,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -5562,7 +5562,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -5596,7 +5596,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostDossierTaskRequestBody'
       responses:
-        '201':
+        201:
           description: 'Dossier Task created successfully'
           content:
             application/json:
@@ -5617,7 +5617,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -5638,7 +5638,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -5681,7 +5681,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchDossierTaskRequestBody'
       responses:
-        '200':
+        200:
           description: 'Dossier task successfully updated.'
           content:
             application/json:
@@ -5702,7 +5702,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Invalid input provided.'
           content:
             application/json:
@@ -5723,7 +5723,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Internal server error encountered.'
           content:
             application/json:
@@ -5784,7 +5784,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchDossierTaskRequestBody'
       responses:
-        '200':
+        200:
           description: 'Dossier task successfully updated.'
           content:
             application/json:
@@ -5805,7 +5805,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Invalid input provided.'
           content:
             application/json:
@@ -5826,7 +5826,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Internal server error occurred.'
           content:
             application/json:
@@ -5946,7 +5946,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of birth leave dossiers'
           content:
             application/json:
@@ -5967,7 +5967,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -5988,7 +5988,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -6023,7 +6023,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostBirthLeaveRequestBody'
       responses:
-        '201':
+        201:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -6044,7 +6044,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -6065,7 +6065,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -6108,7 +6108,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchBirthLeaveDossierRequestBody'
       responses:
-        '200':
+        200:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -6129,7 +6129,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -6150,7 +6150,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -6286,7 +6286,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of Dossiers'
           content:
             application/json:
@@ -6307,7 +6307,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -6328,7 +6328,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -6438,7 +6438,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of Preventive Dossiers'
           content:
             application/json:
@@ -6459,7 +6459,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -6480,7 +6480,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -6515,7 +6515,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostPreventiveDossierRequestBody'
       responses:
-        '201':
+        201:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -6536,7 +6536,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -6557,7 +6557,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -6600,7 +6600,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchPreventiveDossierRequestBody'
       responses:
-        '200':
+        200:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -6621,7 +6621,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -6642,7 +6642,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -6760,7 +6760,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of Medical Preventive Dossiers'
           content:
             application/json:
@@ -6781,7 +6781,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -6802,7 +6802,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -6837,7 +6837,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostMedicalPreventiveDossierRequestBody'
       responses:
-        '201':
+        201:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -6858,7 +6858,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -6879,7 +6879,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -6922,7 +6922,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchMedicalPreventiveDossierRequestBody'
       responses:
-        '200':
+        200:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -6943,7 +6943,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -6964,7 +6964,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -7055,7 +7055,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of dossier sections'
           content:
             application/json:
@@ -7076,7 +7076,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad request'
           content:
             application/json:
@@ -7097,7 +7097,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -7134,7 +7134,7 @@ paths:
             type: string
             format: uuid
       responses:
-        '200':
+        200:
           description: 'File content streamed successfully'
           headers:
             Content-Type:
@@ -7163,13 +7163,13 @@ paths:
                 description: 'Binary file content'
                 type: string
                 format: binary
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestResponse'
-        '500':
+        500:
           description: 'Server Error'
           content:
             application/json:
@@ -7271,7 +7271,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of Illness Dossiers'
           content:
             application/json:
@@ -7292,7 +7292,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -7313,7 +7313,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -7348,7 +7348,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchIllnessRequestBody'
       responses:
-        '200':
+        200:
           description: 'Dossier successfully updated'
           content:
             application/json:
@@ -7369,7 +7369,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Invalid input'
           content:
             application/json:
@@ -7390,7 +7390,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -7515,7 +7515,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of Illness and ZW-ERD Dossiers'
           content:
             application/json:
@@ -7536,7 +7536,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -7557,7 +7557,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -7592,7 +7592,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchIllnessZwerdDossierRequestBody'
       responses:
-        '200':
+        200:
           description: 'Dossier successfully updated'
           content:
             application/json:
@@ -7613,7 +7613,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Invalid input'
           content:
             application/json:
@@ -7634,7 +7634,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -7770,7 +7770,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of medical dossiers'
           content:
             application/json:
@@ -7791,7 +7791,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -7812,7 +7812,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -7929,7 +7929,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of paid parental leave dossiers'
           content:
             application/json:
@@ -7950,7 +7950,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -7971,7 +7971,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -8006,7 +8006,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostPaidParentalLeaveRequestBody'
       responses:
-        '201':
+        201:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -8027,7 +8027,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -8048,7 +8048,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -8091,7 +8091,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchPaidParentalLeaveDossierRequestBody'
       responses:
-        '200':
+        200:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -8112,7 +8112,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -8133,7 +8133,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -8262,7 +8262,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of pregnancy dossiers'
           content:
             application/json:
@@ -8283,7 +8283,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -8304,7 +8304,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -8339,7 +8339,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostPregnancyDossierRequestBody'
       responses:
-        '201':
+        201:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -8360,7 +8360,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -8381,7 +8381,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -8424,7 +8424,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchPregnancyDossierRequestBody'
       responses:
-        '200':
+        200:
           description: 'Dossier successfully updated'
           content:
             application/json:
@@ -8445,7 +8445,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Invalid input'
           content:
             application/json:
@@ -8466,7 +8466,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -8519,7 +8519,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'Retrieved return to work advice successfully'
           content:
             application/json:
@@ -8540,7 +8540,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -8561,7 +8561,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -8674,7 +8674,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of Spoor-2 Dossiers'
           content:
             application/json:
@@ -8695,7 +8695,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -8716,7 +8716,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -8751,7 +8751,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostSpoor2RequestBody'
       responses:
-        '201':
+        201:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -8772,7 +8772,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -8793,7 +8793,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -8836,7 +8836,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchSpoor2RequestBody'
       responses:
-        '200':
+        200:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -8857,7 +8857,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -8878,7 +8878,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -9007,7 +9007,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of ZW-ERD Dossiers'
           content:
             application/json:
@@ -9028,7 +9028,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -9049,7 +9049,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -9084,7 +9084,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostZwerdDossierRequestBody'
       responses:
-        '201':
+        201:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -9105,7 +9105,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -9126,7 +9126,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -9169,7 +9169,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchZwerdDossierRequestBody'
       responses:
-        '200':
+        200:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -9190,7 +9190,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -9211,7 +9211,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -9255,7 +9255,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostBasicDossierRequestBody'
       responses:
-        '201':
+        201:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -9276,7 +9276,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -9297,7 +9297,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -9340,7 +9340,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchBasicRequestBody'
       responses:
-        '200':
+        200:
           description: 'Dossier successfully updated'
           content:
             application/json:
@@ -9361,7 +9361,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -9382,7 +9382,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -9426,7 +9426,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostBasicDossierRequestBody'
       responses:
-        '201':
+        201:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -9447,7 +9447,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -9468,7 +9468,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -9511,7 +9511,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchBasicRequestBody'
       responses:
-        '200':
+        200:
           description: 'Dossier successfully updated'
           content:
             application/json:
@@ -9532,7 +9532,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -9553,7 +9553,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -9597,7 +9597,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostBasicDossierRequestBody'
       responses:
-        '201':
+        201:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -9618,7 +9618,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -9639,7 +9639,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -9682,7 +9682,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchBasicRequestBody'
       responses:
-        '200':
+        200:
           description: 'Dossier successfully updated'
           content:
             application/json:
@@ -9703,7 +9703,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -9724,7 +9724,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -9768,7 +9768,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostBasicDossierRequestBody'
       responses:
-        '201':
+        201:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -9789,7 +9789,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -9810,7 +9810,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -9853,7 +9853,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchBasicRequestBody'
       responses:
-        '200':
+        200:
           description: 'Dossier successfully updated'
           content:
             application/json:
@@ -9874,7 +9874,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -9895,7 +9895,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -9939,7 +9939,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchBasicRequestBody'
       responses:
-        '200':
+        200:
           description: 'Dossier successfully updated'
           content:
             application/json:
@@ -9960,7 +9960,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -9981,7 +9981,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -10025,7 +10025,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostBasicDossierRequestBody'
       responses:
-        '201':
+        201:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -10046,7 +10046,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -10067,7 +10067,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -10110,7 +10110,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchBasicRequestBody'
       responses:
-        '200':
+        200:
           description: 'Dossier successfully updated'
           content:
             application/json:
@@ -10131,7 +10131,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -10152,7 +10152,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -10196,7 +10196,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostBasicDossierRequestBody'
       responses:
-        '201':
+        201:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -10217,7 +10217,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -10238,7 +10238,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -10281,7 +10281,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchBasicRequestBody'
       responses:
-        '200':
+        200:
           description: 'Dossier successfully updated'
           content:
             application/json:
@@ -10302,7 +10302,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -10323,7 +10323,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -10367,7 +10367,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostWGADossierRequestBody'
       responses:
-        '201':
+        201:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -10388,7 +10388,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -10409,7 +10409,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -10452,7 +10452,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchWGADossierRequestBody'
       responses:
-        '200':
+        200:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -10473,7 +10473,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -10494,7 +10494,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -10538,7 +10538,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostBasicDossierRequestBody'
       responses:
-        '201':
+        201:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -10559,7 +10559,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -10580,7 +10580,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -10624,7 +10624,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostCompanyDossierRequestBody'
       responses:
-        '201':
+        201:
           description: 'Dossier successfully created'
           content:
             application/json:
@@ -10645,7 +10645,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -10666,7 +10666,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -10735,7 +10735,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of Dossier Officers'
           content:
             application/json:
@@ -10756,7 +10756,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -10802,7 +10802,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'Employee successfully deleted'
           content:
             application/json:
@@ -10823,7 +10823,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -10844,7 +10844,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -10946,7 +10946,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of Employees'
           content:
             application/json:
@@ -10967,7 +10967,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -11002,7 +11002,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostEmployeeRequestBody'
       responses:
-        '201':
+        201:
           description: 'Employee successfully created'
           content:
             application/json:
@@ -11023,7 +11023,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -11044,7 +11044,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -11087,7 +11087,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchEmployeeRequestBody'
       responses:
-        '200':
+        200:
           description: 'Employee successfully updated'
           content:
             application/json:
@@ -11108,7 +11108,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -11129,7 +11129,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -11183,7 +11183,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'Employer successfully deleted'
           content:
             application/json:
@@ -11204,7 +11204,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -11225,7 +11225,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -11275,7 +11275,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchEmployerRequestBody'
       responses:
-        '200':
+        200:
           description: 'Employer successfully updated'
           content:
             application/json:
@@ -11296,7 +11296,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -11317,7 +11317,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -11374,7 +11374,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of available arbo services'
           content:
             application/json:
@@ -11395,7 +11395,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad request'
           content:
             application/json:
@@ -11416,7 +11416,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -11509,7 +11509,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of employers that match the given filters'
           content:
             application/json:
@@ -11530,7 +11530,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -11551,7 +11551,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Internal Server Error'
           content:
             application/json:
@@ -11585,7 +11585,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostEmployerRequestBody'
       responses:
-        '201':
+        201:
           description: 'Employer successfully created'
           content:
             application/json:
@@ -11606,7 +11606,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -11627,7 +11627,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -11669,7 +11669,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchEmployerRequestBody'
       responses:
-        '200':
+        200:
           description: 'Employer successfully updated'
           content:
             application/json:
@@ -11690,7 +11690,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -11711,7 +11711,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -11807,7 +11807,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of employer divisions that match the given filters'
           content:
             application/json:
@@ -11828,7 +11828,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -11849,7 +11849,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -11932,7 +11932,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of available employer roles'
           content:
             application/json:
@@ -11953,7 +11953,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad request'
           content:
             application/json:
@@ -11974,7 +11974,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -12019,7 +12019,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'Employment Contract successfully deleted'
           content:
             application/json:
@@ -12040,7 +12040,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -12061,7 +12061,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -12106,7 +12106,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'Employment successfully deleted'
           content:
             application/json:
@@ -12127,7 +12127,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -12148,7 +12148,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -12302,7 +12302,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of Employment Contracts'
           content:
             application/json:
@@ -12323,7 +12323,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -12344,7 +12344,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -12379,7 +12379,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostEmploymentContractRequestBody'
       responses:
-        '201':
+        201:
           description: 'Employment contract successfully created'
           content:
             application/json:
@@ -12400,7 +12400,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -12421,7 +12421,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -12464,7 +12464,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchEmploymentContractRequestBody'
       responses:
-        '200':
+        200:
           description: 'Employment contract successfully created'
           content:
             application/json:
@@ -12485,7 +12485,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -12506,7 +12506,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -12686,7 +12686,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of Employments'
           content:
             application/json:
@@ -12707,7 +12707,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -12728,7 +12728,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -12763,7 +12763,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostEmploymentRequestBody'
       responses:
-        '201':
+        201:
           description: 'Employment successfully created'
           content:
             application/json:
@@ -12784,7 +12784,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -12805,7 +12805,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -12848,7 +12848,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchEmploymentRequestBody'
       responses:
-        '200':
+        200:
           description: 'Employment successfully updated'
           content:
             application/json:
@@ -12869,7 +12869,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -12890,7 +12890,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -12963,7 +12963,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of EmploymentTypes'
           content:
             application/json:
@@ -12984,7 +12984,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -13036,7 +13036,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchEmploymentRequestBody'
       responses:
-        '200':
+        200:
           description: 'Employment successfully updated'
           content:
             application/json:
@@ -13057,7 +13057,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -13078,7 +13078,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -13161,7 +13161,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of external supervisors'
           content:
             application/json:
@@ -13182,7 +13182,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -13203,7 +13203,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server Error'
           content:
             application/json:
@@ -13308,7 +13308,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of operations'
           content:
             application/json:
@@ -13329,7 +13329,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -13350,7 +13350,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -13481,7 +13481,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of Operationable entities'
           content:
             application/json:
@@ -13502,7 +13502,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -13523,7 +13523,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -13568,7 +13568,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'Organizational unit successfully deleted'
           content:
             application/json:
@@ -13589,7 +13589,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -13610,7 +13610,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -13661,7 +13661,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchOrganizationalUnitRequestBody'
       responses:
-        '200':
+        200:
           description: 'Organizational unit successfully updated'
           content:
             application/json:
@@ -13682,7 +13682,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -13703,7 +13703,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -13836,7 +13836,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of organization units that match the given filters'
           content:
             application/json:
@@ -13857,7 +13857,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -13878,7 +13878,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -13913,7 +13913,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostOrganizationalUnitRequestBody'
       responses:
-        '201':
+        201:
           description: 'Organizational unit successfully created'
           content:
             application/json:
@@ -13934,7 +13934,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -13955,7 +13955,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -14026,7 +14026,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of organization unit types that match the given filters'
           content:
             application/json:
@@ -14047,7 +14047,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -14068,7 +14068,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -14195,7 +14195,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of Task entities'
           content:
             application/json:
@@ -14216,7 +14216,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -14237,7 +14237,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -14282,7 +14282,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'User successfully deleted'
           content:
             application/json:
@@ -14303,7 +14303,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -14324,7 +14324,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -14518,11 +14518,11 @@ paths:
                   type: object
               type: object
       responses:
-        '200':
+        200:
           description: 'success - user updated'
-        '201':
+        201:
           description: 'success - user created'
-        '400':
+        400:
           description: 'Error response'
           content:
             application/json:
@@ -14590,7 +14590,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of Users'
           content:
             application/json:
@@ -14611,7 +14611,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -14632,7 +14632,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server Error'
           content:
             application/json:
@@ -14667,7 +14667,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostUserRequestBody'
       responses:
-        '201':
+        201:
           description: 'User successfully created'
           content:
             application/json:
@@ -14688,7 +14688,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -14709,7 +14709,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -14793,7 +14793,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of Users'
           content:
             application/json:
@@ -14814,7 +14814,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -14835,7 +14835,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server Error'
           content:
             application/json:
@@ -14870,7 +14870,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostUserRequestBody'
       responses:
-        '201':
+        201:
           description: 'User successfully created'
           content:
             application/json:
@@ -14891,7 +14891,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -14912,7 +14912,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -14994,7 +14994,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of Users'
           content:
             application/json:
@@ -15015,7 +15015,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -15036,7 +15036,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server Error'
           content:
             application/json:
@@ -15071,7 +15071,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostUserRequestBody'
       responses:
-        '201':
+        201:
           description: 'User successfully created'
           content:
             application/json:
@@ -15092,7 +15092,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -15113,7 +15113,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -15197,7 +15197,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of Users'
           content:
             application/json:
@@ -15218,7 +15218,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -15239,7 +15239,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server Error'
           content:
             application/json:
@@ -15274,7 +15274,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostEmployeeUserRequestBody'
       responses:
-        '201':
+        201:
           description: 'User successfully created'
           content:
             application/json:
@@ -15295,7 +15295,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -15316,7 +15316,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -15359,7 +15359,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchEmployeeUserRequestBody'
       responses:
-        '200':
+        200:
           description: 'User successfully updated'
           content:
             application/json:
@@ -15380,7 +15380,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -15401,7 +15401,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -15445,7 +15445,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchUserRequestBody'
       responses:
-        '200':
+        200:
           description: 'User successfully created'
           content:
             application/json:
@@ -15466,7 +15466,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -15487,7 +15487,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -15531,7 +15531,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostUserAuthorizationsRequestBody'
       responses:
-        '201':
+        201:
           description: 'User authorizations successfully created'
           content:
             application/json:
@@ -15552,7 +15552,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -15573,7 +15573,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -15627,7 +15627,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'Linked user successfully deleted'
           content:
             application/json:
@@ -15648,7 +15648,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -15669,7 +15669,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -15724,7 +15724,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'Linked users successfully deleted for this user'
           content:
             application/json:
@@ -15745,7 +15745,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -15766,7 +15766,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -15898,7 +15898,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        200:
           description: 'A list of LinkedUser records that match the given filters'
           content:
             application/json:
@@ -15919,7 +15919,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -15940,7 +15940,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -15975,7 +15975,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PostLinkedUserRequestBody'
       responses:
-        '201':
+        201:
           description: 'Linked user successfully created'
           content:
             application/json:
@@ -15996,7 +15996,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
+        400:
           description: 'Bad Request'
           content:
             application/json:
@@ -16017,7 +16017,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
+        500:
           description: 'Server error'
           content:
             application/json:
@@ -16804,7 +16804,7 @@ components:
           type: array
           items:
             type: string
-          example: []
+          example: {  }
         traceId:
           type: string
           format: uuid
@@ -16860,7 +16860,7 @@ components:
           type: array
           items:
             type: string
-          example: []
+          example: {  }
         traceId:
           type: string
           format: uuid
