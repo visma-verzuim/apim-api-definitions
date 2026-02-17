@@ -25,7 +25,7 @@ The changelog has been tracked since March 15, 2024. Changes prior to this date 
 
 
 ### Documentation
-- OpenAPI specification: `percentageWorkRelated` on `DiagnosisResource` (VV-8906)
+- OpenAPI specification: clarified `percentageWorkRelated` on `DiagnosisResource` (VV-8906)
 
 
 ## Update January 19 2026

@@ -2780,10 +2780,10 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-  /diagnosis:
+  /dossier/diagnosis:
     post:
       tags:
-        - Diagnosis
+        - Dossier
       summary: 'Create a diagnosis'
       operationId: diagnosis-post-v1-essential
       requestBody:
@@ -27282,9 +27282,6 @@ tags:
   -
     name: Dossier
     description: Dossier
-  -
-    name: Diagnosis
-    description: Diagnosis
   -
     name: DossierContent
     description: DossierContent
