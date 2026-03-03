@@ -3,6 +3,15 @@
 All notable changes to the Public API will be documented in this file.
 The changelog has been tracked since March 15, 2024. Changes prior to this date are based on the git log of the project.
 
+## Update March 3rd 2026
+
+### Added
+- `GET` `Appointments` endpoint - new fields added for dossier, employment, and additional invoice line (VV-9274)
+
+### Fixed
+- `POST` User authorizations endpoint does not accept externalKeys anymore (VV-9447)
+
+
 ## Release February 2026
 
 ### Added
