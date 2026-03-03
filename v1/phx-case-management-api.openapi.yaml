@@ -5752,7 +5752,7 @@ paths:
           description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
           schema:
             type: string
-  '/dossier/task/{uuid}':
+  '/dossier/task/{id}':
     patch:
       tags:
         - 'Dossier Task'
