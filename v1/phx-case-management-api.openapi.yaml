@@ -2780,10 +2780,10 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-  /diagnosis:
+  /dossier/diagnosis:
     post:
       tags:
-        - Diagnosis
+        - Dossier
       summary: 'Create a diagnosis'
       operationId: diagnosis-post-v1-essential
       requestBody:
@@ -17414,6 +17414,7 @@ components:
         - chairman-of-the-works-council
         - manager
         - hr-manager
+        - casemanager
     ContactPerson:
       properties:
         id:
@@ -26532,7 +26533,7 @@ components:
           maxLength: 191
           minLength: 1
           example: 1234@external-key|test
-        externalkey:
+        externalKey:
           description: 'The key known in an external system associated with the user'
           type: string
           maxLength: 191
@@ -26612,7 +26613,7 @@ components:
           type: object
     PostEmployeeUserRequestBody:
       properties:
-        externalkey:
+        externalKey:
           description: 'The key known in an external system to identify the user'
           type: string
           maxLength: 191
@@ -26838,7 +26839,7 @@ components:
           description: 'The unique identifier of the user where the authorization is set for'
           type: string
           format: uuid
-        externalkey:
+        externalKey:
           description: 'The key of an external system, associated with the user where the authorization is set for'
           type: string
           example: 98798779@12
@@ -27045,6 +27046,7 @@ components:
         - internal
         - external
         - employer
+        - employee
     UserAuthorizationResource:
       properties:
         id:
@@ -27060,11 +27062,14 @@ components:
         type:
           $ref: '#/components/schemas/UserTypeEnumOptions'
         authorizations:
-          oneOf:
-            -
-              $ref: '#/components/schemas/ArboAuthorizationResource'
-            -
-              $ref: '#/components/schemas/EmployerAuthorizationResource'
+          type: array
+          items:
+            oneOf:
+              -
+                $ref: '#/components/schemas/ArboAuthorizationResource'
+              -
+                $ref: '#/components/schemas/EmployerAuthorizationResource'
+          nullable: true
       type: object
     UserResource:
       properties:
@@ -27303,9 +27308,6 @@ tags:
   -
     name: Dossier
     description: Dossier
-  -
-    name: Diagnosis
-    description: Diagnosis
   -
     name: DossierContent
     description: DossierContent
