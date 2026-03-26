@@ -272,6 +272,91 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+    post:
+      tags:
+        - Appointments
+      summary: 'Create an appointment'
+      description: 'This endpoint creates a new appointment in the capacity engine with the provided data.'
+      operationId: appointment-post-v1-ultimate
+      requestBody:
+        description: 'Appointment data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostAppointmentRequestBody'
+      responses:
+        '201':
+          description: 'Appointment successfully created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostAppointmentResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '500':
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
   /agenda/billable/availabilities:
     get:
       tags:
@@ -7421,6 +7506,91 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+    post:
+      tags:
+        - Dossier
+      summary: 'Create an illness dossier'
+      description: 'Creates a new illness dossier. The employer service contract active at dateStart is resolved automatically.'
+      operationId: dossier-illness-post-v1-ultimate
+      requestBody:
+        description: 'Dossier data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostBasicDossierRequestBody'
+      responses:
+        '201':
+          description: 'Dossier successfully created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostBasicDossierResponseBody'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '500':
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
     patch:
       tags:
         - Dossier
@@ -7665,6 +7835,91 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+    post:
+      tags:
+        - Dossier
+      summary: 'Create an illness and ZW-ERD dossier'
+      description: 'Creates a new illness and ZW-ERD dossier. The employer service contract active at dateStart is resolved automatically.'
+      operationId: dossier-illnessandzwerd-post-v1-ultimate
+      requestBody:
+        description: 'Dossier data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostBasicDossierRequestBody'
+      responses:
+        '201':
+          description: 'Dossier successfully created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostBasicDossierResponseBody'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '500':
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
     patch:
       tags:
         - Dossier
@@ -13524,6 +13779,133 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+  /location:
+    get:
+      tags:
+        - Locations
+      summary: 'Get a list of locations'
+      description: 'Retrieve a list of locations with optional filtering and inclusion of related resources.'
+      operationId: location-get-v1-essential
+      parameters:
+        -
+          name: 'filter[name]'
+          in: query
+          description: 'Filter by the locaction name. Matches partial strings, case-insensitive.'
+          schema:
+            type: string
+        -
+          name: 'filter[shortCode]'
+          in: query
+          description: 'Filter by the locaction shortCode. Matches partial strings, case-insensitive.'
+          schema:
+            type: string
+        -
+          name: 'filter[isActive]'
+          in: query
+          description: 'Filter by whether the location is active or not.'
+          schema:
+            type: string
+        -
+          name: 'filter[employerIds]'
+          in: query
+          description: 'Show only locations for the specified employers. Must be a valid UUID.'
+          schema:
+            type: array
+            items:
+              type: string
+              format: uuid
+          example: 8366316b-1304-482e-bf53-0067174d477a
+        -
+          name: include
+          in: query
+          description: 'Include the related resources - use comma separated values to include multiple resources'
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/GetLocationIncludeOptions'
+        -
+          name: sort
+          in: query
+          description: "Sort results by the given field. Use '-' prefix for descending order."
+          schema:
+            $ref: '#/components/schemas/GetLocationSortOptions'
+        -
+          $ref: '#/components/parameters/GetRequestPageNumber'
+        -
+          $ref: '#/components/parameters/GetRequestPageSize'
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'A list of locations matching the provided criteria'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLocationResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '500':
+          description: 'Internal Server Error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
   /operation:
     get:
       tags:
@@ -16411,6 +16793,73 @@ components:
           minLength: 0
           example: false
       type: object
+    PostAppointmentRequestBody:
+      required:
+        - title
+        - status
+        - startDate
+        - endDate
+        - userId
+        - operationId
+      properties:
+        title:
+          description: 'The title of the appointment.'
+          type: string
+          maxLength: 255
+          minLength: 1
+          example: 'Meeting with John Doe'
+        status:
+          description: 'The status of the appointment.'
+          type: string
+          example: completed
+        startDate:
+          description: 'The start date and time of the appointment in ISO 8601 format.'
+          type: string
+          example: '2026-01-01T09:00:00+01:00'
+        endDate:
+          description: 'The end date and time of the appointment in ISO 8601 format. Should be at least 5 minutes after the startDate.'
+          type: string
+          example: '2026-01-01T09:30:00+01:00'
+        userId:
+          description: 'The UUID of the user associated with the appointment.'
+          type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+        operationId:
+          description: 'The UUID of the operation associated with the appointment.'
+          type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+        employerId:
+          description: 'The UUID of the employer associated with the appointment.'
+          type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+          nullable: true
+        employeeId:
+          description: 'The UUID of the employee associated with the appointment.'
+          type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+          nullable: true
+        employmentId:
+          description: 'The UUID of the employment associated with the appointment.'
+          type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+          nullable: true
+        locationId:
+          description: 'The UUID of the location associated with the appointment.'
+          type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+          nullable: true
+      type: object
+    PostAppointmentResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Appointment'
+          type: object
     GetAppointmentResponse:
       properties:
         data:
@@ -16431,6 +16880,7 @@ components:
         - employee
         - operation
         - methodOfConsult
+        - schedule
         - billing
         - dossier
         - employment
@@ -25579,6 +26029,125 @@ components:
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
           example: '2024-11-15 12:34:56'
       type: object
+    GetLocationResponse:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+        meta:
+          $ref: '#/components/schemas/PaginationMetaInformation'
+      type: object
+    GetLocationIncludeOptions:
+      type: string
+      enum:
+        - employer
+        - rooms
+    GetLocationSortOptions:
+      type: string
+      enum:
+        - name
+        - '-name'
+        - code
+        - '-code'
+        - dateCreated
+        - '-dateCreated'
+    Location:
+      properties:
+        id:
+          description: 'The unique identifier of the location'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+        name:
+          description: 'The name of the location'
+          type: string
+          maxLength: 255
+          minLength: 1
+        shortCode:
+          description: 'The short code of the location, if applicable'
+          type: string
+          maxLength: 16
+          minLength: 0
+          nullable: true
+        city:
+          description: 'The city where the location is situated, if applicable'
+          type: string
+          maxLength: 255
+          minLength: 0
+          nullable: true
+        postalCode:
+          description: 'The postal code of the location, if applicable'
+          type: string
+          maxLength: 16
+          minLength: 0
+          nullable: true
+        employer:
+          oneOf:
+            -
+              $ref: '#/components/schemas/EmployerWithoutRelations'
+          nullable: true
+          description: 'The employer related to the location, available if the relation is included in the query'
+        startDate:
+          description: 'The date and time the location becomes active in YYYY-MM-DD HH:MM:SS format'
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+        dateCreated:
+          description: 'The date and time the location was created in YYYY-MM-DD HH:MM:SS format'
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+        dateUpdated:
+          description: 'The date and time the location was last updated in YYYY-MM-DD HH:MM:SS format'
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+      type: object
+    Room:
+      properties:
+        id:
+          description: 'The unique identifier of the room'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+        name:
+          description: 'The name of the room'
+          type: string
+          maxLength: 255
+          minLength: 1
+        isReservable:
+          description: 'Indicates whether the room can be reserved or not'
+          type: boolean
+        shortCode:
+          description: 'The short code of the room, if applicable'
+          type: string
+          maxLength: 16
+          minLength: 0
+          nullable: true
+        capacity:
+          description: 'The maximum capacity of the room, if applicable'
+          type: integer
+        locationId:
+          description: 'The unique identifier of the location this room belongs to'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+        startDate:
+          description: 'The date and time the room becomes active in YYYY-MM-DD HH:MM:SS format'
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+        dateCreated:
+          description: 'The date and time the room was created in YYYY-MM-DD HH:MM:SS format'
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+        dateUpdated:
+          description: 'The date and time the room was last updated in YYYY-MM-DD HH:MM:SS format'
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+      type: object
     MasterPerson:
       properties:
         id:
@@ -27764,6 +28333,9 @@ tags:
   -
     name: 'External Supervisor'
     description: 'External Supervisor'
+  -
+    name: Locations
+    description: Locations
   -
     name: Operation
     description: Operation
