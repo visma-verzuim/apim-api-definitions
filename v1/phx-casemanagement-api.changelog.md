@@ -3,6 +3,17 @@
 All notable changes to the Public API will be documented in this file.
 The changelog has been tracked since March 15, 2024. Changes prior to this date are based on the git log of the project.
 
+## Patch Release March 2026 (26-03-2026)
+
+### Added
+- `POST` `/dossier/illness` and POST /dossier/illness-and-zwerd endpoints for creating illness and illness+zwerd dossiers (VV-9595)
+- `POST` `/appointment` endpoint to create agenda appointments (VV-9275)
+
+### Fixed
+- `GET` `/dossier/` endpoints - pagination total incorrectly returned 1 in some cases (VV-9631)
+- `GET` `/appointment` - schedule property was always returning null (VV-9515)
+- `GET` `/dossier/` endpoints - filter by employmentId was returning empty results (VV-9660)
+
 ## Release March 2026
 
 ### Added
