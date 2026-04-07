@@ -3,6 +3,23 @@
 All notable changes to the Public API will be documented in this file.
 The changelog has been tracked since March 15, 2024. Changes prior to this date are based on the git log of the project.
 
+## Release April 2026
+
+### Added
+- `GET` `/location` endpoint to retrieve locations with rooms from Capacity Engine (VV-9337)
+- Property `interactionMethod` added to `GET`, `POST` and `PATCH` `/employer` and `/organizational-unit` endpoints (VV-9538)
+
+### Fixed
+- `POST` `/employment` — `migrationKey` was incorrectly mapped (VV-9702)
+- `POST` `/organizational-unit` — contact person fields `nickname`/`surname` renamed to `firstName`/`lastName` to match schema; `riskCode` and `sectorId` corrected to string type (VV-9592)
+- `GET` `/employment` — contract lookup now uses absence start date instead of current date for validation (VV-9680)
+
+### Documentation
+- Fixed `communication` schema for `POST`/`PATCH` `/organizational-unit` (VV-9698)
+- Corrected tag for `POST` `/appointment` migration endpoint (VV-9706)
+- Nullable audit and clarity improvements: removed prohibited fields from `PATCH` request schemas, disambiguated `roleId` descriptions across user endpoints, documented accepted date formats (VV-9525)
+
+
 ## Patch Release March 2026 (26-03-2026)
 
 ### Added
