@@ -20076,14 +20076,6 @@ components:
           nullable: true
         migrationKey:
           $ref: '#/components/schemas/PatchRequestPropertyMigrationKey'
-        dossierId:
-          description: 'The unique identifier of the dossier associated with the task.'
-          type: string
-          format: uuid
-          maxLength: 36
-          minLength: 36
-          example: 123e4567-e89b-12d3-a456-426614174000
-          nullable: true
         taskId:
           description: 'The unique identifier of the task within the dossier.'
           type: string
@@ -20320,25 +20312,12 @@ components:
           format: date
           example: '2020-01-23'
         dateCompleted:
-          description: 'The date the dossier completed in format YYYY-MM-DD, this property is prohibited unless dossierStatus is set to completed'
+          description: "The date the dossier was completed. This field may only be set when completing/closing a dossier (dossierStatus set to 'completed'). Setting it on an active open dossier will be rejected."
           type: string
           format: date
           example: '2020-01-23'
         dossierStatus:
           $ref: '#/components/schemas/DossierStatusEnumOptions'
-        employmentId:
-          description: 'The unique identifier of the employment. Only one employment identifier is allowed.'
-          type: string
-          format: uuid
-          maxLength: 36
-          minLength: 36
-          example: e3eab6bd-4adc-4d9b-9620-2b0c49ecb7d3
-        employmentKey:
-          description: 'The external key of the employment. Only one employment identifier is allowed.'
-          type: string
-          maxLength: 191
-          minLength: 1
-          example: EXT-Key-4385
       type: object
     PatchBasicDossierResponse:
       allOf:
@@ -20888,7 +20867,7 @@ components:
           format: date
           example: '2020-01-23'
         dateCompleted:
-          description: 'The date the dossier was completed in format YYYY-MM-DD'
+          description: "The date the dossier was completed. This field may only be set when completing/closing a dossier (dossierStatus set to 'completed'). Setting it on an active open dossier will be rejected."
           type: string
           format: date
           example: '2020-01-23'
@@ -20990,7 +20969,7 @@ components:
           description: 'The expected duration of the dossier in days'
           type: integer
         dateCompleted:
-          description: 'The date the dossier was completed in format YYYY-MM-DD'
+          description: "The date the dossier was completed. This field may only be set when completing/closing a dossier (dossierStatus set to 'completed'). Setting it on an active open dossier will be rejected."
           type: string
           format: date
           example: '2020-01-23'
@@ -21062,7 +21041,7 @@ components:
           description: 'The expected duration of the absence in days'
           type: integer
         dateCompleted:
-          description: 'The date the dossier was completed'
+          description: "The date the dossier was completed. This field may only be set when completing/closing a dossier (dossierStatus set to 'completed'). Setting it on an active open dossier will be rejected."
           type: string
           format: date
       type: object
@@ -23907,6 +23886,8 @@ components:
           minLength: 36
           example: c9ef0d79-7c66-406d-ae4a-a66515992ef7
           nullable: true
+        interactionMethod:
+          $ref: '#/components/schemas/InteractionMethodEnumOptions'
       type: object
     PatchEmployerResponse:
       allOf:
@@ -24112,6 +24093,8 @@ components:
           maxLength: 36
           minLength: 36
           example: c9ef0d79-7c66-406d-ae4a-a66515992ef7
+        interactionMethod:
+          $ref: '#/components/schemas/InteractionMethodEnumOptions'
       type: object
     Address:
       description: Address
@@ -24322,6 +24305,13 @@ components:
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
           example: '2020-01-23 12:34:56'
       type: object
+    InteractionMethodEnumOptions:
+      type: string
+      enum:
+        - bluevi
+        - post
+        - integration
+        - email
     Employer:
       properties:
         id:
@@ -24436,6 +24426,8 @@ components:
           example: 12
         incomeInsuranceProvider:
           $ref: '#/components/schemas/IncomeInsuranceProvider'
+        interactionMethod:
+          $ref: '#/components/schemas/InteractionMethodEnumOptions'
       type: object
     EmployerWithoutRelations:
       properties:
@@ -26539,7 +26531,7 @@ components:
         postalAddress:
           $ref: '#/components/schemas/OrganizationalUnitAddress'
         communications:
-          $ref: '#/components/schemas/OrganizationalUnitCommunication'
+          $ref: '#/components/schemas/OrganizationalUnitRequestBodyCommunicationData'
         dateStart:
           description: 'Start date of the organizational unit, format as YYYY-MM-DD'
           type: string
@@ -26549,6 +26541,12 @@ components:
           type: string
           format: date
           nullable: true
+        interactionMethod:
+          oneOf:
+            -
+              $ref: '#/components/schemas/InteractionMethodEnumOptions'
+          nullable: true
+          description: 'The interaction method used for communication with this organizational unit. Defaults to null if not provided.'
       type: object
     PatchOrganizationalUnitRequestBodyCompanyData:
       properties:
@@ -26596,6 +26594,17 @@ components:
             data:
               $ref: '#/components/schemas/OrganizationalUnit'
           type: object
+    OrganizationalUnitRequestBodyCommunicationData:
+      properties:
+        email:
+          description: 'The primary email address for communication'
+          type: string
+          example: orgunit@bluevi.com
+        phone:
+          description: 'The primary phone number for communication'
+          type: string
+          example: '0881234567'
+      type: object
     PostOrganizationalUnitRequestBody:
       required:
         - name
@@ -26667,7 +26676,7 @@ components:
         postalAddress:
           $ref: '#/components/schemas/OrganizationalUnitAddress'
         communications:
-          $ref: '#/components/schemas/OrganizationalUnitCommunication'
+          $ref: '#/components/schemas/OrganizationalUnitRequestBodyCommunicationData'
         dateStart:
           description: "Start date, defaults to today's date if not provided"
           type: string
@@ -26677,6 +26686,12 @@ components:
           type: string
           format: date
           nullable: true
+        interactionMethod:
+          oneOf:
+            -
+              $ref: '#/components/schemas/InteractionMethodEnumOptions'
+          nullable: true
+          description: 'The interaction method used for communication with this organizational unit. Defaults to null if not provided.'
       type: object
     PostOrganizationalUnitRequestBodyCompanyData:
       properties:
@@ -26976,6 +26991,12 @@ components:
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
           example: '2024-01-23 12:34:56'
+        interactionMethod:
+          oneOf:
+            -
+              $ref: '#/components/schemas/InteractionMethodEnumOptions'
+          nullable: true
+          description: 'The interaction method used for communication with this organizational unit. Defaults to null if not provided.'
       type: object
     OrganizationalUnitWithoutRelations:
       properties:
@@ -27114,7 +27135,7 @@ components:
           nullable: true
         sectorId:
           description: 'UWV sector ID of the company'
-          type: integer
+          type: string
           nullable: true
         payrollTaxIdentificationNumber:
           description: "Payroll tax identification number ('loonheffingsnummer') of the company"
@@ -27564,7 +27585,7 @@ components:
           example: 98798779@12
           nullable: true
         roleId:
-          description: 'The unique identifier of the role associated with the user'
+          description: 'The unique identifier of the role associated with the user. This expects an employerRole id for employer users and an ArboRole id for internal and external users.'
           type: string
           format: uuid
           maxLength: 36
@@ -27707,11 +27728,12 @@ components:
           example: 98798779@12
           nullable: true
         roleId:
-          description: 'The unique identifier of the role associated with the user'
+          description: 'Role identifier. For /user/internal and /user/external this is an arbo role ID (see GET /arbo-role). For /user/employer this is an employer role ID (see GET /employer-role).'
           type: string
           format: uuid
           maxLength: 36
           minLength: 36
+          example: 1a4b5a19-7ddf-4cbc-9a4e-7cd05faf195f
         username:
           type: string
           maxLength: 191
