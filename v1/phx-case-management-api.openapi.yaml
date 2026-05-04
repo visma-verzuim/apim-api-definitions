@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: 'BlueVi Case Management API'
-  description: 'Communicate with BlueVi directly over 100+ API endpoints.'
+  description: 'Communicate with BlueVi Case Management directly over 100+ API endpoints.'
   version: v1
 paths:
   /absence-reason:
@@ -1736,6 +1736,7 @@ paths:
           schema:
             type: string
             format: uuid
+          example: 8366316b-1304-482e-bf53-0067174d477a
         -
           name: 'filter[employerId]'
           in: query
@@ -5565,6 +5566,280 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+  /dossier/content/uwv-document-v1:
+    get:
+      tags:
+        - DossierContent
+      summary: 'Get a list of UWV document meta data for dossier content (v1 / legacy schema)'
+      operationId: dossiercontent-uwv-documents-v1-get-v1-ultimate
+      parameters:
+        -
+          $ref: '#/components/parameters/GetRequestFilterId'
+        -
+          name: 'filter[dossierId]'
+          in: query
+          description: 'Filter by the unique identifier of the dossier the UWV document belongs to'
+          required: false
+          schema:
+            type: string
+            format: uuid
+        -
+          name: 'filter[status]'
+          in: query
+          description: 'Filter by the UWV document status.'
+          required: false
+          schema:
+            $ref: '#/components/schemas/UwvDocumentStatusEnumOptions'
+        -
+          name: 'filter[messageType]'
+          in: query
+          description: 'Filter by the underlying UWV message (supports delimited array values)'
+          required: false
+          schema:
+            $ref: '#/components/schemas/UwvMessageTypeEnumOptions'
+        -
+          name: 'filter[isSigned]'
+          in: query
+          description: 'Filter by whether all required signatures on the UWV document have been collected. True returns fully signed documents (and documents that were never registered for signing); false returns documents with at least one outstanding signature obligation.'
+          required: false
+          schema:
+            type: boolean
+        -
+          $ref: '#/components/parameters/GetRequestFilterDateCreatedFrom'
+        -
+          $ref: '#/components/parameters/GetRequestFilterDateCreatedUntil'
+        -
+          $ref: '#/components/parameters/GetRequestFilterDateUpdatedFrom'
+        -
+          $ref: '#/components/parameters/GetRequestFilterDateUpdatedUntil'
+        -
+          name: sort
+          in: query
+          description: 'Sort by certain pre-defined fields'
+          schema:
+            $ref: '#/components/schemas/GetDossierContentUwvDocumentV1SortOptions'
+        -
+          name: include
+          in: query
+          description: 'Include the related resources - use comma separated values to include multiple resources'
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/GetDossierContentUwvDocumentV1IncludeOptions'
+        -
+          $ref: '#/components/parameters/GetRequestPageNumber'
+        -
+          $ref: '#/components/parameters/GetRequestPageSize'
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'A list of UWV document meta data (v1 schema)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDossierContentUwvDocumentV1Response'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '500':
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+  /dossier/content/uwv-document-v2:
+    get:
+      tags:
+        - DossierContent
+      summary: 'Get a list of UWV document meta data for dossier content (v2 schema)'
+      operationId: dossiercontent-uwv-documents-v2-get-v1-ultimate
+      parameters:
+        -
+          $ref: '#/components/parameters/GetRequestFilterId'
+        -
+          name: 'filter[dossierId]'
+          in: query
+          description: 'Filter by the unique identifier of the dossier the UWV document belongs to'
+          required: false
+          schema:
+            type: string
+            format: uuid
+        -
+          name: 'filter[status]'
+          in: query
+          description: 'Filter by the UWV document status'
+          required: false
+          schema:
+            $ref: '#/components/schemas/UwvDocumentStatusEnumOptions'
+        -
+          name: 'filter[messageType]'
+          in: query
+          description: 'Filter by the underlying UWV message (supports delimited array values)'
+          required: false
+          schema:
+            $ref: '#/components/schemas/UwvMessageTypeEnumOptions'
+        -
+          name: 'filter[isSigned]'
+          in: query
+          description: 'Filter by whether the UWV document is fully signed. True returns only completed signatures; false returns unsigned, partly signed, and documents without a signing workflow.'
+          required: false
+          schema:
+            type: boolean
+        -
+          $ref: '#/components/parameters/GetRequestFilterDateCreatedFrom'
+        -
+          $ref: '#/components/parameters/GetRequestFilterDateCreatedUntil'
+        -
+          $ref: '#/components/parameters/GetRequestFilterDateUpdatedFrom'
+        -
+          $ref: '#/components/parameters/GetRequestFilterDateUpdatedUntil'
+        -
+          name: sort
+          in: query
+          description: 'Sort by certain pre-defined fields'
+          schema:
+            $ref: '#/components/schemas/GetDossierContentUwvDocumentV2SortOptions'
+        -
+          name: include
+          in: query
+          description: 'Include the related resources - use comma separated values to include multiple resources'
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/GetDossierContentUwvDocumentV2IncludeOptions'
+        -
+          $ref: '#/components/parameters/GetRequestPageNumber'
+        -
+          $ref: '#/components/parameters/GetRequestPageSize'
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'A list of UWV document meta data'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDossierContentUwvDocumentV2Response'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '500':
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
   /dossier/task:
     get:
       tags:
@@ -6366,13 +6641,6 @@ paths:
             type: string
             format: uuid
         -
-          name: 'filter[dossierId]'
-          in: query
-          description: 'Filter by the unique identifier of a specific dossier'
-          schema:
-            type: string
-            format: uuid
-        -
           name: 'filter[externalKey]'
           in: query
           description: 'Filter by the external key of a specific dossier'
@@ -6531,12 +6799,6 @@ paths:
           name: 'filter[id]'
           in: query
           description: 'Filter by ID to get a specific dossier'
-          schema:
-            type: string
-        -
-          name: 'filter[dossierId]'
-          in: query
-          description: 'Filter by the ID of a specific dossier'
           schema:
             type: string
         -
@@ -6853,12 +7115,6 @@ paths:
           name: 'filter[id]'
           in: query
           description: 'Filter by ID to get a specific dossier'
-          schema:
-            type: string
-        -
-          name: 'filter[dossierId]'
-          in: query
-          description: 'Filter by the ID of a specific dossier'
           schema:
             type: string
         -
@@ -10778,6 +11034,348 @@ paths:
           description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
           schema:
             type: string
+  /dossier/company-dossier:
+    post:
+      tags:
+        - Dossier
+      summary: 'Create a company dossier'
+      description: 'This endpoint is used to create a new company dossier.'
+      operationId: dossier-companydossier-post-v1-ultimate
+      requestBody:
+        description: 'Dossier data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostCompanyDossierRequestBody'
+      responses:
+        '201':
+          description: 'Dossier successfully created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostCompanyDossierResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '500':
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+    patch:
+      tags:
+        - Dossier
+      summary: 'Update a company dossier'
+      description: 'Updates an existing company dossier.'
+      operationId: dossier-companydossier-patch-v1-ultimate
+      requestBody:
+        description: 'Company dossier data to update'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchCompanyDossierRequestBody'
+      responses:
+        '200':
+          description: 'Company dossier successfully updated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatchCompanyDossierResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '500':
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+  /dossier/employee:
+    post:
+      tags:
+        - Dossier
+      summary: 'Create an employee dossier'
+      description: "Creates a personal employee dossier. Each employee can have at most one employee dossier. The dossier is linked to the employee's current employment."
+      operationId: dossier-employee-post-v1-essential
+      requestBody:
+        description: 'Employee dossier data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostEmployeeDossierRequestBody'
+      responses:
+        '201':
+          description: 'Employee dossier successfully created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostEmployeeDossierResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '500':
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+    patch:
+      tags:
+        - Dossier
+      summary: 'Update an employee dossier'
+      description: 'Updates an existing employee dossier.'
+      operationId: dossier-employee-patch-v1-essential
+      requestBody:
+        description: 'Employee dossier data to update'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchEmployeeDossierRequestBody'
+      responses:
+        '200':
+          description: 'Employee dossier successfully updated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatchEmployeeDossierResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '500':
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
   /dossier/wga:
     post:
       tags:
@@ -10884,178 +11482,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PatchWGADossierResponse'
-          headers:
-            Deprecated:
-              description: 'This endpoint has been deprecated at the given timestamp.'
-              required: false
-              schema:
-                type: string
-                example: '@1758557834'
-                pattern: '^\@[0-9]{10}$'
-            Sunset:
-              description: 'This endpoint will be removed at the given date/time.'
-              required: false
-              schema:
-                type: string
-                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
-                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
-          description: 'Bad Request'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadRequestResponse'
-          headers:
-            Deprecated:
-              description: 'This endpoint has been deprecated at the given timestamp.'
-              required: false
-              schema:
-                type: string
-                example: '@1758557834'
-                pattern: '^\@[0-9]{10}$'
-            Sunset:
-              description: 'This endpoint will be removed at the given date/time.'
-              required: false
-              schema:
-                type: string
-                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
-                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
-          description: 'Server error'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerErrorResponse'
-          headers:
-            Deprecated:
-              description: 'This endpoint has been deprecated at the given timestamp.'
-              required: false
-              schema:
-                type: string
-                example: '@1758557834'
-                pattern: '^\@[0-9]{10}$'
-            Sunset:
-              description: 'This endpoint will be removed at the given date/time.'
-              required: false
-              schema:
-                type: string
-                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
-                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-      parameters:
-        -
-          name: Ocp-Apim-Subscription-Key
-          in: header
-          required: true
-          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
-          schema:
-            type: string
-  /dossier/company-dossier:
-    post:
-      tags:
-        - Dossier
-      summary: 'Create a company dossier'
-      description: 'This endpoint is used to create a new company dossier.'
-      operationId: dossier-companydossier-post-v1-ultimate
-      requestBody:
-        description: 'Dossier data'
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PostCompanyDossierRequestBody'
-      responses:
-        '201':
-          description: 'Dossier successfully created'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PostCompanyDossierResponse'
-          headers:
-            Deprecated:
-              description: 'This endpoint has been deprecated at the given timestamp.'
-              required: false
-              schema:
-                type: string
-                example: '@1758557834'
-                pattern: '^\@[0-9]{10}$'
-            Sunset:
-              description: 'This endpoint will be removed at the given date/time.'
-              required: false
-              schema:
-                type: string
-                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
-                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
-          description: 'Bad Request'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadRequestResponse'
-          headers:
-            Deprecated:
-              description: 'This endpoint has been deprecated at the given timestamp.'
-              required: false
-              schema:
-                type: string
-                example: '@1758557834'
-                pattern: '^\@[0-9]{10}$'
-            Sunset:
-              description: 'This endpoint will be removed at the given date/time.'
-              required: false
-              schema:
-                type: string
-                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
-                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
-          description: 'Server error'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerErrorResponse'
-          headers:
-            Deprecated:
-              description: 'This endpoint has been deprecated at the given timestamp.'
-              required: false
-              schema:
-                type: string
-                example: '@1758557834'
-                pattern: '^\@[0-9]{10}$'
-            Sunset:
-              description: 'This endpoint will be removed at the given date/time.'
-              required: false
-              schema:
-                type: string
-                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
-                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-      parameters:
-        -
-          name: Ocp-Apim-Subscription-Key
-          in: header
-          required: true
-          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
-          schema:
-            type: string
-  /dossier/employee:
-    post:
-      tags:
-        - Dossier
-      summary: 'Create an employee dossier'
-      description: "Creates a personal employee dossier. Each employee can have at most one employee dossier. The dossier is linked to the employee's current employment."
-      operationId: dossier-employee-post-v1-essential
-      requestBody:
-        description: 'Employee dossier data'
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PostEmployeeDossierRequestBody'
-      responses:
-        '201':
-          description: 'Employee dossier successfully created'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PostEmployeeDossierResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -12171,7 +12597,7 @@ paths:
       tags:
         - Employer
       summary: 'Close tasks after migration'
-      description: 'Cancels all open and overdue tasks for dossiers belonging to the specified employer where the task start date is on or before the provided date. This endpoint is only available within 2 weeks of employer creation to support data migration workflows. WARNING: Tasks are generated automatically overnight (00:00-08:00). We recommend calling this endpoint at least 36 hours after migration to ensure all tasks have been generated. Calling too early may result in incomplete task cancellation. The user is responsible for correct timing and providing the correct date parameter.'
+      description: 'Generates all tasks for dossiers belonging to the specified employer and then cancels all open and overdue tasks where the task start date is on or before the provided date. Task generation and cancellation are queued and processed asynchronously. This endpoint is only available within 2 weeks of employer creation to support data migration workflows.'
       operationId: employermigration-post-v1-essential
       requestBody:
         description: 'Request parameters'
@@ -12182,7 +12608,7 @@ paths:
               $ref: '#/components/schemas/PostCloseTasksAfterMigrationRequestBody'
       responses:
         '201':
-          description: 'Tasks successfully cancelled'
+          description: 'Tasks queued for cancellation'
           content:
             application/json:
               schema:
@@ -12224,7 +12650,7 @@ paths:
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
         '403':
-          description: 'Migration period expired'
+          description: 'Migration period expired or endpoint called outside allowed hours (18:00–06:00)'
           content:
             application/json:
               schema:
@@ -13813,7 +14239,6 @@ paths:
             items:
               type: string
               format: uuid
-          example: 8366316b-1304-482e-bf53-0067174d477a
         -
           name: include
           in: query
@@ -17521,6 +17946,7 @@ components:
         - m
         - f
         - x
+        - invalid-value
     PaginationLinks:
       properties:
         self:
@@ -18203,6 +18629,7 @@ components:
         - manager
         - hr-manager
         - casemanager
+        - invalid-value
     ContactPerson:
       properties:
         id:
@@ -18338,6 +18765,7 @@ components:
         - contractType
         - serviceType
         - employer
+        - modules
         - organizationalUnit
         - partnership
     GetContractModulesResponse:
@@ -18666,6 +19094,7 @@ components:
       enum:
         - base
         - custom
+        - invalid-value
     BillingTypeEnumOptions:
       type: string
       enum:
@@ -18673,6 +19102,7 @@ components:
         - fixed
         - budget
         - credits
+        - invalid-value
     ContractType:
       properties:
         id:
@@ -18754,6 +19184,7 @@ components:
         - active
         - ended
         - blocked
+        - invalid-value
     EmployerContract:
       properties:
         id:
@@ -18846,6 +19277,11 @@ components:
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
           example: '2020-01-23 12:34:56'
+        modules:
+          description: 'The modules associated with the employer contract'
+          type: array
+          items:
+            $ref: '#/components/schemas/Module'
       type: object
     EmployerServiceContract:
       properties:
@@ -18930,6 +19366,8 @@ components:
         code:
           description: 'The code of the module'
           type: string
+        billingType:
+          $ref: '#/components/schemas/BillingTypeEnumOptions'
         dateCreated:
           description: 'The date the module was created'
           type: string
@@ -19110,8 +19548,8 @@ components:
           example: 2
         recoveryPercentage:
           description: 'Percentage of recovery, 0 being fully absent, 100 being fully recovered'
-          type: integer
-          format: int32
+          type: number
+          format: float
           maximum: 100
           minimum: 0
           example: 25
@@ -19229,8 +19667,8 @@ components:
           example: 5
         recoveryPercentage:
           description: 'Percentage of recovery, 0 being fully absent, 100 being fully recovered, required'
-          type: integer
-          format: int32
+          type: number
+          format: float
           maximum: 100
           minimum: 0
           example: 25
@@ -20026,6 +20464,60 @@ components:
             data:
               $ref: '#/components/schemas/DossierUploadResource'
           type: object
+    GetDossierContentUwvDocumentV1IncludeOptions:
+      type: string
+      enum:
+        - dossier
+        - uwvMessage
+    GetDossierContentUwvDocumentV1SortOptions:
+      type: string
+      enum:
+        - dateCreated
+        - '-dateCreated'
+        - dateUpdated
+        - '-dateUpdated'
+        - messageType
+        - '-messageType'
+        - category
+        - '-category'
+    GetDossierContentUwvDocumentV1Response:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DossierUwvDocumentV1Resource'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+        meta:
+          $ref: '#/components/schemas/PaginationMetaInformation'
+      type: object
+    GetDossierContentUwvDocumentV2IncludeOptions:
+      type: string
+      enum:
+        - dossier
+        - uwvMessage
+    GetDossierContentUwvDocumentV2SortOptions:
+      type: string
+      enum:
+        - dateCreated
+        - '-dateCreated'
+        - dateUpdated
+        - '-dateUpdated'
+        - messageType
+        - '-messageType'
+        - category
+        - '-category'
+    GetDossierContentUwvDocumentV2Response:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DossierUwvDocumentV2Resource'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+        meta:
+          $ref: '#/components/schemas/PaginationMetaInformation'
+      type: object
     GetDossierTaskResponse:
       properties:
         data:
@@ -20336,6 +20828,7 @@ components:
         - completed
         - cancelled
         - outdated
+        - invalid-value
     PatchBirthLeaveDossierRequestBody:
       required:
         - id
@@ -20440,6 +20933,59 @@ components:
           properties:
             data:
               $ref: '#/components/schemas/Dossier'
+          type: object
+    PatchCompanyDossierRequestBody:
+      properties:
+        id:
+          $ref: '#/components/schemas/PatchRequestPropertyId'
+        key:
+          $ref: '#/components/schemas/PatchRequestPropertyKey'
+        migrationKeyId:
+          $ref: '#/components/schemas/PatchRequestPropertyMigrationKeyId'
+        dateStart:
+          description: 'The date the dossier started in format YYYY-MM-DD'
+          type: string
+          format: date
+          example: '2024-01-15'
+        externalKey:
+          $ref: '#/components/schemas/PatchRequestPropertyExternalKey'
+        migrationKey:
+          $ref: '#/components/schemas/PatchRequestPropertyMigrationKey'
+      type: object
+    PatchCompanyDossierResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/DossierWithoutRelations'
+          type: object
+    PatchEmployeeDossierRequestBody:
+      properties:
+        id:
+          $ref: '#/components/schemas/PatchRequestPropertyId'
+        key:
+          $ref: '#/components/schemas/PatchRequestPropertyKey'
+        migrationKeyId:
+          $ref: '#/components/schemas/PatchRequestPropertyMigrationKeyId'
+        externalKey:
+          $ref: '#/components/schemas/PatchRequestPropertyExternalKey'
+        migrationKey:
+          $ref: '#/components/schemas/PatchRequestPropertyMigrationKey'
+      type: object
+    PatchEmployeeDossierResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/DossierWithoutRelations'
           type: object
     PatchIllnessRequestBody:
       required:
@@ -21839,6 +22385,7 @@ components:
         - start-pregnancy-leave
         - partial-recovery
         - fully-sick-again
+        - invalid-value
     AbsenceCourse:
       type: object
       allOf:
@@ -21976,6 +22523,7 @@ components:
       enum:
         - employee
         - employer
+        - invalid-value
     BirthLeave:
       properties:
         id:
@@ -22006,6 +22554,11 @@ components:
           description: 'The number of weeks of leave'
           type: integer
       type: object
+    CasDiagnosisTypeEnumOptions:
+      type: string
+      enum:
+        - cas
+        - icd-11
     CasDiagnosis:
       properties:
         code:
@@ -22014,6 +22567,8 @@ components:
         description:
           type: string
           example: Pijn
+        type:
+          $ref: '#/components/schemas/CasDiagnosisTypeEnumOptions'
         isDeleted:
           type: boolean
           example: false
@@ -22523,6 +23078,104 @@ components:
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
       type: object
+    DossierUwvDocumentV1Resource:
+      properties:
+        id:
+          description: 'The unique identifier of the UWV document (v1 / legacy schema).'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+        status:
+          oneOf:
+            -
+              $ref: '#/components/schemas/UwvDocumentStatusEnumOptions'
+          nullable: true
+          description: 'The derived status of the UWV document; null when the document is neither final nor draft.'
+        signed:
+          description: 'Whether all required signatures on the UWV document have been collected (employee, employer, arbo and/or company doctor, depending on the document). True when no outstanding signature obligations remain; also true for documents that were never registered for signing.'
+          type: boolean
+        dateCreated:
+          description: 'The date and time the UWV document was created.'
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+        dateUpdated:
+          description: 'The date and time the UWV document was last updated.'
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+        dossier:
+          oneOf:
+            -
+              $ref: '#/components/schemas/Dossier'
+          nullable: true
+          description: 'The dossier associated with the UWV document.'
+        uwvMessage:
+          oneOf:
+            -
+              $ref: '#/components/schemas/UwvMessageResource'
+          nullable: true
+          description: 'The underlying UWV message that the UWV document is based on.'
+      type: object
+    UwvDocumentStatusEnumOptions:
+      type: string
+      enum:
+        - draft
+        - final
+    UwvDocumentSignatureStatusEnumOptions:
+      type: string
+      enum:
+        - waiting-for-signature
+        - partly-signed
+        - completed
+    DossierUwvDocumentV2Resource:
+      properties:
+        id:
+          description: 'The unique identifier of the UWV document.'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+        status:
+          $ref: '#/components/schemas/UwvDocumentStatusEnumOptions'
+        signatureStatus:
+          oneOf:
+            -
+              $ref: '#/components/schemas/UwvDocumentSignatureStatusEnumOptions'
+          nullable: true
+          description: 'The signature status of the UWV document. Null when no signing workflow applies.'
+        dateCreated:
+          description: 'The date and time the UWV document was created.'
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+        dateUpdated:
+          description: 'The date and time the UWV document was last updated.'
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+        dossier:
+          oneOf:
+            -
+              $ref: '#/components/schemas/Dossier'
+          nullable: true
+          description: 'The dossier associated with the UWV document.'
+        uwvMessage:
+          oneOf:
+            -
+              $ref: '#/components/schemas/UwvMessageResource'
+          nullable: true
+          description: 'The underlying UWV message that the UWV document is based on.'
+      type: object
+    UwvMessageResource:
+      properties:
+        messageType:
+          oneOf:
+            -
+              $ref: '#/components/schemas/UwvMessageTypeEnumOptions'
+          nullable: true
+          description: 'The stable kebab-case identifier of the underlying UWV message, suitable for round-tripping through `filter[messageType]`. Null only for messages outside the publicly mapped set (rare in practice).'
+        category:
+          description: 'The category of the underlying UWV message (`document` or `interface`).'
+          type: string
+      type: object
     DossierExternalResourceResource:
       properties:
         id:
@@ -22599,11 +23252,13 @@ components:
         - birth-leave
         - illness-and-zwerd
         - paid-parental-leave
+        - invalid-value
     DossierStatusEnumOptions:
       type: string
       enum:
         - open
         - completed
+        - invalid-value
     SafetyNetEnumOptions:
       type: string
       enum:
@@ -22614,6 +23269,7 @@ components:
         - sick-due-to-childbirth
         - sick-due-to-organ-donation
         - unknown
+        - invalid-value
     AccidentTypeEnumOptions:
       type: string
       enum:
@@ -22621,6 +23277,7 @@ components:
         - private-with-liable
         - work-related-accident
         - work-related-accident-with-liable
+        - invalid-value
     Dossier:
       type: object
       allOf:
@@ -22784,6 +23441,7 @@ components:
         - finished
         - cancelled
         - overdue
+        - invalid-value
     DossierTaskWithoutRelations:
       properties:
         id:
@@ -22914,6 +23572,7 @@ components:
         - adoption
         - foster-care
         - cohabiting
+        - invalid-value
     PaidParentalLeave:
       properties:
         id:
@@ -23115,6 +23774,7 @@ components:
         - loopbaancoaching-orientatie
         - talentenanalyse-act-meting
         - ontwikkeltraject
+        - invalid-value
     Spoor2:
       properties:
         id:
@@ -23605,12 +24265,9 @@ components:
         - employment.dateStart
       properties:
         externalKey:
-          description: "An identifier provided by an external system that uniquely specifies the employee. This key serves as an alternative to the 'id' field for referencing the employee."
-          type: string
-          maxLength: 191
-          minLength: 0
-          example: ext-key-987654321
-          nullable: true
+          $ref: '#/components/schemas/PostRequestPropertyExternalKey'
+        migrationKey:
+          $ref: '#/components/schemas/PostRequestPropertyMigrationKey'
         person:
           $ref: '#/components/schemas/EmployeeRequestBodyPerson'
         address:
@@ -23929,10 +24586,10 @@ components:
           properties:
             data:
               properties:
-                tasksCancelled:
-                  description: 'The number of tasks that were cancelled'
-                  type: integer
-                  example: 42
+                queued:
+                  description: 'Whether the task generation and cancellation job has been queued'
+                  type: boolean
+                  example: true
               type: object
           type: object
     EmployerRequestBodyContract:
@@ -24823,6 +25480,7 @@ components:
         - partner
         - own-partner
         - partner-own
+        - invalid-value
     MaritalStatusEnumOptions:
       type: string
       enum:
@@ -24836,11 +25494,13 @@ components:
         - divorced-after-marriage
         - divorced-after-partnership
         - unknown
+        - invalid-value
     SalutationEnumOptions:
       type: string
       enum:
         - full
         - short
+        - invalid-value
     EmployerPersonResource:
       properties:
         id:
@@ -25524,6 +26184,7 @@ components:
         - four-weeks
         - month
         - year
+        - invalid-value
     EmploymentContractResource:
       properties:
         id:
@@ -25713,6 +26374,7 @@ components:
         - dismissal-own-request
         - immediate-dismissal
         - mutual-termination-of-employment
+        - invalid-value
     Employment:
       type: object
       allOf:
@@ -26739,6 +27401,7 @@ components:
         - cooperative-and-mutual-insurance-company
         - foundation
         - association
+        - invalid-value
     OrganizationalUnitCompany:
       properties:
         legalName:
@@ -27235,6 +27898,7 @@ components:
         - verzuim-zw-erd
         - bedrijfsdossier
         - betaald-ouderschapsverlof
+        - invalid-value
     TaskTypeEnumOptions:
       type: string
       enum:
@@ -27243,6 +27907,7 @@ components:
         - informative
         - uwv
         - evaluation
+        - invalid-value
     TaskTriggerEnumOptions:
       type: string
       enum:
@@ -27263,6 +27928,7 @@ components:
         - date-intake-spoor-2
         - actual-end-date-pregnancy-leave
         - date-of-termination-employment-contract
+        - invalid-value
     Task:
       properties:
         id:
@@ -28025,6 +28691,7 @@ components:
         - authorized-signals-only
         - authorized-viewing-only
         - black-authorization
+        - invalid-value
     ArboAuthorizationResource:
       properties:
         organizationalUnitId:
@@ -28058,6 +28725,7 @@ components:
         - external
         - employer
         - employee
+        - invalid-value
     UserAuthorizationResource:
       properties:
         id:
@@ -28177,6 +28845,52 @@ components:
               -
                 $ref: '#/components/schemas/EmployerAuthorizationResource'
       type: object
+    UwvMessageTypeEnumOptions:
+      type: string
+      enum:
+        - probleemanalyse
+        - plan-van-aanpak
+        - 42e-week-melding
+        - eerstejaars-evaluatie
+        - eindevaluatie
+        - actueel-oordeel
+        - aanvraag-zwanger
+        - nasturen-documenten-voor-adoptie-of-pleegzorg
+        - verlenging-wazo-ivm-ziekenhuisopname
+        - aanvragen-ziektewet-uitkering
+        - wijziging-doorgeven-bij-vangnet
+        - gedeeltelijk-herstel-bij-vangnet
+        - aanvragen-deskundigen-oordeel-werkgever
+        - aanvraag-vergoeding-voorziening-werkgever
+        - bijstelling-probleemanalyse
+        - medische-informatie
+        - verkort-re-integratieverslag
+        - melding-volledig-herstel-werknemer-na-42e-week
+        - digipoort-zw-ziektemelding
+        - digipoort-werkhervatting
+        - digipoort-wazo
+        - digipoort-mla
+        - digipoort-mla-herstel
+        - digipoort-erd
+        - functie-mogelijkheden-lijst
+        - verzoek-om-een-beschikking-over-de-ziektewet-uitkering
+        - inzetbaarheidsprofiel
+        - verklaring-bedrijfsarts
+        - ziekmelden-ex-werknemer-erd
+        - beoordeling-maatregel-zw-uitkering-voor-erd
+        - hersteldmelding-bij-volledig-hervatten-van-eigen-werk-erd
+        - wijzigingen-doorgeven-voor-erd
+        - ovm-werkhervattingsplan
+        - ovm-kwaliteitscorelijst-werkhervattingsplan
+        - ovm-6-wekelijk-dossiercheck
+        - ovm-frequent-verzuim
+        - ovm-vragenformulier-bedrijfsarts
+        - informatie-aanvraag-eerstejaars-ziektewet-beoordeling
+        - aanvraag-wazo
+        - bar-document
+        - inzetbaarheidsprofiel-izp
+        - aanvraag-verlenging-loondoorbetaling-wia
+        - doorgeven-wijzigingen-in-uw-gezondheid-wajong
   parameters:
     GetRequestFilterMigrationKey:
       name: 'filter[migrationKey]'
