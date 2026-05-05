@@ -3,6 +3,22 @@
 All notable changes to the Public API will be documented in this file.
 The changelog has been tracked since March 15, 2024. Changes prior to this date are based on the git log of the project.
 
+## Release May 2026
+
+### Added
+- `GET` `/dossier/content/uwv-document-v1` and `GET` `/dossier/content/uwv-document-v2` endpoints for retrieving UWV document meta data. Choice between `v1` and `v2` depends on partner environment configuration. (VV-9841)
+- `PATCH` `/dossier/employee` and `PATCH` `/dossier/company-dossier` endpoints for updating dossier properties (VV-9718)
+- Property `modules` include added to `GET` `/employer-contract` endpoint, exposing `billingType` per module (VV-9805)
+
+### Fixed
+- `POST` `/appointment` — not-found errors now return 404 instead of 500 (VV-9901)
+- `POST` `/user/authorizations` — no longer resets `externalKey` to null when assigning authorizations (VV-9822)
+- `POST` `/organizational-unit` — `contactPerson.type` now correctly read from nested object (VV-9803)
+
+### Documentation
+- All enum fields now include `invalid-value` as a documented option in the OpenAPI specification (VV-8551)
+
+
 ## Release April 2026
 
 ### Added
