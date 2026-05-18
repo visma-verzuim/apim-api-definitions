@@ -3,6 +3,22 @@
 All notable changes to the Public API will be documented in this file.
 The changelog has been tracked since March 15, 2024. Changes prior to this date are based on the git log of the project.
 
+## Release 2 May 2026 (13-05-2026)
+
+### Added
+- `DELETE` `/appointment/{uuid}` endpoint to cancel appointments (VV-9820)
+- `PATCH` `/dossier/diagnosis` endpoint for updating diagnosis properties. Includes a breaking change for the `POST` endpoint: `dateStart` property was renamed to `dateReported` as the original name was misleading and factually incorrect (VV-9898)
+- Property `firstEmploymentContract` + include added to `GET` `/employment` and `GET` `/employee` endpoints (VV-9992)
+- Filter parameters `dateUpdatedFrom` and `dateUpdatedUntil` added to `GET` `/appointment` (VV-9934)
+- Property `fullyAuthorized` added to `POST` and `GET` `/user/authorizations` endpoints (VV-9899)
+
+### Changed
+- `recoveryPercentage` now correctly accepts float values in `POST` and `PATCH` `/absence-course`. `AbsenceCourse` now always returns a float for `recoveryPercentage` in accordance with the schema definition (VV-9848)
+
+### Fixed
+- `POST` `/employer` — creation is now fully rolled back on failure instead of returning 500 with a partially created employer (VV-9832)
+
+
 ## Release May 2026
 
 ### Added

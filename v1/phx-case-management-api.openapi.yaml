@@ -182,6 +182,22 @@ paths:
             format: uuid
           example: 8366316b-1304-482e-bf53-0067174d477a
         -
+          name: 'filter[dateUpdatedFrom]'
+          in: query
+          description: 'Filter appointments updated on or after this datetime. Format: YYYY-MM-DD HH:MM:SS'
+          schema:
+            type: string
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-01 00:00:00'
+        -
+          name: 'filter[dateUpdatedUntil]'
+          in: query
+          description: 'Filter appointments updated on or before this datetime. Format: YYYY-MM-DD HH:MM:SS'
+          schema:
+            type: string
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+          example: '2026-01-31 23:59:59'
+        -
           name: include
           in: query
           description: 'Include the related resources - use comma separated values to include multiple resources'
@@ -357,6 +373,100 @@ paths:
           description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
           schema:
             type: string
+  '/appointment/{id}':
+    delete:
+      tags:
+        - Appointments
+      summary: 'Delete an appointment'
+      description: 'Deletes an appointment based on the unique identifier.'
+      operationId: appointment-delete-v1-ultimate
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Unique identifier of the appointment to delete.'
+          required: true
+          schema:
+            type: string
+            format: uuid
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+      requestBody:
+        description: 'Delete options'
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteAppointmentRequestBody'
+      responses:
+        '200':
+          description: 'Appointment successfully deleted'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '500':
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
   /agenda/billable/availabilities:
     get:
       tags:
@@ -2957,7 +3067,7 @@ paths:
       tags:
         - Dossier
       summary: 'Create a diagnosis'
-      operationId: diagnosis-post-v1-essential
+      operationId: diagnosis-post-v1-advanced
       requestBody:
         description: 'Diagnosis data'
         required: true
@@ -2972,6 +3082,91 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PostDiagnosisResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '500':
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+    patch:
+      tags:
+        - Dossier
+      summary: 'Update a diagnosis'
+      description: 'Update a diagnosis by applying changes to an existing diagnosis.'
+      operationId: diagnosis-patch-v1-advanced
+      requestBody:
+        description: 'Diagnosis data to update'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchDiagnosisRequestBody'
+      responses:
+        '200':
+          description: 'Diagnosis successfully updated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatchDiagnosisResponse'
           headers:
             Deprecated:
               description: 'This endpoint has been deprecated at the given timestamp.'
@@ -17284,6 +17479,14 @@ components:
             data:
               $ref: '#/components/schemas/Appointment'
           type: object
+    DeleteAppointmentRequestBody:
+      properties:
+        forceDelete:
+          description: 'Force delete the appointment, bypassing constraints. . Use true to delete without trashing record.'
+          type: boolean
+          default: false
+          example: false
+      type: object
     GetAppointmentResponse:
       properties:
         data:
@@ -19684,10 +19887,85 @@ components:
             data:
               $ref: '#/components/schemas/AbsenceCourse'
           type: object
+    PatchDiagnosisRequestBody:
+      properties:
+        id:
+          $ref: '#/components/schemas/PatchRequestPropertyId'
+        key:
+          $ref: '#/components/schemas/PatchRequestPropertyKey'
+        migrationKeyId:
+          $ref: '#/components/schemas/PatchRequestPropertyMigrationKeyId'
+        externalKey:
+          $ref: '#/components/schemas/PatchRequestPropertyExternalKey'
+        migrationKey:
+          $ref: '#/components/schemas/PatchRequestPropertyMigrationKey'
+        casCode:
+          description: 'The CAS code of the diagnosis.'
+          type: string
+          maxLength: 4
+          minLength: 0
+          example: A100
+        cvoCode:
+          description: 'The CVO code of the diagnosis.'
+          type: string
+          maxLength: 10
+          minLength: 0
+          example: '911.42'
+          nullable: true
+        cvoCodeSecondary:
+          description: 'The secondary CVO code of the diagnosis.'
+          type: string
+          maxLength: 10
+          minLength: 0
+          example: '911.42'
+          nullable: true
+        percentageWorkRelated:
+          description: 'The percentage of the condition that is caused by work. Must be between 0 and 100.'
+          type: number
+          format: float
+          maximum: 100
+          minimum: 0
+          example: 75.5
+          nullable: true
+        casIsChronic:
+          description: 'If the CAS diagnosis is chronic or not.'
+          type: boolean
+        cvoIsChronic:
+          description: 'If the CVO diagnosis is chronic or not.'
+          type: boolean
+        cvoIsChronicSecondary:
+          description: 'If the secondary CVO diagnosis is chronic or not.'
+          type: boolean
+        isMain:
+          description: 'If this is the main diagnosis for this dossier.'
+          type: boolean
+        dateReported:
+          description: 'The date the diagnosis was reported, in format YYYY-MM-DD'
+          type: string
+          format: date
+          example: '2024-01-01'
+        dateOrigin:
+          description: 'The origin-date of the diagnosis in format YYYY-MM-DD'
+          type: string
+          format: date
+          example: '2024-03-01'
+          nullable: true
+      type: object
+    PatchDiagnosisResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/Diagnosis'
+          type: object
     PostDiagnosisRequestBody:
       description: 'diagnosis data'
       required:
-        - dateStart
+        - dateReported
         - casCode
       properties:
         externalKey:
@@ -19748,8 +20026,8 @@ components:
         isMain:
           description: 'If this is the main diagnosis for this dossier. Defaults to false.'
           type: boolean
-        dateStart:
-          description: 'The start-date of the diagnosis in format YYYY-MM-DD'
+        dateReported:
+          description: 'The date the diagnosis was reported, in format YYYY-MM-DD'
           type: string
           format: date
           example: '2024-01-01'
@@ -22596,6 +22874,11 @@ components:
       type: object
     Diagnosis:
       properties:
+        id:
+          description: 'The unique identifier of the diagnosis.'
+          type: string
+          format: uuid
+          example: 123e4567-e89b-12d3-a456-426614174000
         externalKey:
           description: 'An identifier provided by an external system that uniquely specifies the diagnosis.'
           type: string
@@ -23914,6 +24197,9 @@ components:
         - employments
         - employments.employmentContracts
         - currentOrLastEmploymentContract.organizationalUnit.employer
+        - employments.firstEmploymentContract
+        - employments.firstEmploymentContract.employmentType
+        - employments.firstEmploymentContract.organizationalUnit.employer
         - addresses.country
         - employmentContract
         - communicationMethods
@@ -24144,7 +24430,7 @@ components:
           description: 'The waiting period (related to UWV) of the employee'
           type: integer
         payrollDiscountIndication:
-          description: 'Indication for payroll discount (related to UWV) for the Employee.'
+          description: '(DEPRECATED - use employment.payrollDiscountIndication instead) Indication for payroll discount (related to UWV) for the Employee.'
           type: boolean
       type: object
     PostEmployeeRequestBodyEmployment:
@@ -24249,6 +24535,14 @@ components:
           nullable: true
           description: 'The salary payment period of the employee.'
           example: month
+        payrollDiscountIndication:
+          description: 'Indication for payroll discount for the employee. Mutually exclusive with uwv.payrollDiscountIndication.'
+          type: boolean
+          nullable: true
+        payrollTaxIdentificationNumber:
+          description: 'The payroll tax identification number (loonheffingsnummer) of the employee.'
+          type: string
+          nullable: true
       type: object
     PostEmployeeRequestBody:
       required:
@@ -25729,6 +26023,8 @@ components:
         - employmentContracts.employmentType
         - currentOrLastEmploymentContract.organizationalUnit.employer
         - currentOrLastEmploymentContract.employmentType
+        - firstEmploymentContract.organizationalUnit.employer
+        - firstEmploymentContract.employmentType
     GetEmploymentTypeResponse:
       properties:
         data:
@@ -25884,7 +26180,7 @@ components:
           example: 3
           nullable: true
         uwvSector:
-          description: 'The UWV sector for the Employment'
+          description: 'The UWV Sector in which the employment belongs'
           type: integer
           example: 2
           nullable: true
@@ -25921,6 +26217,13 @@ components:
           maxLength: 191
           minLength: 0
           example: testEmployeeNumber
+          nullable: true
+        payrollTaxIdentificationNumber:
+          description: 'The payroll tax identification number (loonheffingsnummer) of the employee.'
+          type: string
+          maxLength: 255
+          minLength: 0
+          example: 123456789L01
           nullable: true
       type: object
     PatchEmploymentResponse:
@@ -26125,6 +26428,13 @@ components:
           description: 'Uwv Risk Code'
           type: string
           example: Uwv@Risk@Code
+        payrollTaxIdentificationNumber:
+          description: 'The payroll tax identification number (loonheffingsnummer)'
+          type: string
+          maxLength: 255
+          minLength: 0
+          example: 123456789L01
+          nullable: true
         dateStart:
           description: 'Start date for the new employment contract, defaults to current day'
           type: string
@@ -26262,6 +26572,9 @@ components:
           format: double
           example: 99899.34
           nullable: true
+        payrollDiscountIndication:
+          description: 'Indication for payroll discount for the employee.'
+          type: boolean
         dateCreated:
           description: 'The date and time the employment contract was created in our system. (Format YYYY-MM-DD HH:MM:SS)'
           type: string
@@ -26346,6 +26659,9 @@ components:
           format: double
           example: 99899.34
           nullable: true
+        payrollDiscountIndication:
+          description: 'Indication for payroll discount for the employee.'
+          type: boolean
         dateCreated:
           description: 'The date and time the employment contract was created in our system. (Format YYYY-MM-DD HH:MM:SS)'
           type: string
@@ -26408,8 +26724,10 @@ components:
               nullable: true
             currentOrLastEmploymentContract:
               $ref: '#/components/schemas/EmploymentContractResource'
+            firstEmploymentContract:
+              $ref: '#/components/schemas/EmploymentContractResource'
             firstEmploymentContractId:
-              description: 'The unique identifier of the first employment contract associated with this employment'
+              description: "(DEPRECATED - left for backwards compatibility - recommend using 'firstEmploymentContract.id' instead) The unique identifier of the first employment contract associated with this employment"
               type: string
               format: uuid
               maxLength: 36
@@ -26472,6 +26790,18 @@ components:
           type: string
           pattern: '^\d{4}-\d{2}-\d{2}$'
           example: '2020-01-23'
+          nullable: true
+        payrollTaxIdentificationNumber:
+          description: 'The payroll tax identification number (loonheffingsnummer) of the Employee associated with this employment.'
+          type: string
+          example: 123456789L01
+          nullable: true
+        uwvRegistrationNumber:
+          description: 'The UWV registration number (aansluitnummer) of the Employee associated with this employment.'
+          type: string
+          maxLength: 191
+          minLength: 0
+          example: '000012345'
           nullable: true
         uwvRiskCode:
           description: 'The UWV risk code of the Employee associated with this employment.'
@@ -28527,6 +28857,9 @@ components:
       properties:
         cleaning:
           $ref: '#/components/schemas/UserAuthorizationCleaningTypeEnumOptions'
+        fullyAuthorized:
+          description: 'When set to `true`, grants root authorization to the user, superseding all granular authorizations. When `true`, `organizationalUnits`, `employments`, and `employers` must be empty. Only supported for employer and internal users.'
+          type: boolean
         organizationalUnits:
           type: array
           items:
@@ -28749,6 +29082,9 @@ components:
               -
                 $ref: '#/components/schemas/EmployerAuthorizationResource'
           nullable: true
+        fullyAuthorized:
+          description: 'Indicates if the user has root authorization which supersedes all other authorizations'
+          type: boolean
       type: object
     User:
       properties:
