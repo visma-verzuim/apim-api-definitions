@@ -3815,6 +3815,13 @@ paths:
           schema:
             type: boolean
         -
+          name: 'filter[isIncome]'
+          in: query
+          description: 'Filter by whether the document type is shared with BlueVi Income'
+          required: false
+          schema:
+            type: boolean
+        -
           name: 'filter[dossierId]'
           in: query
           description: "Filter by the unique identifier of the dossier where the document's belonging to"
@@ -4886,6 +4893,13 @@ paths:
           schema:
             type: boolean
         -
+          name: 'filter[isIncome]'
+          in: query
+          description: 'Filter by whether the note type is shared with BlueVi Income'
+          required: false
+          schema:
+            type: boolean
+        -
           name: 'filter[dossierId]'
           in: query
           description: "Filter by the note's belonging to this dossierId"
@@ -5386,6 +5400,13 @@ paths:
           schema:
             type: boolean
         -
+          name: 'filter[isIncome]'
+          in: query
+          description: 'Filter by whether the upload type is shared with BlueVi Income'
+          required: false
+          schema:
+            type: boolean
+        -
           name: 'filter[dossierId]'
           in: query
           description: "Filter by the dossier upload's belonging to this dossierId"
@@ -5800,6 +5821,13 @@ paths:
           schema:
             type: boolean
         -
+          name: 'filter[isIncome]'
+          in: query
+          description: 'Filter by whether the UWV message type is shared with BlueVi Income'
+          required: false
+          schema:
+            type: boolean
+        -
           $ref: '#/components/parameters/GetRequestFilterDateCreatedFrom'
         -
           $ref: '#/components/parameters/GetRequestFilterDateCreatedUntil'
@@ -5933,6 +5961,13 @@ paths:
           name: 'filter[isSigned]'
           in: query
           description: 'Filter by whether the UWV document is fully signed. True returns only completed signatures; false returns unsigned, partly signed, and documents without a signing workflow.'
+          required: false
+          schema:
+            type: boolean
+        -
+          name: 'filter[isIncome]'
+          in: query
+          description: 'Filter by whether the UWV message type is shared with BlueVi Income'
           required: false
           schema:
             type: boolean
@@ -18702,7 +18737,6 @@ components:
         - firstName
         - lastName
         - email
-        - mobile
       properties:
         initials:
           description: 'Initials of the contact person'
@@ -18746,7 +18780,7 @@ components:
         mobile:
           description: 'Mobile number of the contact person'
           type: string
-          maxLength: 255
+          maxLength: 191
           example: '+31612345678'
           nullable: true
         externalKey:
@@ -23097,6 +23131,9 @@ components:
         isHr:
           description: 'Indication if the document are available in HR'
           type: boolean
+        isIncome:
+          description: 'Indication if the document type is shared with BlueVi Income'
+          type: boolean
         feedbackToDossier:
           description: "Indication if the document are available as 'feedback to dossier' (terugkoppeling in dossier)"
           type: boolean
@@ -23227,6 +23264,9 @@ components:
         isHr:
           description: 'Indicates if the note type is available in HR'
           type: boolean
+        isIncome:
+          description: 'Indicates if the note type is shared with BlueVi Income'
+          type: boolean
         dateCreated:
           description: 'Date and time the note type was created in our system'
           type: string
@@ -23348,6 +23388,9 @@ components:
           type: boolean
         isHr:
           description: 'Whether the upload type is available in HR'
+          type: boolean
+        isIncome:
+          description: 'Whether the upload type is shared with BlueVi Income'
           type: boolean
         feedbackToDossier:
           description: 'Indication if the feedback will be placed into the dossier (terugkoppeling in dossier)'
@@ -26225,6 +26268,13 @@ components:
           minLength: 0
           example: 123456789L01
           nullable: true
+        uwvRegistrationNumber:
+          description: 'The UWV registration number (aansluitnummer) of the Employee associated with this employment.'
+          type: string
+          maxLength: 191
+          minLength: 0
+          example: '000012345'
+          nullable: true
       type: object
     PatchEmploymentResponse:
       allOf:
@@ -26434,6 +26484,13 @@ components:
           maxLength: 255
           minLength: 0
           example: 123456789L01
+          nullable: true
+        uwvRegistrationNumber:
+          description: 'The UWV registration number (aansluitnummer) of the Employee associated with this employment.'
+          type: string
+          maxLength: 191
+          minLength: 0
+          example: '000012345'
           nullable: true
         dateStart:
           description: 'Start date for the new employment contract, defaults to current day'

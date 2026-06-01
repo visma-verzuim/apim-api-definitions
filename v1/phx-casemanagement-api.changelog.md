@@ -3,6 +3,16 @@
 All notable changes to the Public API will be documented in this file.
 The changelog has been tracked since March 15, 2024. Changes prior to this date are based on the git log of the project.
 
+## Release 28 May 2026 (28-05-2026)
+
+### Added
+- Property `uwvRegistrationNumber` added to `POST` and `PATCH` `/employment` endpoints (VV-10077)
+- `filter[isIncome]` query parameter and `isIncome` response field added to `GET /dossier/content/{type}` endpoints. `isIncome` denotes content that is configured to be made available to BlueVi Income  (VV-9932)
+
+### Changed
+- `mobile` field is now optional on `POST /contact-person/{type}` and `PATCH /contact-person/{type}` (VV-9912)
+
+
 ## Release 2 May 2026 (13-05-2026)
 
 ### Added
