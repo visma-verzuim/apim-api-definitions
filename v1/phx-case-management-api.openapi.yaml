@@ -3815,6 +3815,13 @@ paths:
           schema:
             type: boolean
         -
+          name: 'filter[isIncome]'
+          in: query
+          description: 'Filter by whether the document type is shared with BlueVi Income'
+          required: false
+          schema:
+            type: boolean
+        -
           name: 'filter[dossierId]'
           in: query
           description: "Filter by the unique identifier of the dossier where the document's belonging to"
@@ -4886,6 +4893,13 @@ paths:
           schema:
             type: boolean
         -
+          name: 'filter[isIncome]'
+          in: query
+          description: 'Filter by whether the note type is shared with BlueVi Income'
+          required: false
+          schema:
+            type: boolean
+        -
           name: 'filter[dossierId]'
           in: query
           description: "Filter by the note's belonging to this dossierId"
@@ -5386,6 +5400,13 @@ paths:
           schema:
             type: boolean
         -
+          name: 'filter[isIncome]'
+          in: query
+          description: 'Filter by whether the upload type is shared with BlueVi Income'
+          required: false
+          schema:
+            type: boolean
+        -
           name: 'filter[dossierId]'
           in: query
           description: "Filter by the dossier upload's belonging to this dossierId"
@@ -5800,6 +5821,13 @@ paths:
           schema:
             type: boolean
         -
+          name: 'filter[isIncome]'
+          in: query
+          description: 'Filter by whether the UWV message type is shared with BlueVi Income'
+          required: false
+          schema:
+            type: boolean
+        -
           $ref: '#/components/parameters/GetRequestFilterDateCreatedFrom'
         -
           $ref: '#/components/parameters/GetRequestFilterDateCreatedUntil'
@@ -5933,6 +5961,13 @@ paths:
           name: 'filter[isSigned]'
           in: query
           description: 'Filter by whether the UWV document is fully signed. True returns only completed signatures; false returns unsigned, partly signed, and documents without a signing workflow.'
+          required: false
+          schema:
+            type: boolean
+        -
+          name: 'filter[isIncome]'
+          in: query
+          description: 'Filter by whether the UWV message type is shared with BlueVi Income'
           required: false
           schema:
             type: boolean
@@ -18277,6 +18312,21 @@ components:
             data:
               $ref: '#/components/schemas/PublicApiResponseBodyDataExample'
           type: object
+    PatchRequestPropertyDossierStatus:
+      description: 'The status of the dossier. When omitted, the existing status is retained.'
+      allOf:
+        -
+          $ref: '#/components/schemas/DossierStatusEnumOptions'
+    PatchRequestPropertyDossierDateCompleted:
+      description: "The date the dossier was completed in format YYYY-MM-DD. Cannot be set while the effective dossier status is 'open'."
+      type: string
+      format: date
+      nullable: true
+    PatchRequestPropertyDossierDateEnd:
+      description: 'The end date of the dossier in format YYYY-MM-DD.'
+      type: string
+      format: date
+      nullable: true
     PatchRequestPropertyId:
       description: "Unique identifier of the resource to update. Mutually exclusive with 'key' and if applicable 'migrationKeyIdentifier'."
       type: string
@@ -18702,7 +18752,6 @@ components:
         - firstName
         - lastName
         - email
-        - mobile
       properties:
         initials:
           description: 'Initials of the contact person'
@@ -18746,7 +18795,7 @@ components:
         mobile:
           description: 'Mobile number of the contact person'
           type: string
-          maxLength: 255
+          maxLength: 191
           example: '+31612345678'
           nullable: true
         externalKey:
@@ -21136,7 +21185,7 @@ components:
         migrationKey:
           $ref: '#/components/schemas/PatchRequestPropertyMigrationKey'
         dossierStatus:
-          $ref: '#/components/schemas/DossierStatusEnumOptions'
+          $ref: '#/components/schemas/PatchRequestPropertyDossierStatus'
         dateReported:
           description: "Date the dossier was reported, if omitted defaults to 'now'"
           type: string
@@ -21181,9 +21230,7 @@ components:
           description: 'The expected duration of the dossier in days'
           type: integer
         dateCompleted:
-          description: 'The date the dossier was completed in format YYYY-MM-DD'
-          type: string
-          format: date
+          $ref: '#/components/schemas/PatchRequestPropertyDossierDateCompleted'
         beneficiary:
           $ref: '#/components/schemas/BirthLeaveBeneficiaryEnumOptions'
         dateOfBirthExpected:
@@ -21292,7 +21339,7 @@ components:
         migrationKey:
           $ref: '#/components/schemas/PatchRequestPropertyMigrationKey'
         dossierStatus:
-          $ref: '#/components/schemas/DossierStatusEnumOptions'
+          $ref: '#/components/schemas/PatchRequestPropertyDossierStatus'
         dateReported:
           description: "The date the dossier was reported in format YYYY-MM-DD, if omitted defaults to 'now'"
           type: string
@@ -21333,9 +21380,7 @@ components:
           description: 'The expected duration of the dossier in days (informative)'
           type: integer
         dateCompleted:
-          description: 'The date the dossier was completed in format YYYY-MM-DD'
-          type: string
-          format: date
+          $ref: '#/components/schemas/PatchRequestPropertyDossierDateCompleted'
         pa:
           description: 'Indicates if the problem analysis has been made'
           type: boolean
@@ -21379,6 +21424,12 @@ components:
           $ref: '#/components/schemas/PatchRequestPropertyMigrationKeyId'
         migrationKey:
           $ref: '#/components/schemas/PatchRequestPropertyMigrationKey'
+        dossierStatus:
+          $ref: '#/components/schemas/PatchRequestPropertyDossierStatus'
+        dateCompleted:
+          $ref: '#/components/schemas/PatchRequestPropertyDossierDateCompleted'
+        dateEnd:
+          $ref: '#/components/schemas/PatchRequestPropertyDossierDateEnd'
         zwerdDecline:
           description: 'Indicates if the ZWERD request is declined'
           type: boolean
@@ -21467,6 +21518,12 @@ components:
           $ref: '#/components/schemas/PatchRequestPropertyMigrationKeyId'
         migrationKey:
           $ref: '#/components/schemas/PatchRequestPropertyMigrationKey'
+        dossierStatus:
+          $ref: '#/components/schemas/PatchRequestPropertyDossierStatus'
+        dateCompleted:
+          $ref: '#/components/schemas/PatchRequestPropertyDossierDateCompleted'
+        dateEnd:
+          $ref: '#/components/schemas/PatchRequestPropertyDossierDateEnd'
         externalKey:
           description: "An identifier provided by an external system that uniquely specifies the dossier. This key serves as an alternative to the 'id' field for referencing the dossier."
           type: string
@@ -21512,11 +21569,7 @@ components:
         migrationKey:
           $ref: '#/components/schemas/PatchRequestPropertyMigrationKey'
         dossierStatus:
-          oneOf:
-            -
-              $ref: '#/components/schemas/DossierStatusEnumOptions'
-          nullable: true
-          description: "The status of the dossier, if omitted defaults to 'open', unless 'dateCompleted' is set  in the past, then it defaults to 'completed'"
+          $ref: '#/components/schemas/PatchRequestPropertyDossierStatus'
         dateReported:
           description: "Date the dossier was reported, if omitted defaults to 'now'"
           type: string
@@ -21553,9 +21606,7 @@ components:
           description: 'The expected duration of the dossier in days'
           type: integer
         dateCompleted:
-          description: 'The date the dossier was completed in format YYYY-MM-DD'
-          type: string
-          format: date
+          $ref: '#/components/schemas/PatchRequestPropertyDossierDateCompleted'
         paidParentalLeaveType:
           $ref: '#/components/schemas/PaidParentalLeaveTypeEnumOptions'
         dateOfBirth:
@@ -21609,6 +21660,12 @@ components:
           $ref: '#/components/schemas/PatchRequestPropertyMigrationKeyId'
         migrationKey:
           $ref: '#/components/schemas/PatchRequestPropertyMigrationKey'
+        dossierStatus:
+          $ref: '#/components/schemas/PatchRequestPropertyDossierStatus'
+        dateCompleted:
+          $ref: '#/components/schemas/PatchRequestPropertyDossierDateCompleted'
+        dateEnd:
+          $ref: '#/components/schemas/PatchRequestPropertyDossierDateEnd'
         dateOfBirthExpected:
           description: 'The expected birthdate of the child'
           type: string
@@ -21736,7 +21793,7 @@ components:
           example: EXT-DOS-123
           nullable: true
         dossierStatus:
-          $ref: '#/components/schemas/DossierStatusEnumOptions'
+          $ref: '#/components/schemas/PatchRequestPropertyDossierStatus'
         dateReported:
           description: "Date the dossier was reported in format YYYY-MM-DD, if omitted defaults to 'now'"
           type: string
@@ -21793,10 +21850,7 @@ components:
           description: 'The expected duration of the dossier in days'
           type: integer
         dateCompleted:
-          description: "The date the dossier was completed. This field may only be set when completing/closing a dossier (dossierStatus set to 'completed'). Setting it on an active open dossier will be rejected."
-          type: string
-          format: date
-          example: '2020-01-23'
+          $ref: '#/components/schemas/PatchRequestPropertyDossierDateCompleted'
         traject:
           $ref: '#/components/schemas/Spoor2TrajectEnumOptions'
       type: object
@@ -21834,7 +21888,7 @@ components:
         migrationKey:
           $ref: '#/components/schemas/PatchRequestPropertyMigrationKey'
         dossierStatus:
-          $ref: '#/components/schemas/DossierStatusEnumOptions'
+          $ref: '#/components/schemas/PatchRequestPropertyDossierStatus'
         dateReported:
           description: "Date the absence was reported, if omitted defaults to 'now'"
           type: string
@@ -21865,9 +21919,7 @@ components:
           description: 'The expected duration of the absence in days'
           type: integer
         dateCompleted:
-          description: "The date the dossier was completed. This field may only be set when completing/closing a dossier (dossierStatus set to 'completed'). Setting it on an active open dossier will be rejected."
-          type: string
-          format: date
+          $ref: '#/components/schemas/PatchRequestPropertyDossierDateCompleted'
       type: object
     PatchWGADossierResponse:
       allOf:
@@ -21899,6 +21951,12 @@ components:
           $ref: '#/components/schemas/PatchRequestPropertyMigrationKeyId'
         migrationKey:
           $ref: '#/components/schemas/PatchRequestPropertyMigrationKey'
+        dossierStatus:
+          $ref: '#/components/schemas/PatchRequestPropertyDossierStatus'
+        dateCompleted:
+          $ref: '#/components/schemas/PatchRequestPropertyDossierDateCompleted'
+        dateEnd:
+          $ref: '#/components/schemas/PatchRequestPropertyDossierDateEnd'
         key:
           description: "An identifier provided by an external system that uniquely specifies the dossier to be updated. The key of the dossier, this is an alternative to the 'id' field for referencing the dossier"
           type: string
@@ -23097,6 +23155,9 @@ components:
         isHr:
           description: 'Indication if the document are available in HR'
           type: boolean
+        isIncome:
+          description: 'Indication if the document type is shared with BlueVi Income'
+          type: boolean
         feedbackToDossier:
           description: "Indication if the document are available as 'feedback to dossier' (terugkoppeling in dossier)"
           type: boolean
@@ -23227,6 +23288,9 @@ components:
         isHr:
           description: 'Indicates if the note type is available in HR'
           type: boolean
+        isIncome:
+          description: 'Indicates if the note type is shared with BlueVi Income'
+          type: boolean
         dateCreated:
           description: 'Date and time the note type was created in our system'
           type: string
@@ -23348,6 +23412,9 @@ components:
           type: boolean
         isHr:
           description: 'Whether the upload type is available in HR'
+          type: boolean
+        isIncome:
+          description: 'Whether the upload type is shared with BlueVi Income'
           type: boolean
         feedbackToDossier:
           description: 'Indication if the feedback will be placed into the dossier (terugkoppeling in dossier)'
@@ -26225,6 +26292,13 @@ components:
           minLength: 0
           example: 123456789L01
           nullable: true
+        uwvRegistrationNumber:
+          description: 'The UWV registration number (aansluitnummer) of the Employee associated with this employment.'
+          type: string
+          maxLength: 191
+          minLength: 0
+          example: '000012345'
+          nullable: true
       type: object
     PatchEmploymentResponse:
       allOf:
@@ -26434,6 +26508,13 @@ components:
           maxLength: 255
           minLength: 0
           example: 123456789L01
+          nullable: true
+        uwvRegistrationNumber:
+          description: 'The UWV registration number (aansluitnummer) of the Employee associated with this employment.'
+          type: string
+          maxLength: 191
+          minLength: 0
+          example: '000012345'
           nullable: true
         dateStart:
           description: 'Start date for the new employment contract, defaults to current day'
