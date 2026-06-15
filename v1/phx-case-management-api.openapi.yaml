@@ -121,6 +121,92 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+  /address/dossier/nursing:
+    post:
+      tags:
+        - DossierAddress
+      summary: 'Create a nursing address for a dossier'
+      description: 'Creates a new nursing address record for the given dossier. All address fields are optional. If both dateStart and dateEnd are provided, dateEnd must not be before dateStart.'
+      operationId: dossieraddress-nursing-post-v1-essential
+      requestBody:
+        description: 'The nursing address data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostDossierNursingAddressRequestBody'
+      responses:
+        '201':
+          description: 'Nursing address created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostDossierNursingAddressResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '500':
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
   /appointment:
     get:
       tags:
@@ -197,6 +283,14 @@ paths:
             type: string
             pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
           example: '2026-01-31 23:59:59'
+        -
+          name: 'filter[migrationKey]'
+          in: query
+          description: 'Filter by the migration key associated with the appointment.'
+          schema:
+            type: string
+            maxLength: 255
+          example: 123e4567-e89b-12d3-a456-426614174000
         -
           name: include
           in: query
@@ -654,6 +748,92 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+  /appointment/migration-key:
+    patch:
+      tags:
+        - Appointments
+      summary: 'Clear migration key from appointments'
+      description: 'Clears the migration key from all appointments that match the provided migration key.'
+      operationId: appointment-migrationkey-patch-v1-ultimate
+      requestBody:
+        description: 'Migration key to clear'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchAppointmentMigrationKeyRequestBody'
+      responses:
+        '200':
+          description: 'Migration key successfully cleared'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatchAppointmentMigrationKeyResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '500':
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
   /auth/partner/token:
     post:
       tags:
@@ -5926,6 +6106,58 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+  '/dossier/content/uwv-document-v2/{uuid}/content':
+    get:
+      tags:
+        - DossierContent
+      summary: 'Download UWV document v2 PDF content'
+      operationId: dossiercontent-uwv-document-v2-content-get-v1-advanced
+      parameters:
+        -
+          name: uuid
+          in: path
+          description: 'The unique identifier of the UWV document v2'
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: 'PDF content streamed successfully'
+          headers:
+            Content-Type:
+              description: 'The MIME type of the file (always application/pdf)'
+              schema:
+                type: string
+                example: application/pdf
+            Content-Disposition:
+              description: 'Attachment disposition with filename'
+              schema:
+                type: string
+                example: 'attachment; filename=uwv-document.pdf'
+            Content-Length:
+              description: 'Size of the file in bytes'
+              schema:
+                type: integer
+                example: 1024000
+          content:
+            application/octet-stream:
+              schema:
+                description: 'Binary PDF content'
+                type: string
+                format: binary
+        '400':
+          description: 'Bad Request - document not found, not finalized, or not fully signed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        '500':
+          description: 'Server Error - PDF generation or file read failure'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
   /dossier/content/uwv-document-v2:
     get:
       tags:
@@ -17447,6 +17679,79 @@ components:
           minLength: 0
           example: false
       type: object
+    PostDossierNursingAddressRequestBody:
+      properties:
+        dossierId:
+          description: "UUID of the dossier. Required if 'dossierKey' is omitted."
+          type: string
+          format: uuid
+          example: a1b2c3d4-1234-5678-abcd-ef0123456789
+          nullable: true
+        dossierKey:
+          description: "External key of the dossier. Required if 'dossierId' is omitted."
+          type: string
+          example: DOS-1234
+          nullable: true
+        name:
+          description: "Free-format label, e.g. 'Care facility', 'Campsite'."
+          type: string
+          maxLength: 191
+          example: 'Care facility'
+          nullable: true
+        street:
+          type: string
+          maxLength: 191
+          example: Dorpstraat
+          nullable: true
+        number:
+          type: string
+          maxLength: 191
+          example: 12A
+          nullable: true
+        postalCode:
+          type: string
+          maxLength: 191
+          example: 1234AB
+          nullable: true
+        city:
+          type: string
+          maxLength: 191
+          example: Amsterdam
+          nullable: true
+        region:
+          type: string
+          maxLength: 191
+          example: Noord-Holland
+          nullable: true
+        country:
+          description: 'ISO 3166 alpha-2 country code.'
+          type: string
+          maxLength: 2
+          minLength: 2
+          example: NL
+          nullable: true
+        dateStart:
+          type: string
+          format: date
+          example: '2025-01-01'
+          nullable: true
+        dateEnd:
+          type: string
+          format: date
+          example: '2025-06-01'
+          nullable: true
+      type: object
+    PostDossierNursingAddressResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/DossierAddress'
+          type: object
     PostAppointmentRequestBody:
       required:
         - title
@@ -17500,6 +17805,12 @@ components:
         locationId:
           description: 'The UUID of the location associated with the appointment.'
           type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+          nullable: true
+        migrationKey:
+          description: 'An optional migration key to associate with the appointment.'
+          type: string
+          maxLength: 255
           example: 123e4567-e89b-12d3-a456-426614174000
           nullable: true
       type: object
@@ -17590,6 +17901,36 @@ components:
         - mutations.createdBy.person
         - employer
         - organizationalUnit
+    PatchAppointmentMigrationKeyRequestBody:
+      required:
+        - migrationKey
+      properties:
+        migrationKey:
+          description: 'The migration key to clear from appointments.'
+          type: string
+          maxLength: 255
+          example: 123e4567-e89b-12d3-a456-426614174000
+      type: object
+    PatchAppointmentMigrationKeyData:
+      required:
+        - affectedCount
+      properties:
+        affectedCount:
+          description: 'The number of appointments that had their migration key cleared.'
+          type: integer
+          example: 3
+      type: object
+    PatchAppointmentMigrationKeyResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/PatchAppointmentMigrationKeyData'
+          type: object
     Appointment:
       properties:
         id:
@@ -18312,6 +18653,45 @@ components:
             data:
               $ref: '#/components/schemas/PublicApiResponseBodyDataExample'
           type: object
+    DossierRequestPropertyNursingAddress:
+      description: 'Optional nursing address for the employee. Providing this creates or updates the nursing address. New dateStart must be strictly after the current nursing address start date.'
+      properties:
+        name:
+          type: string
+          example: 'Verzorgingshuis De Linde'
+          nullable: true
+        street:
+          type: string
+          example: Dorpstraat
+          nullable: true
+        number:
+          type: string
+          example: 12A
+          nullable: true
+        postalCode:
+          type: string
+          example: 1234AB
+          nullable: true
+        city:
+          type: string
+          example: Amsterdam
+          nullable: true
+        region:
+          type: string
+          example: Noord-Holland
+          nullable: true
+        country:
+          description: 'ISO 3166-1 alpha-2 country code'
+          type: string
+          example: NL
+          nullable: true
+        dateStart:
+          description: 'Required. Format YYYY-MM-DD.'
+          type: string
+          format: date
+          example: '2024-01-15'
+      type: object
+      nullable: true
     PatchRequestPropertyId:
       description: "Unique identifier of the resource to update. Mutually exclusive with 'key' and if applicable 'migrationKeyIdentifier'."
       type: string
@@ -19315,6 +19695,10 @@ components:
           format: date
           example: '2025-12-31'
           nullable: true
+        outgoingDossiers:
+          description: "Indicates whether tasks and dossiers from this employer remain visible in the case management portal's open tasks and dossier lists after the contract has ended (Uitloop dossier option)"
+          type: boolean
+          example: true
         dateCreated:
           description: 'The date and time that the contract was created in our system. Format YYYY-MM-DD HH:MM:SS'
           type: string
@@ -19447,6 +19831,11 @@ components:
           nullable: true
         contractType:
           $ref: '#/components/schemas/ContractType'
+        serviceType:
+          oneOf:
+            -
+              $ref: '#/components/schemas/ServiceType'
+          nullable: true
         employer:
           $ref: '#/components/schemas/EmployerWithoutRelations'
         partnership:
@@ -21235,6 +21624,8 @@ components:
           maximum: 9
           minimum: 1
           example: 8
+        nursingAddress:
+          $ref: '#/components/schemas/DossierRequestPropertyNursingAddress'
       type: object
     PatchBirthLeaveDossierResponse:
       allOf:
@@ -21378,6 +21769,8 @@ components:
         pva:
           description: 'Indicates if the plan of approach has been made'
           type: boolean
+        nursingAddress:
+          $ref: '#/components/schemas/DossierRequestPropertyNursingAddress'
       type: object
     PatchIllnessDossierResponse:
       allOf:
@@ -21485,6 +21878,8 @@ components:
         pva:
           description: 'Indicates if the plan of approach has been made'
           type: boolean
+        nursingAddress:
+          $ref: '#/components/schemas/DossierRequestPropertyNursingAddress'
       type: object
     PatchIllnessZwerdDossierResponse:
       allOf:
@@ -21539,6 +21934,8 @@ components:
           type: string
           format: date
           example: '2020-01-23'
+        nursingAddress:
+          $ref: '#/components/schemas/DossierRequestPropertyNursingAddress'
       type: object
     PatchMedicalPreventiveDossierResponse:
       allOf:
@@ -21626,6 +22023,8 @@ components:
           description: 'The date of admission in format YYYY-MM-DD'
           type: string
           format: date
+        nursingAddress:
+          $ref: '#/components/schemas/DossierRequestPropertyNursingAddress'
       type: object
     PatchPaidParentalLeaveDossierResponse:
       allOf:
@@ -21717,6 +22116,8 @@ components:
           description: 'The actual start date of the requested leave'
           type: string
           format: date
+        nursingAddress:
+          $ref: '#/components/schemas/DossierRequestPropertyNursingAddress'
       type: object
     PatchPregnancyDossierResponse:
       allOf:
@@ -21764,6 +22165,8 @@ components:
           type: string
           format: date
           example: '2020-01-23'
+        nursingAddress:
+          $ref: '#/components/schemas/DossierRequestPropertyNursingAddress'
       type: object
     PatchPreventiveDossierResponse:
       allOf:
@@ -21869,6 +22272,8 @@ components:
           nullable: true
         traject:
           $ref: '#/components/schemas/Spoor2TrajectEnumOptions'
+        nursingAddress:
+          $ref: '#/components/schemas/DossierRequestPropertyNursingAddress'
       type: object
     PatchSpoor2DossierResponse:
       allOf:
@@ -21939,6 +22344,8 @@ components:
           type: string
           format: date
           nullable: true
+        nursingAddress:
+          $ref: '#/components/schemas/DossierRequestPropertyNursingAddress'
       type: object
     PatchWGADossierResponse:
       allOf:
@@ -22007,6 +22414,8 @@ components:
           description: "The date the employee's employment was completed in format YYYY-MM-DD"
           type: string
           format: date
+        nursingAddress:
+          $ref: '#/components/schemas/DossierRequestPropertyNursingAddress'
       type: object
     PatchZwerdDossierResponse:
       allOf:
@@ -22155,6 +22564,8 @@ components:
           maximum: 9
           minimum: 1
           example: 8
+        nursingAddress:
+          $ref: '#/components/schemas/DossierRequestPropertyNursingAddress'
       type: object
     PostBirthLeaveDossierResponse:
       allOf:
@@ -22268,6 +22679,8 @@ components:
           description: 'The key of the employment associated with the medical preventive dossier.'
           type: string
           example: EXT-DVB-3215
+        nursingAddress:
+          $ref: '#/components/schemas/DossierRequestPropertyNursingAddress'
       type: object
     PostMedicalPreventiveDossierResponse:
       allOf:
@@ -22387,6 +22800,8 @@ components:
           description: 'The number of children the leave applies to'
           type: integer
           example: 1
+        nursingAddress:
+          $ref: '#/components/schemas/DossierRequestPropertyNursingAddress'
       type: object
     PostPaidParentalLeaveDossierResponse:
       allOf:
@@ -22466,6 +22881,8 @@ components:
           format: date
         requestedLeavePeriod:
           $ref: '#/components/schemas/RequestedLeavePeriodEnumOptions'
+        nursingAddress:
+          $ref: '#/components/schemas/DossierRequestPropertyNursingAddress'
       type: object
     PostPregnancyDossierResponse:
       allOf:
@@ -22518,6 +22935,8 @@ components:
           description: 'The date the dossier was completed in format YYYY-MM-DD'
           type: string
           format: date
+        nursingAddress:
+          $ref: '#/components/schemas/DossierRequestPropertyNursingAddress'
       type: object
     PostPreventiveDossierResponse:
       allOf:
@@ -22622,6 +23041,8 @@ components:
           example: '2020-01-23'
         traject:
           $ref: '#/components/schemas/Spoor2TrajectEnumOptions'
+        nursingAddress:
+          $ref: '#/components/schemas/DossierRequestPropertyNursingAddress'
       type: object
     PostSpoor2DossierResponse:
       allOf:
@@ -22663,6 +23084,8 @@ components:
         dossierNumber:
           description: 'The dossier number of the dossier'
           type: string
+        nursingAddress:
+          $ref: '#/components/schemas/DossierRequestPropertyNursingAddress'
       type: object
     PostWGADossierResponse:
       allOf:
@@ -22723,6 +23146,8 @@ components:
           description: "The date the employee's employment was completed in format YYYY-MM-DD"
           type: string
           format: date
+        nursingAddress:
+          $ref: '#/components/schemas/DossierRequestPropertyNursingAddress'
       type: object
     PostZwerdDossierResponse:
       allOf:
@@ -23031,6 +23456,12 @@ components:
           maxLength: 36
           minLength: 36
           example: a1b2c3d4-5678-9012-3456-7890abcdef12
+        name:
+          description: 'The name or label of the address (e.g. nursing home name).'
+          type: string
+          maxLength: 191
+          minLength: 0
+          example: 'Verzorgingshuis De Linde'
         street:
           description: 'The street name and any additional location details such as apartment or suite numbers'
           type: string
@@ -23059,6 +23490,13 @@ components:
           minLength: 0
           example: 1234AB
           nullable: true
+        region:
+          description: 'The region or province of the address.'
+          type: string
+          maxLength: 191
+          minLength: 0
+          example: Noord-Holland
+          nullable: true
         country:
           description: 'The country code of the address in ISO3166-alpha-2 format.'
           type: string
@@ -23066,6 +23504,17 @@ components:
           minLength: 2
           pattern: '([A-Z]{2})'
           example: NL
+          nullable: true
+        dateStart:
+          description: 'The date from which this nursing address is active, in format YYYY-MM-DD.'
+          type: string
+          format: date
+          example: '2024-01-15'
+        dateEnd:
+          description: 'The date until which this nursing address was active, in format YYYY-MM-DD. Null if still active.'
+          type: string
+          format: date
+          example: '2024-03-20'
           nullable: true
       type: object
     DossierDocumentResource:
@@ -24464,6 +24913,54 @@ components:
           minLength: 0
           example: +316-123456789
           nullable: true
+        privateEmailValidated:
+          description: 'Whether the private email of the employee has been validated.'
+          type: boolean
+          nullable: true
+        privatePhoneValidated:
+          description: 'Whether the private phonenumber of the employee has been validated.'
+          type: boolean
+          nullable: true
+        privateMobileValidated:
+          description: 'Whether the private mobile phone of the employee has been validated.'
+          type: boolean
+          nullable: true
+        businessEmailValidated:
+          description: 'Whether the business email of the employee has been validated.'
+          type: boolean
+          nullable: true
+        businessPhoneValidated:
+          description: 'Whether the business phone of the employee has been validated.'
+          type: boolean
+          nullable: true
+        businessMobileValidated:
+          description: 'Whether the business mobile phone of the employee has been validated.'
+          type: boolean
+          nullable: true
+        privateEmailPrimary:
+          description: 'Whether the private email is the primary email. Only one email (personal or business) can be primary; flagging another email as primary unsets the previous one, and sending both the private and business email as primary in the same request is rejected.'
+          type: boolean
+          nullable: true
+        privatePhonePrimary:
+          description: 'Whether the private phonenumber is the primary phonenumber. Only one phonenumber (personal or business) can be primary; flagging another phonenumber as primary unsets the previous one, and sending both the private and business phonenumber as primary in the same request is rejected.'
+          type: boolean
+          nullable: true
+        privateMobilePrimary:
+          description: 'Whether the private mobile phone is the primary mobile phone. Only one mobile phone (personal or business) can be primary; flagging another mobile phone as primary unsets the previous one, and sending both the private and business mobile phone as primary in the same request is rejected.'
+          type: boolean
+          nullable: true
+        businessEmailPrimary:
+          description: 'Whether the business email is the primary email. Only one email (personal or business) can be primary; flagging another email as primary unsets the previous one, and sending both the private and business email as primary in the same request is rejected.'
+          type: boolean
+          nullable: true
+        businessPhonePrimary:
+          description: 'Whether the business phone is the primary phonenumber. Only one phonenumber (personal or business) can be primary; flagging another phonenumber as primary unsets the previous one, and sending both the private and business phonenumber as primary in the same request is rejected.'
+          type: boolean
+          nullable: true
+        businessMobilePrimary:
+          description: 'Whether the business mobile phone is the primary mobile phone. Only one mobile phone (personal or business) can be primary; flagging another mobile phone as primary unsets the previous one, and sending both the private and business mobile phone as primary in the same request is rejected.'
+          type: boolean
+          nullable: true
       type: object
     PatchEmployeeRequestBody:
       properties:
@@ -25037,6 +25534,11 @@ components:
           $ref: '#/components/schemas/EmployerContractStatusEnumOptions'
         incomingDossiers:
           description: 'Indicates the presence of incoming dossiers initiated before the contract start date.'
+          type: boolean
+          example: true
+          nullable: true
+        outgoingDossiers:
+          description: "Indicates whether tasks and dossiers from this employer remain visible in the case management portal's open tasks and dossier lists after the contract has ended (Uitloop dossier option)"
           type: boolean
           example: true
           nullable: true
@@ -25840,8 +26342,12 @@ components:
           minLength: 0
           example: something@mail.address
           nullable: true
+        validated:
+          description: 'Indication if the communication method has been validated or not.'
+          type: boolean
+          example: true
         primary:
-          description: 'Indication if the communication method is flagged as primary or not.'
+          description: 'Indication if the communication method is flagged as primary or not. Only one communication per type (email, phone or mobile) is primary - the personal and business communication of the same type cannot both be primary.'
           type: boolean
           example: true
         type:
@@ -29450,6 +29956,9 @@ tags:
   -
     name: 'Absence Reasons'
     description: 'Absence Reasons'
+  -
+    name: DossierAddress
+    description: DossierAddress
   -
     name: Appointments
     description: Appointments
