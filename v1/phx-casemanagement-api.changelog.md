@@ -7,10 +7,10 @@ The changelog has been tracked since March 15, 2024. Changes prior to this date 
 
 ### Added
 - `POST` `/address/dossier/nursing` endpoint added (VV-8649)
-- Property `outgoingDossiers` added to `POST` `/employer` (VV-10047)
-- Property `serviceType` added to `GET` `/employer-contract` (VV-10121)
-- Communication `status` field now accepts `validated` value on `POST` `/employee` (VV-10162)
-- `PUT` `/appointment` endpoint to clear `migrationKey` for appointments (VV-9849)
+- `PUT` `/appointment` endpoint added to clear `migrationKey` for appointments (VV-9849)
+- `POST` `/employer` property `outgoingDossiers` added (VV-10047)
+- `GET` `/employer-contract` property `serviceType` added (VV-10121)
+- `POST` `/employee` communications can now have `primary` and `validated` status set (VV-10162)
 
 ### Fixed
 - `POST` `/absence-course` — `externalKey` no longer lost for subsequent absence courses in a dossier (VV-10160)
