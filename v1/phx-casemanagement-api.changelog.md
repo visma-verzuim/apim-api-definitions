@@ -3,6 +3,22 @@
 All notable changes to the Public API will be documented in this file.
 The changelog has been tracked since March 15, 2024. Changes prior to this date are based on the git log of the project.
 
+## Release June 2026
+
+### Added
+- `POST` `/address/dossier/nursing` endpoint added (VV-8649)
+- `PATCH` `/appointment/migration-key` endpoint added to clear `migrationKey` for appointments (VV-9849)
+- `GET` `dossier/content/uwv-documents-v2` endpoint added to retrieve UWV Document v2 in PDF form (VV-9933)
+- `POST` `/employer` property `outgoingDossiers` added (VV-10047)
+- `GET` `/employer-contract` property `serviceType` added (VV-10121)
+- `POST` `/employee` communications can now have `primary` and `validated` status set (VV-10162)
+
+### Fixed
+- `POST` `/absence-course` — `externalKey` no longer lost for subsequent absence courses in a dossier (VV-10160)
+- `PATCH` `/employer` — communication fields no longer incorrectly nulled (VV-10170)
+- `PATCH` `/dossier` endpoints — missing basic properties added to documentation (VV-10120)
+
+
 ## Release 28 May 2026 (28-05-2026)
 
 ### Added
