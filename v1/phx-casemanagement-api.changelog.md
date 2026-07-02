@@ -3,6 +3,27 @@
 All notable changes to the Public API will be documented in this file.
 The changelog has been tracked since March 15, 2024. Changes prior to this date are based on the git log of the project.
 
+## Release July 2026
+
+### Added
+- `DELETE` `/address/dossier/nursing/{uuid}` endpoint added to delete a dossier nursing address (VV-9665)
+- `GET` `/contact-person` - `employment.employee`, and `dossier` includes added. Together with existing includes this allows full visibility of where the contactperson falls within the organisation hierarchy, along with `employmentId`, `employmentKey`, `dossierId`, and `dossierKey` filters (VV-10257)
+- `GET` `/dossier/content/{type}` endpoints - added `filter[dossierType]` (VV-9168)
+- `GET` `/dossier/task` endpoint has an `absenceCourse` include added (VV-10223)
+
+### Fixed
+- `GET` `/dossier` endpoints — `company` dossiers are now returned, dedicated `GET` `/dossier/company` endpoint added (VV-10116)
+- `POST`/`PATCH` `/user/employer` — employer role validation is now scoped to the target employer (VV-8460)
+- `GET` `/dossier/content/notes` — `medicalOnly` notes are now included (VV-8735)
+- `POST` `/dossier/content/document` — document `dateCreated` time component is stored as requested, no longer stores current time (VV-8506)
+- `POST`/`PATCH` `/employer-contract` — `modules` field is now read correctly (VV-10256)
+- `POST` `/employment/contract` — `migrationKey` is now persisted (VV-9727)
+- `PATCH` `/contact-person/{type}` — `migrationKey` and `migrationKeyId` are now fully supported (VV-9727)
+
+### Documentation
+- Fixed Public API OpenAPI specification imperfections and gaps (VV-9727)
+
+
 ## Release June 2026
 
 ### Added
