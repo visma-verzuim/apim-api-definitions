@@ -3,6 +3,26 @@
 All notable changes to the Public API will be documented in this file.
 The changelog has been tracked since March 15, 2024. Changes prior to this date are based on the git log of the project.
 
+## Release August 2026
+
+### Added
+- `POST` `/employer/{uuid}/erd` endpoint added to mark an employer as ERD (VV-10317)
+- `GET` `/dossier/illness` endpoint - nested `absenceCourses.absenceReason` include added (VV-10567)
+- `Appointment` and `Diagnosis` webhooks added, firing on create/update/delete events (VV-7946)
+- `PATCH` `/absence-course` - `accidentType` property can now be updated (VV-10564)
+- `GET` `/dossier/company-dossier` endpoint added, aliasing `GET` `/dossier/company` for consistency with the `company-dossier` type used by the `POST`/`PATCH` endpoints. `GET` `/dossier/company` is now deprecated (VV-10641)
+
+### Fixed
+- `POST`/`PATCH` `/dossier/content/document` - `employeeNeedToSign` and `employerNeedToSign` properties are now applied (VV-9527)
+- `POST` `/user/authorizations` - employer authorizations are no longer dropped when submitted alongside empty employer or organizational unit authorizations (VV-10388)
+- `GET` endpoints - pagination `links` now reflect the external URL of the environment instead of the internal URL (VV-8830)
+- `PATCH` `/dossier` endpoints - `safetyNet` property is now nullable across all applicable dossier types (VV-10565)
+
+### Documentation
+- OpenAPI specification: missing enums added for `Employment`, `OrganizationalUnit`, and `Task`/`TaskCondition` resources (VV-9546)
+- OpenAPI specification: corrected `filter` parameters across multiple endpoints - removed 14 documented filters the API already rejected with a 400, and documented several supported filters that were missing from the spec. (VV-10613)
+
+
 ## Release July 2026
 
 ### Added

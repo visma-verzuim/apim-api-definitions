@@ -5186,13 +5186,6 @@ paths:
           schema:
             type: string
         -
-          name: 'filter[content]'
-          in: query
-          description: "Filter by the note 's content"
-          required: false
-          schema:
-            type: string
-        -
           name: 'filter[forBothParties]'
           in: query
           description: "Filter by the note's forBothParties status"
@@ -6478,12 +6471,6 @@ paths:
           schema:
             type: string
         -
-          name: 'filter[name]'
-          in: query
-          description: 'Filter by the name of the dossier task'
-          schema:
-            type: string
-        -
           name: 'filter[baseTaskId]'
           in: query
           description: 'Filter by the unique identifier of the base task'
@@ -6536,12 +6523,6 @@ paths:
           schema:
             type: string
             pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
-        -
-          name: 'filter[active]'
-          in: query
-          description: 'Filter by active status'
-          schema:
-            type: boolean
         -
           name: 'filter[dossierId]'
           in: query
@@ -6925,13 +6906,6 @@ paths:
             type: string
             format: uuid
         -
-          name: 'filter[dossierId]'
-          in: query
-          description: 'Filter by the unique identifier of a specific dossier'
-          schema:
-            type: string
-            format: uuid
-        -
           name: 'filter[externalKey]'
           in: query
           description: 'Filter by the external key of a dossier'
@@ -6942,15 +6916,17 @@ paths:
         -
           $ref: '#/components/parameters/GetRequestFilterMigrationKeyIsEmpty'
         -
+          $ref: '#/components/parameters/GetRequestFilterEmployeeId'
+        -
           name: 'filter[employmentId]'
           in: query
           description: 'Filter by the unique identifier of a specific employment'
           schema:
             type: string
         -
-          name: 'filter[employmentNumber]'
+          name: 'filter[employeeNumber]'
           in: query
-          description: 'Filter by the employment number'
+          description: 'Filter by the employee number'
           schema:
             type: string
         -
@@ -7242,11 +7218,325 @@ paths:
           description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
           schema:
             type: string
-  /dossier/company:
+  /dossier/company-dossier:
     get:
       tags:
         - Dossier
       summary: 'Get a list of Company dossiers'
+      operationId: dossier-companydossier-get-v1-essential
+      parameters:
+        -
+          name: 'filter[id]'
+          in: query
+          description: 'Filter by the unique identifier to get a specific dossier'
+          schema:
+            type: string
+            format: uuid
+        -
+          name: 'filter[externalKey]'
+          in: query
+          description: 'Filter by the external key of a specific dossier'
+          schema:
+            type: string
+        -
+          $ref: '#/components/parameters/GetRequestFilterMigrationKey'
+        -
+          $ref: '#/components/parameters/GetRequestFilterMigrationKeyIsEmpty'
+        -
+          name: 'filter[dateUpdatedFrom]'
+          in: query
+          description: 'Filter by the updated-since date'
+          schema:
+            type: string
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+        -
+          name: 'filter[dateStart]'
+          in: query
+          description: 'Filter by the start date of a dossier'
+          schema:
+            type: string
+            format: date
+        -
+          name: 'filter[dateEnd]'
+          in: query
+          description: 'Filter by the end date of a dossier'
+          schema:
+            type: string
+            format: date
+        -
+          name: 'filter[dateUpdatedUntil]'
+          in: query
+          description: 'Filter up to (and including) the update date'
+          schema:
+            type: string
+            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+        -
+          name: sort
+          in: query
+          description: "Sort results by startDate, externalKey or dateUpdated, prefix with '-' to sort descending"
+          schema:
+            $ref: '#/components/schemas/GetDossierSortOptions'
+        -
+          name: include
+          in: query
+          description: 'Include related resources - use comma separated values for multiple'
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/GetCompanyDossierIncludeOptions'
+        -
+          $ref: '#/components/parameters/GetRequestPageNumber'
+        -
+          $ref: '#/components/parameters/GetRequestPageSize'
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'A list of Company Dossiers'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCompanyDossierResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '500':
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+    post:
+      tags:
+        - Dossier
+      summary: 'Create a company dossier'
+      description: 'This endpoint is used to create a new company dossier.'
+      operationId: dossier-companydossier-post-v1-ultimate
+      requestBody:
+        description: 'Dossier data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostCompanyDossierRequestBody'
+      responses:
+        '201':
+          description: 'Dossier successfully created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostCompanyDossierResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '500':
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+    patch:
+      tags:
+        - Dossier
+      summary: 'Update a company dossier'
+      description: 'Updates an existing company dossier.'
+      operationId: dossier-companydossier-patch-v1-ultimate
+      requestBody:
+        description: 'Company dossier data to update'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchCompanyDossierRequestBody'
+      responses:
+        '200':
+          description: 'Company dossier successfully updated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatchCompanyDossierResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '500':
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+      parameters:
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+  /dossier/company:
+    get:
+      tags:
+        - Dossier
+      summary: '(DEPRECATED) Get a list of Company dossiers'
+      description: 'Replaced by GET /dossier/company-dossier, for consistency with the dossier-type naming already used by POST/PATCH.'
       operationId: dossier-company-get-v1-essential
       parameters:
         -
@@ -7385,6 +7675,7 @@ paths:
                 type: string
                 example: 'Wed, 31 Dec 2025 23:00:00 UTC'
                 pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+      deprecated: true
   /dossier:
     get:
       tags:
@@ -7411,6 +7702,14 @@ paths:
         -
           $ref: '#/components/parameters/GetRequestFilterMigrationKeyIsEmpty'
         -
+          $ref: '#/components/parameters/GetRequestFilterEmployeeId'
+        -
+          name: 'filter[excludeIllnessDossiers]'
+          in: query
+          description: 'Exclude illness-type dossiers from the results. The value is ignored; illness dossiers are excluded whenever this parameter is present at all.'
+          schema:
+            type: boolean
+        -
           name: 'filter[type]'
           in: query
           description: 'Filter by the dossier type'
@@ -7424,9 +7723,9 @@ paths:
             type: string
             format: uuid
         -
-          name: 'filter[employmentNumber]'
+          name: 'filter[employeeNumber]'
           in: query
-          description: 'Filter by the employment number'
+          description: 'Filter by the employee number'
           schema:
             type: string
         -
@@ -7572,15 +7871,17 @@ paths:
         -
           $ref: '#/components/parameters/GetRequestFilterMigrationKeyIsEmpty'
         -
+          $ref: '#/components/parameters/GetRequestFilterEmployeeId'
+        -
           name: 'filter[employmentId]'
           in: query
           description: 'Filter by the ID of a specific employment'
           schema:
             type: string
         -
-          name: 'filter[employmentNumber]'
+          name: 'filter[employeeNumber]'
           in: query
-          description: 'Filter by the employment number'
+          description: 'Filter by the employee number'
           schema:
             type: string
         -
@@ -7888,15 +8189,17 @@ paths:
         -
           $ref: '#/components/parameters/GetRequestFilterMigrationKeyIsEmpty'
         -
+          $ref: '#/components/parameters/GetRequestFilterEmployeeId'
+        -
           name: 'filter[employmentId]'
           in: query
           description: 'Filter by the ID of a specific employment'
           schema:
             type: string
         -
-          name: 'filter[employmentNumber]'
+          name: 'filter[employeeNumber]'
           in: query
-          description: 'Filter by the employment number'
+          description: 'Filter by the employee number'
           schema:
             type: string
         -
@@ -8377,18 +8680,17 @@ paths:
             type: string
             format: uuid
         -
-          name: 'filter[dossierId]'
-          in: query
-          description: 'Filter by the ID of a specific dossier'
-          schema:
-            type: string
-            format: uuid
-        -
           name: 'filter[externalKey]'
           in: query
           description: 'Filter by external key'
           schema:
             type: string
+        -
+          $ref: '#/components/parameters/GetRequestFilterMigrationKey'
+        -
+          $ref: '#/components/parameters/GetRequestFilterMigrationKeyIsEmpty'
+        -
+          $ref: '#/components/parameters/GetRequestFilterEmployeeId'
         -
           name: 'filter[employmentId]'
           in: query
@@ -8397,9 +8699,9 @@ paths:
             type: string
             format: uuid
         -
-          name: 'filter[employmentNumber]'
+          name: 'filter[employeeNumber]'
           in: query
-          description: 'Filter by the employment number'
+          description: 'Filter by the employee number'
           schema:
             type: string
         -
@@ -8706,13 +9008,6 @@ paths:
             type: string
             format: uuid
         -
-          name: 'filter[dossierId]'
-          in: query
-          description: 'Filter by the ID of a specific dossier'
-          schema:
-            type: string
-            format: uuid
-        -
           name: 'filter[externalKey]'
           in: query
           description: 'Filter by external key'
@@ -8723,6 +9018,8 @@ paths:
         -
           $ref: '#/components/parameters/GetRequestFilterMigrationKeyIsEmpty'
         -
+          $ref: '#/components/parameters/GetRequestFilterEmployeeId'
+        -
           name: 'filter[employmentId]'
           in: query
           description: 'Filter by the ID of a specific employment'
@@ -8730,9 +9027,9 @@ paths:
             type: string
             format: uuid
         -
-          name: 'filter[employmentNumber]'
+          name: 'filter[employeeNumber]'
           in: query
-          description: 'Filter by the employment number'
+          description: 'Filter by the employee number'
           schema:
             type: string
         -
@@ -9035,13 +9332,6 @@ paths:
             type: string
             format: uuid
         -
-          name: 'filter[dossierId]'
-          in: query
-          description: 'Filter by the unique identifier of a specific dossier'
-          schema:
-            type: string
-            format: uuid
-        -
           name: 'filter[findMedicalDossierForDossierId]'
           in: query
           description: 'Find the medical dossier for the given Illness or Illness+ZWERD dossier ID'
@@ -9059,6 +9349,8 @@ paths:
         -
           $ref: '#/components/parameters/GetRequestFilterMigrationKeyIsEmpty'
         -
+          $ref: '#/components/parameters/GetRequestFilterEmployeeId'
+        -
           name: 'filter[employmentId]'
           in: query
           description: 'Filter by the unique identifier of a specific employment'
@@ -9066,9 +9358,9 @@ paths:
             type: string
             format: uuid
         -
-          name: 'filter[employmentNumber]'
+          name: 'filter[employeeNumber]'
           in: query
-          description: 'Filter by the employment number'
+          description: 'Filter by the employee number'
           schema:
             type: string
         -
@@ -9205,18 +9497,17 @@ paths:
             type: string
             format: uuid
         -
-          name: 'filter[dossierId]'
-          in: query
-          description: 'Filter by the unique identifier of a specific dossier'
-          schema:
-            type: string
-            format: uuid
-        -
           name: 'filter[externalKey]'
           in: query
           description: 'Filter by the external key of the dossier'
           schema:
             type: string
+        -
+          $ref: '#/components/parameters/GetRequestFilterMigrationKey'
+        -
+          $ref: '#/components/parameters/GetRequestFilterMigrationKeyIsEmpty'
+        -
+          $ref: '#/components/parameters/GetRequestFilterEmployeeId'
         -
           name: 'filter[employmentId]'
           in: query
@@ -9225,9 +9516,9 @@ paths:
             type: string
             format: uuid
         -
-          name: 'filter[employmentNumber]'
+          name: 'filter[employeeNumber]'
           in: query
-          description: 'Filter by the employment number'
+          description: 'Filter by the employee number'
           schema:
             type: string
         -
@@ -9534,13 +9825,6 @@ paths:
             type: string
             format: uuid
         -
-          name: 'filter[dossierId]'
-          in: query
-          description: 'Filter by the unique identifier of a specific dossier'
-          schema:
-            type: string
-            format: uuid
-        -
           name: 'filter[externalKey]'
           in: query
           description: 'Filter by the key in an external system of the dossier'
@@ -9551,6 +9835,8 @@ paths:
         -
           $ref: '#/components/parameters/GetRequestFilterMigrationKeyIsEmpty'
         -
+          $ref: '#/components/parameters/GetRequestFilterEmployeeId'
+        -
           name: 'filter[employmentId]'
           in: query
           description: 'Filter by the unique identifier of a specific employment'
@@ -9558,9 +9844,9 @@ paths:
             type: string
             format: uuid
         -
-          name: 'filter[employmentNumber]'
+          name: 'filter[employeeNumber]'
           in: query
-          description: 'Filter by the employment number'
+          description: 'Filter by the employee number'
           schema:
             type: string
         -
@@ -9954,18 +10240,17 @@ paths:
             type: string
             format: uuid
         -
-          name: 'filter[dossierId]'
-          in: query
-          description: 'Filter by the unique identifier of a specific dossier'
-          schema:
-            type: string
-            format: uuid
-        -
           name: 'filter[externalKey]'
           in: query
           description: 'Filter by the external key of the dossier'
           schema:
             type: string
+        -
+          $ref: '#/components/parameters/GetRequestFilterMigrationKey'
+        -
+          $ref: '#/components/parameters/GetRequestFilterMigrationKeyIsEmpty'
+        -
+          $ref: '#/components/parameters/GetRequestFilterEmployeeId'
         -
           name: 'filter[employmentId]'
           in: query
@@ -9974,9 +10259,9 @@ paths:
             type: string
             format: uuid
         -
-          name: 'filter[employmentNumber]'
+          name: 'filter[employeeNumber]'
           in: query
-          description: 'Filter by the employment number'
+          description: 'Filter by the employee number'
           schema:
             type: string
         -
@@ -10279,13 +10564,6 @@ paths:
             type: string
             format: uuid
         -
-          name: 'filter[dossierId]'
-          in: query
-          description: 'Filter by the unique identifier of a specific dossier'
-          schema:
-            type: string
-            format: uuid
-        -
           name: 'filter[externalKey]'
           in: query
           description: 'Filter by the external key of a specific dossier'
@@ -10296,6 +10574,8 @@ paths:
         -
           $ref: '#/components/parameters/GetRequestFilterMigrationKeyIsEmpty'
         -
+          $ref: '#/components/parameters/GetRequestFilterEmployeeId'
+        -
           name: 'filter[employmentId]'
           in: query
           description: 'Filter by the unique identifier of a specific employment'
@@ -10303,9 +10583,9 @@ paths:
             type: string
             format: uuid
         -
-          name: 'filter[employmentNumber]'
+          name: 'filter[employeeNumber]'
           in: query
-          description: 'Filter by the employment number'
+          description: 'Filter by the employee number'
           schema:
             type: string
         -
@@ -11794,177 +12074,6 @@ paths:
           description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
           schema:
             type: string
-  /dossier/company-dossier:
-    post:
-      tags:
-        - Dossier
-      summary: 'Create a company dossier'
-      description: 'This endpoint is used to create a new company dossier.'
-      operationId: dossier-companydossier-post-v1-ultimate
-      requestBody:
-        description: 'Dossier data'
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PostCompanyDossierRequestBody'
-      responses:
-        '201':
-          description: 'Dossier successfully created'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PostCompanyDossierResponse'
-          headers:
-            Deprecated:
-              description: 'This endpoint has been deprecated at the given timestamp.'
-              required: false
-              schema:
-                type: string
-                example: '@1758557834'
-                pattern: '^\@[0-9]{10}$'
-            Sunset:
-              description: 'This endpoint will be removed at the given date/time.'
-              required: false
-              schema:
-                type: string
-                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
-                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
-          description: 'Bad Request'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadRequestResponse'
-          headers:
-            Deprecated:
-              description: 'This endpoint has been deprecated at the given timestamp.'
-              required: false
-              schema:
-                type: string
-                example: '@1758557834'
-                pattern: '^\@[0-9]{10}$'
-            Sunset:
-              description: 'This endpoint will be removed at the given date/time.'
-              required: false
-              schema:
-                type: string
-                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
-                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
-          description: 'Server error'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerErrorResponse'
-          headers:
-            Deprecated:
-              description: 'This endpoint has been deprecated at the given timestamp.'
-              required: false
-              schema:
-                type: string
-                example: '@1758557834'
-                pattern: '^\@[0-9]{10}$'
-            Sunset:
-              description: 'This endpoint will be removed at the given date/time.'
-              required: false
-              schema:
-                type: string
-                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
-                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-      parameters:
-        -
-          name: Ocp-Apim-Subscription-Key
-          in: header
-          required: true
-          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
-          schema:
-            type: string
-    patch:
-      tags:
-        - Dossier
-      summary: 'Update a company dossier'
-      description: 'Updates an existing company dossier.'
-      operationId: dossier-companydossier-patch-v1-ultimate
-      requestBody:
-        description: 'Company dossier data to update'
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchCompanyDossierRequestBody'
-      responses:
-        '200':
-          description: 'Company dossier successfully updated'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PatchCompanyDossierResponse'
-          headers:
-            Deprecated:
-              description: 'This endpoint has been deprecated at the given timestamp.'
-              required: false
-              schema:
-                type: string
-                example: '@1758557834'
-                pattern: '^\@[0-9]{10}$'
-            Sunset:
-              description: 'This endpoint will be removed at the given date/time.'
-              required: false
-              schema:
-                type: string
-                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
-                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '400':
-          description: 'Bad Request'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadRequestResponse'
-          headers:
-            Deprecated:
-              description: 'This endpoint has been deprecated at the given timestamp.'
-              required: false
-              schema:
-                type: string
-                example: '@1758557834'
-                pattern: '^\@[0-9]{10}$'
-            Sunset:
-              description: 'This endpoint will be removed at the given date/time.'
-              required: false
-              schema:
-                type: string
-                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
-                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-        '500':
-          description: 'Server error'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerErrorResponse'
-          headers:
-            Deprecated:
-              description: 'This endpoint has been deprecated at the given timestamp.'
-              required: false
-              schema:
-                type: string
-                example: '@1758557834'
-                pattern: '^\@[0-9]{10}$'
-            Sunset:
-              description: 'This endpoint will be removed at the given date/time.'
-              required: false
-              schema:
-                type: string
-                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
-                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
-      parameters:
-        -
-          name: Ocp-Apim-Subscription-Key
-          in: header
-          required: true
-          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
-          schema:
-            type: string
   /dossier/employee:
     post:
       tags:
@@ -13079,6 +13188,10 @@ paths:
             type: string
           example: CRM_123456
         -
+          $ref: '#/components/parameters/GetRequestFilterMigrationKey'
+        -
+          $ref: '#/components/parameters/GetRequestFilterMigrationKeyIsEmpty'
+        -
           name: 'filter[dateUpdatedFrom]'
           in: query
           description: 'Filter employers that were updated on after this date/time'
@@ -13480,6 +13593,99 @@ paths:
           description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
           schema:
             type: string
+  '/employer/{id}/erd':
+    post:
+      tags:
+        - Employer
+      summary: 'Mark an employer as ERD (EigenRisicoDrager)'
+      operationId: employer-erd-post-v1-advanced
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Unique identifier of the employer to mark as ERD.'
+          required: true
+          schema:
+            type: string
+            format: uuid
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+      requestBody:
+        description: 'ERD data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostEmployerErdRequestBody'
+      responses:
+        '201':
+          description: 'Employer successfully marked as ERD'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostEmployerErdResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '500':
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
   /employer-division:
     get:
       tags:
@@ -15143,20 +15349,6 @@ paths:
             type: string
             pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
         -
-          name: 'filter[dateCreatedFrom]'
-          in: query
-          description: 'Filter operations that were created from a specific date/time (inclusive)'
-          schema:
-            type: string
-            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
-        -
-          name: 'filter[dateCreatedUntil]'
-          in: query
-          description: 'Filter operations that were created up to a specific date/time (inclusive)'
-          schema:
-            type: string
-            pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
-        -
           name: sort
           in: query
           description: 'Sort by certain pre-defined fields'
@@ -15609,6 +15801,10 @@ paths:
           description: 'Filter by the external key of the organizational unit'
           schema:
             type: string
+        -
+          $ref: '#/components/parameters/GetRequestFilterMigrationKey'
+        -
+          $ref: '#/components/parameters/GetRequestFilterMigrationKeyIsEmpty'
         -
           name: 'filter[name]'
           in: query
@@ -20484,7 +20680,19 @@ components:
           format: date
           example: '2025-02-10'
         safetyNet:
-          $ref: '#/components/schemas/SafetyNetEnumOptions'
+          oneOf:
+            -
+              $ref: '#/components/schemas/SafetyNetEnumOptions'
+          nullable: true
+          description: 'If applicable, the type of safety net (vangnet) that applies to this absence. This is a dossier property, changing it affects the dossier the absence course belongs to. Send null to clear it.'
+          example: unknown
+        accidentType:
+          oneOf:
+            -
+              $ref: '#/components/schemas/AccidentTypeEnumOptions'
+          nullable: true
+          description: 'If applicable, the type of accident that applies to this absence. This is a dossier property, changing it affects the dossier the absence course belongs to. Send null to clear it.'
+          example: private
         absenceReasonId:
           description: 'Set absence reason based on the unique identifier of the absence reason'
           type: string
@@ -20917,6 +21125,14 @@ components:
           maxLength: 67108863
           minLength: 1
           example: 'Content of this document.'
+        employeeNeedToSign:
+          description: 'Whether the employee needs to sign the document'
+          type: boolean
+          example: false
+        employerNeedToSign:
+          description: 'Whether the employer needs to sign the document'
+          type: boolean
+          example: false
         reviewByCompanyDoctor:
           description: 'Whether the document is reviewed by the company doctor. Required if inReview is true'
           type: boolean
@@ -20997,6 +21213,14 @@ components:
           maxLength: 67108863
           minLength: 1
           example: 'Content of this document.'
+        employeeNeedToSign:
+          description: 'Whether the employee needs to sign the document'
+          type: boolean
+          example: false
+        employerNeedToSign:
+          description: 'Whether the employer needs to sign the document'
+          type: boolean
+          example: false
         dateCreated:
           description: 'The date the document was created'
           type: string
@@ -21801,6 +22025,7 @@ components:
       type: string
       enum:
         - absenceCourses
+        - absenceCourses.absenceReason
         - employment
         - nursingAddress
         - medicalDossier
@@ -21938,7 +22163,11 @@ components:
           example: ArboUser-234
           nullable: true
         safetyNet:
-          $ref: '#/components/schemas/SafetyNetEnumOptions'
+          oneOf:
+            -
+              $ref: '#/components/schemas/SafetyNetEnumOptions'
+          nullable: true
+          description: 'If applicable, the type of safety net (vangnet) that applies to this dossier. Send null to clear it.'
         dossierClosureReason:
           $ref: '#/components/schemas/DossierClosureReasonEnumOptions'
         contractId:
@@ -22093,7 +22322,11 @@ components:
           minLength: 0
           nullable: true
         safetyNet:
-          $ref: '#/components/schemas/SafetyNetEnumOptions'
+          oneOf:
+            -
+              $ref: '#/components/schemas/SafetyNetEnumOptions'
+          nullable: true
+          description: 'If applicable, the type of safety net (vangnet) that applies to this dossier. Send null to clear it.'
         dossierClosureReason:
           $ref: '#/components/schemas/DossierClosureReasonEnumOptions'
         contractId:
@@ -22340,7 +22573,11 @@ components:
           description: "The key of the dossier officer, required if 'dossierOfficerId' is omitted"
           type: string
         safetyNet:
-          $ref: '#/components/schemas/SafetyNetEnumOptions'
+          oneOf:
+            -
+              $ref: '#/components/schemas/SafetyNetEnumOptions'
+          nullable: true
+          description: 'If applicable, the type of safety net (vangnet) that applies to this dossier. Send null to clear it.'
         dossierClosureReason:
           $ref: '#/components/schemas/DossierClosureReasonEnumOptions'
         contractId:
@@ -22412,6 +22649,16 @@ components:
           $ref: '#/components/schemas/PatchRequestPropertyMigrationKey'
         dossierStatus:
           $ref: '#/components/schemas/DossierStatusEnumOptions'
+        dateStart:
+          description: 'The date the dossier started, in format YYYY-MM-DD.'
+          type: string
+          format: date
+        safetyNet:
+          oneOf:
+            -
+              $ref: '#/components/schemas/SafetyNetEnumOptions'
+          nullable: true
+          description: 'If applicable, the type of safety net (vangnet) that applies to this dossier. Send null to clear it.'
         dateCompleted:
           description: "The date the dossier was completed in format YYYY-MM-DD. Cannot be set while the effective dossier status is 'open'."
           type: string
@@ -22595,7 +22842,7 @@ components:
             -
               $ref: '#/components/schemas/SafetyNetEnumOptions'
           nullable: true
-          description: 'If applicable, the type of safety net (vangnet) that applies to this dossier'
+          description: 'If applicable, the type of safety net (vangnet) that applies to this dossier. Send null to clear it.'
         dossierClosureReason:
           oneOf:
             -
@@ -22678,7 +22925,11 @@ components:
           description: "The key of the dossier officer, required if 'dossierOfficerId' is omitted"
           type: string
         safetyNet:
-          $ref: '#/components/schemas/SafetyNetEnumOptions'
+          oneOf:
+            -
+              $ref: '#/components/schemas/SafetyNetEnumOptions'
+          nullable: true
+          description: 'If applicable, the type of safety net (vangnet) that applies to this absence. Send null to clear it.'
         dossierClosureReason:
           $ref: '#/components/schemas/DossierClosureReasonEnumOptions'
         contractId:
@@ -26139,6 +26390,54 @@ components:
             data:
               $ref: '#/components/schemas/Employer'
           type: object
+    PostEmployerErdRequestBody:
+      description: 'Data to mark an employer as ERD (EigenRisicoDrager)'
+      required:
+        - dateStart
+      properties:
+        dateStart:
+          description: 'The start date of the ERD period. Must be the 1st of January or the 1st of July. Format YYYY-MM-DD'
+          type: string
+          format: date
+          example: '2026-01-01'
+        dateEnd:
+          description: 'The end date of the ERD period. Must be after dateStart. Format YYYY-MM-DD, defaults to NULL'
+          type: string
+          format: date
+          example: '2029-01-01'
+          nullable: true
+        isExternal:
+          description: 'Whether the ERD is external rather than internal.'
+          type: boolean
+          default: false
+          example: false
+          nullable: true
+        payrollTaxNumber:
+          description: 'The payroll tax number (loonheffingsnummer) for the ERD period'
+          type: string
+          maxLength: 191
+          example: 123456789L01
+          nullable: true
+        organizationalUnitId:
+          description: 'The unique identifier of the organizational unit this ERD applies to. Must belong to the employer. Omit for an employer-level ERD.'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+          example: c9ef0d79-7c66-406d-ae4a-a66515992ef7
+          nullable: true
+      type: object
+    PostEmployerErdResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPostResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/EmployerErdResponseData'
+          type: object
     ArboService:
       properties:
         id:
@@ -26299,6 +26598,40 @@ components:
           type: string
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
           example: '2020-01-23 12:34:56'
+      type: object
+    EmployerErdResponseData:
+      properties:
+        id:
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+          example: c9ef0d79-7c66-406d-ae4a-a66515992ef7
+        isExternal:
+          description: 'Whether the ERD is external rather than internal.'
+          type: boolean
+          example: false
+        organizationalUnit:
+          $ref: '#/components/schemas/OrganizationalUnitWithoutRelations'
+        payrollTaxNumber:
+          type: string
+          example: 123456789L01
+          nullable: true
+        dateStart:
+          type: string
+          format: date
+          example: '2026-01-01'
+        dateEnd:
+          type: string
+          format: date
+          example: '2029-01-01'
+          nullable: true
+        dateCreated:
+          type: string
+          example: '2026-07-01 12:00:00'
+        dateUpdated:
+          type: string
+          example: '2026-07-01 12:00:00'
       type: object
     InteractionMethodEnumOptions:
       type: string
@@ -27738,6 +28071,11 @@ components:
           pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
           example: '2020-01-23 12:34:56'
       type: object
+    SupervisorTypeEnumOptions:
+      type: string
+      enum:
+        - internal
+        - external
     EmploymentEndReasonEnumOptions:
       type: string
       enum:
@@ -27883,6 +28221,13 @@ components:
           description: 'Indication if the employment is flagged confidential under Negative Registration or not.'
           type: boolean
           example: true
+        supervisorType:
+          oneOf:
+            -
+              $ref: '#/components/schemas/SupervisorTypeEnumOptions'
+          nullable: true
+          description: 'The type of supervisor associated with this employment.'
+          example: internal
         dateCreated:
           description: 'The date and time the employment was created in our system. (Format YYYY-MM-DD HH:MM:SS)'
           type: string
@@ -29016,6 +29361,13 @@ components:
           maxLength: 36
           minLength: 36
           example: 40b03a3c-e304-4b8f-b4ae-562b315e36f2
+        supervisorType:
+          oneOf:
+            -
+              $ref: '#/components/schemas/SupervisorTypeEnumOptions'
+          nullable: true
+          description: 'The type of supervisor associated with this organizational unit.'
+          example: internal
         contactPersons:
           type: array
           items:
@@ -29299,6 +29651,12 @@ components:
         - verzuim-zw-erd
         - bedrijfsdossier
         - betaald-ouderschapsverlof
+        - bedrijfsmaatschappelijkwerker
+        - ergonomie
+        - vertrouwenspersoon
+        - tweedelijnszorg
+        - fysiotherapie
+        - psycholoog
         - invalid-value
     TaskTypeEnumOptions:
       type: string
@@ -29366,9 +29724,13 @@ components:
           minLength: 0
           example: 'Werknemers en werkgevers maken samen het Plan van aanpak. Hierin staan afspraken over wat de werknemer gaat doen om weer aan het werk te kunnen gaan'
           nullable: true
-        protocolId:
-          description: 'The protocol ID associated with the task.'
-          type: string
+        protocol:
+          oneOf:
+            -
+              $ref: '#/components/schemas/ProtocolEnumOptions'
+          nullable: true
+          description: 'The protocol associated with the task.'
+          example: wvp
         code:
           description: 'The code associated with the task.'
           type: string
@@ -30298,6 +30660,8 @@ components:
         - inzetbaarheidsprofiel-izp
         - aanvraag-verlenging-loondoorbetaling-wia
         - doorgeven-wijzigingen-in-uw-gezondheid-wajong
+        - aanvragen-ziektewet-beoordeling-tweede-ziektejaar
+        - functionele-mogelijkhedenlijst
   parameters:
     GetRequestFilterMigrationKey:
       name: 'filter[migrationKey]'
@@ -30316,6 +30680,13 @@ components:
       name: 'filter[id]'
       in: query
       description: 'Filter by the unique identifier to get a specific resource.'
+      schema:
+        type: string
+        format: uuid
+    GetRequestFilterEmployeeId:
+      name: 'filter[employeeId]'
+      in: query
+      description: 'Filter by the unique identifier of a specific employee'
       schema:
         type: string
         format: uuid
