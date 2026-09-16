@@ -3,6 +3,22 @@
 All notable changes to the Public API will be documented in this file.
 The changelog has been tracked since March 15, 2024. Changes prior to this date are based on the git log of the project.
 
+## Release September 2026
+
+### Added
+- `PATCH` `/employer/erd/{uuid}` endpoint added to update an existing ERD (EigenRisicoDrager) period (VV-10322)
+- `GET` `/agenda/billable/availabilities` - `isInactive` property and `filter[isInactive]` query parameter added, exposing whether a root record's latest mutation marks it inactive (VV-10296)
+
+### Changed
+- `POST` `/employee` - `employment.hoursPerWeek` is no longer required, aligning with the sibling `/employment` endpoints (VV-10683)
+- `POST` `/employer` - `contract` is no longer required; an employer can now be created without a contract. Please note that a contract is still required for the employer to function properly (VV-10711)
+- `GET` `/agenda/billable/availabilities` - `billableDurationMinutes` is now always returned, instead of only when the `mutations` include was requested (VV-10296)
+
+### Fixed
+- `POST`/`PATCH` `/dossier` endpoints - a dossier may now start before the employer contract start date when the contract active today accepts incoming dossiers. When it does not, the response returns the new `DOS_00029` error instead of the generic `DOS_00027` "no contract found" (VV-10594)
+- `POST` `/employer` - `contract.incomingDossiers` is no longer rejected for partners who use regular contracts instead of service contracts, matching `POST`/`PATCH` `/employer-contract` (VV-10841)
+
+
 ## Release August 2026
 
 ### Added

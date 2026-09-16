@@ -766,6 +766,12 @@ paths:
           schema:
             type: boolean
         -
+          name: 'filter[isInactive]'
+          in: query
+          description: 'Filter root records by whether their latest mutation marks them inactive. Cannot be combined with filter[isRootRecord]=false.'
+          schema:
+            type: boolean
+        -
           name: sort
           in: query
           description: "Sort results by the given field, use '-' as prefix to sort descending"
@@ -13465,6 +13471,99 @@ paths:
           description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
           schema:
             type: string
+  '/employer/erd/{uuid}':
+    patch:
+      tags:
+        - Employer
+      summary: "Update an employer's ERD (EigenRisicoDrager) period"
+      operationId: employer-erd-patch-v1-advanced
+      parameters:
+        -
+          name: uuid
+          in: path
+          description: 'Unique identifier of the ERD period to update.'
+          required: true
+          schema:
+            type: string
+            format: uuid
+        -
+          name: Ocp-Apim-Subscription-Key
+          in: header
+          required: true
+          description: 'Your personal **subscription key**, which can be acquired by subscribing to one of our products and which can be viewed on your profile page.'
+          schema:
+            type: string
+      requestBody:
+        description: 'ERD data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchEmployerErdRequestBody'
+      responses:
+        '200':
+          description: 'ERD successfully updated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatchEmployerErdResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
+        '500':
+          description: 'Server error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorResponse'
+          headers:
+            Deprecated:
+              description: 'This endpoint has been deprecated at the given timestamp.'
+              required: false
+              schema:
+                type: string
+                example: '@1758557834'
+                pattern: '^\@[0-9]{10}$'
+            Sunset:
+              description: 'This endpoint will be removed at the given date/time.'
+              required: false
+              schema:
+                type: string
+                example: 'Wed, 31 Dec 2025 23:00:00 UTC'
+                pattern: '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s[0-9]{2}\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sUTC$'
   /employer/close-tasks-after-migration:
     post:
       tags:
@@ -18815,11 +18914,14 @@ components:
         isMutation:
           description: 'Whether this is a mutation of another record'
           type: boolean
+        isInactive:
+          description: 'Whether this availability is currently inactive (deactivated)'
+          type: boolean
         originalDurationMinutes:
           description: 'The original duration in minutes between start and end time'
           type: integer
         billableDurationMinutes:
-          description: "Requires the 'mutations' include. The total minutes to be billed. The sum of the original duration +/- all mutations"
+          description: 'The total minutes to be billed. The sum of the original duration +/- all mutations'
           type: integer
         dateCreated:
           description: 'The date and time the record was created'
@@ -25817,7 +25919,6 @@ components:
           type: number
           format: float
           example: 32
-          nullable: true
         paymentPeriod:
           oneOf:
             -
@@ -25845,7 +25946,6 @@ components:
         - address.number
         - address.postalCode
         - address.city
-        - employment.hoursPerWeek
         - employment.dateStart
       properties:
         externalKey:
@@ -26141,6 +26241,51 @@ components:
             data:
               $ref: '#/components/schemas/Employer'
           type: object
+    PatchEmployerErdRequestBody:
+      description: 'You should only send the fields that need to be updated; any omitted fields will remain unchanged.'
+      properties:
+        dateStart:
+          description: 'The start date of the ERD period. Must be the 1st of January or the 1st of July. Format YYYY-MM-DD'
+          type: string
+          format: date
+          example: '2026-01-01'
+        dateEnd:
+          description: 'The end date of the ERD period. Must be after dateStart. Format YYYY-MM-DD'
+          type: string
+          format: date
+          example: '2029-01-01'
+          nullable: true
+        isExternal:
+          description: 'Whether the ERD is external rather than internal.'
+          type: boolean
+          example: false
+          nullable: true
+        payrollTaxNumber:
+          description: 'The payroll tax number (loonheffingsnummer) for the ERD period'
+          type: string
+          maxLength: 191
+          example: 123456789L01
+          nullable: true
+        organizationalUnitId:
+          description: 'The unique identifier of the organizational unit this ERD applies to. Must belong to the employer. Omit for an employer-level ERD.'
+          type: string
+          format: uuid
+          maxLength: 36
+          minLength: 36
+          example: c9ef0d79-7c66-406d-ae4a-a66515992ef7
+          nullable: true
+      type: object
+    PatchEmployerErdResponse:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicApiPatchResponseEnvelope'
+        -
+          required:
+            - data
+          properties:
+            data:
+              $ref: '#/components/schemas/EmployerErdResponseData'
+          type: object
     PostCloseTasksAfterMigrationRequestBody:
       required:
         - dateTarget
@@ -26234,7 +26379,7 @@ components:
         status:
           $ref: '#/components/schemas/EmployerContractStatusEnumOptions'
         incomingDossiers:
-          description: 'Indicates the presence of incoming dossiers initiated before the contract start date.'
+          description: 'Indicate if dossiers started before the start-date are associated to this employer-contract'
           type: boolean
           example: true
           nullable: true
@@ -26248,7 +26393,6 @@ components:
       description: 'Employer data'
       required:
         - name
-        - contract
       properties:
         name:
           description: 'The (legal) name of the employer'
