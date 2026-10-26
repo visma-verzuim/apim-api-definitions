@@ -3,6 +3,16 @@
 All notable changes to the Public API will be documented in this file.
 The changelog has been tracked since March 15, 2024. Changes prior to this date are based on the git log of the project.
 
+## Release October 2026
+
+### Added
+- `POST` `/dossier/vitality`, `/dossier/frequent-absence` and `/dossier/pmo` endpoints added to create vitality, frequent absence and PMO dossiers (VV-10582)
+- `GET`/`POST`/`PATCH` `/absence-course` - `adviceOnReturningToWork` property added, indicating whether advice on returning to work ('Werkhervattingsadvies') was given for the absence-course (VV-10897)
+
+### Changed
+- `POST`/`PATCH` `/employer-contract` - a service type that is part of ZW ERD is no longer rejected when the employer has no ERD period covering the contract dates. The `EMPL_CONTR_000006` "Service type is incorrect" error is no longer returned (VV-10710)
+
+
 ## Release September 2026
 
 ### Added
