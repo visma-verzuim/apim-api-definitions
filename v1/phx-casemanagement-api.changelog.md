@@ -3,6 +3,17 @@
 All notable changes to the Public API will be documented in this file.
 The changelog has been tracked since March 15, 2024. Changes prior to this date are based on the git log of the project.
 
+## Release November 2026
+
+### Added
+- `OrganizationalUnitCompany` schema - `policyNumber` property added, also accepted on `POST`/`PATCH` `/organizational-unit` (VV-11320)
+
+### Fixed
+- `POST` `/absence-course` and the `POST`/`PATCH` `/dossier` endpoints - a `dateStart` equal to the end date of an employment contract is no longer rejected with `ABS_00018` "no active employment contract found". When two consecutive contracts share that date, the later contract is used (VV-10792)
+- `PATCH` `/absence-course` - patching a full recovery (`recoveryPercentage` 100) no longer moves the start date of the following absence course back to the recovery date; the following course keeps its `dateStart` (VV-10813)
+- `GET` `/agenda/billable/availabilities` - a schedule with multiple time slots on one day now returns one availability per time slot, each with its own `timeStart`, `timeEnd` and duration. Previously a single availability was returned for the whole day, so its times and `billableDurationMinutes` did not reflect the other time slots (VV-11256)
+
+
 ## Release October 2026
 
 ### Added
