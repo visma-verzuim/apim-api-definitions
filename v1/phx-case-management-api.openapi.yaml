@@ -29387,6 +29387,12 @@ components:
           maxLength: 191
           minLength: 0
           nullable: true
+        policyNumber:
+          description: 'The insurance policy number of the company. Send null to clear it'
+          type: string
+          maxLength: 191
+          minLength: 0
+          nullable: true
         kvkNumber:
           description: 'The registered KVK number of the company'
           type: string
@@ -29532,6 +29538,10 @@ components:
         relationNumber:
           description: 'Your relation number for the company (shown in reports)'
           type: string
+        policyNumber:
+          description: 'The insurance policy number of the company'
+          type: string
+          maxLength: 191
         kvkNumber:
           description: 'KVK number of the company'
           type: string
@@ -29581,6 +29591,13 @@ components:
           maxLength: 191
           minLength: 0
           example: crm1234
+          nullable: true
+        policyNumber:
+          description: 'The insurance policy number of the company'
+          type: string
+          maxLength: 191
+          minLength: 0
+          example: POL-123456
           nullable: true
         normHours:
           description: 'Norm hours per week of the company, used for reports and statistics'
